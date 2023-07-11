@@ -12,11 +12,11 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
             return true;
         }
 
-        public override float GetDamageMult(Player Player, Item Item) => 10f;
+        public override float GetDamageMult(Player Player, Item Item) => 6f;
 
         public override string GetDescription() => "Critically strikes while the target is at least 75 tiles away";
 
-        public override bool ShouldCrit(Player Player, Item Item, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {
             return Player.Distance(target.getRect().ClosestPointInRect(Player.Center)) >= 1200;
         }

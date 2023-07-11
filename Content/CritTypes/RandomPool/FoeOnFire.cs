@@ -21,7 +21,7 @@ namespace CritRework.Content.CritTypes.RandomPool
             return item.useAmmo != AmmoID.Gel && !blacklist.Contains(item.type);
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {
             List<int> countedBuffs = new()
             {

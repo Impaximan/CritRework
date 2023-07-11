@@ -10,7 +10,7 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         public override string GetDescription() => "Critically strikes while the target has more than 85% of its health left";
 
-        public override bool ShouldCrit(Player Player, Item Item, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {
             return target.life >= target.lifeMax * 0.85f;
         }

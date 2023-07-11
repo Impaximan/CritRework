@@ -15,7 +15,7 @@ namespace CritRework.Content.CritTypes.RandomPool
             return !item.DamageType.CountsAsClass(DamageClass.Melee);
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {
             return Player.Distance(target.getRect().ClosestPointInRect(Player.Center)) <= 96;
         }

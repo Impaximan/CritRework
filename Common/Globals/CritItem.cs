@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CritRework.Common.ModPlayers;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -25,8 +26,18 @@ namespace CritRework.Common.Globals
 
         public override int ChoosePrefix(Item item, UnifiedRandom rand)
         {
-            if (critType == null) AddCritType(item);
+            AddCritType(item);
             return base.ChoosePrefix(item, rand);
+        }
+
+        public override void UpdateInventory(Item item, Player player)
+        {
+            if (critType == null) AddCritType(item);
+        }
+
+        public override void HoldItem(Item item, Player player)
+        {
+            if (critType == null) AddCritType(item);
         }
 
         public override void SetDefaults(Item entity)
@@ -40,14 +51,24 @@ namespace CritRework.Common.Globals
                     if (entity.type == itemType)
                     {
                         critType = crit;
+                        break;
                     }
-                    break;
                 }
             }
         }
 
         public override void OnCreated(Item item, ItemCreationContext context)
         {
+            if (context is RecipeItemCreationContext recipeContext)
+            {
+                CritPlayer critPlayer = Main.LocalPlayer.GetModPlayer<CritPlayer>();
+                if (critPlayer.slotMachineCritCrafting)
+                {
+                    critType = critPlayer.slotMachineCrit;
+                    critPlayer.currentSlotTime = CritPlayer.maxCurrentSlotTime;
+                    return;
+                }
+            }
             AddCritType(item);
         }
 
@@ -76,7 +97,7 @@ namespace CritRework.Common.Globals
             }
 
 
-            if (CritRework.randomCritPool.Count <= 0)
+            if (CritRework.randomCritPool.Count <= 0 || item.consumable)
             {
                 return;
             }
@@ -106,6 +127,13 @@ namespace CritRework.Common.Globals
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
+            CritPlayer critPlayer = Main.LocalPlayer.GetModPlayer<CritPlayer>();
+
+            if (critPlayer.slotMachineCritCrafting)
+            {
+                critPlayer.slotMachineItem = item;
+            }
+
             foreach (Tuple<string, string> conversion in CritRework.tooltipConversions)
             {
                 foreach (TooltipLine tooltip in tooltips)
@@ -123,15 +151,53 @@ namespace CritRework.Common.Globals
                 int index = tooltips.FindIndex(x => x.Name == "CritChance");
                 tooltips.RemoveAt(index);
 
-                if (CanHaveCrits(item))
+                if (CanHaveCrits(item) || critType != null)
                 {
                     if (critType == null)
                     {
-                        TooltipLine line = new TooltipLine(Mod, "NoCrit", "Currently cannot critically strike" +
-                            "\nCan be reforged to gain the ability to");
-                        line.OverrideColor = Color.Gray;
+                        if (critPlayer.slotMachineCritCrafting && critPlayer.slotMachineCrit != null)
+                        {
+                            critPlayer.timeSinceLastTooltipShown = 0;
+                            TooltipLine line2 = new TooltipLine(Mod, "CritDescription", critPlayer.slotMachineCrit.GetDescription());
+                            line2.OverrideColor = critPlayer.slotMachineCrit.Color;
 
-                        tooltips.Add(line);
+                            int indexA = tooltips.FindLastIndex(x => x.Name.Contains("Tooltip"));
+                            int indexB = tooltips.FindIndex(x => x.Name == "Consumable");
+                            int indexC = tooltips.FindIndex(x => x.Name == "UseMana");
+                            int indexD = tooltips.FindIndex(x => x.Name == "Knockback");
+
+                            if (indexA != -1)
+                            {
+                                tooltips.Insert(indexA + 1, line2);
+                            }
+                            else if (indexB != -1)
+                            {
+                                tooltips.Insert(indexB + 1, line2);
+                            }
+                            else if (indexC != -1)
+                            {
+                                tooltips.Insert(indexC + 1, line2);
+                            }
+                            else if (indexD != -1)
+                            {
+                                tooltips.Insert(indexD + 1, line2);
+                            }
+                            else
+                            {
+                                tooltips.Add(line2);
+                            }
+
+                            TooltipLine line3 = new TooltipLine(Mod, "CritDamage", Math.Round(Main.LocalPlayer.GetWeaponDamage(item, true) * CritType.CalculateActualCritMult(critPlayer.slotMachineCrit, item, Main.LocalPlayer)) + " critical strike damage");
+
+                            tooltips.Insert(index, line3);
+                        }
+                        else
+                        {
+                            TooltipLine line = new TooltipLine(Mod, "NoCrit", "Unknown critical strike condition");
+                            line.OverrideColor = Color.Gray;
+
+                            tooltips.Add(line);
+                        }
                     }
                     else
                     {
@@ -142,9 +208,9 @@ namespace CritRework.Common.Globals
                 }
             }
 
-            if (!CanHaveCrits(item) && item.ammo == AmmoID.None)
+            if (!CanHaveCrits(item) && item.ammo == AmmoID.None && critType == null && item.damage > 0)
             {
-                TooltipLine line = new TooltipLine(Mod, "CritDamage", "Unable to critically strike");
+                TooltipLine line = new TooltipLine(Mod, "NoCrit", "Unable to critically strike");
                 line.OverrideColor = Color.Gray;
 
                 tooltips.Add(line);
@@ -156,8 +222,9 @@ namespace CritRework.Common.Globals
                 line.OverrideColor = critType.Color;
 
                 int indexA = tooltips.FindLastIndex(x => x.Name.Contains("Tooltip"));
-                int indexB = tooltips.FindIndex(x => x.Name == "UseMana");
-                int indexC = tooltips.FindIndex(x => x.Name == "Knockback");
+                int indexB = tooltips.FindIndex(x => x.Name == "Consumable");
+                int indexC = tooltips.FindIndex(x => x.Name == "UseMana");
+                int indexD = tooltips.FindIndex(x => x.Name == "Knockback");
 
                 if (indexA != -1)
                 {
@@ -170,6 +237,10 @@ namespace CritRework.Common.Globals
                 else if (indexC != -1)
                 {
                     tooltips.Insert(indexC + 1, line);
+                }
+                else if (indexD != -1)
+                {
+                    tooltips.Insert(indexD + 1, line);
                 }
                 else
                 {

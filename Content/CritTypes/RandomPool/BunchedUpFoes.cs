@@ -11,7 +11,7 @@ namespace CritRework.Content.CritTypes.RandomPool
         const int minNumber = 5;
         public override string GetDescription() => "Critically strikes when there are many enemies in close proximity";
 
-        public override bool ShouldCrit(Player Player, Item Item, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {
             int numberOfEnemies = 0;
 

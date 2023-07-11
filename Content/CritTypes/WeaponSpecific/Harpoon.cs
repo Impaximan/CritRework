@@ -16,7 +16,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
 
         public override string GetDescription() => "Critically strikes while the target is at least 26 tiles away";
 
-        public override bool ShouldCrit(Player Player, Item Item, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {
             return Player.Distance(target.getRect().ClosestPointInRect(Player.Center)) >= 416;
         }

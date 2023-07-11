@@ -15,7 +15,7 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         public override string GetDescription() => "Critically strikes while you are above the target";
 
-        public override bool ShouldCrit(Player Player, Item Item, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {
             return Player.position.Y + Player.height < target.position.Y;
         }

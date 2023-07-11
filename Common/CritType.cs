@@ -20,7 +20,9 @@ namespace CritRework.Common
             return true;
         }
 
-        public abstract bool ShouldCrit(Player Player, Item Item, NPC target);
+#nullable enable
+        public abstract bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target);
+#nullable disable
 
         public abstract float GetDamageMult(Player Player, Item Item);
 
