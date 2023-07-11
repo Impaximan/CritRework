@@ -32,5 +32,6 @@ namespace CritRework.Common.Globals
 
             if (CritRework.critSounds && hit.Crit && projectile.owner == Main.myPlayer) SoundEngine.PlaySound(style);
         }
+
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader.IO;
@@ -59,10 +60,10 @@ namespace CritRework.Common.Globals
 
         public override void OnCreated(Item item, ItemCreationContext context)
         {
-            if (context is RecipeItemCreationContext recipeContext)
+            CritPlayer critPlayer = Main.LocalPlayer.GetModPlayer<CritPlayer>();
+            if (critPlayer.timeSinceLastTooltipShown <= 2)
             {
-                CritPlayer critPlayer = Main.LocalPlayer.GetModPlayer<CritPlayer>();
-                if (critPlayer.slotMachineCritCrafting)
+                if (critPlayer.slotMachineCritCrafting && critPlayer.slotMachineCrit.CanApplyTo(item))
                 {
                     critType = critPlayer.slotMachineCrit;
                     critPlayer.currentSlotTime = CritPlayer.maxCurrentSlotTime;
@@ -128,6 +129,7 @@ namespace CritRework.Common.Globals
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
             CritPlayer critPlayer = Main.LocalPlayer.GetModPlayer<CritPlayer>();
+            int index = tooltips.FindIndex(x => x.Name == "CritChance");
 
             if (critPlayer.slotMachineCritCrafting)
             {
@@ -145,10 +147,19 @@ namespace CritRework.Common.Globals
                 }
             }
 
+            Item firstAmmo = (item.useAmmo != AmmoID.None && Main.LocalPlayer.HasAmmo(item)) ? Main.LocalPlayer.ChooseAmmo(item) : null;
+
+            if (tooltips.Exists(x => x.Name == "Damage") && firstAmmo != null)
+            {
+                int i = tooltips.FindIndex(x => x.Name == "Damage");
+                int stringIndex = tooltips[i].Text.IndexOf(" ");
+
+                string ammoExtra1 = " + " + Main.LocalPlayer.GetWeaponDamage(firstAmmo, true);
+                tooltips[i].Text = tooltips[i].Text.Insert(stringIndex, ammoExtra1);
+            }
 
             if (tooltips.Exists(x => x.Name == "CritChance"))
             {
-                int index = tooltips.FindIndex(x => x.Name == "CritChance");
                 tooltips.RemoveAt(index);
 
                 if (CanHaveCrits(item) || critType != null)
@@ -187,7 +198,8 @@ namespace CritRework.Common.Globals
                                 tooltips.Add(line2);
                             }
 
-                            TooltipLine line3 = new TooltipLine(Mod, "CritDamage", Math.Round(Main.LocalPlayer.GetWeaponDamage(item, true) * CritType.CalculateActualCritMult(critPlayer.slotMachineCrit, item, Main.LocalPlayer)) + " critical strike damage");
+                            string ammoExtra = firstAmmo != null ? (" + " + Math.Round(Main.LocalPlayer.GetWeaponDamage(firstAmmo, true) * CritType.CalculateActualCritMult(critPlayer.slotMachineCrit, item, Main.LocalPlayer))) : "";
+                            TooltipLine line3 = new TooltipLine(Mod, "CritDamage", Math.Round(Main.LocalPlayer.GetWeaponDamage(item, true) * CritType.CalculateActualCritMult(critPlayer.slotMachineCrit, item, Main.LocalPlayer)) + ammoExtra + " critical strike damage");
 
                             tooltips.Insert(index, line3);
                         }
@@ -197,11 +209,17 @@ namespace CritRework.Common.Globals
                             line.OverrideColor = Color.Gray;
 
                             tooltips.Add(line);
+
+                            TooltipLine line3 = new TooltipLine(Mod, "CritDamage", "??? critical strike damage");
+                            line3.OverrideColor = Color.Gray;
+
+                            tooltips.Insert(index, line3);
                         }
                     }
                     else
                     {
-                        TooltipLine line = new TooltipLine(Mod, "CritDamage", Math.Round(Main.LocalPlayer.GetWeaponDamage(item, true) * CritType.CalculateActualCritMult(critType, item, Main.LocalPlayer)) + " critical strike damage");
+                        string ammoExtra = firstAmmo != null ? (" + " + Math.Round(Main.LocalPlayer.GetWeaponDamage(firstAmmo, true) * CritType.CalculateActualCritMult(critType, item, Main.LocalPlayer))) : "";
+                        TooltipLine line = new TooltipLine(Mod, "CritDamage", Math.Round(Main.LocalPlayer.GetWeaponDamage(item, true) * CritType.CalculateActualCritMult(critType, item, Main.LocalPlayer)) + ammoExtra + " critical strike damage");
 
                         tooltips.Insert(index, line);
                     }

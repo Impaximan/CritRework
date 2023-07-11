@@ -12,7 +12,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
             return true;
         }
 
-        public override float GetDamageMult(Player Player, Item Item) => 2f;
+        public override float GetDamageMult(Player Player, Item Item) => 2.5f;
 
         public override string GetDescription() => "Critically strikes after ricocheting off at least one target";
 

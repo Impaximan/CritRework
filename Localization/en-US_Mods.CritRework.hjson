@@ -1,0 +1,6 @@
+Items: {
+	CritMonocle: {
+		Tooltip: While this item is favorited, choose the crit condition of crafted items... if you're lucky
+		DisplayName: Gambler's Monocle
+	}
+}

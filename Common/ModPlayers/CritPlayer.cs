@@ -6,7 +6,7 @@ namespace CritRework.Common.ModPlayers
     public class CritPlayer : ModPlayer
     {
         public int timeSinceLastHit = 0;
-        public bool slotMachineCritCrafting = true;
+        public bool slotMachineCritCrafting = false;
         public CritType slotMachineCrit = null;
         public Item slotMachineItem = null;
 
@@ -15,6 +15,12 @@ namespace CritRework.Common.ModPlayers
         public const int maxCurrentSlotTime = 30;
         public const int minCurrentSlotTime = 5;
         public int timeSinceLastTooltipShown = 0;
+
+        public override void ResetEffects()
+        {
+            slotMachineCritCrafting = false;
+        }
+
         public override void PostUpdate()
         {
             timeSinceLastHit++;
