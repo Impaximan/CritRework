@@ -14,7 +14,10 @@ namespace CritRework.Common.ModPlayers
         public int currentSlotTime = maxCurrentSlotTime;
         public const int maxCurrentSlotTime = 30;
         public const int minCurrentSlotTime = 5;
+        public int freshItemTime = 0;
         public int timeSinceLastTooltipShown = 0;
+
+        public Item lastWeaponUsed = null;
 
         public override void ResetEffects()
         {
@@ -24,7 +27,7 @@ namespace CritRework.Common.ModPlayers
         public override void PostUpdate()
         {
             timeSinceLastHit++;
-
+            freshItemTime++;
             UpdateSlotMachine();
         }
 

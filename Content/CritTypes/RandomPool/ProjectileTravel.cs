@@ -1,0 +1,27 @@
+﻿using Microsoft.Xna.Framework;
+
+namespace CritRework.Content.CritTypes.WeaponSpecific
+{
+    internal class ProjectileTravel : CritType
+    {
+        public override bool InRandomPool => true;
+
+        public override float GetDamageMult(Player Player, Item Item) => 1.3f;
+
+        public override string GetDescription() => "Critically strikes if the projectile has been travelling for more than 1 second";
+
+        public override bool CanApplyTo(Item item)
+        {
+            return item.shoot != ProjectileID.None && !ItemID.Sets.Spears[item.type];
+        }
+
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
+        {
+            if (Projectile != null)
+            {
+                return Projectile.GetGlobalProjectile<Common.Globals.CritProjectile>().timeActive >= 60;
+            }
+            return false;
+        }
+    }
+}

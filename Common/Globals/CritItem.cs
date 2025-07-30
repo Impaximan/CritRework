@@ -39,6 +39,19 @@ namespace CritRework.Common.Globals
             }
         }
 
+        public override bool? UseItem(Item item, Player player)
+        {
+            if (item.damage > 0 && !item.accessory)
+            {
+                if (player.GetModPlayer<CritPlayer>().lastWeaponUsed != item)
+                {
+                    player.GetModPlayer<CritPlayer>().freshItemTime = 0;
+                }
+                player.GetModPlayer<CritPlayer>().lastWeaponUsed = item;
+            }
+            return base.UseItem(item, player);
+        }
+
         public override void HoldItem(Item item, Player player)
         {
             if (critType == null)
