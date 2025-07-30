@@ -149,7 +149,7 @@ namespace CritRework.Common.Globals
 
         public static bool CanHaveCrits(Item item)
         {
-            return item.DamageType != DamageClass.Summon && item.DamageType != DamageClass.SummonMeleeSpeed && item.ammo == AmmoID.None && !item.consumable && !item.accessory;
+            return item.DamageType != DamageClass.Summon && item.DamageType != DamageClass.SummonMeleeSpeed && item.ammo == AmmoID.None && !item.consumable && !item.accessory && item.damage > 0;
         }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)

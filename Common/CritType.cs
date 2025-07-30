@@ -13,6 +13,11 @@ namespace CritRework.Common
             return critType.GetDamageMult(Player, Item) * (1f + (Player.GetCritChance(Item.DamageType) + Player.GetCritChance<GenericDamageClass>() + Item.crit) / 100f);
         }
 
+        public static T Get<T>() where T : CritType
+        {
+            return CritRework.loadedCritTypes.Find(x => x is T) as T;
+        }
+
         public virtual bool InRandomPool => false;
 
         public virtual bool CanApplyTo(Item item)

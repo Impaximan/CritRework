@@ -1,5 +1,6 @@
 global using Terraria.ModLoader;
 global using Terraria;
+global using Terraria.Localization;
 global using Terraria.ID;
 global using CritRework.Common;
 using System.Collections.Generic;

@@ -3,4 +3,15 @@ Items: {
 		Tooltip: While this item is favorited, choose the crit condition of crafted items... if you're lucky
 		DisplayName: Gambler's Monocle
 	}
+
+	IronWhetstone: {
+		DisplayName: Iron Whetstone
+		Tooltip: "'The most basic whetstone'"
+		CanBeApplied: Can be applied to any weapon
+	}
+}
+
+Whetstone: {
+	Tooltip1: Can be used to grant the following crit condition to a weapon:
+	Tooltip2: To apply, hold an eligible weapon with your mouse cursor and right click on this item
 }
