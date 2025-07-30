@@ -36,14 +36,14 @@ namespace CritRework.Content.Items
                 .AddIngredient(ItemID.Lens, 3)
                 .AddIngredient(ItemID.BlackLens)
                 .AddIngredient(ItemID.DemoniteBar, 2)
-                .AddTile(TileID.DemonAltar)
+                .AddTile(TileID.Anvils)
                 .Register();
 
             CreateRecipe()
                 .AddIngredient(ItemID.Lens, 3)
                 .AddIngredient(ItemID.BlackLens)
                 .AddIngredient(ItemID.CrimtaneBar, 2)
-                .AddTile(TileID.DemonAltar)
+                .AddTile(TileID.Anvils)
                 .Register();
         }
     }

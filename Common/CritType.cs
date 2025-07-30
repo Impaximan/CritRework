@@ -10,7 +10,7 @@ namespace CritRework.Common
             {
                 return 1f;
             }
-            return critType.GetDamageMult(Player, Item) * (1f + (Player.GetCritChance(Item.DamageType) + Item.crit) / 100f);
+            return critType.GetDamageMult(Player, Item) * (1f + (Player.GetCritChance(Item.DamageType) + Player.GetCritChance<GenericDamageClass>() + Item.crit) / 100f);
         }
 
         public virtual bool InRandomPool => false;

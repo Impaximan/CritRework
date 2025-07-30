@@ -27,19 +27,32 @@ namespace CritRework.Common.Globals
 
         public override int ChoosePrefix(Item item, UnifiedRandom rand)
         {
-            AddCritType(item);
+            if (critType == null) AddCritType(item);
             return base.ChoosePrefix(item, rand);
         }
 
         public override void UpdateInventory(Item item, Player player)
         {
-            if (critType == null) AddCritType(item);
+            if (critType == null)
+            {
+                AddCritType(item);
+            }
         }
 
         public override void HoldItem(Item item, Player player)
         {
-            if (critType == null) AddCritType(item);
+            if (critType == null)
+            {
+                AddCritType(item);
+            }
         }
+
+        //public override GlobalItem Clone(Item from, Item to)
+        //{
+        //    CritItem critItem = new CritItem();
+        //    critItem.critType = critType;
+        //    return critItem;
+        //}
 
         public override void SetDefaults(Item entity)
         {
@@ -75,7 +88,7 @@ namespace CritRework.Common.Globals
 
         public void AddCritType(Item item)
         {
-            if (item.damage == -1 || item.ammo != AmmoID.None)
+            if (item.damage == -1 || item.ammo != AmmoID.None || item.accessory)
             {
                 return;
             }
@@ -123,7 +136,7 @@ namespace CritRework.Common.Globals
 
         public static bool CanHaveCrits(Item item)
         {
-            return item.DamageType != DamageClass.Summon && item.DamageType != DamageClass.SummonMeleeSpeed && item.ammo == AmmoID.None && !item.consumable;
+            return item.DamageType != DamageClass.Summon && item.DamageType != DamageClass.SummonMeleeSpeed && item.ammo == AmmoID.None && !item.consumable && !item.accessory;
         }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -154,7 +167,7 @@ namespace CritRework.Common.Globals
                 int i = tooltips.FindIndex(x => x.Name == "Damage");
                 int stringIndex = tooltips[i].Text.IndexOf(" ");
 
-                string ammoExtra1 = " + " + Main.LocalPlayer.GetWeaponDamage(firstAmmo, true);
+                string ammoExtra1 = "+" + Main.LocalPlayer.GetWeaponDamage(firstAmmo, true);
                 tooltips[i].Text = tooltips[i].Text.Insert(stringIndex, ammoExtra1);
             }
 
@@ -210,18 +223,47 @@ namespace CritRework.Common.Globals
 
                             tooltips.Add(line);
 
-                            TooltipLine line3 = new TooltipLine(Mod, "CritDamage", "??? critical strike damage");
-                            line3.OverrideColor = Color.Gray;
+                            int i = tooltips.FindIndex(x => x.Name == "Damage");
+                            tooltips[i].Text = tooltips[i].Text.Insert(tooltips[i].Text.IndexOf(' '), " ([c/808080:???])");
 
-                            tooltips.Insert(index, line3);
+                            //TooltipLine line3 = new TooltipLine(Mod, "CritDamage", "??? critical strike damage");
+                            //line3.OverrideColor = Color.Gray;
+
+                            //tooltips.Insert(index, line3);
                         }
                     }
                     else
                     {
-                        string ammoExtra = firstAmmo != null ? (" + " + Math.Round(Main.LocalPlayer.GetWeaponDamage(firstAmmo, true) * CritType.CalculateActualCritMult(critType, item, Main.LocalPlayer))) : "";
-                        TooltipLine line = new TooltipLine(Mod, "CritDamage", Math.Round(Main.LocalPlayer.GetWeaponDamage(item, true) * CritType.CalculateActualCritMult(critType, item, Main.LocalPlayer)) + ammoExtra + " critical strike damage");
 
-                        tooltips.Insert(index, line);
+                        if (tooltips.Exists(x => x.Name == "Damage"))
+                        {
+                            int i = tooltips.FindIndex(x => x.Name == "Damage");
+                            List<string> words = tooltips[i].Text.Split(' ').ToList();
+
+                            string damageExtra = Math.Round(Main.LocalPlayer.GetWeaponDamage(item, true) * CritType.CalculateActualCritMult(critType, item, Main.LocalPlayer)).ToString();
+                            if (firstAmmo != null)
+                            {
+                                string ammoExtra = "+" + Math.Round(Main.LocalPlayer.GetWeaponDamage(firstAmmo, true) * CritType.CalculateActualCritMult(critType, item, Main.LocalPlayer));
+                                words.Insert(1, "([c/fff88d:" + damageExtra + ammoExtra + "])");
+                            }
+                            else
+                            {
+                                words.Insert(1, "([c/fff88d:" + damageExtra + "])");
+                            }
+
+                            string final = "";
+
+                            foreach (string word in words)
+                            {
+                                final += word + " ";
+                            }
+                            tooltips[i].Text = final;
+                        }
+
+                        //string ammoExtra = firstAmmo != null ? (" + " + Math.Round(Main.LocalPlayer.GetWeaponDamage(firstAmmo, true) * CritType.CalculateActualCritMult(critType, item, Main.LocalPlayer))) : "";
+                        //TooltipLine line = new TooltipLine(Mod, "CritDamage", Math.Round(Main.LocalPlayer.GetWeaponDamage(item, true) * CritType.CalculateActualCritMult(critType, item, Main.LocalPlayer)) + ammoExtra + " critical strike damage");
+
+                        //tooltips.Insert(index, line);
                     }
                 }
             }
