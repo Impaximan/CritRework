@@ -33,10 +33,32 @@ Items: {
 		DisplayName: Volatile Whetstone
 		Tooltip: "'Instructions: Apply weapon to whetstone gently. Distributor not responsible for any lost limbs or property.'"
 	}
+
+	WebCoveredWhetstone: {
+		CanBeApplied: Can be applied to any weapon that can crit
+		DisplayName: Web Covered Whetstone
+		Tooltip: ""
+	}
+
+	AdaptiveWhetstone: {
+		CanBeApplied: Can be applied to any weapon that can crit
+		DisplayName: Adaptive Whetstone
+		Tooltip: ""
+	}
+
+	FrozenWhetstone: {
+		CanBeApplied: Can be applied to any weapon that can crit
+		DisplayName: Frozen Whetstone
+		Tooltip: ""
+	}
 }
 
 Whetstone: {
 	Tooltip1: Can be used to grant the following crit condition to a weapon:
-	Tooltip2: To apply, hold an eligible weapon with your mouse cursor and right click on this item
+	Tooltip2:
+	'''
+	To apply, hold an eligible weapon with your mouse cursor and right click on this item
+	The effect will be erased upon reforging
+	'''
 	critDamageMult: crit damage mult
 }

@@ -2,16 +2,16 @@
 
 namespace CritRework.Content.Items.Whetstones
 {
-    public class EnchantedWhetstone : Whetstone
+    public class FrozenWhetstone : Whetstone
     {
-        public override CritType AssociatedCritType => CritType.Get<CritTypes.WhetstoneSpecific.Enchanted>();
+        public override CritType AssociatedCritType => CritType.Get<CritTypes.WhetstoneSpecific.Frozen>();
 
         public override void SetDefaults()
         {
             Item.width = 24;
             Item.height = 22;
             Item.rare = ItemRarityID.Blue;
-            Item.value = Item.sellPrice(0, 1, 0, 0);
+            Item.value = Item.sellPrice(0, 0, 75, 0);
             Item.maxStack = 20;
         }
 
@@ -19,13 +19,13 @@ namespace CritRework.Content.Items.Whetstones
         {
             CreateRecipe()
                 .AddIngredient<IronWhetstone>()
-                .AddIngredient(ItemID.FallenStar, 6)
-                .AddTile(TileID.WorkBenches)
+                .AddIngredient(ItemID.IceBlock, 15)
+                .AddTile(TileID.IceMachine)
                 .Register();
             CreateRecipe()
                 .AddIngredient<LeadWhetstone>()
-                .AddIngredient(ItemID.FallenStar, 6)
-                .AddTile(TileID.WorkBenches)
+                .AddIngredient(ItemID.IceBlock, 15)
+                .AddTile(TileID.IceMachine)
                 .Register();
         }
     }

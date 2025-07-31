@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace CritRework.Content.CritTypes.WhetstoneSpecific
 {
-    internal class GreedyWhetstone : CritType
+    public class Adaptive : CritType
     {
         public override bool InRandomPool => false;
 
-        public override float GetDamageMult(Player Player, Item Item) => 1.5f;
+        public override float GetDamageMult(Player Player, Item Item) => 1.85f;
 
-        public override string GetDescription() => "Critically strikes for 3 seconds after you pick up money";
+        public override string GetDescription() => "Critically strikes for 3 seconds after healing for at least 20 hp (healing while at max doesn't count)";
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {
-            return Player.GetModPlayer<CritPlayer>().timeSinceGoldPickup <= 60 * 3;
+            return Player.GetModPlayer<CritPlayer>().timeSinceHeal <= 60 * 3;
         }
     }
 }

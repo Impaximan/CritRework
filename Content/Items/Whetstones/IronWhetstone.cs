@@ -10,7 +10,7 @@ namespace CritRework.Content.Items.Whetstones
         {
             Item.width = 24;
             Item.height = 22;
-            Item.rare = ItemRarityID.Blue;
+            Item.rare = ItemRarityID.White;
             Item.value = Item.sellPrice(0, 0, 30, 0);
             Item.maxStack = 20;
         }
@@ -19,7 +19,7 @@ namespace CritRework.Content.Items.Whetstones
         {
             CreateRecipe()
                 .AddIngredient(ItemID.IronBar, 6)
-                .AddTile(TileID.Anvils)
+                .AddTile(TileID.Sawmill)
                 .Register();
         }
     }

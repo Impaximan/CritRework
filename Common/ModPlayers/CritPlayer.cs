@@ -17,6 +17,8 @@ namespace CritRework.Common.ModPlayers
         public int freshItemTime = 0;
         public int timeSinceLastTooltipShown = 0;
         public int timeSinceGoldPickup = 0;
+        public int timeSinceHeal = 0;
+        public int timeSinceHook = 0;
 
         public Item lastWeaponUsed = null;
 
@@ -30,6 +32,8 @@ namespace CritRework.Common.ModPlayers
             timeSinceLastHit++;
             freshItemTime++;
             timeSinceGoldPickup++;
+            timeSinceHeal++;
+            timeSinceHook++;
             UpdateSlotMachine();
         }
 
@@ -107,6 +111,23 @@ namespace CritRework.Common.ModPlayers
         public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
         {
             timeSinceLastHit = 0;
+        }
+
+        int lastHealth = 1000;
+        public override void PostUpdateMiscEffects()
+        {
+            int diff = Player.statLife - lastHealth;
+            lastHealth = Player.statLife;
+
+            if (diff >= 20)
+            {
+                timeSinceHeal = 0;
+            }
+
+            if (Player.grapCount > 0)
+            {
+                timeSinceHook = 0;
+            }
         }
 
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)

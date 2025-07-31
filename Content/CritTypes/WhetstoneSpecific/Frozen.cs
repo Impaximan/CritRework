@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace CritRework.Content.CritTypes.WhetstoneSpecific
 {
-    internal class EnchantedWhetstone : CritType
+    internal class Frozen : CritType
     {
         public override bool InRandomPool => false;
 
-        public override float GetDamageMult(Player Player, Item Item) => 1.5f;
+        public override float GetDamageMult(Player Player, Item Item) => 1.3f;
 
-        public override string GetDescription() => "Critically strikes if you have less than 30% of your maximum mana";
+        public override string GetDescription() => "Critically strikes on targets moving less than 10 miles per hour";
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {
-            return Player.statMana <= Player.statManaMax2 * 0.3f;
+            return target.velocity.Length() <= 2f;
         }
     }
 }

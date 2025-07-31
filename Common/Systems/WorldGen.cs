@@ -1,0 +1,97 @@
+﻿using Terraria.WorldBuilding;
+
+namespace CritRework.Common.Systems
+{
+    class ChestLoot : ModSystem
+    {
+        public override void PostWorldGen()
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                Chest chest = Main.chest[i];
+
+                if (chest != null)
+                {
+                    if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 0 * 36) //Wooden chest
+                    {
+
+                    }
+
+                    if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 12 * 36) //Living wood chest
+                    {
+
+                    }
+
+                    if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 1 * 36) //Golden chest
+                    {
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(WorldGen.SavedOreTiers.Iron == TileID.Iron ? ModContent.ItemType<Content.Items.Whetstones.IronWhetstone>() : ModContent.ItemType<Content.Items.Whetstones.LeadWhetstone>());
+                                    chest.item[inventoryIndex].stack = 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 8 * 36) //Rich mahogany chest
+                    {
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Whetstones.AdaptiveWhetstone>());
+                                    chest.item[inventoryIndex].stack = 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 11 * 36) //Ice chest
+                    {
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Whetstones.FrozenWhetstone>());
+                                    chest.item[inventoryIndex].stack = 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 15 * 36) //Spider chest
+                    {
+                        if (WorldGen.genRand.NextBool(2))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Whetstones.WebCoveredWhetstone>());
+                                    chest.item[inventoryIndex].stack = 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 32 * 36) //Mushroom Chest
+                    {
+
+                    }
+                }
+            }
+        }
+    }
+}

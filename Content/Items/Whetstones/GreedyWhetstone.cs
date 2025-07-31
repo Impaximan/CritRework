@@ -4,7 +4,7 @@ namespace CritRework.Content.Items.Whetstones
 {
     public class GreedyWhetstone : Whetstone
     {
-        public override CritType AssociatedCritType => CritType.Get<CritTypes.WhetstoneSpecific.GreedyWhetstone>();
+        public override CritType AssociatedCritType => CritType.Get<CritTypes.WhetstoneSpecific.Greedy>();
 
         public override void SetDefaults()
         {
