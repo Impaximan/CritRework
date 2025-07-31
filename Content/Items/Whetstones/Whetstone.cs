@@ -68,13 +68,20 @@ namespace CritRework.Content.Items.Whetstones
 
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
-            tooltips.Insert(1, new TooltipLine(Mod, "WhetstoneTooltip0", tooltip1.Value));
-            tooltips.Insert(2, new TooltipLine(Mod, "WhetstoneTooltip1", " • \"" + AssociatedCritType.GetDescription() + "\"" + "\n • " + Math.Round(AssociatedCritType.GetDamageMult(Main.LocalPlayer, Item), 2) + "x " + critDamageMult.Value)
+            int startingIndex = 1;
+
+            if (tooltips.Exists(x => x.Name == "FavoriteDesc"))
+            {
+                startingIndex = tooltips.FindIndex(x => x.Name == "FavoriteDesc") + 1;
+            }
+
+            tooltips.Insert(startingIndex, new TooltipLine(Mod, "WhetstoneTooltip0", tooltip1.Value));
+            tooltips.Insert(startingIndex + 1, new TooltipLine(Mod, "WhetstoneTooltip1", " • \"" + AssociatedCritType.GetDescription() + "\"" + "\n • " + Math.Round(AssociatedCritType.GetDamageMult(Main.LocalPlayer, Item), 2) + "x " + critDamageMult.Value)
             {
                 OverrideColor = Color.Lerp(Color.Yellow, Color.White, 0.3f)
             });
-            tooltips.Insert(3, new TooltipLine(Mod, "WhetstoneTooltip3", Mod.GetLocalization($"Items.{GetType().Name}.CanBeApplied").Value));
-            tooltips.Insert(4, new TooltipLine(Mod, "WhetstoneTooltip2", tooltip2.Value));
+            tooltips.Insert(startingIndex + 2, new TooltipLine(Mod, "WhetstoneTooltip3", Mod.GetLocalization($"Items.{GetType().Name}.CanBeApplied").Value));
+            tooltips.Insert(startingIndex + 3, new TooltipLine(Mod, "WhetstoneTooltip2", tooltip2.Value));
         }
     }
 }

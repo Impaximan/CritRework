@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-
-namespace CritRework.Content.CritTypes.RandomPool
+﻿namespace CritRework.Content.CritTypes.RandomPool
 {
     internal class FoeIsWet : CritType
     {

@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-using Terraria.Audio;
+﻿using System.Collections.Generic;
 
 namespace CritRework.Content.CritTypes.RandomPool
 {

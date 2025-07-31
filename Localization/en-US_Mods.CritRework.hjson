@@ -51,14 +51,32 @@ Items: {
 		DisplayName: Frozen Whetstone
 		Tooltip: ""
 	}
+
+	NecromanticWhetstone: {
+		CanBeApplied: Can be applied to any weapon that can crit
+		DisplayName: Necromantic Whetstone
+		Tooltip: ""
+	}
+
+	StarterWhetstone: {
+		CanBeApplied: Can be applied to any weapon that can crit
+		DisplayName: Starter Whetstone
+		Tooltip: "'Perfect for beginners!'"
+	}
+
+	AncientWhetstone: {
+		CanBeApplied: Can be applied to any weapon that can crit
+		DisplayName: Ancient Whetstone
+		Tooltip: ""
+	}
 }
 
 Whetstone: {
 	Tooltip1: Can be used to grant the following crit condition to a weapon:
 	Tooltip2:
-	'''
-	To apply, hold an eligible weapon with your mouse cursor and right click on this item
-	The effect will be erased upon reforging
-	'''
+		'''
+		To apply, hold an eligible weapon with your mouse cursor and right click on this item
+		The effect will be erased upon reforging
+		'''
 	critDamageMult: crit damage mult
 }

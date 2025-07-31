@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace CritRework.Content.CritTypes.WeaponSpecific
+﻿namespace CritRework.Content.CritTypes.WeaponSpecific
 {
     internal class Harpoon : CritType
     {

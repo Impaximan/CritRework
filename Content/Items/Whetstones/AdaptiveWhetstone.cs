@@ -1,6 +1,4 @@
-﻿using CritRework.Content.CritTypes.RandomPool;
-
-namespace CritRework.Content.Items.Whetstones
+﻿namespace CritRework.Content.Items.Whetstones
 {
     public class AdaptiveWhetstone : Whetstone
     {
@@ -10,7 +8,7 @@ namespace CritRework.Content.Items.Whetstones
         {
             Item.width = 24;
             Item.height = 22;
-            Item.rare = ItemRarityID.Blue;
+            Item.rare = ItemRarityID.Green;
             Item.value = Item.sellPrice(0, 1, 30, 0);
             Item.maxStack = 20;
         }

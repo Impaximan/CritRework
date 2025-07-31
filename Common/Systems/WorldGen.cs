@@ -1,6 +1,4 @@
-﻿using Terraria.WorldBuilding;
-
-namespace CritRework.Common.Systems
+﻿namespace CritRework.Common.Systems
 {
     class ChestLoot : ModSystem
     {
@@ -38,6 +36,22 @@ namespace CritRework.Common.Systems
                         }
                     }
 
+                    if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 2 * 36) //Locked golden (dungeon) chest
+                    {
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Whetstones.NecromanticWhetstone>());
+                                    chest.item[inventoryIndex].stack = 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
                     if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 8 * 36) //Rich mahogany chest
                     {
                         if (WorldGen.genRand.NextBool(4))
@@ -63,6 +77,21 @@ namespace CritRework.Common.Systems
                                 if (chest.item[inventoryIndex].type == ItemID.None)
                                 {
                                     chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Whetstones.FrozenWhetstone>());
+                                    chest.item[inventoryIndex].stack = 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (Main.tile[chest.x, chest.y].TileType == TileID.Containers2 && Main.tile[chest.x, chest.y].TileFrameX == 10 * 36) //Sandstone chest
+                    {
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Whetstones.AncientWhetstone>());
                                     chest.item[inventoryIndex].stack = 1;
                                     break;
                                 }

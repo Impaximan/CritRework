@@ -1,5 +1,7 @@
 ﻿using CritRework.Common.Globals;
+using CritRework.Content.Items.Whetstones;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace CritRework.Common.ModPlayers
 {
@@ -18,9 +20,22 @@ namespace CritRework.Common.ModPlayers
         public int timeSinceLastTooltipShown = 0;
         public int timeSinceGoldPickup = 0;
         public int timeSinceHeal = 0;
+        public int timeSinceDeath = 0;
         public int timeSinceHook = 0;
 
         public Item lastWeaponUsed = null;
+
+        public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
+        {
+            List<Item> list = new();
+
+            if (!mediumCoreDeath)
+            {
+                list.Add(new Item(ModContent.ItemType<StarterWhetstone>(), 2));
+            }
+
+            return list;
+        }
 
         public override void ResetEffects()
         {
@@ -34,6 +49,7 @@ namespace CritRework.Common.ModPlayers
             timeSinceGoldPickup++;
             timeSinceHeal++;
             timeSinceHook++;
+            timeSinceDeath++;
             UpdateSlotMachine();
         }
 
@@ -128,6 +144,11 @@ namespace CritRework.Common.ModPlayers
             {
                 timeSinceHook = 0;
             }
+        }
+
+        public override void UpdateDead()
+        {
+            timeSinceDeath = 0;
         }
 
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)

@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace CritRework.Content.CritTypes.RandomPool
+﻿namespace CritRework.Content.CritTypes.RandomPool
 {
     internal class FarFromFoe : CritType
     {

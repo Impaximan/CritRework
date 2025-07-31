@@ -1,10 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.GameContent.Creative;
-
-namespace CritRework.Content.Items
+﻿namespace CritRework.Content.Items
 {
     class CritMonocle : ModItem
     {

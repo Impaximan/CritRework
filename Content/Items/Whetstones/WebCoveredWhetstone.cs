@@ -1,6 +1,4 @@
-﻿using CritRework.Content.CritTypes.RandomPool;
-
-namespace CritRework.Content.Items.Whetstones
+﻿namespace CritRework.Content.Items.Whetstones
 {
     public class WebCoveredWhetstone : Whetstone
     {

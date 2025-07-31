@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace CritRework.Content.CritTypes.WeaponSpecific
+﻿namespace CritRework.Content.CritTypes.WeaponSpecific
 {
     internal class ProjectileTravel : CritType
     {
@@ -12,7 +10,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
 
         public override bool CanApplyTo(Item item)
         {
-            return item.shoot != ProjectileID.None && !ItemID.Sets.Spears[item.type];
+            return item.shoot != ProjectileID.None && !ItemID.Sets.Spears[item.type] && item.useStyle != ItemUseStyleID.Rapier;
         }
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)

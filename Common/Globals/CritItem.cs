@@ -2,8 +2,8 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader.IO;
 using Terraria.Utilities;
@@ -15,6 +15,23 @@ namespace CritRework.Common.Globals
         public override bool InstancePerEntity => true;
         public CritType critType = null;
 
+        public override void NetSend(Item item, BinaryWriter writer)
+        {
+            writer.Write(critType != null);
+            if (critType != null)
+            {
+                writer.Write(critType.GetType().ToString());
+            }
+        }
+
+        public override void NetReceive(Item item, BinaryReader reader)
+        {
+            if (reader.ReadBoolean())
+            {
+                critType = CritRework.GetCrit(reader.ReadString());
+            }
+        }
+
         public override void SaveData(Item item, TagCompound tag)
         {
             if (critType != null) tag.Add("critType", critType.GetType().ToString());
@@ -23,6 +40,11 @@ namespace CritRework.Common.Globals
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.ContainsKey("critType")) critType = CritRework.GetCrit(tag.GetString("critType"));
+        }
+
+        public override void PostReforge(Item item)
+        {
+            AddCritType(item);
         }
 
         public override int ChoosePrefix(Item item, UnifiedRandom rand)
@@ -90,6 +112,23 @@ namespace CritRework.Common.Globals
                         break;
                     }
                 }
+            }
+
+            List<int> affectedShortswords = new()
+            {
+                ItemID.CopperShortsword,
+                ItemID.TinShortsword,
+                ItemID.IronShortsword,
+                ItemID.LeadShortsword,
+                ItemID.SilverShortsword,
+                ItemID.TungstenShortsword,
+                ItemID.GoldShortsword,
+                ItemID.PlatinumShortsword
+            };
+
+            if (affectedShortswords.Contains(entity.type))
+            {
+                entity.crit += 35;
             }
         }
 
