@@ -1,9 +1,22 @@
-﻿using Terraria.Audio;
+﻿using CritRework.Content.Items.Whetstones;
+using Terraria.Audio;
 
 namespace CritRework.Common.Globals
 {
     public class CritNPC : GlobalNPC
     {
+        public override void ModifyShop(NPCShop shop)
+        {
+            if (shop.NpcType == NPCID.Merchant)
+            {
+                shop.Add<GreedyWhetstone>();
+            }
+
+            if (shop.NpcType == NPCID.Demolitionist)
+            {
+                shop.Add<VolatileWhetstone>();
+            }
+        }
 
         public override void OnHitByItem(NPC npc, Player player, Item item, NPC.HitInfo hit, int damageDone)
         {

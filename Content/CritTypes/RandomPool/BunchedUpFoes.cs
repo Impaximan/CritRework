@@ -4,12 +4,18 @@ namespace CritRework.Content.CritTypes.RandomPool
 {
     internal class BunchedUpFoes : CritType
     {
-        public override bool InRandomPool => true;
+        public override bool InRandomPool => false;
 
-        public override float GetDamageMult(Player Player, Item Item) => 1.5f;
+        public override bool ForceOnItem(out int itemType)
+        {
+            itemType = ItemID.Grenade;
+            return true;
+        }
 
-        const int minNumber = 5;
-        public override string GetDescription() => "Critically strikes when there are many enemies in close proximity";
+        public override float GetDamageMult(Player Player, Item Item) => 2f;
+
+        const int minNumber = 4;
+        public override string GetDescription() => "Critically strikes when there are many enemies in close proximity to each other";
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {

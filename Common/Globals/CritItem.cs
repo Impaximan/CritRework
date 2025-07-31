@@ -39,6 +39,15 @@ namespace CritRework.Common.Globals
             }
         }
 
+        public override bool OnPickup(Item item, Player player)
+        {
+            if (item.IsCurrency)
+            {
+                player.GetModPlayer<CritPlayer>().timeSinceGoldPickup = 0;
+            }
+            return base.OnPickup(item, player);
+        }
+
         public override bool? UseItem(Item item, Player player)
         {
             if (item.damage > 0 && !item.accessory)

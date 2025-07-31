@@ -16,6 +16,7 @@ namespace CritRework.Common.ModPlayers
         public const int minCurrentSlotTime = 5;
         public int freshItemTime = 0;
         public int timeSinceLastTooltipShown = 0;
+        public int timeSinceGoldPickup = 0;
 
         public Item lastWeaponUsed = null;
 
@@ -28,6 +29,7 @@ namespace CritRework.Common.ModPlayers
         {
             timeSinceLastHit++;
             freshItemTime++;
+            timeSinceGoldPickup++;
             UpdateSlotMachine();
         }
 

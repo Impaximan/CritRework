@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria.Audio;
+using System;
 
 namespace CritRework.Content.Items.Whetstones
 {
@@ -9,12 +10,14 @@ namespace CritRework.Content.Items.Whetstones
     {
         static LocalizedText tooltip1;
         static LocalizedText tooltip2;
+        static LocalizedText critDamageMult;
         public LocalizedText applicableTooltip;
 
         public override void SetStaticDefaults()
         {
             tooltip1 = Mod.GetLocalization($"{typeof(Whetstone).Name}.Tooltip1");
             tooltip2 = Mod.GetLocalization($"{typeof(Whetstone).Name}.Tooltip2");
+            critDamageMult = Mod.GetLocalization($"{typeof(Whetstone).Name}.critDamageMult");
             applicableTooltip = Mod.GetLocalization($"Items.{GetType().Name}.CanBeApplied");
         }
 
@@ -66,7 +69,7 @@ namespace CritRework.Content.Items.Whetstones
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             tooltips.Insert(1, new TooltipLine(Mod, "WhetstoneTooltip0", tooltip1.Value));
-            tooltips.Insert(2, new TooltipLine(Mod, "WhetstoneTooltip1", " • \"" + AssociatedCritType.GetDescription() + "\"")
+            tooltips.Insert(2, new TooltipLine(Mod, "WhetstoneTooltip1", " • \"" + AssociatedCritType.GetDescription() + "\"" + "\n • " + Math.Round(AssociatedCritType.GetDamageMult(Main.LocalPlayer, Item), 2) + "x " + critDamageMult.Value)
             {
                 OverrideColor = Color.Lerp(Color.Yellow, Color.White, 0.3f)
             });

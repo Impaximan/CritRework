@@ -4,7 +4,7 @@ namespace CritRework.Content.Items.Whetstones
 {
     public class LeadWhetstone : Whetstone
     {
-        public override CritType AssociatedCritType => CritType.Get<MediumChance>();
+        public override CritType AssociatedCritType => CritType.Get<HighChance>();
 
         public override void SetDefaults()
         {

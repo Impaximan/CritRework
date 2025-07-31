@@ -9,9 +9,34 @@ Items: {
 		Tooltip: "'The most basic whetstone'"
 		CanBeApplied: Can be applied to any weapon
 	}
+
+	EnchantedWhetstone: {
+		CanBeApplied: Can be applied to any weapon that can crit
+		DisplayName: Enchanted Whetstone
+		Tooltip: ""
+	}
+
+	LeadWhetstone: {
+		CanBeApplied: Can be applied to any weapon that can crit
+		DisplayName: Lead Whetstone
+		Tooltip: ""
+	}
+
+	GreedyWhetstone: {
+		CanBeApplied: Can be applied to any weapon that can crit
+		DisplayName: Greedy Whetstone
+		Tooltip: ""
+	}
+
+	VolatileWhetstone: {
+		CanBeApplied: Can be applied to any weapon that can crit
+		DisplayName: Volatile Whetstone
+		Tooltip: "'Instructions: Apply weapon to whetstone gently. Distributor not responsible for any lost limbs or property.'"
+	}
 }
 
 Whetstone: {
 	Tooltip1: Can be used to grant the following crit condition to a weapon:
 	Tooltip2: To apply, hold an eligible weapon with your mouse cursor and right click on this item
+	critDamageMult: crit damage mult
 }
