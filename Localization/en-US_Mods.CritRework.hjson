@@ -69,6 +69,18 @@ Items: {
 		DisplayName: Ancient Whetstone
 		Tooltip: ""
 	}
+
+	SoaringWhetstone: {
+		CanBeApplied: Can be applied to any weapon that can crit
+		DisplayName: Soaring Whetstone
+		Tooltip: ""
+	}
+
+	AmmoWhetstone: {
+		CanBeApplied: Can be applied to any weapon that can crit and consumes ammo
+		DisplayName: Reserving Whetstone
+		Tooltip: ""
+	}
 }
 
 Whetstone: {

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria.Audio;
+using Terraria.ModLoader.IO;
 using System;
 
 namespace CritRework.Content.Items.Whetstones
@@ -27,7 +28,7 @@ namespace CritRework.Content.Items.Whetstones
             {
                 if (AssociatedCritType == Main.mouseItem.GetGlobalItem<CritItem>().critType)
                 {
-                    Main.NewText("[i:" + Main.mouseItem.type + "] already has [i:" + Item.type + "]", new Color(255, 25, 25));
+                    Main.NewText("[i/d" + ItemIO.ToBase64(Main.mouseItem) + ":" + Main.mouseItem.type + "]" + " already has [i/s1/d" + ItemIO.ToBase64(Item) + ":" + Item.type + "]", new Color(255, 25, 25));
                 }
                 else
                 {
@@ -36,7 +37,7 @@ namespace CritRework.Content.Items.Whetstones
             }
             else
             {
-                Main.NewText("[i:" + Main.mouseItem.type + "] is not eligible for [i:" + Item.type + "]", new Color(255, 25, 25));
+                Main.NewText("[i/d" + ItemIO.ToBase64(Main.mouseItem) + ":" + Main.mouseItem.type + "] is not eligible for [i/s1/d" + ItemIO.ToBase64(Item) + ":" + Item.type + "]", new Color(255, 25, 25));
             }
         }
 
@@ -49,7 +50,7 @@ namespace CritRework.Content.Items.Whetstones
         {
             target.GetGlobalItem<CritItem>().critType = AssociatedCritType;
             SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/Whetstone"));
-            Main.NewText("Applied [i:" + Item.type + "] to [i:" + target.type + "]", Color.Yellow);
+            Main.NewText("Applied [i/s1/d" + ItemIO.ToBase64(Item) + ":" + Item.type + "] to [i/d" + ItemIO.ToBase64(target) + ":" + target.type + "]", Color.Yellow);
 
             Item.stack--;
 

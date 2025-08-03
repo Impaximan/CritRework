@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CritRework.Common.ModPlayers;
+using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 
 namespace CritRework.Common.Globals
@@ -11,6 +12,7 @@ namespace CritRework.Common.Globals
         public int targetsHit = 0;
         public int wallBounces = 0;
         public int timeActive = 0;
+        public bool consumedAmmo = false;
 
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -40,16 +42,38 @@ namespace CritRework.Common.Globals
                     critType = itemSource.Item.GetGlobalItem<CritItem>().critType;
                     ogItem = itemSource.Item;
                 }
+
+                if (itemSource is EntitySource_ItemUse_WithAmmo ammoSource)
+                {
+                    if (ammoSource.AmmoItemIdUsed != 0)
+                    {
+                        if (itemSource.Player.GetModPlayer<CritPlayer>().ammoUsedThisFrame)
+                        {
+                            consumedAmmo = true;
+                        }
+                        else
+                        {
+                            consumedAmmo = false;
+                        }
+                    }
+                }
+                else
+                {
+                    consumedAmmo = false;
+                }
             }
 
             if (source is EntitySource_Parent parentSource)
             {
                 if (parentSource.Entity is Projectile parent)
                 {
-                    if (parent.GetGlobalProjectile<CritProjectile>() != null)
+                    if (parent.TryGetGlobalProjectile(out CritProjectile crit))
                     {
-                        critType = parent.GetGlobalProjectile<CritProjectile>().critType;
-                        ogItem = parent.GetGlobalProjectile<CritProjectile>().ogItem;
+                        critType = crit.critType;
+                        ogItem = crit.ogItem;
+                        consumedAmmo = crit.consumedAmmo;
+                        wallBounces = crit.wallBounces;
+                        targetsHit = crit.targetsHit;
                     }
                 }
             }

@@ -119,6 +119,22 @@
                     {
 
                     }
+
+                    if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 13 * 36) //Skyware Chest
+                    {
+                        if (WorldGen.genRand.NextBool(3))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Whetstones.SoaringWhetstone>());
+                                    chest.item[inventoryIndex].stack = 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

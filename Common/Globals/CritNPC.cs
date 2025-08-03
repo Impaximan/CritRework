@@ -16,6 +16,11 @@ namespace CritRework.Common.Globals
             {
                 shop.Add<VolatileWhetstone>();
             }
+
+            if (shop.NpcType == NPCID.ArmsDealer)
+            {
+                shop.Add<AmmoWhetstone>();
+            }
         }
 
         public override void OnHitByItem(NPC npc, Player player, Item item, NPC.HitInfo hit, int damageDone)

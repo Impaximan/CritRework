@@ -22,8 +22,11 @@ namespace CritRework.Common.ModPlayers
         public int timeSinceHeal = 0;
         public int timeSinceDeath = 0;
         public int timeSinceHook = 0;
+        public int timeFalling = 0;
 
         public Item lastWeaponUsed = null;
+
+        public bool ammoUsedThisFrame = false;
 
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
@@ -50,6 +53,7 @@ namespace CritRework.Common.ModPlayers
             timeSinceHeal++;
             timeSinceHook++;
             timeSinceDeath++;
+            timeFalling++;
             UpdateSlotMachine();
         }
 
@@ -144,6 +148,26 @@ namespace CritRework.Common.ModPlayers
             {
                 timeSinceHook = 0;
             }
+
+
+            if (Player.velocity.Y == 0 ||
+                Player.wingTime > 0 && Player.controlJump
+                || Player.rocketTime > 0 && Player.controlJump)
+            {
+                timeFalling = 0;
+            }
+
+            ammoUsedThisFrame = false;
+        }
+
+        public override void OnConsumeAmmo(Item weapon, Item ammo)
+        {
+            ammoUsedThisFrame = true;
+        }
+
+        public override void ExtraJumpVisuals(ExtraJump jump)
+        {
+            timeFalling = 0;
         }
 
         public override void UpdateDead()
