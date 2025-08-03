@@ -92,3 +92,13 @@ Whetstone: {
 		'''
 	critDamageMult: crit damage mult
 }
+
+Prefixes: {
+	Accurate.DisplayName: Accurate
+	Methodical.DisplayName: Methodical
+	Quality.DisplayName: Quality
+	Blunt.DisplayName: Blunt
+	Necromantic.DisplayName: Necromantic
+}
+
+NecromanticTooltip: +2 lifesteal when inflicting critical damage upon enemies

@@ -13,10 +13,16 @@ namespace CritRework.Common.Globals
         public int wallBounces = 0;
         public int timeActive = 0;
         public bool consumedAmmo = false;
+        public bool fromNecromantic = false;
 
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             targetsHit++;
+
+            if (fromNecromantic && hit.Crit && !Main.player[projectile.owner].moonLeech)
+            {
+                Main.player[projectile.owner].Heal(Content.Prefixes.Weapon.Necromantic.healAmount);
+            }
         }
 
         public override bool OnTileCollide(Projectile projectile, Vector2 oldVelocity)
@@ -41,6 +47,11 @@ namespace CritRework.Common.Globals
                 {
                     critType = itemSource.Item.GetGlobalItem<CritItem>().critType;
                     ogItem = itemSource.Item;
+                }
+
+                if (itemSource.Item.prefix == ModContent.PrefixType<Content.Prefixes.Weapon.Necromantic>())
+                {
+                    fromNecromantic = true;
                 }
 
                 if (itemSource is EntitySource_ItemUse_WithAmmo ammoSource)

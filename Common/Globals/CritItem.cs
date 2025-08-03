@@ -14,6 +14,12 @@ namespace CritRework.Common.Globals
     {
         public override bool InstancePerEntity => true;
         public CritType critType = null;
+        public static LocalizedText necromanticTooltip;
+
+        public override void SetStaticDefaults()
+        {
+            necromanticTooltip = Mod.GetLocalization($"NecromanticTooltip");
+        }
 
         public override void NetSend(Item item, BinaryWriter writer)
         {
@@ -68,6 +74,14 @@ namespace CritRework.Common.Globals
                 player.GetModPlayer<CritPlayer>().timeSinceGoldPickup = 0;
             }
             return base.OnPickup(item, player);
+        }
+
+        public override void OnHitNPC(Item item, Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (hit.Crit && item.prefix == ModContent.PrefixType<Content.Prefixes.Weapon.Necromantic>() && !player.moonLeech)
+            {
+                player.Heal(Content.Prefixes.Weapon.Necromantic.healAmount);
+            }
         }
 
         public override bool? UseItem(Item item, Player player)
@@ -367,6 +381,15 @@ namespace CritRework.Common.Globals
                 {
                     tooltips.Add(line);
                 }
+            }
+
+            if (item.prefix == ModContent.PrefixType<Content.Prefixes.Weapon.Necromantic>())
+            {
+                int i = tooltips.FindIndex(x => x.Name == "PrefixCritChance");
+                tooltips.Insert(i + 1, new TooltipLine(Mod, "PrefixNecromantic", necromanticTooltip.Value)
+                {
+                    IsModifier = true,
+                });
             }
         }
     }
