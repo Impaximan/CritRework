@@ -15,10 +15,14 @@ namespace CritRework.Common.Globals
         public override bool InstancePerEntity => true;
         public CritType critType = null;
         public static LocalizedText necromanticTooltip;
+        public static LocalizedText unknownTooltip;
+        public static LocalizedText unableTooltip;
 
         public override void SetStaticDefaults()
         {
             necromanticTooltip = Mod.GetLocalization($"NecromanticTooltip");
+            unknownTooltip = Mod.GetLocalization($"UnknownTooltip");
+            unableTooltip = Mod.GetLocalization($"UnableTooltip");
         }
 
         public override void NetSend(Item item, BinaryWriter writer)
@@ -289,7 +293,7 @@ namespace CritRework.Common.Globals
                         }
                         else
                         {
-                            TooltipLine line = new TooltipLine(Mod, "NoCrit", "Unknown critical strike condition");
+                            TooltipLine line = new TooltipLine(Mod, "NoCrit", unknownTooltip.Value);
                             line.OverrideColor = Color.Gray;
 
                             tooltips.Add(line);
@@ -349,7 +353,7 @@ namespace CritRework.Common.Globals
 
             if (!CanHaveCrits(item) && item.ammo == AmmoID.None && critType == null && item.damage > 0)
             {
-                TooltipLine line = new TooltipLine(Mod, "NoCrit", "Unable to critically strike");
+                TooltipLine line = new TooltipLine(Mod, "NoCrit", unableTooltip.Value);
                 line.OverrideColor = Color.Gray;
 
                 tooltips.Add(line);

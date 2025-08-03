@@ -200,3 +200,6 @@ CritTypes: {
 	Boomerangs.Description: Critically strikes while returning to you
 	Prepared.Description: Critically strikes after the attack has been active for at least 5 seconds
 }
+
+UnknownTooltip: Unknown critical strike condition
+UnableTooltip: Unable to critically strike

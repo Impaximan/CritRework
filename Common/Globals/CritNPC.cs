@@ -21,6 +21,11 @@ namespace CritRework.Common.Globals
             {
                 shop.Add<AmmoWhetstone>();
             }
+
+            if (shop.NpcType == NPCID.GoblinTinkerer)
+            {
+                shop.Add<PreparedWhetstone>();
+            }
         }
 
         public override void OnHitByItem(NPC npc, Player player, Item item, NPC.HitInfo hit, int damageDone)

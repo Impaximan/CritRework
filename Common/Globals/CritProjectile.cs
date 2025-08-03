@@ -85,6 +85,7 @@ namespace CritRework.Common.Globals
                         consumedAmmo = crit.consumedAmmo;
                         wallBounces = crit.wallBounces;
                         targetsHit = crit.targetsHit;
+                        timeActive = crit.timeActive;
                     }
                 }
             }
