@@ -16,7 +16,7 @@
             }
         }
 
-        public override string GetDescription() => "Critically strikes while you are below the target";
+        //public override string GetDescription() => "Critically strikes while you are below the target";
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {

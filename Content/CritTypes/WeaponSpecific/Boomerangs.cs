@@ -2,13 +2,22 @@
 
 namespace CritRework.Content.CritTypes.RandomPool
 {
-    internal class Flamethrower : CritType
+    internal class Boomerangs : CritType
     {
         public override bool InRandomPool => false;
 
         public override bool ForceOnItem(Item item)
         {
-            return item.type == ItemID.Flamethrower || item.type == ItemID.ElfMelter;
+            List<int> allAffected = new()
+            {
+                ItemID.WoodenBoomerang,
+                ItemID.EnchantedBoomerang,
+                ItemID.IceBoomerang,
+                ItemID.Flamarang,
+                ItemID.Shroomerang,
+                ItemID.Trimarang
+            };
+            return allAffected.Contains(item.type);
         }
 
         public override float GetDamageMult(Player Player, Item Item) => 1.35f;
@@ -17,18 +26,7 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {
-            List<int> countedBuffs = new()
-            {
-                BuffID.Slimed,
-                320
-            };
-
-            foreach (int id in countedBuffs)
-            {
-                if (target.HasBuff(id)) return true;
-            }
-
-            return false;
+            return Projectile.ai[0] == 1;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         public override float GetDamageMult(Player Player, Item Item) => 1.25f;
 
-        public override string GetDescription() => "Critically strikes while the target is inflicted with two or more debuffs";
+        //public override string GetDescription() => "Critically strikes while the target is inflicted with two or more debuffs";
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {

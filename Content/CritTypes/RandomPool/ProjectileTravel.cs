@@ -6,7 +6,7 @@
 
         public override float GetDamageMult(Player Player, Item Item) => 1.3f;
 
-        public override string GetDescription() => "Critically strikes if the projectile has been travelling for more than 1 second";
+        //public override string GetDescription() => "Critically strikes if the projectile has been travelling for more than 1 second";
 
         public override bool CanApplyTo(Item item)
         {

@@ -114,13 +114,11 @@ namespace CritRework.Common.Globals
 
         public override void SetDefaults(Item entity)
         {
-            if (CritRework.forcedCritTypes.Count > 0)
+            if (CritRework.loadedCritTypes.Count > 0)
             {
-                foreach (CritType crit in CritRework.forcedCritTypes)
+                foreach (CritType crit in CritRework.loadedCritTypes)
                 {
-                    crit.ForceOnItem(out int itemType);
-
-                    if (entity.type == itemType)
+                    if (crit.ForceOnItem(entity))
                     {
                         critType = crit;
                         break;
@@ -163,7 +161,7 @@ namespace CritRework.Common.Globals
 
         public void AddCritType(Item item)
         {
-            if (item.damage == -1 || item.ammo != AmmoID.None || item.accessory)
+            if (item.damage == -1 || item.ammo != AmmoID.None || item.accessory || !CanHaveCrits(item))
             {
                 return;
             }
@@ -174,11 +172,9 @@ namespace CritRework.Common.Globals
             }
 
 
-            foreach (CritType crit in CritRework.forcedCritTypes)
+            foreach (CritType crit in CritRework.loadedCritTypes)
             {
-                crit.ForceOnItem(out int itemType);
-
-                if (item.type == itemType)
+                if (crit.ForceOnItem(item))
                 {
                     critType = crit;
                     return;
@@ -203,11 +199,11 @@ namespace CritRework.Common.Globals
             }
         }
 
-        public float GetCritDamageMult(Player player, Item item)
-        {
-            float mult = critType.GetDamageMult(player, item);
-            return mult;
-        }
+        //public float GetCritDamageMult(Player player, Item item)
+        //{
+        //    float mult = critType.GetDamageMult(player, item);
+        //    return mult;
+        //}
 
         public static bool CanHaveCrits(Item item)
         {
@@ -257,7 +253,7 @@ namespace CritRework.Common.Globals
                         if (critPlayer.slotMachineCritCrafting && critPlayer.slotMachineCrit != null)
                         {
                             critPlayer.timeSinceLastTooltipShown = 0;
-                            TooltipLine line2 = new TooltipLine(Mod, "CritDescription", critPlayer.slotMachineCrit.GetDescription());
+                            TooltipLine line2 = new TooltipLine(Mod, "CritDescription", critPlayer.slotMachineCrit.description.Value);
                             line2.OverrideColor = critPlayer.slotMachineCrit.Color;
 
                             int indexA = tooltips.FindLastIndex(x => x.Name.Contains("Tooltip"));
@@ -316,14 +312,22 @@ namespace CritRework.Common.Globals
                             List<string> words = tooltips[i].Text.Split(' ').ToList();
 
                             string damageExtra = Math.Round(Main.LocalPlayer.GetWeaponDamage(item, true) * CritType.CalculateActualCritMult(critType, item, Main.LocalPlayer)).ToString();
+
+                            string colorHex = "fff88d";
+
+                            if (CritRework.overrideCritColor)
+                            {
+                                colorHex = CritRework.critColor.Hex3();
+                            }
+
                             if (firstAmmo != null)
                             {
                                 string ammoExtra = "+" + Math.Round(Main.LocalPlayer.GetWeaponDamage(firstAmmo, true) * CritType.CalculateActualCritMult(critType, item, Main.LocalPlayer));
-                                words.Insert(1, "([c/fff88d:" + damageExtra + ammoExtra + "])");
+                                words.Insert(1, "([c/" + colorHex + ":" + damageExtra + ammoExtra + "])");
                             }
                             else
                             {
-                                words.Insert(1, "([c/fff88d:" + damageExtra + "])");
+                                words.Insert(1, "([c/" + colorHex + ":" + damageExtra + "])");
                             }
 
                             string final = "";
@@ -353,7 +357,7 @@ namespace CritRework.Common.Globals
 
             if (critType != null)
             {
-                TooltipLine line = new TooltipLine(Mod, "CritDescription", critType.GetDescription());
+                TooltipLine line = new TooltipLine(Mod, "CritDescription", critType.description.Value);
                 line.OverrideColor = critType.Color;
 
                 int indexA = tooltips.FindLastIndex(x => x.Name.Contains("Tooltip"));

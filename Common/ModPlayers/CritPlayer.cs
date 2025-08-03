@@ -92,11 +92,9 @@ namespace CritRework.Common.ModPlayers
                         return;
                     }
 
-                    foreach (CritType crit in CritRework.forcedCritTypes)
+                    foreach (CritType crit in CritRework.loadedCritTypes)
                     {
-                        crit.ForceOnItem(out int itemType);
-
-                        if (slotMachineItem.type == itemType)
+                        if (crit.ForceOnItem(slotMachineItem))
                         {
                             slotMachineCrit = crit;
                             return;
@@ -208,6 +206,7 @@ namespace CritRework.Common.ModPlayers
                 modifiers.SetCrit();
                 modifiers.SourceDamage *= CritType.CalculateActualCritMult(critType, item, Player);
                 modifiers.FinalDamage *= 0.5f;
+                if (CritRework.overrideCritColor) modifiers.HideCombatText();
             }
             else
             {

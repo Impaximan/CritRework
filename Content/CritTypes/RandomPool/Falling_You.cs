@@ -6,7 +6,7 @@
 
         public override float GetDamageMult(Player Player, Item Item) => 1.25f;
 
-        public override string GetDescription() => "Critically strikes while you are falling";
+        //public override string GetDescription() => "Critically strikes while you are falling";
 
         public override bool CanApplyTo(Item item)
         {

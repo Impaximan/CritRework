@@ -8,7 +8,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
 
         public override float GetDamageMult(Player Player, Item Item) => 1.85f;
 
-        public override string GetDescription() => "Critically strikes when not consuming ammo";
+        //public override string GetDescription() => "Critically strikes when not consuming ammo";
 
         public override bool CanApplyTo(Item item)
         {

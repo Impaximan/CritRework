@@ -6,6 +6,7 @@ global using CritRework.Common;
 using System.Collections.Generic;
 using System;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework;
 using ReLogic.Content;
 
 namespace CritRework
@@ -15,8 +16,12 @@ namespace CritRework
         public static bool critSounds = true;
 
         public static List<CritType> loadedCritTypes = new();
-        public static List<CritType> forcedCritTypes = new();
         public static List<CritType> randomCritPool = new();
+
+        public static bool overrideCritColor = false;
+        public static Color critColor = Color.White;
+
+        public static float critPower = 1f;
 
         public static CritType GetCrit<T>() where T : CritType
         {

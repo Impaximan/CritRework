@@ -77,7 +77,7 @@ namespace CritRework.Content.Items.Whetstones
             }
 
             tooltips.Insert(startingIndex, new TooltipLine(Mod, "WhetstoneTooltip0", tooltip1.Value));
-            tooltips.Insert(startingIndex + 1, new TooltipLine(Mod, "WhetstoneTooltip1", " • \"" + AssociatedCritType.GetDescription() + "\"" + "\n • " + Math.Round(AssociatedCritType.GetDamageMult(Main.LocalPlayer, Item), 2) + "x " + critDamageMult.Value)
+            tooltips.Insert(startingIndex + 1, new TooltipLine(Mod, "WhetstoneTooltip1", " • \"" + AssociatedCritType.description.Value + "\"" + "\n • " + Math.Round(AssociatedCritType.GetDamageMult(Main.LocalPlayer, Item), 2) + "x " + critDamageMult.Value)
             {
                 OverrideColor = Color.Lerp(Color.Yellow, Color.White, 0.3f)
             });

@@ -11,7 +11,7 @@ Items: {
 	}
 
 	EnchantedWhetstone: {
-		CanBeApplied: Can be applied to any weapon that can crit
+		CanBeApplied: Can be applied to any weapon that can crit and consumes mana
 		DisplayName: Enchanted Whetstone
 		Tooltip: ""
 	}
@@ -81,6 +81,12 @@ Items: {
 		DisplayName: Reserving Whetstone
 		Tooltip: ""
 	}
+
+	PreparedWhetstone: {
+		CanBeApplied: Can be applied to any weapon that can crit
+		DisplayName: Prepared Whetstone
+		Tooltip: ""
+	}
 }
 
 Whetstone: {
@@ -102,3 +108,95 @@ Prefixes: {
 }
 
 NecromanticTooltip: +2 lifesteal when inflicting critical damage upon enemies
+
+Configs: {
+	ClientConfig: {
+		DisplayName: Client Config
+		Headers.AestheticHeader: Aesthetic
+
+		overrideCritColor: {
+			Label: Override Crit Color
+			Tooltip: Set to true to change the color of critical strike text (see below)
+		}
+
+		critColor: {
+			Label: Crit color
+			Tooltip: Change the color of critical strike text if the above is set to true
+		}
+
+		critSoundEffect: {
+			Label: Critical strike sound effects
+			Tooltip: Enable/disable the sound effect that plays when critically striking enemies
+		}
+	}
+
+	ServerConfig: {
+		DisplayName: Server Config
+		Headers.BalanceHeader: Balance
+
+		critPower: {
+			Label: Crit power
+			Tooltip:
+				'''
+				Allows you to modify how powerful critical strikes are.
+				At 0, all crits will do the same damage as normal hits.
+				At 2, the bonus damage from all crits is doubled.
+				'''
+		}
+	}
+}
+
+CritTypes: {
+	AboveFoe.Description: Critically strikes while you are above the target
+	BelowFoe.Description: Critically strikes while you are below the target
+	BunchedUpFoes.Description: Critically strikes when there are many enemies in close proximity to each other
+	CloseToFoe.Description: Critically strikes while you are closer than 6 tiles away from the target
+	ElfMelter.Description: Critically strikes while the target is covered in slime
+	Falling.Description: Critically strikes while you are falling
+	FarFromFoe.Description: Critically strikes while you are further than 40 tiles away from the target
+	Flamethrower.Description: Critically strikes while the target is covered in slime
+	FoeAtHighHP.Description: Critically strikes while the target has more than 85% of its health left
+	FoeAtLowHP.Description: Critically strikes while the target has less than 25% of its health left
+	FoeConfused.Description: Critically strikes while the target is confused
+	FoeHasFourDebuffs.Description: Critically strikes while the target is inflicted with four or more debuffs
+	FoeHasThreeDebuffs.Description: Critically strikes while the target is inflicted with three or more debuffs
+	FoeHasTwoDebuffs.Description: Critically strikes while the target is inflicted with two or more debuffs
+	FoeIsWet.Description: Critically strikes while the target is wet or underwater
+	FoeOnFire.Description: Critically strikes while the target is on fire
+	FoePoisoned.Description: Critically strikes while the target is poisoned
+	HighChance.Description: Critically strikes 50% of the time
+	LowChance.Description: Critically strikes 1% of the time
+	MediumChance.Description: Critically strikes 10% of the time
+	MovingFast.Description: Critically strikes while you are moving faster than 40 miles per hour
+	PlayerNohit.Description: Critically strikes if you haven't taken damage in more than 15 seconds
+	StandingStill.Description: Critically strikes while you are moving less than 10 miles per hour
+	TipOfTheWeapon.Description: Critically strikes when hitting enemies at the tip of the weapon
+	CrystalVileShard.Description: Critically strikes at the tip of the crystals
+	FreshItem.Description:
+		'''
+		Critically strikes for 1 second after the first use of this weapon
+		Reset after using another weapon
+		'''
+	Harpoon.Description: Critically strikes while the target is at least 26 tiles away
+	JustHitByEnemy.Description: Critically strikes for 1.5 seconds after getting hit
+	ProjectileTravel.Description: Critically strikes if the projectile has been travelling for more than 1 second
+	ShadowbeamStaff.Description: Critically strikes after bouncing off a wall
+	ShadowflameKnife.Description: Critically strikes after ricocheting off at least one target
+	Shuriken.Description: Critically strikes after hitting at least one target
+	Sniper.Description: Critically strikes while the target is at least 75 tiles away
+	SpikyBall.Description: Critically strikes after being present for more than 5 seconds
+	ThrowingKnife.Description: Critically strikes when falling
+	Vilethorn.Description: Critically strikes at the tip of the thorns
+	Adaptive.Description: Critically strikes for 3 seconds after healing for at least 20 hp (healing while at max doesn't count)
+	Ammo.Description: Critically strikes when not consuming ammo
+	Ancient.Description: Critically strikes for 60 seconds after you respawn
+	Enchanted.Description: Critically strikes if you have less than 30% of your maximum mana
+	Frozen.Description: Critically strikes on targets moving less than 10 miles per hour
+	Greedy.Description: Critically strikes for 3 seconds after you pick up money
+	Necromantic.Description: Critically strikes while another player is dead
+	Soaring.Description: Critically strikes when falling or gliding for at least 4 seconds
+	Starter.Description: Critically strikes if you have less than 200 max life
+	WebCovered.Description: Critically strikes for 1 second after grappling yourself to a block, or while grappled
+	Boomerangs.Description: Critically strikes while returning to you
+	Prepared.Description: Critically strikes after the attack has been active for at least 5 seconds
+}

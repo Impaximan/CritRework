@@ -6,7 +6,7 @@
 
         public override float GetDamageMult(Player Player, Item Item) => 1.2f;
 
-        public override string GetDescription() => "Critically strikes while you are further than 40 tiles away from the target";
+        //public override string GetDescription() => "Critically strikes while you are further than 40 tiles away from the target";
 
         public override bool CanApplyTo(Item item)
         {

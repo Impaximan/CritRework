@@ -10,13 +10,17 @@ namespace CritRework.Common
             {
                 return 1f;
             }
-            return critType.GetDamageMult(Player, Item) * (1f + (Player.GetCritChance(Item.DamageType) + Player.GetCritChance<GenericDamageClass>() + Item.crit) / 100f);
+
+            return MathHelper.Lerp(1f, critType.GetDamageMult(Player, Item) * (1f + (Player.GetCritChance(Item.DamageType) + Player.GetCritChance<GenericDamageClass>() + Item.crit) / 100f), CritRework.critPower);
         }
 
         public static T Get<T>() where T : CritType
         {
             return CritRework.loadedCritTypes.Find(x => x is T) as T;
         }
+
+        public LocalizedText description;
+        public LocalizedText name;
 
         public virtual bool InRandomPool => false;
 
@@ -31,25 +35,20 @@ namespace CritRework.Common
 
         public abstract float GetDamageMult(Player Player, Item Item);
 
-        public abstract string GetDescription();
-
         public virtual Color Color => new Color(255, 255, 181);
 
 
-        public virtual bool ForceOnItem(out int itemType)
+        public virtual bool ForceOnItem(Item item)
         {
-            itemType = 0;
             return false;
         }
 
         public void Load(Mod mod)
         {
+            description = mod.GetLocalization($"CritTypes.{GetType().Name}.Description");
+
             CritRework.loadedCritTypes.Add(this);
-            if (ForceOnItem(out int itemType))
-            {
-                CritRework.forcedCritTypes.Add(this);
-            }
-            else if (InRandomPool)
+            if (InRandomPool)
             {
                 CritRework.randomCritPool.Add(this);
             }
@@ -58,11 +57,7 @@ namespace CritRework.Common
         public void Unload()
         {
             CritRework.loadedCritTypes.Remove(this);
-            if (ForceOnItem(out int itemType))
-            {
-                CritRework.forcedCritTypes.Remove(this);
-            }
-            else if (InRandomPool)
+            if (InRandomPool)
             {
                 CritRework.randomCritPool.Remove(this);
             }

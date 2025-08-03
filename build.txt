@@ -1,3 +1,3 @@
-displayName = Critical Strikes Overhaul
+displayName = [c/77ffb9:Critical Strikes Overhaul]
 author = Impaxim
-version = 0.1
+version = 1.0

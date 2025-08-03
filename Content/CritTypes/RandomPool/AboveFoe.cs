@@ -11,7 +11,7 @@
             return item.shoot != ProjectileID.None;
         }
 
-        public override string GetDescription() => "Critically strikes while you are above the target";
+        //public override string GetDescription() => "Critically strikes while you are above the target";
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {

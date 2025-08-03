@@ -4,15 +4,14 @@
     {
         public override bool InRandomPool => false;
 
-        public override bool ForceOnItem(out int itemType)
+        public override bool ForceOnItem(Item item)
         {
-            itemType = ItemID.Vilethorn;
-            return true;
+            return item.type == ItemID.Vilethorn;
         }
 
         public override float GetDamageMult(Player Player, Item Item) => 1.5f;
 
-        public override string GetDescription() => "Critically strikes at the tip of the thorns";
+        //public override string GetDescription() => "Critically strikes at the tip of the thorns";
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {
@@ -24,15 +23,14 @@
     {
         public override bool InRandomPool => false;
 
-        public override bool ForceOnItem(out int itemType)
+        public override bool ForceOnItem(Item item)
         {
-            itemType = ItemID.CrystalVileShard;
-            return true;
+            return item.type == ItemID.CrystalVileShard;
         }
 
         public override float GetDamageMult(Player Player, Item Item) => 2.25f;
 
-        public override string GetDescription() => "Critically strikes at the tip";
+        //public override string GetDescription() => "Critically strikes at the tip";
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {

@@ -4,15 +4,14 @@
     {
         public override bool InRandomPool => false;
 
-        public override bool ForceOnItem(out int itemType)
+        public override bool ForceOnItem(Item item)
         {
-            itemType = ItemID.SniperRifle;
-            return true;
+            return item.type == ItemID.SniperRifle;
         }
 
         public override float GetDamageMult(Player Player, Item Item) => 6f;
 
-        public override string GetDescription() => "Critically strikes while the target is at least 75 tiles away";
+        //public override string GetDescription() => "Critically strikes while the target is at least 75 tiles away";
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
         {

@@ -8,7 +8,7 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         public override float GetDamageMult(Player Player, Item Item) => 1.15f;
 
-        public override string GetDescription() => "Critically strikes when hitting enemies at the tip of the weapon";
+        //public override string GetDescription() => "Critically strikes when hitting enemies at the tip of the weapon";
 
         public override bool CanApplyTo(Item item)
         {

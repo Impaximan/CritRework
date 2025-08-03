@@ -34,7 +34,18 @@ namespace CritRework.Common.Globals
                 Volume = 1.75f
             };
 
-            if (CritRework.critSounds && hit.Crit && player.whoAmI == Main.myPlayer) SoundEngine.PlaySound(style);
+            if (CritRework.critSounds && hit.Crit)
+            {
+                if (player.whoAmI == Main.myPlayer)
+                {
+                    SoundEngine.PlaySound(style);
+                }
+
+                if (CritRework.overrideCritColor)
+                {
+                    CombatText.NewText(npc.getRect(), CritRework.critColor, hit.Damage, true);
+                }
+            }
         }
 
         public override void OnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
@@ -48,7 +59,18 @@ namespace CritRework.Common.Globals
                 Volume = 1.75f
             };
 
-            if (CritRework.critSounds && hit.Crit && projectile.owner == Main.myPlayer) SoundEngine.PlaySound(style);
+            if (CritRework.critSounds && hit.Crit)
+            {
+                if (projectile.owner == Main.myPlayer)
+                {
+                    SoundEngine.PlaySound(style);
+                }
+
+                if (CritRework.overrideCritColor)
+                {
+                    CombatText.NewText(npc.getRect(), CritRework.critColor, hit.Damage, true);
+                }
+            }
         }
 
     }
