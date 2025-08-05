@@ -11,7 +11,7 @@ namespace CritRework.Common
                 return 1f;
             }
 
-            return MathHelper.Lerp(1f, critType.GetDamageMult(Player, Item) * (1f + (Player.GetCritChance(Item.DamageType) + Player.GetCritChance<GenericDamageClass>() + Item.crit) / 100f), CritRework.critPower);
+            return MathHelper.Lerp(1f, critType.GetDamageMult(Player, Item) * (1f + (Player.GetWeaponCrit(Item)) / 100f), CritRework.critPower);
         }
 
         public static T Get<T>() where T : CritType
