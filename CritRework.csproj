@@ -5,4 +5,7 @@
     <AssemblyName>CritRework</AssemblyName>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="description_workshop.txt" />
+  </ItemGroup>
 </Project>
