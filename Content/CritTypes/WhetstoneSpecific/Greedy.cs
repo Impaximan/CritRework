@@ -10,7 +10,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
 
         //public override string GetDescription() => "Critically strikes for 3 seconds after you pick up money";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             return Player.GetModPlayer<CritPlayer>().timeSinceGoldPickup <= 60 * 3;
         }

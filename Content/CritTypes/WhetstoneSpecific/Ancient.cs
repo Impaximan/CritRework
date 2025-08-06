@@ -10,7 +10,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
 
         //public override string GetDescription() => "Critically strikes for 60 seconds after you respawn";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             return Player.GetModPlayer<CritPlayer>().timeSinceDeath <= 60 * 60;
         }

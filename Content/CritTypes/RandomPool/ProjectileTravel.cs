@@ -13,7 +13,7 @@
             return item.shoot != ProjectileID.None && !ItemID.Sets.Spears[item.type] && item.useStyle != ItemUseStyleID.Rapier;
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             if (Projectile != null)
             {

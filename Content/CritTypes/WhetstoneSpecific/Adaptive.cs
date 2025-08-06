@@ -10,7 +10,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
 
         //public override string GetDescription() => "Critically strikes for 3 seconds after healing for at least 20 hp (healing while at max doesn't count)";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             return Player.GetModPlayer<CritPlayer>().timeSinceHeal <= 60 * 3;
         }

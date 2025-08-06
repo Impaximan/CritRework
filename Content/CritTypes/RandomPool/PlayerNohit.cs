@@ -8,7 +8,7 @@
 
         //public override string GetDescription() => "Critically strikes if you haven't taken damage in more than 15 seconds";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             return Player.GetModPlayer<Common.ModPlayers.CritPlayer>().timeSinceLastHit >= 60 * 15;
         }

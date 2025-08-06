@@ -19,6 +19,11 @@ namespace CritRework.Common
             return CritRework.loadedCritTypes.Find(x => x is T) as T;
         }
 
+        public static CritType Get(string typeAsString)
+        {
+            return CritRework.GetCrit(typeAsString);
+        }
+
         public LocalizedText description;
         public LocalizedText name;
 
@@ -30,7 +35,7 @@ namespace CritRework.Common
         }
 
 #nullable enable
-        public abstract bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target);
+        public abstract bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers);
 #nullable disable
 
         public abstract float GetDamageMult(Player Player, Item Item);

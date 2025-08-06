@@ -8,7 +8,7 @@
 
         //public override string GetDescription() => "Critically strikes if you have less than 200 max life";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             return Player.statLifeMax2 < 200;
         }

@@ -8,7 +8,7 @@
 
         //public override string GetDescription() => "Critically strikes while the target is wet or underwater";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             return target.wet || target.HasBuff(BuffID.Wet);
         }

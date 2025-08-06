@@ -203,3 +203,4 @@ CritTypes: {
 
 UnknownTooltip: Unknown critical strike condition
 UnableTooltip: Unable to critically strike
+ExampleCritDescription: Mods.CritRework.ExampleCritDescription

@@ -8,7 +8,7 @@
 
         //public override string GetDescription() => "Critically strikes while you are moving faster than 40 miles per hour";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             return Player.velocity.Length() >= 8f;
         }

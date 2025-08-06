@@ -201,7 +201,7 @@ namespace CritRework.Common.ModPlayers
 
         private NPC.HitModifiers ApplyModifiers(Item item, Projectile? projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
         {
-            if (critType != null && critType.ShouldCrit(Player, item, projectile, target))
+            if (critType != null && critType.ShouldCrit(Player, item, projectile, target, modifiers))
             {
                 modifiers.SetCrit();
                 modifiers.SourceDamage *= CritType.CalculateActualCritMult(critType, item, Player);

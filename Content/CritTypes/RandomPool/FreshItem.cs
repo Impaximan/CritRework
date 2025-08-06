@@ -11,7 +11,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
         //public override string GetDescription() => "Critically strikes for 1 second after the first use of this weapon" +
         //    "\nReset after using another weapon";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             return Player.GetModPlayer<CritPlayer>().freshItemTime <= 60;
         }

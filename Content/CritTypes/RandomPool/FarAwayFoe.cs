@@ -13,7 +13,7 @@
             return !item.DamageType.CountsAsClass(DamageClass.Melee);
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             return Player.Distance(target.getRect().ClosestPointInRect(Player.Center)) >= 40 * 16;
         }

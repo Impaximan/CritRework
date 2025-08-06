@@ -8,7 +8,7 @@
 
         //public override string GetDescription() => "Critically strikes while the target has less than 25% of its health left";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             return target.life <= target.lifeMax * 0.25f;
         }

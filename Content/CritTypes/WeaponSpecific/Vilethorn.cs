@@ -13,7 +13,7 @@
 
         //public override string GetDescription() => "Critically strikes at the tip of the thorns";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             return Projectile != null && Projectile.type == ProjectileID.VilethornTip;
         }
@@ -32,7 +32,7 @@
 
         //public override string GetDescription() => "Critically strikes at the tip";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             return Projectile != null && Projectile.type == ProjectileID.CrystalVileShardHead;
         }
