@@ -30,7 +30,7 @@ namespace CritRework.Common.Globals
             writer.Write(critType != null);
             if (critType != null)
             {
-                writer.Write(critType.GetType().ToString());
+                writer.Write(critType.InternalName);
             }
         }
 
@@ -44,7 +44,7 @@ namespace CritRework.Common.Globals
 
         public override void SaveData(Item item, TagCompound tag)
         {
-            if (critType != null) tag.Add("critType", critType.GetType().ToString());
+            if (critType != null) tag.Add("critType", critType.InternalName);
         }
 
         public override void LoadData(Item item, TagCompound tag)
