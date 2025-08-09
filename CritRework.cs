@@ -31,7 +31,7 @@ namespace CritRework
 
         public static CritType GetCrit(string typeAsString)
         {
-            return loadedCritTypes.Find(x => x.GetType().ToString() == typeAsString || (x is ModCalledCritType mc && mc.internalName == typeAsString));
+            return loadedCritTypes.Find(x => x.InternalName == typeAsString);
         }
 
         public static List<Tuple<string, string>> tooltipConversions = new()

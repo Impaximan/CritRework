@@ -27,6 +27,7 @@ namespace CritRework.Common
         public LocalizedText description;
         public LocalizedText name;
 
+        public virtual string InternalName => GetType().Name;
         public virtual bool InRandomPool => false;
 
         public virtual bool CanApplyTo(Item item)
