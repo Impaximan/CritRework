@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CritRework.Content.CritTypes
 {
-    public class ModCalledCritType : CritType
-    {
-        public override bool InRandomPool => inRandomPool;
+    public class ModCalledCritType : CritType {
+		public override string InternalName => $"{Mod.Name}/{internalName}";
+		public override bool InRandomPool => inRandomPool;
 
         public Mod Mod;
 
@@ -32,6 +32,7 @@ namespace CritRework.Content.CritTypes
             this.getDamageMult = getDamageMult;
             this.description = description;
             this.internalName = internalName;
+            this.forceOnItem = forceOnItem;
             this.canApplyTo = canApplyTo;
         }
 
