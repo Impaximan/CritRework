@@ -87,6 +87,12 @@ Items: {
 		DisplayName: Prepared Whetstone
 		Tooltip: ""
 	}
+
+	HolyWhetstone: {
+		CanBeApplied: Can be applied to any weapon that can crit
+		DisplayName: Holy Whetstone
+		Tooltip: ""
+	}
 }
 
 Whetstone: {
@@ -199,6 +205,8 @@ CritTypes: {
 	WebCovered.Description: Critically strikes for 1 second after grappling yourself to a block, or while grappled
 	Boomerangs.Description: Critically strikes while returning to you
 	Prepared.Description: Critically strikes after the attack has been active for at least 5 seconds
+	Holy.Description: Critically strikes while you have invincibility (such as after taking damage)
+	CritWithAnother.Description: Critically strikes for 3 seconds after critically striking with another weapon
 }
 
 UnknownTooltip: Unknown critical strike condition

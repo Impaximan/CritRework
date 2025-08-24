@@ -1,7 +1,9 @@
 ﻿using CritRework.Common.Globals;
+using CritRework.Content.CritTypes.WeaponSpecific;
 using CritRework.Content.Items.Whetstones;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using Terraria;
 
 namespace CritRework.Common.ModPlayers
 {
@@ -22,6 +24,7 @@ namespace CritRework.Common.ModPlayers
         public int timeSinceHeal = 0;
         public int timeSinceDeath = 0;
         public int timeSinceHook = 0;
+        public int timeSinceCrit = 0;
         public int timeFalling = 0;
 
         public Item lastWeaponUsed = null;
@@ -54,6 +57,7 @@ namespace CritRework.Common.ModPlayers
             timeSinceHook++;
             timeSinceDeath++;
             timeFalling++;
+            timeSinceCrit++;
             UpdateSlotMachine();
         }
 
@@ -216,5 +220,21 @@ namespace CritRework.Common.ModPlayers
             return modifiers;
         }
 
+
+        public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (hit.Crit && item.TryGetGlobalItem(out CritItem critItem) && critItem.critType is not CritWithAnother)
+            {
+                timeSinceCrit = 0;
+            }
+        }
+
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (hit.Crit && proj.TryGetGlobalProjectile(out CritProjectile crit) && crit.critType is not CritWithAnother)
+            {
+                timeSinceCrit = 0;
+            }
+        }
     }
 }
