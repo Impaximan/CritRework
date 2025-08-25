@@ -16,9 +16,25 @@ namespace CritRework
         [Range(0f, 2f)]
         public float critPower = 1f;
 
+        [DefaultValue(0.25f)]
+        [Increment(0.01f)]
+        [Range(0f, 1f)]
+        public float randomHijackChance = 0.25f;
+
+        [DefaultValue(true)]
+        public bool randomHijackSound = true;
+
+        [Header($"ContentHeader")]
+
+        [DefaultValue(true)]
+        public bool pirateHijack = true;
+
         public override void OnChanged()
         {
             CritRework.critPower = critPower;
+            CritRework.randomHijackChance = randomHijackChance;
+            CritRework.pirateHijack = pirateHijack;
+            CritRework.randomHijackSound = randomHijackSound;
         }
     }
 }

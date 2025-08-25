@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ModLoader.IO;
 using Terraria.Utilities;
@@ -54,7 +55,18 @@ namespace CritRework.Common.Globals
 
         public override void PostReforge(Item item)
         {
-            AddCritType(item);
+            if (Main.rand.NextFloat() < CritRework.randomHijackChance)
+            {
+                AddCritType(item);
+
+                if (CritRework.randomHijackSound)
+                {
+                    SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/Hijack")
+                    {
+                        Volume = 0.5f
+                    });
+                }
+            }
         }
 
         public override int ChoosePrefix(Item item, UnifiedRandom rand)

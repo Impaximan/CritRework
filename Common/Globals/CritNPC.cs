@@ -1,5 +1,10 @@
 ﻿using CritRework.Content.Items.Whetstones;
+using System.Collections.Generic;
 using Terraria.Audio;
+using Terraria.GameContent;
+using Terraria.GameContent.UI.Chat;
+using Terraria.ModLoader.IO;
+using Microsoft.Xna.Framework;
 
 namespace CritRework.Common.Globals
 {
@@ -78,5 +83,112 @@ namespace CritRework.Common.Globals
             }
         }
 
+
+        public override void OnChatButtonClicked(NPC npc, bool firstButton)
+        {
+            if (npc.type == NPCID.Pirate)
+            {
+                if (!firstButton)
+                {
+                    SoundEngine.PlaySound(SoundID.MenuTick);
+
+                    if (Main.LocalPlayer.HeldItem != null)
+                    {
+                        Item item = Main.LocalPlayer.HeldItem;
+                        if (CritItem.CanHaveCrits(item) && item.TryGetGlobalItem(out CritItem cItem))
+                        {
+                            if (Main.LocalPlayer.BuyItem(GetItemHijackCost(item)))
+                            {
+                                string before = ItemTagHandler.GenerateTag(item);
+
+                                cItem.AddCritType(item);
+                                SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/Hijack")
+                                {
+                                    Volume = 0.5f
+                                });
+                                SoundEngine.PlaySound(SoundID.Coins);
+
+                                string after = ItemTagHandler.GenerateTag(item);
+
+                                Main.npcChatText = GetPirateSuccessDialogue() + "\n" + before + " [c/ffff00:->] " + after +
+                                    "\n[c/fff78b:" + cItem.critType.description.Value + "]";
+                                //Main.NewText(before + " hijacked into " + after, Color.Yellow);
+
+                            }
+                            else
+                            {
+                                Main.npcChatText = GetPirateBrokeDialogue();
+                            }
+                        }
+                        else
+                        {
+                            Main.npcChatText = GetPirateNoCanDoDialogue();
+                        }
+                    }
+                    else
+                    {
+                        Main.npcChatText = GetPirateNoCanDoDialogue();
+                    }
+                }
+            }
+        }
+
+        public static int GetItemHijackCost(Item item)
+        {
+            int num = item.GetStoreValue() / 3;
+            if (num > 100) num -= num % 100;
+
+            if (num > Item.buyPrice(0, 5, 0, 0))
+            {
+                num -= num % 10000;
+            }
+
+            return num;
+        }
+
+        public string GetPirateNoCanDoDialogue()
+        {
+            List<string> potentialDialogues = new();
+
+            int num = 1;
+            while (Language.Exists("Mods.CritRework.PirateNoCanDo" + num.ToString()))
+            {
+                potentialDialogues.Add(Language.GetTextValue("Mods.CritRework.PirateNoCanDo" + num.ToString()));
+
+                num++;
+            }
+
+            return Main.rand.Next(potentialDialogues);
+        }
+
+        public string GetPirateBrokeDialogue()
+        {
+            List<string> potentialDialogues = new();
+
+            int num = 1;
+            while (Language.Exists("Mods.CritRework.PirateBroke" + num.ToString()))
+            {
+                potentialDialogues.Add(Language.GetTextValue("Mods.CritRework.PirateBroke" + num.ToString()));
+
+                num++;
+            }
+
+            return Main.rand.Next(potentialDialogues);
+        }
+
+        public string GetPirateSuccessDialogue()
+        {
+            List<string> potentialDialogues = new();
+
+            int num = 1;
+            while (Language.Exists("Mods.CritRework.PirateSuccessful" + num.ToString()))
+            {
+                potentialDialogues.Add(Language.GetTextValue("Mods.CritRework.PirateSuccessful" + num.ToString()));
+
+                num++;
+            }
+
+            return Main.rand.Next(potentialDialogues);
+        }
     }
 }

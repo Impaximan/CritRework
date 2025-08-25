@@ -121,7 +121,7 @@ Configs: {
 		Headers.AestheticHeader: Aesthetic
 
 		overrideCritColor: {
-			Label: Override Crit Color
+			Label: Should override crit color
 			Tooltip: Set to true to change the color of critical strike text (see below)
 		}
 
@@ -138,7 +138,11 @@ Configs: {
 
 	ServerConfig: {
 		DisplayName: Server Config
-		Headers.BalanceHeader: Balance
+
+		Headers: {
+			BalanceHeader: Balance
+			ContentHeader: Content
+		}
 
 		critPower: {
 			Label: Crit power
@@ -148,6 +152,21 @@ Configs: {
 				At 0, all crits will do the same damage as normal hits.
 				At 2, the bonus damage from all crits is doubled.
 				'''
+		}
+
+		pirateHijack: {
+			Label: Pirate hijack
+			Tooltip: When set to true, the pirate has a new feature which allows him to reroll the crit condition of a held item without reforging it.
+		}
+
+		randomHijackChance: {
+			Label: Reforge hijack chance
+			Tooltip: The chance for a weapon to be "hijacked"" when reforged by the goblin tinkerer, changing its crit condition.
+		}
+
+		randomHijackSound: {
+			Label: Reforge hijack sound
+			Tooltip: Whether or not a sound plays when a reforge hijacks your weapon (see above)
 		}
 	}
 }
@@ -178,11 +197,7 @@ CritTypes: {
 	StandingStill.Description: Critically strikes while you are moving less than 10 miles per hour
 	TipOfTheWeapon.Description: Critically strikes when hitting enemies at the tip of the weapon
 	CrystalVileShard.Description: Critically strikes at the tip of the crystals
-	FreshItem.Description:
-		'''
-		Critically strikes for 1 second after the first use of this weapon
-		Reset after using another weapon
-		'''
+	FreshItem.Description: Critically strikes for 1 second after selecting this weapon
 	Harpoon.Description: Critically strikes while the target is at least 26 tiles away
 	JustHitByEnemy.Description: Critically strikes for 1.5 seconds after getting hit
 	ProjectileTravel.Description: Critically strikes if the projectile has been travelling for more than 1 second
@@ -212,3 +227,13 @@ CritTypes: {
 UnknownTooltip: Unknown critical strike condition
 UnableTooltip: Unable to critically strike
 ExampleCritDescription: Mods.CritRework.ExampleCritDescription
+PirateHijack: Hijack
+PirateNoCanDo1: And just what precisely do ye think I'll do with this?
+PirateNoCanDo2: Can't hijack that, I'm afraid.
+PirateNoCanDo3: Bring me a proper critical weapon, will ye?
+PirateBroke1: Won't hijack nothin' for free, y'know.
+PirateBroke2: Bring some booty, will ye?
+PirateBroke3: You tryin' to pirate ME? Ya scallywag!
+PirateSuccessful1: There ye go, matey! Good as new.
+PirateSuccessful2: No refunds!
+PirateSuccessful3: Aye aye, matey.

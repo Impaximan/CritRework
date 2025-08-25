@@ -23,6 +23,11 @@ namespace CritRework
         public static Color critColor = Color.White;
 
         public static float critPower = 1f;
+        public static float randomHijackChance = 0.25f;
+        public static bool randomHijackSound = true;
+        public static bool pirateHijack = true;
+
+        public static CritRework instance;
 
         public static CritType GetCrit<T>() where T : CritType
         {
@@ -44,7 +49,16 @@ namespace CritRework
 
         public override void Load()
         {
+            instance = this;
+
             ModContent.Request<SoundEffect>("CritRework/Assets/Sounds/Crit", AssetRequestMode.ImmediateLoad);
+
+            Detours.Load();
+        }
+
+        public override void Unload()
+        {
+            Detours.Unload();
         }
 
         public override object Call(params object[] args)
