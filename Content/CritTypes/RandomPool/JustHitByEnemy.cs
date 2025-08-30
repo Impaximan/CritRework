@@ -14,7 +14,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
         {
             if (Projectile != null)
             {
-                return Player.GetModPlayer<CritPlayer>().timeSinceLastHit <= 90;
+                return Player.GetModPlayer<CritPlayer>().timeSinceLastHit <= 60 * 2.5f;
             }
             return false;
         }

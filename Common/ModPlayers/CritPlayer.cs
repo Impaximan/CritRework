@@ -41,6 +41,8 @@ namespace CritRework.Common.ModPlayers
 
         public static LocalizedText scallywagText;
 
+        public CritType? summonCrit = null;
+
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
             List<Item> list = new();
@@ -63,6 +65,7 @@ namespace CritRework.Common.ModPlayers
             slotMachineCritCrafting = false;
             pirateArmor = false;
             accessoryEffects.Clear();
+            summonCrit = null;
         }
 
         public override void PostUpdate()

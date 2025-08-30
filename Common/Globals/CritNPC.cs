@@ -33,6 +33,11 @@ namespace CritRework.Common.Globals
             {
                 shop.Add<PreparedWhetstone>();
             }
+
+            if (shop.NpcType == NPCID.Pirate)
+            {
+                shop.Add<WiseCracker>();
+            }
         }
 
         public override void OnHitByItem(NPC npc, Player player, Item item, NPC.HitInfo hit, int damageDone)

@@ -8,6 +8,11 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
 
         public override float GetDamageMult(Player Player, Item Item) => 1.5f;
 
+        public override bool CanApplyTo(Item item)
+        {
+            return item.type != ModContent.ItemType<Items.Equipable.Accessories.WiseCracker>();
+        }
+
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             if (Projectile != null)

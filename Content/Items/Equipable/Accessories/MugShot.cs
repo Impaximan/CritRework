@@ -4,7 +4,7 @@
     {
         public override void SetDefaults()
         {
-            Item.width = 42;
+            Item.width = 32;
             Item.height = 38;
             Item.accessory = true;
             Item.rare = ItemRarityID.LightRed;

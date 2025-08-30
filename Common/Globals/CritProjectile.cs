@@ -1,4 +1,5 @@
 ﻿using CritRework.Common.ModPlayers;
+using CritRework.Content.Items.Equipable.Accessories;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 
@@ -34,6 +35,21 @@ namespace CritRework.Common.Globals
         public override void PostAI(Projectile projectile)
         {
             timeActive++;
+
+            if (Main.player[projectile.owner].TryGetModPlayer(out CritPlayer cPlayer))
+            {
+                if (projectile.minion)
+                {
+                    if (Main.player[projectile.owner].HasEquip<WiseCracker>())
+                    {
+                        critType = cPlayer.summonCrit;
+                    }
+                    else
+                    {
+                        critType = null;
+                    }
+                }
+            }
         }
 
         public override void OnSpawn(Projectile projectile, IEntitySource source)
@@ -52,6 +68,14 @@ namespace CritRework.Common.Globals
                 if (itemSource.Item.prefix == ModContent.PrefixType<Content.Prefixes.Weapon.Necromantic>())
                 {
                     fromNecromantic = true;
+                }
+
+                if (itemSource.Player.TryGetModPlayer(out CritPlayer cPlayer))
+                {
+                    if (itemSource.Player.HasEquip<WiseCracker>() && projectile.minion && critType == null)
+                    {
+                        critType = cPlayer.summonCrit;
+                    }
                 }
 
                 if (itemSource is EntitySource_ItemUse_WithAmmo ammoSource)
