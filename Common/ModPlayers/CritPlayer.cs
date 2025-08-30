@@ -234,7 +234,13 @@ namespace CritRework.Common.ModPlayers
             }
             else
             {
-                modifiers.DisableCrit();
+                if (item.TryGetGlobalItem(out CritItem cItem))
+                {
+                    if (cItem.critType != null && item.DamageType.UseStandardCritCalcs)
+                    {
+                        modifiers.DisableCrit();
+                    }
+                }
             }
 
             return modifiers;

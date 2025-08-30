@@ -4,7 +4,7 @@
     {
         public override bool InRandomPool => true;
 
-        public override float GetDamageMult(Player Player, Item Item) => 1.3f;
+        public override float GetDamageMult(Player Player, Item Item) => 1.25f;
 
         //public override string GetDescription() => "Critically strikes if the projectile has been travelling for more than 1 second";
 

@@ -213,7 +213,7 @@ CritTypes: {
 	FoeIsWet.Description: Critically strikes while the target is wet or underwater
 	FoeOnFire.Description: Critically strikes while the target is on fire
 	FoePoisoned.Description: Critically strikes while the target is poisoned
-	HighChance.Description: Critically strikes 50% of the time
+	HighChance.Description: Critically strikes 25% of the time
 	LowChance.Description: Critically strikes 1% of the time
 	MediumChance.Description: Critically strikes 10% of the time
 	MovingFast.Description: Critically strikes while you are moving faster than 60 miles per hour

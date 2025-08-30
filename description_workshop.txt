@@ -4,7 +4,7 @@
 
 That's what this mod aims to fix. It [b]COMPLETELY overhauls the way critical strikes work in Terraria to be condition-based rather than chance-based[/b]. In particular, each item is either given a predetermined crit condition (for example, Shadowflame Knives critically striking on repeat hits) or a randomly chosen crit condition-- most weapons work this way; for example, when you craft a copper shortsword, it might deal crits for a moment after you take damage, or when hitting enemies that are on fire.
 
-[h3]Specifics[/h3]
+[h2]Specifics[/h2]
 
 There are a few ways to modify a weapon's crit condition. For starters, weapons asigned a random crit condition will have it re-rolled either by reforging the item at the goblin tinkerer, or by [b]hijacking[/b] it using the Pirate NPC, using the feature added by the mod. As an alternative, this mod also adds a new item category called Whetstones, which allow you to asign a specific (often more niche and build dependent) crit condition to a weapon.
 
@@ -12,7 +12,16 @@ The damage that critical strikes deal are now affected by a variety of factors. 
 
 [b]The purpose of this mod is to allow for more creative and niche build crafting for the player.[/b] Because of that, there are probably several overpowered builds that I haven't thought of myself. But that's the fun of it! I can't guarentee that this mod will work perfectly with every other mod (ESPECIALLY balance wise), and most crit conditions from other mods will likely be broken (sadly not much I can do about this). All critical strike on-hit effects should work just fine, though.
 
-It also adds a few new item prefixes to accomodate crit-focused builds (especially since the rework makes lucky obsolete compared to menacing).
+[h3]Full content list:[h3]
+
+[list]
+[*]A complete overhaul of how critical strikes work (see above)
+[*]Around 50 different potential critical strike conditions
+[*]15 different whetstones
+[*]Various new crit-oriented item prefixes
+[*]A complete rework of the pirate NPC, including an crit oriented overhaul of the pirate armor (no longer just vanity; it's now a ranged-summoner hybrid set)
+[*]2 new crit oriented accessories (and more to come!)
+[/list]
 
 Special thanks: [list]
 [*]Moonlight Glint: helping to make some of the mod's codebase neater, fixing various problems with crossmod support
