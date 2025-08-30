@@ -29,12 +29,18 @@ namespace CritRework
         [DefaultValue(true)]
         public bool pirateHijack = true;
 
+        [DefaultValue(true)]
+        [ReloadRequired]
+        public bool pirateArmorRework = true;
+
         public override void OnChanged()
         {
             CritRework.critPower = critPower;
             CritRework.randomHijackChance = randomHijackChance;
+
             CritRework.pirateHijack = pirateHijack;
             CritRework.randomHijackSound = randomHijackSound;
+            CritRework.pirateArmorRework = pirateArmorRework;
         }
     }
 }

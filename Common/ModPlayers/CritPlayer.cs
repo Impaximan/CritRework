@@ -1,9 +1,14 @@
 ﻿using CritRework.Common.Globals;
+using CritRework.Content.Buffs;
 using CritRework.Content.CritTypes.WeaponSpecific;
+using CritRework.Content.CritTypes.WhetstoneSpecific;
+using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Whetstones;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
 
 namespace CritRework.Common.ModPlayers
 {
@@ -26,10 +31,15 @@ namespace CritRework.Common.ModPlayers
         public int timeSinceHook = 0;
         public int timeSinceCrit = 0;
         public int timeFalling = 0;
+        public bool pirateArmor = false;
 
         public Item lastWeaponUsed = null;
 
         public bool ammoUsedThisFrame = false;
+
+        public List<string> accessoryEffects = new List<string>();
+
+        public static LocalizedText scallywagText;
 
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
@@ -43,9 +53,16 @@ namespace CritRework.Common.ModPlayers
             return list;
         }
 
+        public override void Load()
+        {
+            scallywagText = Mod.GetLocalization($"ScallywagText");
+        }
+
         public override void ResetEffects()
         {
             slotMachineCritCrafting = false;
+            pirateArmor = false;
+            accessoryEffects.Clear();
         }
 
         public override void PostUpdate()
@@ -234,6 +251,53 @@ namespace CritRework.Common.ModPlayers
             if (hit.Crit && proj.TryGetGlobalProjectile(out CritProjectile crit) && crit.critType is not CritWithAnother)
             {
                 timeSinceCrit = 0;
+            }
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (Player.HasEquip<MugShot>() && hit.Crit && target.type != NPCID.TargetDummy)
+            {
+                if (Main.rand.NextFloat() <= 0.2f + 0.1f * Player.luck)
+                {
+                    if (Main.rand.NextBool(20))
+                    {
+                        if (Main.rand.NextBool(100))
+                        {
+                            Item.NewItem(new EntitySource_OnHit(Player, target, "MugShotHit"), Player.getRect(), new Item(ItemID.PlatinumCoin));
+                        }
+                        else
+                        {
+                            Item.NewItem(new EntitySource_OnHit(Player, target, "MugShotHit"), Player.getRect(), new Item(ItemID.GoldCoin, Main.rand.Next(1, 3)));
+                        }
+                    }
+                    else
+                    {
+                        Item.NewItem(new EntitySource_OnHit(Player, target, "MugShotHit"), Player.getRect(), new Item(ItemID.SilverCoin, Main.rand.Next(3, 11)));
+                    }
+
+                    SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/CoinCrit")
+                    {
+                        Volume = 1f,
+                        PitchVariance = 0.35f
+                    });
+                }
+            }
+
+            if (pirateArmor && hit.Crit && Player.mount.Active)
+            {
+                if (!Player.HasBuff<Scallywag>())
+                {
+                    SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/PirateLaugh")
+                    {
+                        Volume = 1f,
+                        PitchVariance = 0.25f
+                    }, Player.Center);
+
+                    CombatText.NewText(Player.getRect(), Color.Beige, scallywagText.Value, true);
+                }
+
+                Player.AddBuff(ModContent.BuffType<Scallywag>(), 300);
             }
         }
     }

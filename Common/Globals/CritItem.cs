@@ -1,4 +1,6 @@
 ﻿using CritRework.Common.ModPlayers;
+using CritRework.Content.CritTypes.WhetstoneSpecific;
+using CritRework.Content.Items.Equipable.Accessories;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -19,11 +21,20 @@ namespace CritRework.Common.Globals
         public static LocalizedText unknownTooltip;
         public static LocalizedText unableTooltip;
 
+        public static LocalizedText pirateHatTooltip;
+        public static LocalizedText pirateShirtTooltip;
+        public static LocalizedText piratePantsTooltip;
+        public static LocalizedText pirateBonus;
+
         public override void SetStaticDefaults()
         {
             necromanticTooltip = Mod.GetLocalization($"NecromanticTooltip");
             unknownTooltip = Mod.GetLocalization($"UnknownTooltip");
             unableTooltip = Mod.GetLocalization($"UnableTooltip");
+            pirateHatTooltip = Mod.GetLocalization($"PirateHat");
+            pirateShirtTooltip = Mod.GetLocalization($"PirateShirt");
+            piratePantsTooltip = Mod.GetLocalization($"PiratePants");
+            pirateBonus = Mod.GetLocalization($"PirateSetBonus");
         }
 
         public override void NetSend(Item item, BinaryWriter writer)
@@ -128,13 +139,13 @@ namespace CritRework.Common.Globals
         //    return critItem;
         //}
 
-        public override void SetDefaults(Item entity)
+        public override void SetDefaults(Item item)
         {
             if (CritRework.loadedCritTypes.Count > 0)
             {
                 foreach (CritType crit in CritRework.loadedCritTypes)
                 {
-                    if (crit.ForceOnItem(entity))
+                    if (crit.ForceOnItem(item))
                     {
                         critType = crit;
                         break;
@@ -154,9 +165,38 @@ namespace CritRework.Common.Globals
                 ItemID.PlatinumShortsword
             };
 
-            if (affectedShortswords.Contains(entity.type))
+            if (affectedShortswords.Contains(item.type))
             {
-                entity.crit += 35;
+                item.crit += 35;
+            }
+
+            //CHANGE PIRATE ARMOR
+
+            if (CritRework.pirateArmorRework)
+            {
+                if (item.type == ItemID.PirateHat)
+                {
+                    item.vanity = false;
+                    item.defense = 8;
+                    item.rare = ItemRarityID.Pink;
+                    item.value = Item.buyPrice(0, 15, 0, 0);
+                }
+
+                if (item.type == ItemID.PirateShirt)
+                {
+                    item.vanity = false;
+                    item.defense = 12;
+                    item.rare = ItemRarityID.Pink;
+                    item.value = Item.buyPrice(0, 15, 0, 0);
+                }
+
+                if (item.type == ItemID.PiratePants)
+                {
+                    item.vanity = false;
+                    item.defense = 10;
+                    item.rare = ItemRarityID.Pink;
+                    item.value = Item.buyPrice(0, 15, 0, 0);
+                }
             }
         }
 
@@ -226,6 +266,73 @@ namespace CritRework.Common.Globals
             return item.DamageType.UseStandardCritCalcs && item.useStyle != ItemUseStyleID.None && !item.consumable && item.damage > 0;
         }
 
+        public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
+        {
+            if (player.HasEquip<MugShot>() && critType is Greedy)
+            {
+                damage *= 0.75f;
+            }
+        }
+
+        public override bool CanConsumeAmmo(Item weapon, Item ammo, Player player)
+        {
+            if (player.GetModPlayer<CritPlayer>().accessoryEffects.Contains("PirateHat") && Main.rand.NextBool(4))
+            {
+                return false;
+            }
+            return base.CanConsumeAmmo(weapon, ammo, player);
+        }
+
+        public override void UpdateEquip(Item item, Player player)
+        {
+            //Add pirate armor effects
+            if (CritRework.pirateArmorRework)
+            {
+                if (item.type == ItemID.PirateHat)
+                {
+                    player.GetCritChance(DamageClass.Ranged) += 15;
+                    player.GetCritChance(DamageClass.Summon) += 15;
+                    player.GetModPlayer<CritPlayer>().accessoryEffects.Add("PirateHat");
+                    player.GetDamage(DamageClass.Generic) += 0.05f;
+                }
+
+                if (item.type == ItemID.PirateShirt)
+                {
+                    player.GetCritChance(DamageClass.Ranged) += 20;
+                    player.GetCritChance(DamageClass.Summon) += 20;
+                    player.maxMinions++;
+                    player.GetDamage(DamageClass.Generic) += 0.02f;
+                }
+
+                if (item.type == ItemID.PiratePants)
+                {
+                    player.GetCritChance(DamageClass.Ranged) += 15;
+                    player.GetCritChance(DamageClass.Summon) += 15;
+                    player.maxMinions++;
+                    player.moveSpeed += 0.15f;
+                }
+            }
+        }
+
+        public override void UpdateArmorSet(Player player, string set)
+        {
+            if (set == "PirateArmor")
+            {
+                player.setBonus = pirateBonus.Value;
+                player.GetModPlayer<CritPlayer>().pirateArmor = true;
+            }
+        }
+
+        public override string IsArmorSet(Item head, Item body, Item legs)
+        {
+            if ((head.type == ItemID.PirateHat && body.type == ItemID.PirateShirt && legs.type == ItemID.PiratePants) && CritRework.pirateArmorRework)
+            {
+                return "PirateArmor";
+            }
+
+            return base.IsArmorSet(head, body, legs);
+        }
+
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
             CritPlayer critPlayer = Main.LocalPlayer.GetModPlayer<CritPlayer>();
@@ -234,6 +341,25 @@ namespace CritRework.Common.Globals
             if (critPlayer.slotMachineCritCrafting)
             {
                 critPlayer.slotMachineItem = item;
+            }
+
+            //Add pirate armor tooltip
+            if (CritRework.pirateArmorRework && !tooltips.Exists(x => x.Name == "Social"))
+            {
+                if (item.type == ItemID.PirateHat)
+                {
+                    tooltips.Insert(tooltips.FindIndex(x => x.Name == "Defense") + 1, new TooltipLine(Mod, "Tooltip", pirateHatTooltip.Value));
+                }
+
+                if (item.type == ItemID.PirateShirt)
+                {
+                    tooltips.Insert(tooltips.FindIndex(x => x.Name == "Defense") + 1, new TooltipLine(Mod, "Tooltip", pirateShirtTooltip.Value));
+                }
+
+                if (item.type == ItemID.PiratePants)
+                {
+                    tooltips.Insert(tooltips.FindIndex(x => x.Name == "Defense") + 1, new TooltipLine(Mod, "Tooltip", piratePantsTooltip.Value));
+                }
             }
 
             foreach (Tuple<string, string> conversion in CritRework.tooltipConversions)

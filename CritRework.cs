@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework;
 using ReLogic.Content;
 using CritRework.Content.CritTypes;
+using CritRework.Common.ModPlayers;
 
 namespace CritRework
 {
@@ -26,6 +27,7 @@ namespace CritRework
         public static float randomHijackChance = 0.25f;
         public static bool randomHijackSound = true;
         public static bool pirateHijack = true;
+        public static bool pirateArmorRework = true;
 
         public static CritRework instance;
 
@@ -119,5 +121,26 @@ namespace CritRework
         //            "ExampleCrit"); //Lastly, the crit's internal name. Used for saving, loading, multiplayer syncing etc. Also what you (or another modder) would use to access this CritType.
         //    }
         //}
+    }
+
+    public static class Extensions
+    {
+        public static void AddEquip<T>(this Player player) where T : ModItem
+        {
+            if (player.TryGetModPlayer(out CritPlayer cPlayer))
+            {
+                cPlayer.accessoryEffects.Add(typeof(T).Name);
+            }
+        }
+
+        public static bool HasEquip<T>(this Player player) where T : ModItem
+        {
+            if (player.TryGetModPlayer(out CritPlayer cPlayer))
+            {
+                return cPlayer.accessoryEffects.Contains(typeof(T).Name);
+            }
+
+            return false;
+        }
     }
 }

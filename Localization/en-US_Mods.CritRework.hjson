@@ -273,7 +273,7 @@ PiratePants:
 PirateSetBonus:
 	'''
 	While mounted, critically striking grants the 'Scallywag' buff for 5 seconds
-	Scallywag increases movement speed by 35% and attack speed by 20%
+	Scallywag increases attack speed by 10%, defense by 10, and crit chance by 15%
 	'''
 ScallywagText: Scallywag!
 

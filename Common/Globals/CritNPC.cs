@@ -5,6 +5,8 @@ using Terraria.GameContent;
 using Terraria.GameContent.UI.Chat;
 using Terraria.ModLoader.IO;
 using Microsoft.Xna.Framework;
+using Terraria.GameContent.ItemDropRules;
+using CritRework.Content.Items.Equipable.Accessories;
 
 namespace CritRework.Common.Globals
 {
@@ -83,6 +85,13 @@ namespace CritRework.Common.Globals
             }
         }
 
+        public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
+        {
+            if (npc.type == NPCID.PirateDeadeye)
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MugShot>(), 15));
+            }
+        }
 
         public override void OnChatButtonClicked(NPC npc, bool firstButton)
         {
