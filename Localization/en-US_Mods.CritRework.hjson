@@ -93,6 +93,16 @@ Items: {
 		DisplayName: Holy Whetstone
 		Tooltip: ""
 	}
+
+	MugShot: {
+		DisplayName: Mug Shot
+		Tooltip:
+			'''
+			10% increased crit chance
+			Grants a chance to steal money when critically striking
+			25% reduced damage when paired with greedy whetstone
+			'''
+	}
 }
 
 Whetstone: {
@@ -168,6 +178,11 @@ Configs: {
 			Label: Reforge hijack sound
 			Tooltip: Whether or not a sound plays when a reforge hijacks your weapon (see above)
 		}
+
+		pirateArmorRework: {
+			Label: Pirate set rework
+			Tooltip: Whether or not the pirate vanity set, sold by the Pirate NPC, will be turned into an actual armor set or not
+		}
 	}
 }
 
@@ -237,3 +252,34 @@ PirateBroke3: You tryin' to pirate ME? Ya scallywag!
 PirateSuccessful1: There ye go, matey! Good as new.
 PirateSuccessful2: No refunds!
 PirateSuccessful3: Aye aye, matey.
+PirateHat:
+	'''
+	15% increased ranged and summoner critical strike chance
+	25% chance to save ammo
+	5% increased damage
+	'''
+PirateShirt:
+	'''
+	20% increased ranged and summoner critical strike chance
+	Increases maximum number of minion slots
+	2% increased damage
+	'''
+PiratePants:
+	'''
+	15% increased ranged and summoner critical strike chance
+	Increases maximum number of minion slots
+	15% increased movement speed
+	'''
+PirateSetBonus:
+	'''
+	While mounted, critically striking grants the 'Scallywag' buff for 5 seconds
+	Scallywag increases movement speed by 35% and attack speed by 20%
+	'''
+ScallywagText: Scallywag!
+
+Buffs: {
+	Scallywag: {
+		DisplayName: Scallywag
+		Description: Yo ho, yo ho, a pirate's life for me!
+	}
+}
