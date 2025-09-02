@@ -12,11 +12,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
-            if (Projectile != null)
-            {
-                return Player.GetModPlayer<CritPlayer>().timeSinceLastHit <= 60 * 2.5f;
-            }
-            return false;
+            return Player.GetModPlayer<CritPlayer>().timeSinceLastHit <= 60 * 2.5f;
         }
     }
 }

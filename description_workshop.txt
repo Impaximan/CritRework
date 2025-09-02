@@ -12,7 +12,7 @@ The damage that critical strikes deal are now affected by a variety of factors. 
 
 [b]The purpose of this mod is to allow for more creative and niche build crafting for the player.[/b] Because of that, there are probably several overpowered builds that I haven't thought of myself. But that's the fun of it! I can't guarentee that this mod will work perfectly with every other mod (ESPECIALLY balance wise), and most crit conditions from other mods will likely be broken (sadly not much I can do about this). All critical strike on-hit effects should work just fine, though.
 
-[h3]Full content list:[h3]
+[h3]Full content list:[/h3]
 
 [list]
 [*]A complete overhaul of how critical strikes work (see above)
