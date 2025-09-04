@@ -2,6 +2,11 @@
 {
     class BronzeAlloy : ModItem
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
+
         LocalizedText AnyCopper;
         LocalizedText AnySilver;
 

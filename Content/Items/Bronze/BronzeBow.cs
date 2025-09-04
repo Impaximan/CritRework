@@ -4,6 +4,10 @@ namespace CritRework.Content.Items.Bronze
 {
     public class BronzeBow : ModItem
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override void SetDefaults()
         {
             Item.useAmmo = AmmoID.Arrow;
