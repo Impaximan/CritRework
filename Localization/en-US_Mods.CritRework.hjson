@@ -112,6 +112,25 @@ Items: {
 			While equipped, all minions will inherit this crit condition
 			'''
 	}
+
+	BronzeAlloy: {
+		DisplayName: Bronze Alloy
+		Tooltip: ""
+	}
+
+	BronzeArrow: {
+		DisplayName: Bronze Arrow
+		Tooltip:
+			'''
+			1.3x critical strike damage multiplier
+			Only deals damage on critical strikes
+			'''
+	}
+
+	BronzeBow: {
+		DisplayName: Bronze Bow
+		Tooltip: Converts wooden arrows into bronze arrows
+	}
 }
 
 Whetstone: {
@@ -246,6 +265,7 @@ CritTypes: {
 	Prepared.Description: Critically strikes after the attack has been active for at least 5 seconds
 	Holy.Description: Critically strikes while you have invincibility (such as after taking damage)
 	CritWithAnother.Description: Critically strikes for 3 seconds after critically striking with another weapon
+	BronzeBowCrit.Description: Critically strikes if the target is between 15 and 20 tiles away
 }
 
 UnknownTooltip: Unknown critical strike condition
@@ -293,3 +313,10 @@ Buffs: {
 		Description: Yo ho, yo ho, a pirate's life for me!
 	}
 }
+
+RecipeGroups: {
+	AnyCopper: Any Copper Bar
+	AnySilver: Any Silver Bar
+}
+
+Projectiles.BronzeArrowProjectile.DisplayName: Bronze Arrow

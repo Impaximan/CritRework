@@ -234,7 +234,7 @@ namespace CritRework.Common.ModPlayers
             }
             else
             {
-                if (item.TryGetGlobalItem(out CritItem cItem))
+                if (item != null && item.TryGetGlobalItem(out CritItem cItem))
                 {
                     if (cItem.critType != null && item.DamageType.UseStandardCritCalcs)
                     {
