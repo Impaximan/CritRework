@@ -131,6 +131,11 @@ Items: {
 		DisplayName: Bronze Bow
 		Tooltip: Converts wooden arrows into bronze arrows
 	}
+
+	BronzeQuarterstaff: {
+		DisplayName: Bronze Quarterstaff
+		Tooltip: ""
+	}
 }
 
 Whetstone: {
@@ -319,4 +324,7 @@ RecipeGroups: {
 	AnySilver: Any Silver Bar
 }
 
-Projectiles.BronzeArrowProjectile.DisplayName: Bronze Arrow
+Projectiles: {
+	BronzeArrowProjectile.DisplayName: Bronze Arrow
+	BronzeQuarterstaffProjectile.DisplayName: Bronze Quarterstaff Projectile
+}

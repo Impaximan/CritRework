@@ -4,10 +4,6 @@ namespace CritRework.Content.Items.Bronze
 {
     public class BronzeBow : ModItem
     {
-        public override bool IsLoadingEnabled(Mod mod)
-        {
-            return false;
-        }
         public override void SetDefaults()
         {
             Item.useAmmo = AmmoID.Arrow;
@@ -25,6 +21,7 @@ namespace CritRework.Content.Items.Bronze
             Item.useAnimation = 20;
             Item.UseSound = SoundID.Item5;
             Item.shoot = 1;
+            Item.noMelee = true;
         }
 
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)

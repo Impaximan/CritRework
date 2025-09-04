@@ -7,11 +7,6 @@ namespace CritRework.Content.Items.Bronze
 {
     public class BronzeArrow : ModItem
     {
-        public override bool IsLoadingEnabled(Mod mod)
-        {
-            return false;
-        }
-
         public override void SetDefaults()
         {
             Item.maxStack = 9999;
