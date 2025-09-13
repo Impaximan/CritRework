@@ -39,7 +39,7 @@ namespace CritRework.Content.Items.Bronze
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient<Materials.BronzeAlloy>(12)
+                .AddIngredient<Materials.BronzeAlloy>(15)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

@@ -134,7 +134,7 @@ Items: {
 
 	BronzeQuarterstaff: {
 		DisplayName: Bronze Quarterstaff
-		Tooltip: Attacks faster when repeatedly critically striking
+		Tooltip: Attacks faster when critically striking repeatedly
 	}
 
 	BronzeBreastplate: {
@@ -150,6 +150,16 @@ Items: {
 	BronzeHelm: {
 		DisplayName: Bronze Helm
 		Tooltip: 5% increased melee and magic critical strike chance
+	}
+
+	BronzeHamaxe: {
+		DisplayName: Bronze Hamaxe
+		Tooltip: ""
+	}
+
+	BronzePickaxe: {
+		DisplayName: Bronze Pickaxe
+		Tooltip: ""
 	}
 }
 

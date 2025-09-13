@@ -18,6 +18,7 @@ The damage that critical strikes deal are now affected by a variety of factors. 
 [*]A complete overhaul of how critical strikes work (see above)
 [*]Around 50 different potential critical strike conditions
 [*]15 different whetstones
+[*]A new late pre-hardmode set of items themed around bronze
 [*]Various new crit-oriented item prefixes
 [*]A complete rework of the pirate NPC, including an crit oriented overhaul of the pirate armor (no longer just vanity; it's now a ranged-summoner hybrid set)
 [*]2 new crit oriented accessories (and more to come!)
