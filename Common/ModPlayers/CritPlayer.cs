@@ -2,6 +2,7 @@
 using CritRework.Content.Buffs;
 using CritRework.Content.CritTypes.WeaponSpecific;
 using CritRework.Content.CritTypes.WhetstoneSpecific;
+using CritRework.Content.Items.Bronze.BronzeArmor;
 using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Whetstones;
 using Microsoft.Xna.Framework;
@@ -307,6 +308,12 @@ namespace CritRework.Common.ModPlayers
                 }
 
                 Player.AddBuff(ModContent.BuffType<Scallywag>(), 300);
+            }
+
+            if (Player.HasEquip<BronzeHelm>() && hit.DamageType.CountsAsClass(DamageClass.Melee) && hit.Crit)
+            {
+                Player.ManaEffect(5);
+                Player.statMana += 5;
             }
         }
     }

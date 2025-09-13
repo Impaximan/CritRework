@@ -134,7 +134,22 @@ Items: {
 
 	BronzeQuarterstaff: {
 		DisplayName: Bronze Quarterstaff
-		Tooltip: ""
+		Tooltip: Attacks faster when repeatedly critically striking
+	}
+
+	BronzeBreastplate: {
+		DisplayName: Bronze Breastplate
+		Tooltip: 7% increased melee and magic critical strike chance
+	}
+
+	BronzeGreaves: {
+		DisplayName: Bronze Greaves
+		Tooltip: 5% increased melee and magic critical strike chance
+	}
+
+	BronzeHelm: {
+		DisplayName: Bronze Helm
+		Tooltip: 5% increased melee and magic critical strike chance
 	}
 }
 
@@ -271,6 +286,8 @@ CritTypes: {
 	Holy.Description: Critically strikes while you have invincibility (such as after taking damage)
 	CritWithAnother.Description: Critically strikes for 3 seconds after critically striking with another weapon
 	BronzeBowCrit.Description: Critically strikes if the target is between 15 and 20 tiles away
+	TenSecondCooldown.Description: Critically strikes if the the last time you crit was at least 10 seconds ago
+	ThreeSecondCooldown.Description: Critically strikes if the the last time you crit was at least 3 seconds ago
 }
 
 UnknownTooltip: Unknown critical strike condition
@@ -328,3 +345,9 @@ Projectiles: {
 	BronzeArrowProjectile.DisplayName: Bronze Arrow
 	BronzeQuarterstaffProjectile.DisplayName: Bronze Quarterstaff Projectile
 }
+
+BronzeHelm.SetBonus:
+	'''
+	Melee critical strikes regenerate mana
+	35% increased melee damage and critical strike chance while regenerating mana
+	'''
