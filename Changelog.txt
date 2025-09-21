@@ -1,2 +1,2 @@
-﻿-Added a new material, Bronze Alloy, and a set of 6 new crit-oriented equipment to go with it. Crafted using any copper tier bar + any silver tier bar at a hellforge
--Added two new randomly assigned crit conditions
+﻿-Added Bronze Staff
+-Nerfed crit damage mult of three second and ten second cooldown crit conditions
