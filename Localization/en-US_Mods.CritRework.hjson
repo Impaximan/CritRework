@@ -161,6 +161,15 @@ Items: {
 		DisplayName: Bronze Pickaxe
 		Tooltip: ""
 	}
+
+	AssassinsDagger: {
+		DisplayName: Assassin's Dagger
+		Tooltip:
+			'''
+			Doubles your critical strike damage once every 10 seconds
+			10% increased melee critical strike chance
+			'''
+	}
 }
 
 Whetstone: {

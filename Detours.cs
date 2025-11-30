@@ -70,7 +70,7 @@ namespace CritRework
         {
             pirateButtonText = CritRework.instance.GetLocalization($"PirateHijack");
             
-            SetChatButtonsHook = SetChatButtonsHook = new Hook(typeof(NPCLoader).GetMethod("SetChatButtons"), SetChatButtons);
+            SetChatButtonsHook = new Hook(typeof(NPCLoader).GetMethod("SetChatButtons"), SetChatButtons);
             SetChatButtonsHook.Apply();
 
             On_NPC.HitModifiers.SetCrit += SetCrit;

@@ -266,7 +266,7 @@ namespace CritRework.Common.Globals
 
         public static bool CanHaveCrits(Item item)
         {
-            if (item.GetGlobalItem<CritItem>().forceCanCrit)
+            if (item.TryGetGlobalItem(out CritItem cItem) && cItem.forceCanCrit)
             {
                 return true;
             }

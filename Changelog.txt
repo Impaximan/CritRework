@@ -1,2 +1,1 @@
-﻿-Added Bronze Staff
--Nerfed crit damage mult of three second and ten second cooldown crit conditions
+﻿-Nerfed crit damage mult of three second and ten second cooldown crit conditions
