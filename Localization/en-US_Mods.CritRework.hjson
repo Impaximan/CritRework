@@ -308,6 +308,7 @@ CritTypes: {
 	TenSecondCooldown.Description: Critically strikes if the the last time you crit was at least 10 seconds ago
 	ThreeSecondCooldown.Description: Critically strikes if the the last time you crit was at least 3 seconds ago
 	Backstab.Description: Critically strikes when hitting (most) enemies in the back
+	PickUpAmmo.Description: Mods.CritRework.CritTypes.PickUpAmmo.Description
 }
 
 UnknownTooltip: Unknown critical strike condition

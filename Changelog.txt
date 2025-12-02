@@ -1,1 +1,2 @@
-﻿-Nerfed crit damage mult of three second and ten second cooldown crit conditions
+﻿-Added 1 new crit condition to the random crit pool
+-Added a new accessory, the Assassin's Dagger, dropped by Goblin Thieves

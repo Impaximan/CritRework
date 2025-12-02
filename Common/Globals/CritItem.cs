@@ -28,6 +28,7 @@ namespace CritRework.Common.Globals
         public static LocalizedText pirateBonus;
 
         public bool forceCanCrit = false;
+        public bool recoverableArrow = false;
 
         public override void SetStaticDefaults()
         {
@@ -102,6 +103,11 @@ namespace CritRework.Common.Globals
             if (item.IsCurrency)
             {
                 player.GetModPlayer<CritPlayer>().timeSinceGoldPickup = 0;
+            }
+
+            if (recoverableArrow)
+            {
+                player.GetModPlayer<CritPlayer>().timeSinceArrowPickup = 0;
             }
             return base.OnPickup(item, player);
         }
@@ -215,7 +221,16 @@ namespace CritRework.Common.Globals
                     return;
                 }
             }
+
             AddCritType(item);
+        }
+
+        public override void OnSpawn(Item item, IEntitySource source)
+        {
+            if (source is EntitySource_DropAsItem dropSource)
+            {
+                recoverableArrow = true;
+            }
         }
 
         public void AddCritType(Item item)

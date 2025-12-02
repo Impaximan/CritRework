@@ -33,6 +33,7 @@ namespace CritRework.Common.ModPlayers
         public int timeSinceCrit = 0;
         public int timeFalling = 0;
         public int timeSinceDaggerBonus = 600;
+        public int timeSinceArrowPickup = 0;
         public bool pirateArmor = false;
 
         public Item lastWeaponUsed = null;
@@ -81,6 +82,7 @@ namespace CritRework.Common.ModPlayers
             timeFalling++;
             timeSinceCrit++;
             timeSinceDaggerBonus++;
+            timeSinceArrowPickup++;
             UpdateSlotMachine();
         }
 
