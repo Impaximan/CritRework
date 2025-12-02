@@ -170,6 +170,26 @@ Items: {
 			10% increased melee critical strike chance
 			'''
 	}
+
+	BattlemageEmblem: {
+		DisplayName: Battlemage Emblem
+		Tooltip: 15% increased melee and magic critical strike chance
+	}
+
+	CommanderEmblem: {
+		DisplayName: Commander Emblem
+		Tooltip: 15% increased ranged and summoner critical strike chance
+	}
+
+	HunterEmblem: {
+		DisplayName: Hunter Emblem
+		Tooltip: 15% increased melee and ranged critical strike chance
+	}
+
+	TeacherEmblem: {
+		DisplayName: Teacher Emblem
+		Tooltip: 15% increased magic and summoner critical strike chance
+	}
 }
 
 Whetstone: {

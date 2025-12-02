@@ -1,6 +1,10 @@
 ﻿-Added 1 new crit condition to the random crit pool
 -Added a new crit condition for the Classy Cane, which now has the highest crit multiplier in the game
 -Added a new crit condition for the Katana
+-Added Battlemage Emblem
+-Added Teacher Emblem
+-Added Hunter Emblem
+-Added Commander Emblem
 -Critically strikes on wet targets now automatically crits during rain
 -Storm Spear now has the above crit condition by default
 -Should have fixed an error when some mods spawn projectiles without an item source (such as Calamity's Amalgamate Brain)
