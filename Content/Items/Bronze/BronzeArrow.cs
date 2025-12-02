@@ -62,11 +62,6 @@ namespace CritRework.Content.Items.Bronze
         public override void Kill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
-
-            if (!Projectile.noDropItem && Main.rand.NextBool(5))
-            {
-                Item.NewItem(new EntitySource_DropAsItem(Projectile), Projectile.getRect(), ModContent.ItemType<BronzeArrow>());
-            }
         }
 
         public override void AI()

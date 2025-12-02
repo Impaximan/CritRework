@@ -16,7 +16,8 @@ The damage that critical strikes deal are now affected by a variety of factors. 
 
 [list]
 [*]A complete overhaul of how critical strikes work (see above)
-[*]Around 50 different potential critical strike conditions
+[*]Around 60 different potential critical strike conditions
+[*]A variety of weapon specific critical strike conditions designed to make certain weapons more interesting
 [*]15 different whetstones
 [*]A new late pre-hardmode set of items themed around bronze
 [*]Various new crit-oriented item prefixes

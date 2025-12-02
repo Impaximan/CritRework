@@ -332,6 +332,15 @@ CritTypes: {
 	HasDebuff.Description: Critically strikes while you are debuffed
 	ClassyCane.Description: Critically strikes while you are holding at least 50 platinum
 	Katana.Description: Critically strikes while you have 0 defense
+	EyeOfCthulhu.Description: Critically strikes while you have less than 50% of your life left
+	CodeYoyos.Description: Critically strikes after hitting an enemy at least 10 times
+	Chik.Description: Critically strikes after hitting at least 2 different enemies
+	Code1.Description: Critically strikes after hitting an enemy at least 10 times
+	Code2.Description: Critically strikes after hitting an enemy at least 20 times
+	Valor.Description: Critically strikes when returning
+	Amarok.Description: Critically strikes after not hitting an enemy for 2 seconds
+	HelFire.Description: Critically strikes when rapidly hitting enemies
+	Kraken.Description: Critically strikes once against each hit enemy per yoyo thrown
 }
 
 UnknownTooltip: Unknown critical strike condition
