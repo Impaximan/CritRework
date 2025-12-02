@@ -6,7 +6,10 @@
 
         public override float GetDamageMult(Player Player, Item Item) => 20f;
 
-        //public override string GetDescription() => "Critically strikes 1% of the time";
+        public override bool ForceOnItem(Item item)
+        {
+            return item.type == ItemID.ZapinatorGray || item.type == ItemID.ZapinatorOrange;
+        }
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {

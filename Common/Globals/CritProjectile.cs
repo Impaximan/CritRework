@@ -59,7 +59,7 @@ namespace CritRework.Common.Globals
             timeActive = 0;
             if (source is EntitySource_ItemUse itemSource)
             {
-                if (itemSource.Item.GetGlobalItem<CritItem>() != null)
+                if (itemSource.Item.TryGetGlobalItem(out CritItem cItem))
                 {
                     critType = itemSource.Item.GetGlobalItem<CritItem>().critType;
                     ogItem = itemSource.Item;

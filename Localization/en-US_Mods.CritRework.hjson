@@ -309,6 +309,9 @@ CritTypes: {
 	ThreeSecondCooldown.Description: Critically strikes if the the last time you crit was at least 3 seconds ago
 	Backstab.Description: Critically strikes when hitting (most) enemies in the back
 	PickUpAmmo.Description: Mods.CritRework.CritTypes.PickUpAmmo.Description
+	HasDebuff.Description: Critically strikes while you are debuffed
+	ClassyCane.Description: Critically strikes while you are holding at least 50 platinum
+	Katana.Description: Critically strikes while you have 0 defense
 }
 
 UnknownTooltip: Unknown critical strike condition
