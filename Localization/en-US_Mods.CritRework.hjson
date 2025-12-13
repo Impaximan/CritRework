@@ -341,6 +341,10 @@ CritTypes: {
 	Amarok.Description: Critically strikes after not hitting an enemy for 2 seconds
 	HelFire.Description: Critically strikes when rapidly hitting enemies
 	Kraken.Description: Critically strikes once against each hit enemy per yoyo thrown
+	MandibleBlade.Description: Critically strikes against enemies moving towards you
+	Trident.Description: Critically strikes after hitting at least 3 times in one use
+	TitaniumTrident.Description: Critically strikes when hitting multiple enemies in one use
+	DemonScytheShadowflameBow.Description: Projectiles will critically strike after killing an enemy
 }
 
 UnknownTooltip: Unknown critical strike condition

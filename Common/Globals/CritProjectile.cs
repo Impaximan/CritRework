@@ -18,9 +18,15 @@ namespace CritRework.Common.Globals
         public List<NPC> npcsHit = new();
         public bool consumedAmmo = false;
         public bool fromNecromantic = false;
+        public int targetsKilled = 0;
 
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if (target.life <= 0)
+            {
+                targetsKilled++;
+            }
+
             targetsHit++;
             timeSinceHit = 0;
 
@@ -33,6 +39,7 @@ namespace CritRework.Common.Globals
             {
                 Main.player[projectile.owner].Heal(Content.Prefixes.Weapon.Necromantic.healAmount);
             }
+
         }
 
         public override bool OnTileCollide(Projectile projectile, Vector2 oldVelocity)
@@ -68,6 +75,7 @@ namespace CritRework.Common.Globals
             npcsHit = new();
             wallBounces = 0;
             timeActive = 0;
+            targetsKilled = 0;
             timeSinceHit = 0;
 
             if (source is EntitySource_ItemUse itemSource)

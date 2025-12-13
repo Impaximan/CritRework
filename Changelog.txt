@@ -1,13 +1,1 @@
-﻿-Added 1 new crit condition to the random crit pool
--Added a new crit condition for the Classy Cane, which now has the highest crit multiplier in the game
--Added a new crit condition for the Katana
--Added new crit conditions for Code 1, Code 2, Chik, Valor, Hel-Fire, Amarok, Kraken, and The Eye of Cthulhu yoyos (8 total)
--Added Battlemage Emblem
--Added Teacher Emblem
--Added Hunter Emblem
--Added Commander Emblem
--Critically strikes on wet targets now automatically crits during rain
--Storm Spear now has the above crit condition by default
--Bronze arrows no longer drop on the ground when destroyed
--Should have fixed an error when some mods spawn projectiles without an item source (such as Calamity's Amalgamate Brain)
--Both zapinators now have the 1% crit chance condition by default
+﻿-Added unique crit conditions for Demon Scythe, Shadowflame Bow, Mandible Blade, Trident, Adamantite Glaive and Titanium Trident
