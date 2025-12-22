@@ -210,6 +210,15 @@ Items: {
 			Critically striking also gains a 10% chance to spawn a heart pickup and inflict extra damage
 			'''
 	}
+
+	IronChakram: {
+		DisplayName: Iron Chakram
+		Tooltip:
+		'''
+		You can usually only throw one chakram at once
+		Critically striking allows you to throw another chakram immediately
+		'''
+	}
 }
 
 Whetstone: {
@@ -427,6 +436,7 @@ RecipeGroups: {
 Projectiles: {
 	BronzeArrowProjectile.DisplayName: Bronze Arrow
 	BronzeQuarterstaffProjectile.DisplayName: Bronze Quarterstaff Projectile
+	IronChakramProjectile.DisplayName: Iron Chakram Projectile
 }
 
 BronzeHelm.SetBonus:
