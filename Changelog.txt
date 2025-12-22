@@ -1,5 +1,7 @@
 ﻿-Added unique crit conditions for Demon Scythe, Shadowflame Bow, Mandible Blade, Trident, Adamantite Glaive and Titanium Trident
 -Added Bronze Staff
 -Added Rabid Claw & Noxious Eye, both dropped by Blood Moon enemies
+-Added Iron and Lead chakrams
+-Added Gold and Platinum Javelins
 -Potion sickness no longer counts towards "critically strikes while you are debuffed" condition
 -Fixed a bug where projectiles which shouldn't be able to crit were able to anyway

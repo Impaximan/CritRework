@@ -214,10 +214,29 @@ Items: {
 	IronChakram: {
 		DisplayName: Iron Chakram
 		Tooltip:
-		'''
-		You can usually only throw one chakram at once
-		Critically striking allows you to throw another chakram immediately
-		'''
+			'''
+			You can usually only throw one chakram at once
+			Critically striking allows you to throw another chakram immediately
+			'''
+	}
+
+	LeadChakram: {
+		DisplayName: Lead Chakram
+		Tooltip: 
+			'''
+			You can usually only throw one chakram at once
+			Critically striking allows you to throw another chakram immediately
+			'''
+	}
+
+	GoldJavelin: {
+		DisplayName: Gold Javelin
+		Tooltip: Pierces enemies only when critically striking
+	}
+
+	PlatinumJavelin: {
+		DisplayName: Platinum Javelin
+		Tooltip: Pierces enemies only when critically striking
 	}
 }
 
@@ -437,6 +456,9 @@ Projectiles: {
 	BronzeArrowProjectile.DisplayName: Bronze Arrow
 	BronzeQuarterstaffProjectile.DisplayName: Bronze Quarterstaff Projectile
 	IronChakramProjectile.DisplayName: Iron Chakram Projectile
+	LeadChakramProjectile.DisplayName: Lead Chakram Projectile
+	GoldJavelinProjectile.DisplayName: Gold Javelin Projectile
+	PlatinumJavelinProjectile.DisplayName: Platinum Javelin Projectile
 }
 
 BronzeHelm.SetBonus:

@@ -12,15 +12,15 @@ namespace CritRework.Content.Items.Weapons
     {
         public override void SetDefaults()
         {
-            Item.SetWeaponValues(8, 1f, 25);
+            Item.SetWeaponValues(8, 1f, 18);
             Item.width = 24;
             Item.height = 24;
             Item.noMelee = true;
             Item.DamageType = DamageClass.Melee;
             Item.UseSound = SoundID.Item1;
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.useTime = 10;
-            Item.useAnimation = 10;
+            Item.useTime = 16;
+            Item.useAnimation = 16;
             Item.noUseGraphic = true;
             Item.value = Item.sellPrice(0, 0, 1, 80);
             Item.rare = ItemRarityID.White;
