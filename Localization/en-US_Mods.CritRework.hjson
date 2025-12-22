@@ -161,6 +161,11 @@ Items: {
 		DisplayName: Bronze Pickaxe
 		Tooltip: ""
 	}
+
+	BronzeStaff: {
+		DisplayName: Bronze Staff
+		Tooltip: ""
+	}
 }
 
 Whetstone: {
@@ -298,6 +303,7 @@ CritTypes: {
 	BronzeBowCrit.Description: Critically strikes if the target is between 15 and 20 tiles away
 	TenSecondCooldown.Description: Critically strikes if the the last time you crit was at least 10 seconds ago
 	ThreeSecondCooldown.Description: Critically strikes if the the last time you crit was at least 3 seconds ago
+	BronzeStaffCrit.Description: Critically strikes if you have less than 20 mana
 }
 
 UnknownTooltip: Unknown critical strike condition

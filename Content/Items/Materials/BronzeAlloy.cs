@@ -1,4 +1,6 @@
-﻿namespace CritRework.Content.Items.Materials
+﻿using Terraria.GameContent.Creative;
+
+namespace CritRework.Content.Items.Materials
 {
     class BronzeAlloy : ModItem
     {
@@ -10,6 +12,7 @@
             Item.ResearchUnlockCount = 1;
             AnyCopper = Mod.GetLocalization($"RecipeGroups.AnyCopper");
             AnySilver = Mod.GetLocalization($"RecipeGroups.AnySilver");
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 25;
         }
 
         public override void SetDefaults()
