@@ -9,9 +9,6 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
 
         public override float GetDamageMult(Player Player, Item Item) => 1.3f;
 
-        //public override string GetDescription() => "Critically strikes for 1 second after the first use of this weapon" +
-        //    "\nReset after using another weapon";
-
         public override bool CanApplyTo(Item item)
         {
             return item.type != ModContent.ItemType<WiseCracker>();

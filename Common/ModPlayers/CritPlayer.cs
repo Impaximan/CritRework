@@ -32,6 +32,8 @@ namespace CritRework.Common.ModPlayers
         public int timeSinceHook = 0;
         public int timeSinceCrit = 0;
         public int timeFalling = 0;
+        public int timeSinceDaggerBonus = 600;
+        public int timeSinceArrowPickup = 0;
         public bool pirateArmor = false;
 
         public Item lastWeaponUsed = null;
@@ -79,6 +81,8 @@ namespace CritRework.Common.ModPlayers
             timeSinceDeath++;
             timeFalling++;
             timeSinceCrit++;
+            timeSinceDaggerBonus++;
+            timeSinceArrowPickup++;
             UpdateSlotMachine();
         }
 
@@ -230,6 +234,17 @@ namespace CritRework.Common.ModPlayers
             {
                 modifiers.SetCrit();
                 modifiers.SourceDamage *= CritType.CalculateActualCritMult(critType, item, Player);
+                if (timeSinceDaggerBonus >= 600 && Player.HasEquip<AssassinsDagger>())
+                {
+                    modifiers.SourceDamage *= 2;
+                    timeSinceDaggerBonus = 0;
+                    CombatText.NewText(Player.getRect(), new Color(172, 44, 77), "Assassin's Strike!", true);
+                    SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/BloodSlash")
+                    {
+                        PitchVariance = 0.5f,
+                        Volume = 1f
+                    }, target.Center);
+                }
                 modifiers.FinalDamage *= 0.5f;
                 if (CritRework.overrideCritColor) modifiers.HideCombatText();
             }

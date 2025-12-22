@@ -96,6 +96,11 @@ namespace CritRework.Common.Globals
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MugShot>(), 15));
             }
+
+            if (npc.type == NPCID.GoblinThief)
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<AssassinsDagger>(), 6));
+            }
         }
 
         public override void OnChatButtonClicked(NPC npc, bool firstButton)

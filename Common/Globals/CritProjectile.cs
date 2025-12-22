@@ -1,6 +1,7 @@
 ﻿using CritRework.Common.ModPlayers;
 using CritRework.Content.Items.Equipable.Accessories;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria.DataStructures;
 
 namespace CritRework.Common.Globals
@@ -13,17 +14,32 @@ namespace CritRework.Common.Globals
         public int targetsHit = 0;
         public int wallBounces = 0;
         public int timeActive = 0;
+        public int timeSinceHit = 0;
+        public List<NPC> npcsHit = new();
         public bool consumedAmmo = false;
         public bool fromNecromantic = false;
+        public int targetsKilled = 0;
 
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if (target.life <= 0)
+            {
+                targetsKilled++;
+            }
+
             targetsHit++;
+            timeSinceHit = 0;
+
+            if (!npcsHit.Contains(target))
+            {
+                npcsHit.Add(target);
+            }
 
             if (fromNecromantic && hit.Crit && !Main.player[projectile.owner].moonLeech)
             {
                 Main.player[projectile.owner].Heal(Content.Prefixes.Weapon.Necromantic.healAmount);
             }
+
         }
 
         public override bool OnTileCollide(Projectile projectile, Vector2 oldVelocity)
@@ -35,6 +51,7 @@ namespace CritRework.Common.Globals
         public override void PostAI(Projectile projectile)
         {
             timeActive++;
+            timeSinceHit++;
 
             if (Main.player[projectile.owner].TryGetModPlayer(out CritPlayer cPlayer))
             {
@@ -55,11 +72,15 @@ namespace CritRework.Common.Globals
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
             targetsHit = 0;
+            npcsHit = new();
             wallBounces = 0;
             timeActive = 0;
+            targetsKilled = 0;
+            timeSinceHit = 0;
+
             if (source is EntitySource_ItemUse itemSource)
             {
-                if (itemSource.Item.GetGlobalItem<CritItem>() != null)
+                if (itemSource.Item.TryGetGlobalItem(out CritItem cItem))
                 {
                     critType = itemSource.Item.GetGlobalItem<CritItem>().critType;
                     ogItem = itemSource.Item;
