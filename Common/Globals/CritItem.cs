@@ -2,6 +2,7 @@
 using CritRework.Content.CritTypes.WhetstoneSpecific;
 using CritRework.Content.Items.Equipable.Accessories;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -66,6 +67,44 @@ namespace CritRework.Common.Globals
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.ContainsKey("critType")) critType = CritRework.GetCrit(tag.GetString("critType"));
+        }
+
+        int counter = 0;
+        float alphaMult = 0f;
+        public override bool PreDrawInInventory(Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
+        {
+            if (!CritRework.showActiveCrits) return base.PreDrawInInventory(item, spriteBatch, position, frame, drawColor, itemColor, origin, scale);
+
+            if (item.TryGetGlobalItem(out CritItem c) && c.critType != null && c.critType.ShowWhenActive && Main.LocalPlayer.inventory.Contains(item))
+            {
+                Texture2D texture = ModContent.Request<Texture2D>("CritRework/Shine1").Value;
+
+                try
+                {
+                    counter++;
+
+                    float baseScale = 30f;
+                    if (Main.LocalPlayer.HeldItem == item && !Main.playerInventory) baseScale = 80f;
+
+                    if (c.critType.ShouldCrit(Main.LocalPlayer, item, null, null, new NPC.HitModifiers()))
+                    {
+                        alphaMult += (1f - alphaMult) * 0.2f;
+                    }
+                    else
+                    {
+                        alphaMult *= 0.9f;
+                    }
+
+                    spriteBatch.Draw(texture, position, null, Color.Lerp(CritRework.overrideCritColor ? CritRework.critColor : Color.Yellow, Color.White, 0.5f) * alphaMult, counter * MathHelper.Pi / 100f, texture.Size() / 2, MathHelper.Lerp(alphaMult, 1f, 0.75f) * baseScale / texture.Size().Length() * (1f + 0.1f * (float)Math.Sin(counter / 10f)) * Main.UIScale, SpriteEffects.None, 0f);
+
+                }
+                catch (Exception ex)
+                {
+                    Main.NewText("Crit condition incompatible with crit display", Color.Red);
+                }
+            }
+
+            return base.PreDrawInInventory(item, spriteBatch, position, frame, drawColor, itemColor, origin, scale);
         }
 
         public override void PostReforge(Item item)

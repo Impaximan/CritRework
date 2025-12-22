@@ -9,6 +9,8 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
 
         public override float GetDamageMult(Player Player, Item Item) => 1.3f;
 
+        public override bool ShowWhenActive => true;
+
         public override bool CanApplyTo(Item item)
         {
             return item.type != ModContent.ItemType<WiseCracker>();

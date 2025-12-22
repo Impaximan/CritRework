@@ -1,4 +1,5 @@
-﻿-Added unique crit conditions for Demon Scythe, Shadowflame Bow, Mandible Blade, Trident, Adamantite Glaive and Titanium Trident
+﻿-Some crit conditions will now visibly cause the item to glow in your inventory while the condition is met (toggleable via config)
+-Added unique crit conditions for Demon Scythe, Shadowflame Bow, Mandible Blade, Trident, Adamantite Glaive and Titanium Trident
 -Added Bronze Staff
 -Added Rabid Claw & Noxious Eye, both dropped by Blood Moon enemies
 -Added Iron and Lead chakrams

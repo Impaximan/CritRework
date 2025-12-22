@@ -14,6 +14,8 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
             return item.type != ModContent.ItemType<WiseCracker>();
         }
 
+        public override bool ShowWhenActive => true;
+
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             return Player.GetModPlayer<CritPlayer>().timeSinceCrit <= 60 * 3;

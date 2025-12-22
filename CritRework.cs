@@ -28,6 +28,7 @@ namespace CritRework
         public static bool randomHijackSound = true;
         public static bool pirateHijack = true;
         public static bool pirateArmorRework = true;
+        public static bool showActiveCrits = true;
 
         public static CritRework instance;
 

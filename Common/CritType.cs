@@ -30,6 +30,8 @@ namespace CritRework.Common
         public virtual string InternalName => GetType().Name;
         public virtual bool InRandomPool => false;
 
+        public virtual bool ShowWhenActive => false;
+
         public virtual bool CanApplyTo(Item item)
         {
             return true;

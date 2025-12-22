@@ -8,7 +8,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
 
         public override float GetDamageMult(Player Player, Item Item) => 1.4f;
 
-        //public override string GetDescription() => "Critically strikes for 60 seconds after you respawn";
+        public override bool ShowWhenActive => true;
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {

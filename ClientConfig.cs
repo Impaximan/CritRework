@@ -11,6 +11,9 @@ namespace CritRework
 
         [Header($"AestheticHeader")]
 
+        [DefaultValue(true)]
+        public bool showActiveCrits = false;
+
         [DefaultValue(false)]
         public bool overrideCritColor = false;
 
@@ -23,6 +26,7 @@ namespace CritRework
 
         public override void OnChanged()
         {
+            CritRework.showActiveCrits = showActiveCrits;
             CritRework.critColor = critColor;
             CritRework.overrideCritColor = overrideCritColor;
             CritRework.critSounds = critSoundEffect;

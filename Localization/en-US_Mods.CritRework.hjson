@@ -222,7 +222,7 @@ Items: {
 
 	LeadChakram: {
 		DisplayName: Lead Chakram
-		Tooltip: 
+		Tooltip:
 			'''
 			You can usually only throw one chakram at once
 			Critically striking allows you to throw another chakram immediately
@@ -278,6 +278,11 @@ Configs: {
 		critSoundEffect: {
 			Label: Critical strike sound effects
 			Tooltip: Enable/disable the sound effect that plays when critically striking enemies
+		}
+
+		showActiveCrits: {
+			Label: Show active crits in inventory
+			Tooltip: While enabled, items that currently meet a crit condition will glow in your inventory
 		}
 	}
 

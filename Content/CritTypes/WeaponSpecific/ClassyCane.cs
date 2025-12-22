@@ -11,6 +11,8 @@
 
         public override float GetDamageMult(Player Player, Item Item) => 100f;
 
+        public override bool ShowWhenActive => true;
+
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
             int totalValue = 0;
