@@ -256,6 +256,10 @@ namespace CritRework.Common.ModPlayers
                     {
                         modifiers.DisableCrit();
                     }
+                    else if (cItem.critType == null)
+                    {
+                        modifiers.DisableCrit();
+                    }
                 }
             }
 
@@ -289,16 +293,16 @@ namespace CritRework.Common.ModPlayers
                     {
                         if (Main.rand.NextBool(100))
                         {
-                            Item.NewItem(new EntitySource_OnHit(Player, target, "MugShotHit"), Player.getRect(), new Item(ItemID.PlatinumCoin));
+                            Player.QuickSpawnItem(new EntitySource_OnHit(Player, target, "MugShotHit"), ItemID.PlatinumCoin, 1);
                         }
                         else
                         {
-                            Item.NewItem(new EntitySource_OnHit(Player, target, "MugShotHit"), Player.getRect(), new Item(ItemID.GoldCoin, Main.rand.Next(1, 3)));
+                            Player.QuickSpawnItem(new EntitySource_OnHit(Player, target, "MugShotHit"), ItemID.GoldCoin, Main.rand.Next(1, 3));
                         }
                     }
                     else
                     {
-                        Item.NewItem(new EntitySource_OnHit(Player, target, "MugShotHit"), Player.getRect(), new Item(ItemID.SilverCoin, Main.rand.Next(3, 11)));
+                        Player.QuickSpawnItem(new EntitySource_OnHit(Player, target, "MugShotHit"), ItemID.SilverCoin, Main.rand.Next(3, 11));
                     }
 
                     SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/CoinCrit")
@@ -323,6 +327,26 @@ namespace CritRework.Common.ModPlayers
                 }
 
                 Player.AddBuff(ModContent.BuffType<Scallywag>(), 300);
+            }
+
+            if (Player.HasEquip<NoxiousEye>() && hit.Crit)
+            {
+                target.AddBuff(BuffID.Poisoned, 30);
+
+                if (Main.rand.NextBool(10) && target.type != NPCID.TargetDummy)
+                {
+                    SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/Gas")
+                    {
+                        Volume = 1.5f,
+                        PitchVariance = 0.25f
+                    }, target.Center);
+
+                    CombatText.NewText(target.getRect(), Color.Crimson, "Exsanguinated", false, true);
+                    target.SimpleStrikeNPC(hit.Damage / 2, 0, false);
+
+                    int i = Item.NewItem(new EntitySource_OnHit(Player, target, "NoxiousEyeHit"), target.getRect(), new Item(ItemID.Heart, 1));
+                    if (Main.netMode == NetmodeID.MultiplayerClient) NetMessage.SendData(MessageID.SyncItem, number: i, number2: 1);
+                }
             }
 
             if (Player.HasEquip<BronzeHelm>() && hit.DamageType.CountsAsClass(DamageClass.Melee) && hit.Crit)

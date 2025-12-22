@@ -7,6 +7,7 @@ using Terraria.ModLoader.IO;
 using Microsoft.Xna.Framework;
 using Terraria.GameContent.ItemDropRules;
 using CritRework.Content.Items.Equipable.Accessories;
+using CritRework.Content.Items.Weapons;
 
 namespace CritRework.Common.Globals
 {
@@ -100,6 +101,16 @@ namespace CritRework.Common.Globals
             if (npc.type == NPCID.GoblinThief)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<AssassinsDagger>(), 6));
+            }
+
+            if (npc.type == NPCID.BloodZombie)
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RabidClaw>(), 6));
+            }
+
+            if (npc.type == NPCID.Drippler)
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<NoxiousEye>(), 10));
             }
         }
 

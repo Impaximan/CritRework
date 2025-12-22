@@ -15,7 +15,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
             {
                 int type = Player.buffType[i];
 
-                if (Main.debuff[type] && !Main.buffNoTimeDisplay[type] && Main.TryGetBuffTime(i, out int time) && time > 5)
+                if (Main.debuff[type] && !Main.buffNoTimeDisplay[type] && Main.TryGetBuffTime(i, out int time) && time > 5 && type != BuffID.PotionSickness)
                 {
                     return true;
                 }

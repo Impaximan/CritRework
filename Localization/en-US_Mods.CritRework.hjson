@@ -181,7 +181,6 @@ Items: {
 		Tooltip: 15% increased ranged and summoner critical strike chance
 	}
 
-
 	HunterEmblem: {
 		DisplayName: Hunter Emblem
 		Tooltip: 15% increased melee and ranged critical strike chance
@@ -190,6 +189,26 @@ Items: {
 	TeacherEmblem: {
 		DisplayName: Teacher Emblem
 		Tooltip: 15% increased magic and summoner critical strike chance
+	}
+
+	BronzeStaff: {
+		DisplayName: Bronze Staff
+		Tooltip: ""
+	}
+
+	RabidClaw: {
+		DisplayName: Rabid Claw
+		Tooltip: Critically striking grants you 30% increased melee speed for 5 seconds
+	}
+
+	NoxiousEye: {
+		DisplayName: Noxious Eye
+		Tooltip:
+			'''
+			5% increased critical strike chance
+			Critically striking briefly poisons enemies
+			Critically striking also gains a 10% chance to spawn a heart pickup and inflict extra damage
+			'''
 	}
 }
 
@@ -328,6 +347,25 @@ CritTypes: {
 	BronzeBowCrit.Description: Critically strikes if the target is between 15 and 20 tiles away
 	TenSecondCooldown.Description: Critically strikes if the the last time you crit was at least 10 seconds ago
 	ThreeSecondCooldown.Description: Critically strikes if the the last time you crit was at least 3 seconds ago
+	Backstab.Description: Critically strikes when hitting (most) enemies in the back
+	PickUpAmmo.Description: Mods.CritRework.CritTypes.PickUpAmmo.Description
+	HasDebuff.Description: Critically strikes while you are debuffed
+	ClassyCane.Description: Critically strikes while you are holding at least 50 platinum
+	Katana.Description: Critically strikes while you have 0 defense
+	EyeOfCthulhu.Description: Critically strikes while you have less than 50% of your life left
+	CodeYoyos.Description: Critically strikes after hitting an enemy at least 10 times
+	Chik.Description: Critically strikes after hitting at least 2 different enemies
+	Code1.Description: Critically strikes after hitting an enemy at least 10 times
+	Code2.Description: Critically strikes after hitting an enemy at least 20 times
+	Valor.Description: Critically strikes when returning
+	Amarok.Description: Critically strikes after not hitting an enemy for 2 seconds
+	HelFire.Description: Critically strikes when rapidly hitting enemies
+	Kraken.Description: Critically strikes once against each hit enemy per yoyo thrown
+	MandibleBlade.Description: Critically strikes against enemies moving towards you
+	Trident.Description: Critically strikes after hitting at least 3 times in one use
+	TitaniumTrident.Description: Critically strikes when hitting multiple enemies in one use
+	DemonScytheShadowflameBow.Description: Projectiles will critically strike after killing an enemy
+	BronzeStaffCrit.Description: Critically strikes while you have less than 20 mana
 }
 
 UnknownTooltip: Unknown critical strike condition
@@ -373,6 +411,11 @@ Buffs: {
 	Scallywag: {
 		DisplayName: Scallywag
 		Description: Yo ho, yo ho, a pirate's life for me!
+	}
+
+	RabidFrenzy: {
+		DisplayName: Rabid Frenzy
+		Description: 30% increased melee speed
 	}
 }
 
