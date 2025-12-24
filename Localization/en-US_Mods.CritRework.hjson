@@ -238,6 +238,16 @@ Items: {
 		DisplayName: Platinum Javelin
 		Tooltip: Pierces enemies only when critically striking
 	}
+
+	CrystalShield: {
+		DisplayName: Crystal Shield
+		Tooltip:
+			'''
+			5% increased melee critical strike chance
+			Inflicting critical strikes grants a stacking defense buff, up to 30 defense
+			Upon getting hit, that buff is reset
+			'''
+	}
 }
 
 Whetstone: {

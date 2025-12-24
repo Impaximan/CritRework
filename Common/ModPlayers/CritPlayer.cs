@@ -37,6 +37,8 @@ namespace CritRework.Common.ModPlayers
         public bool pirateArmor = false;
         public bool allowNewChakram = false;
 
+        public int crystalShieldDefense = 0;
+
         public Item lastWeaponUsed = null;
 
         public bool ammoUsedThisFrame = false;
@@ -70,6 +72,7 @@ namespace CritRework.Common.ModPlayers
             pirateArmor = false;
             accessoryEffects.Clear();
             summonCrit = null;
+            if (Player.HasEquip<CrystalShield>()) Player.statDefense += crystalShieldDefense;
         }
 
         public override void PostUpdate()
@@ -268,6 +271,20 @@ namespace CritRework.Common.ModPlayers
         }
 
 
+        public override void OnHurt(Player.HurtInfo info)
+        {
+            if (crystalShieldDefense > 0)
+            {
+                if (Player.HasEquip<CrystalShield>())
+                {
+                    SoundEngine.PlaySound(SoundID.Shatter, Player.Center);
+                    CombatText.NewText(Player.getRect(), Color.LightPink, crystalShieldDefense);
+                }
+
+                crystalShieldDefense = 0;
+            }
+        }
+
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (hit.Crit && item.TryGetGlobalItem(out CritItem critItem) && critItem.critType is not CritWithAnother)
@@ -347,6 +364,16 @@ namespace CritRework.Common.ModPlayers
 
                     int i = Item.NewItem(new EntitySource_OnHit(Player, target, "NoxiousEyeHit"), target.getRect(), new Item(ItemID.Heart, 1));
                     if (Main.netMode == NetmodeID.MultiplayerClient) NetMessage.SendData(MessageID.SyncItem, number: i, number2: 1);
+                }
+            }
+
+            if (Player.HasEquip<CrystalShield>() && hit.Crit)
+            {
+                crystalShieldDefense++;
+
+                if (crystalShieldDefense > CrystalShield.maxDefense)
+                {
+                    crystalShieldDefense = CrystalShield.maxDefense;
                 }
             }
 
