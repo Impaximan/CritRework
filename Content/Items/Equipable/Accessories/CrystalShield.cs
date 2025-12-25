@@ -2,7 +2,7 @@
 {
     public class CrystalShield : ModItem
     {
-        public static int maxDefense = 30;
+        public static int maxDefense = 50;
 
         public override void AddRecipes()
         {
@@ -26,7 +26,7 @@
             Item.height = 42;
             Item.accessory = true;
             Item.rare = ItemRarityID.Pink;
-            Item.defense = 4;
+            Item.defense = 5;
             Item.value = Item.sellPrice(0, 6, 0, 0);
         }
 

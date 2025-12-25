@@ -72,7 +72,27 @@ namespace CritRework.Common.ModPlayers
             pirateArmor = false;
             accessoryEffects.Clear();
             summonCrit = null;
-            if (Player.HasEquip<CrystalShield>()) Player.statDefense += crystalShieldDefense;
+        }
+
+        int crystalLossCounter = 0;
+        public override void UpdateEquips()
+        {
+            if (Player.HasEquip<CrystalShield>())
+            {
+                Player.statDefense += crystalShieldDefense;
+
+                if (crystalShieldDefense > 0)
+                {
+                    crystalLossCounter++;
+
+                    if (crystalLossCounter > 180f - 3.3f * crystalShieldDefense)
+                    {
+                        crystalLossCounter = 0;
+                        crystalShieldDefense--;
+                        CombatText.NewText(Player.getRect(), Color.LightPink, -1, false, true);
+                    }
+                }
+            }
         }
 
         public override void PostUpdate()
@@ -278,8 +298,9 @@ namespace CritRework.Common.ModPlayers
                 if (Player.HasEquip<CrystalShield>())
                 {
                     SoundEngine.PlaySound(SoundID.Shatter, Player.Center);
-                    CombatText.NewText(Player.getRect(), Color.LightPink, crystalShieldDefense);
+                    CombatText.NewText(Player.getRect(), Color.Pink, -crystalShieldDefense);
                 }
+
 
                 crystalShieldDefense = 0;
             }
@@ -370,6 +391,9 @@ namespace CritRework.Common.ModPlayers
             if (Player.HasEquip<CrystalShield>() && hit.Crit)
             {
                 crystalShieldDefense++;
+
+                CombatText.NewText(Player.getRect(), Color.LightBlue, 1, false, true);
+                crystalLossCounter = 0;
 
                 if (crystalShieldDefense > CrystalShield.maxDefense)
                 {

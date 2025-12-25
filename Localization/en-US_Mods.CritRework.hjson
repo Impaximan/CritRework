@@ -244,7 +244,7 @@ Items: {
 		Tooltip:
 			'''
 			5% increased melee critical strike chance
-			Inflicting critical strikes grants a stacking defense buff, up to 30 defense
+			Inflicting critical strikes grants a stacking defense buff, up to 50 defense
 			Upon getting hit, that buff is reset
 			'''
 	}
