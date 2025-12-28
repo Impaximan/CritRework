@@ -269,6 +269,10 @@ namespace CritRework.Common.ModPlayers
                         Volume = 1f
                     }, target.Center);
                 }
+                if (Player.HasEquip<EternalGuillotine>() && target.life == target.lifeMax)
+                {
+                    modifiers.CritDamage *= 1.5f;
+                }
                 modifiers.FinalDamage *= 0.5f;
                 if (CritRework.overrideCritColor) modifiers.HideCombatText();
             }

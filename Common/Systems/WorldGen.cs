@@ -36,8 +36,23 @@
                         }
                     }
 
+                    int num = 0;
                     if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 2 * 36) //Locked golden (dungeon) chest
                     {
+                        num++;
+                        if (num % 4 == 0)
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Equipable.Accessories.EternalGuillotine>());
+                                    chest.item[inventoryIndex].stack = 1;
+                                    break;
+                                }
+                            }
+                        }
+
                         if (WorldGen.genRand.NextBool(4))
                         {
                             for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)

@@ -248,6 +248,15 @@ Items: {
 			Upon getting hit, that buff is reset
 			'''
 	}
+
+	EternalGuillotine: {
+		DisplayName: Eternal Guillotine
+		Tooltip:
+			'''
+			50% increased critical strike damage on full health enemies
+			Enemies killed by a critical strike are revived as friendly ghosts
+			'''
+	}
 }
 
 Whetstone: {
