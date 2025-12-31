@@ -30,6 +30,8 @@ namespace CritRework
         public static bool pirateArmorRework = true;
         public static bool showActiveCrits = true;
 
+        public static DamageClass gloveDamageClass = DamageClass.Ranged;
+
         public static CritRework instance;
 
         public static CritType GetCrit<T>() where T : CritType

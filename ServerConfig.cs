@@ -33,6 +33,16 @@ namespace CritRework
         [ReloadRequired]
         public bool pirateArmorRework = true;
 
+        [DefaultValue("Ranged")]
+        [OptionStrings(
+        [
+            "Ranged",
+            "Throwing",
+            "Rogue (CALAMITY ONLY)"
+        ])]
+        [ReloadRequired]
+        public string gloveDamageType = "Ranged";
+
         public override void OnChanged()
         {
             CritRework.critPower = critPower;
@@ -41,6 +51,29 @@ namespace CritRework
             CritRework.pirateHijack = pirateHijack;
             CritRework.randomHijackSound = randomHijackSound;
             CritRework.pirateArmorRework = pirateArmorRework;
+
+            switch (gloveDamageType)
+            {
+                default:
+                    CritRework.gloveDamageClass = DamageClass.Ranged;
+                    break;
+                case "Ranged":
+                    CritRework.gloveDamageClass = DamageClass.Ranged;
+                    break;
+                case "Throwing":
+                    CritRework.gloveDamageClass = DamageClass.Throwing;
+                    break;
+                case "Rogue (CALAMITY ONLY)":
+                    if (ModLoader.TryGetMod("CalamityMod", out Mod calamity))
+                    {
+                        CritRework.gloveDamageClass = calamity.Find<DamageClass>("RogueDamageClass");
+                    }
+                    else
+                    {
+                        CritRework.gloveDamageClass = DamageClass.Ranged;
+                    }
+                    break;
+            }
         }
     }
 }

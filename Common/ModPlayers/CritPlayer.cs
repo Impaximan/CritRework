@@ -271,7 +271,7 @@ namespace CritRework.Common.ModPlayers
                 }
                 if (Player.HasEquip<EternalGuillotine>() && target.life == target.lifeMax)
                 {
-                    modifiers.CritDamage *= 1.5f;
+                    modifiers.CritDamage *= 2f;
                 }
                 modifiers.FinalDamage *= 0.5f;
                 if (CritRework.overrideCritColor) modifiers.HideCombatText();
@@ -280,11 +280,7 @@ namespace CritRework.Common.ModPlayers
             {
                 if (item != null && item.TryGetGlobalItem(out CritItem cItem))
                 {
-                    if (cItem.critType != null && item.DamageType.UseStandardCritCalcs)
-                    {
-                        modifiers.DisableCrit();
-                    }
-                    else if (cItem.critType == null)
+                    if (item.DamageType.UseStandardCritCalcs)
                     {
                         modifiers.DisableCrit();
                     }

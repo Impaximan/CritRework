@@ -1,21 +1,19 @@
 ﻿namespace CritRework.Content.CritTypes.RandomPool
 {
-    internal class Falling : CritType
+    internal class FallingEnemy : CritType
     {
         public override bool InRandomPool => true;
 
-        public override float GetDamageMult(Player Player, Item Item) => 1.25f;
-
-        public override bool ShowWhenActive => true;
+        public override float GetDamageMult(Player Player, Item Item) => 1.6f;
 
         public override bool CanApplyTo(Item item)
         {
-            return item.shoot == ProjectileID.None || ItemID.Sets.Spears[item.type];
+            return true;
         }
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
-            return Player.velocity.Y > 0f;
+            return target.velocity.Y > 0f && !target.noGravity;
         }
     }
 }
