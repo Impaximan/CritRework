@@ -13,11 +13,17 @@ namespace CritRework.Content.Items.Weapons.Gloves
     {
         public static LocalizedText gloveDescription;
         public static LocalizedText gloveUsing;
+        public static LocalizedText gloveCritMult;
+        public static LocalizedText gloveShootSpeed;
+        public static LocalizedText gloveBonus;
 
         public override void SetStaticDefaults()
         {
             gloveDescription = Mod.GetLocalization($"GloveDescription");
             gloveUsing = Mod.GetLocalization($"GloveUsing");
+            gloveCritMult = Mod.GetLocalization($"GloveCritMult");
+            gloveShootSpeed = Mod.GetLocalization($"GloveShootSpeed");
+            gloveBonus = Mod.GetLocalization($"GloveBonus");
         }
 
         public sealed override void SetDefaults()
@@ -46,6 +52,33 @@ namespace CritRework.Content.Items.Weapons.Gloves
             if (GetThrownItem(player, out Item throwable))
             {
                 UpdateStatsForThrownItem(player, throwable);
+
+                if (throwable.ModItem != null)
+                {
+                    throwable.ModItem.HoldItem(player);
+                }
+            }
+        }
+
+        public override void GrabRange(Player player, ref int grabRange)
+        {
+            if (GetThrownItem(player, out Item throwable))
+            {
+                if (throwable.ModItem != null)
+                {
+                    throwable.ModItem.GrabRange(player, ref grabRange);
+                }
+            }
+        }
+
+        public override void UseAnimation(Player player)
+        {
+            if (GetThrownItem(player, out Item throwable))
+            {
+                if (throwable.ModItem != null)
+                {
+                    throwable.ModItem.UseAnimation(player);
+                }
             }
         }
 
@@ -55,6 +88,9 @@ namespace CritRework.Content.Items.Weapons.Gloves
             Item.useAnimation = throwable.useAnimation;
             Item.UseSound = throwable.UseSound;
             Item.useStyle = throwable.useStyle;
+            Item.reuseDelay = throwable.reuseDelay;
+            Item.autoReuse = throwable.autoReuse;
+            Item.shoot = throwable.shoot;
         }
 
         public virtual void GloveDefaults()
@@ -154,10 +190,16 @@ namespace CritRework.Content.Items.Weapons.Gloves
             {
                 if (throwable.ModItem != null)
                 {
+                    if (throwable.ModItem.ConsumeItem(player))
+                    {
+                        throwable.stack--;
+                    }
+
                     return throwable.ModItem.Shoot(player, source, position, velocity, type, damage, knockback);
                 }
                 else
                 {
+                    throwable.stack--;
                     return true;
                 }
             }
@@ -186,9 +228,23 @@ namespace CritRework.Content.Items.Weapons.Gloves
             }
 
             TooltipLine damageLine = tooltips.Find(x => x.Name == "Damage");
-            damageLine.Text = damageLine.Text.Insert(damageLine.Text.IndexOf(' '), " bonus");
+            damageLine.Text = damageLine.Text.Insert(damageLine.Text.IndexOf(' '), " " + gloveBonus.Value);
 
-            tooltips.Insert(tooltips.IndexOf(damageLine) + 1, new TooltipLine(Mod, "GloveShootSpeed", System.Math.Round(Item.shootSpeed, 1) + " bonus velocity"));
+            tooltips.Insert(tooltips.IndexOf(damageLine) + 1, new TooltipLine(Mod, "GloveShootSpeed", System.Math.Round(Item.shootSpeed, 1) + " " + gloveShootSpeed.Value));
+            if (Item.TryGetGlobalItem(out Common.Globals.CritItem c))
+            {
+                if (c.critType != null)
+                {
+                    tooltips.Insert(tooltips.IndexOf(damageLine) + 1, new TooltipLine(Mod, "GloveCritMult", System.Math.Round(c.critType.GetDamageMult(Main.LocalPlayer, Item), 1) + gloveCritMult.Value));
+                }
+                else
+                {
+                    tooltips.Insert(tooltips.IndexOf(damageLine) + 1, new TooltipLine(Mod, "GloveCritMult", "???" + gloveCritMult.Value)
+                    {
+                        OverrideColor = Color.Gray
+                    });
+                }
+            }
         }
     }
 }

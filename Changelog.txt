@@ -1,4 +1,8 @@
 ﻿-Added Crystal Shield, a new early-hardmode defensive accessory that rewards crits with defense
 -Added Accursed Guillotine, a crit accessory found in the dungeon which boosts critical strike damage to max-health foes
 -Added a new randomly assigned crit condition
+-Added a new weapon type, gauntlets, which allow you to give crit conditions to consumable weapons;
+-Added silver and tungsten gauntlets
 -The "critically strikes while falling" crit condition now displays when it is active, like other crit conditions
+-Nerfed damage multiplier of 1% crit chance condition
+-Nerfed damage multiplier of ammo whetstone

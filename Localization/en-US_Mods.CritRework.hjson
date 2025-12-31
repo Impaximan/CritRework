@@ -258,6 +258,11 @@ Items: {
 		DisplayName: Silver Gauntlet
 		Tooltip: ""
 	}
+
+	TungstenGauntlet: {
+		DisplayName: Tungsten Gauntlet
+		Tooltip: ""
+	}
 }
 
 Whetstone: {
@@ -508,3 +513,6 @@ GloveDescription:
 	Thrown weapon will inherit this weapon's crit condition & gain bonus stats
 	'''
 GloveUsing: Currently using:
+GloveCritMult: x critical damage multiplier
+GloveShootSpeed: bonus velocity
+GloveBonus: bonus

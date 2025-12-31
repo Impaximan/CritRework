@@ -22,6 +22,8 @@ namespace CritRework.Content.Items.Weapons.Gloves
                 1f, //Knockback
                 0); //Bonus crit
 
+            Item.width = 20;
+            Item.height = 22;
             Item.shootSpeed = 1f;
             Item.value = Item.sellPrice(0, 0, 10, 0);
         }

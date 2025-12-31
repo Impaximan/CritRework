@@ -4,7 +4,7 @@
     {
         public override bool InRandomPool => true;
 
-        public override float GetDamageMult(Player Player, Item Item) => 20f;
+        public override float GetDamageMult(Player Player, Item Item) => 15f;
 
         public override bool ForceOnItem(Item item)
         {
