@@ -92,10 +92,12 @@ namespace CritRework.Content.Items.Weapons.Gloves
             }
         }
 
+        public virtual float AttackTimeMult => 1f;
+
         public void UpdateStatsForThrownItem(Player player, Item throwable)
         {
-            Item.useTime = throwable.useTime + gloveWeight;
-            Item.useAnimation = throwable.useAnimation + gloveWeight;
+            Item.useTime = (int)((throwable.useTime + gloveWeight) * AttackTimeMult);
+            Item.useAnimation = (int)((throwable.useAnimation + gloveWeight) * AttackTimeMult);
             Item.UseSound = throwable.UseSound;
             Item.useStyle = throwable.useStyle;
             Item.reuseDelay = throwable.reuseDelay;

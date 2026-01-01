@@ -286,7 +286,16 @@ Items: {
 
 	PoisonedHand: {
 		DisplayName: Poisoned Hand
-		Tooltip: "Critical strikes will poison enemies for 20 seconds"
+		Tooltip: Critical strikes will poison enemies for 20 seconds
+	}
+
+	SatansClaw: {
+		DisplayName: Satan's Claw
+		Tooltip:
+			'''
+			[c/ff655d:Doubles the attack speed of thrown weapon]
+			[c/ff655d:While held, you rapidly burn]
+			'''
 	}
 }
 
@@ -518,6 +527,11 @@ Buffs: {
 	RabidFrenzy: {
 		DisplayName: Rabid Frenzy
 		Description: 30% increased melee speed
+	}
+
+	Repentence: {
+		DisplayName: Repentence
+		Description: Your hands are ravaged by avarice
 	}
 }
 

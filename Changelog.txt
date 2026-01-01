@@ -9,6 +9,7 @@
 -Added Ancient Glove, which is crafted with sturdy fossils
 -Added Galactic Gauntlet, which is crafted with meteorite
 -Added the Poisoned Hand, a glove crafted with jungle materials
+-Added Satan's Claw, a glove crafted with hellstone
 -You can configure the damage type of gloves/javelins added by this mod in the config, including making them rogue
 -You can also disable the tutorial description of gloves once you understand how they work
 -The "critically strikes while falling" crit condition now displays when it is active, like other crit conditions

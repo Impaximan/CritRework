@@ -4,6 +4,7 @@ using CritRework.Content.CritTypes.WeaponSpecific;
 using CritRework.Content.CritTypes.WhetstoneSpecific;
 using CritRework.Content.Items.Bronze.BronzeArmor;
 using CritRework.Content.Items.Equipable.Accessories;
+using CritRework.Content.Items.Weapons.Gloves;
 using CritRework.Content.Items.Whetstones;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -115,6 +116,20 @@ namespace CritRework.Common.ModPlayers
         public override void UpdateAutopause()
         {
             UpdateSlotMachine();
+        }
+
+        public override void UpdateBadLifeRegen()
+        {
+            if (Player.HasBuff<Repentence>())
+            {
+                if (Player.lifeRegen > 0)
+                {
+                    Player.lifeRegen = 0;
+                    Player.lifeRegenTime = 0;
+                }
+
+                Player.lifeRegen -= 30;
+            }
         }
 
         public void UpdateSlotMachine()
