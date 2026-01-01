@@ -16,13 +16,15 @@ The damage that critical strikes deal are now affected by a variety of factors. 
 
 [list]
 [*]A complete overhaul of how critical strikes work (see above)
-[*]Around 60 different potential critical strike conditions
+[*]More than 60 different potential critical strike conditions
+[*]45+ new items
+[*]10 new crit oriented accessories (and more to come!)
 [*]A variety of weapon specific critical strike conditions designed to make certain weapons more interesting
+[*]A new weapon type, gloves, which allow you to utilize critical strikes with consumable weapons ([b]such as Calamity's rogue weapons[/b])
 [*]15 different whetstones
 [*]A new late pre-hardmode set of items themed around bronze
 [*]Various new crit-oriented item prefixes
 [*]A complete rework of the pirate NPC, including an crit oriented overhaul of the pirate armor (no longer just vanity; it's now a ranged-summoner hybrid set)
-[*]2 new crit oriented accessories (and more to come!)
 [/list]
 
 Special thanks: [list]

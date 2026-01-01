@@ -46,10 +46,6 @@ namespace CritRework.Common.Globals
 
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (blowgunCrit)
-            {
-                modifiers.SetCrit();
-            }
             base.ModifyHitNPC(projectile, target, ref modifiers);
         }
 
