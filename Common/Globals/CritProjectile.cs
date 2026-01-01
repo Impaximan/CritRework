@@ -2,6 +2,7 @@
 using CritRework.Content.Items.Equipable.Accessories;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using Terraria;
 using Terraria.DataStructures;
 
 namespace CritRework.Common.Globals
@@ -19,6 +20,7 @@ namespace CritRework.Common.Globals
         public bool consumedAmmo = false;
         public bool fromNecromantic = false;
         public int targetsKilled = 0;
+        public bool blowgunCrit = false;
 
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -40,6 +42,15 @@ namespace CritRework.Common.Globals
                 Main.player[projectile.owner].Heal(Content.Prefixes.Weapon.Necromantic.healAmount);
             }
 
+        }
+
+        public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if (blowgunCrit)
+            {
+                modifiers.SetCrit();
+            }
+            base.ModifyHitNPC(projectile, target, ref modifiers);
         }
 
         public override bool OnTileCollide(Projectile projectile, Vector2 oldVelocity)
@@ -76,6 +87,7 @@ namespace CritRework.Common.Globals
             wallBounces = 0;
             timeActive = 0;
             targetsKilled = 0;
+            blowgunCrit = false;
             timeSinceHit = 0;
 
             if (source is EntitySource_ItemUse itemSource)
@@ -96,6 +108,15 @@ namespace CritRework.Common.Globals
                     if (itemSource.Player.HasEquip<WiseCracker>() && projectile.minion && critType == null)
                     {
                         critType = cPlayer.summonCrit;
+                    }
+
+                    if (itemSource.Item.type == ItemID.Blowpipe || itemSource.Item.type == ItemID.Blowgun)
+                    {
+                        if (cPlayer.timeSinceBlowpipe > 180)
+                        {
+                            blowgunCrit = true;
+                        }
+                        cPlayer.timeSinceBlowpipe = 0;
                     }
                 }
 

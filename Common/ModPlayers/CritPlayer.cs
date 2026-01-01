@@ -34,6 +34,7 @@ namespace CritRework.Common.ModPlayers
         public int timeFalling = 0;
         public int timeSinceDaggerBonus = 600;
         public int timeSinceArrowPickup = 0;
+        public int timeSinceBlowpipe = 0;
         public bool pirateArmor = false;
         public bool allowNewChakram = false;
 
@@ -107,6 +108,7 @@ namespace CritRework.Common.ModPlayers
             timeSinceCrit++;
             timeSinceDaggerBonus++;
             timeSinceArrowPickup++;
+            timeSinceBlowpipe++;
             UpdateSlotMachine();
         }
 

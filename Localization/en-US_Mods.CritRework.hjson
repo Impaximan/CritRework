@@ -327,7 +327,7 @@ Configs: {
 
 		hideGloveDescription: {
 			Label: Hide glove tutorial
-			Tooltip: "When set to true, the tutorial description on gloves will be removed from their tooltip to reduce clutter"
+			Tooltip: When set to true, the tutorial description on gloves will be removed from their tooltip to reduce clutter
 		}
 	}
 
@@ -455,6 +455,7 @@ CritTypes: {
 	DemonScytheShadowflameBow.Description: Projectiles will critically strike after killing an enemy
 	BronzeStaffCrit.Description: Critically strikes while you have less than 20 mana
 	FallingEnemy.Description: Critically strikes on falling targets
+	Blowpipe.Description: Critically strikes if the last time you used this weapon was at least 3 seconds ago
 }
 
 UnknownTooltip: Unknown critical strike condition
