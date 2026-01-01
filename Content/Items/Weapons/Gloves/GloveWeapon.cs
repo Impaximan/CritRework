@@ -244,8 +244,8 @@ namespace CritRework.Content.Items.Weapons.Gloves
             if (gloveWeight >= 4) weightDescriptor = weight[3].Value;
             if (gloveWeight >= 6) weightDescriptor = weight[4].Value;
             if (gloveWeight >= 10) weightDescriptor = weight[5].Value;
-            if (gloveWeight >= 18) weightDescriptor = weight[6].Value;
-            if (gloveWeight >= 28) weightDescriptor = weight[7].Value;
+            if (gloveWeight >= 16) weightDescriptor = weight[6].Value;
+            if (gloveWeight >= 24) weightDescriptor = weight[7].Value;
 
             tooltips.Insert(tooltips.IndexOf(damageLine) + 1, new TooltipLine(Mod, "GloveWeight", weightDescriptor));
 

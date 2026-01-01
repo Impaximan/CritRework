@@ -1,5 +1,6 @@
 ﻿using CritRework.Common.ModPlayers;
 using CritRework.Content.Items.Equipable.Accessories;
+using CritRework.Content.Items.Weapons.Gloves;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -21,6 +22,9 @@ namespace CritRework.Common.Globals
         public bool fromNecromantic = false;
         public int targetsKilled = 0;
         public bool blowgunCrit = false;
+        public bool thrownUpward = false;
+        public float highestPoint = 0;
+        public bool fromPoisonedHand = false;
 
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -42,6 +46,10 @@ namespace CritRework.Common.Globals
                 Main.player[projectile.owner].Heal(Content.Prefixes.Weapon.Necromantic.healAmount);
             }
 
+            if (fromPoisonedHand && hit.Crit)
+            {
+                target.AddBuff(BuffID.Poisoned, 1200);
+            }
         }
 
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
@@ -74,6 +82,8 @@ namespace CritRework.Common.Globals
                     }
                 }
             }
+
+            if (projectile.Center.Y < highestPoint) highestPoint = projectile.Center.Y;
         }
 
         public override void OnSpawn(Projectile projectile, IEntitySource source)
@@ -85,6 +95,9 @@ namespace CritRework.Common.Globals
             targetsKilled = 0;
             blowgunCrit = false;
             timeSinceHit = 0;
+            thrownUpward = projectile.velocity.Y < 0;
+            highestPoint = projectile.Center.Y;
+            fromPoisonedHand = false;
 
             if (source is EntitySource_ItemUse itemSource)
             {
@@ -92,6 +105,11 @@ namespace CritRework.Common.Globals
                 {
                     critType = itemSource.Item.GetGlobalItem<CritItem>().critType;
                     ogItem = itemSource.Item;
+                }
+
+                if (itemSource.Item.type == ModContent.ItemType<PoisonedHand>())
+                {
+                    fromPoisonedHand = true;
                 }
 
                 if (itemSource.Item.prefix == ModContent.PrefixType<Content.Prefixes.Weapon.Necromantic>())

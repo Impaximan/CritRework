@@ -1,12 +1,14 @@
 ﻿-Added Crystal Shield, a new early-hardmode defensive accessory that rewards crits with defense
 -Added Accursed Guillotine, a crit accessory found in the dungeon which boosts critical strike damage to max-health foes
 -Added unique crit condition for Blowpipe and Blowgun
--Added a new randomly assigned crit condition
+-Added 2 new randomly assigned crit conditions
 -Added a new weapon type, gloves, which allow you to give crit conditions to consumable weapons;
 -Added Leather Glove
 -Added Silk Glove
 -Added Silver and Tungsten gauntlets
 -Added Ancient Glove, which is crafted with sturdy fossils
+-Added Galactic Gauntlet, which is crafted with meteorite
+-Added the Poisoned Hand, a glove crafted with jungle materials
 -You can configure the damage type of gloves/javelins added by this mod in the config, including making them rogue
 -You can also disable the tutorial description of gloves once you understand how they work
 -The "critically strikes while falling" crit condition now displays when it is active, like other crit conditions

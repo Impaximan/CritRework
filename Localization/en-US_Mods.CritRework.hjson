@@ -278,6 +278,16 @@ Items: {
 		DisplayName: Ancient Glove
 		Tooltip: ""
 	}
+
+	GalacticGauntlet: {
+		DisplayName: Galactic Gauntlet
+		Tooltip: ""
+	}
+
+	PoisonedHand: {
+		DisplayName: Poisoned Hand
+		Tooltip: "Critical strikes will poison enemies for 20 seconds"
+	}
 }
 
 Whetstone: {
@@ -456,6 +466,8 @@ CritTypes: {
 	BronzeStaffCrit.Description: Critically strikes while you have less than 20 mana
 	FallingEnemy.Description: Critically strikes on falling targets
 	Blowpipe.Description: Critically strikes if the last time you used this weapon was at least 3 seconds ago
+	GalacticCrit.Description: Critically strikes if the weapon is thrown upward and then falls at least 10 tiles
+	NonBoss.Description: Critically strikes on non-boss targets
 }
 
 UnknownTooltip: Unknown critical strike condition
