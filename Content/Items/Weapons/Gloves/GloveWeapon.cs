@@ -17,6 +17,11 @@ namespace CritRework.Content.Items.Weapons.Gloves
         public static LocalizedText gloveShootSpeed;
         public static LocalizedText gloveBonus;
 
+        public static LocalizedText[] weight = new LocalizedText[numWeights];
+        const int numWeights = 9;
+
+        public int gloveWeight = 0;
+
         public override void SetStaticDefaults()
         {
             gloveDescription = Mod.GetLocalization($"GloveDescription");
@@ -24,6 +29,11 @@ namespace CritRework.Content.Items.Weapons.Gloves
             gloveCritMult = Mod.GetLocalization($"GloveCritMult");
             gloveShootSpeed = Mod.GetLocalization($"GloveShootSpeed");
             gloveBonus = Mod.GetLocalization($"GloveBonus");
+
+            for (int i = 0; i < numWeights; i++)
+            {
+                weight[i] = Mod.GetLocalization($"GloveWeight{i}");
+            }
         }
 
         public sealed override void SetDefaults()
@@ -84,8 +94,8 @@ namespace CritRework.Content.Items.Weapons.Gloves
 
         public void UpdateStatsForThrownItem(Player player, Item throwable)
         {
-            Item.useTime = throwable.useTime;
-            Item.useAnimation = throwable.useAnimation;
+            Item.useTime = throwable.useTime + gloveWeight;
+            Item.useAnimation = throwable.useAnimation + gloveWeight;
             Item.UseSound = throwable.UseSound;
             Item.useStyle = throwable.useStyle;
             Item.reuseDelay = throwable.reuseDelay;
@@ -215,9 +225,7 @@ namespace CritRework.Content.Items.Weapons.Gloves
             tooltips.RemoveAll(x => x.Name == "Knockback");
 
             tooltips.Insert(2, new TooltipLine(Mod, "GloveTooltip", gloveDescription.Value));
-
-
-
+            
             if (GetThrownItem(Main.LocalPlayer, out Item throwable))
             {
                 tooltips.Insert(3, new TooltipLine(Mod, "GloveUsing", gloveUsing.Value + " " + ItemTagHandler.GenerateTag(throwable) + $" [c/{ItemRarity.GetColor(throwable.rare).Hex3()}:" + throwable.Name + "]"));
@@ -229,6 +237,17 @@ namespace CritRework.Content.Items.Weapons.Gloves
 
             TooltipLine damageLine = tooltips.Find(x => x.Name == "Damage");
             damageLine.Text = damageLine.Text.Insert(damageLine.Text.IndexOf(' '), " " + gloveBonus.Value);
+
+            string weightDescriptor = weight[0].Value;
+            if (gloveWeight >= 1) weightDescriptor = weight[1].Value;
+            if (gloveWeight >= 2) weightDescriptor = weight[2].Value;
+            if (gloveWeight >= 4) weightDescriptor = weight[3].Value;
+            if (gloveWeight >= 6) weightDescriptor = weight[4].Value;
+            if (gloveWeight >= 10) weightDescriptor = weight[5].Value;
+            if (gloveWeight >= 18) weightDescriptor = weight[6].Value;
+            if (gloveWeight >= 28) weightDescriptor = weight[7].Value;
+
+            tooltips.Insert(tooltips.IndexOf(damageLine) + 1, new TooltipLine(Mod, "GloveWeight", weightDescriptor));
 
             tooltips.Insert(tooltips.IndexOf(damageLine) + 1, new TooltipLine(Mod, "GloveShootSpeed", System.Math.Round(Item.shootSpeed, 1) + " " + gloveShootSpeed.Value));
             if (Item.TryGetGlobalItem(out Common.Globals.CritItem c))

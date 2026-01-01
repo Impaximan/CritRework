@@ -511,8 +511,18 @@ GloveDescription:
 	'''
 	Can be used to throw consumable weapons
 	Thrown weapon will inherit this weapon's crit condition & gain bonus stats
+	Heavier gloves have slower attack speed
 	'''
 GloveUsing: Currently using:
 GloveCritMult: x critical damage multiplier
 GloveShootSpeed: bonus velocity
 GloveBonus: bonus
+GloveWeight0: No weight
+GloveWeight1: Very light weight
+GloveWeight2: Light weight
+GloveWeight3: Average weight
+GloveWeight4: Heavy weight
+GloveWeight5: Very heavy weight
+GloveWeight6: Extremely heavy weight
+GloveWeight7: Unbearably heavy weight
+GloveWeight8: Titanic weight

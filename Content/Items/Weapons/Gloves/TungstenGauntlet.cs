@@ -18,7 +18,7 @@ namespace CritRework.Content.Items.Weapons.Gloves
 
         public override void GloveDefaults()
         {
-            Item.SetWeaponValues(6, //Damage
+            Item.SetWeaponValues(8, //Damage
                 1f, //Knockback
                 0); //Bonus crit
 
@@ -26,6 +26,7 @@ namespace CritRework.Content.Items.Weapons.Gloves
             Item.height = 22;
             Item.shootSpeed = 1f;
             Item.value = Item.sellPrice(0, 0, 10, 0);
+            gloveWeight = 6;
         }
     }
 }

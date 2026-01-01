@@ -26,6 +26,7 @@ namespace CritRework.Content.Items.Weapons.Gloves
             Item.height = 22;
             Item.shootSpeed = 1.5f;
             Item.value = Item.sellPrice(0, 0, 10, 0);
+            gloveWeight = 2;
         }
     }
 }
