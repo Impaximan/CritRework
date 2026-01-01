@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Terraria.GameContent.ItemDropRules;
 using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Weapons;
+using CritRework.Content.Items.Weapons.Gloves;
 
 namespace CritRework.Common.Globals
 {
@@ -17,6 +18,7 @@ namespace CritRework.Common.Globals
         {
             if (shop.NpcType == NPCID.Merchant)
             {
+                shop.Add<LeatherGlove>();
                 shop.Add<GreedyWhetstone>();
             }
 

@@ -23,6 +23,8 @@ namespace CritRework
         [DefaultValue(true)]
         public bool critSoundEffect = true;
 
+        [DefaultValue(false)]
+        public bool hideGloveDescription = false;
 
         public override void OnChanged()
         {
@@ -30,6 +32,7 @@ namespace CritRework
             CritRework.critColor = critColor;
             CritRework.overrideCritColor = overrideCritColor;
             CritRework.critSounds = critSoundEffect;
+            CritRework.hideGloveDescription = hideGloveDescription;
         }
     }
 }

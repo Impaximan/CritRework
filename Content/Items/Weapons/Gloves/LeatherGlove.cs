@@ -6,28 +6,27 @@ using System.Threading.Tasks;
 
 namespace CritRework.Content.Items.Weapons.Gloves
 {
-    public class TungstenGauntlet : GloveWeapon
+    public class LeatherGlove : GloveWeapon
     {
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.TungstenBar, 5)
-                .AddTile(TileID.Anvils)
-                .Register()
-                .SortAfterFirstRecipesOf(ItemID.TungstenBow);
+                .AddIngredient(ItemID.Leather, 3)
+                .AddTile(TileID.WorkBenches)
+                .Register();
         }
 
         public override void GloveDefaults()
         {
-            Item.SetWeaponValues(8, //Damage
+            Item.SetWeaponValues(2, //Damage
                 1f, //Knockback
                 0); //Bonus crit
 
             Item.width = 20;
             Item.height = 22;
-            Item.shootSpeed = 1f;
-            Item.value = Item.sellPrice(0, 0, 10, 0);
-            gloveWeight = 6;
+            Item.shootSpeed = 0.5f;
+            Item.value = Item.buyPrice(0, 0, 35, 0);
+            gloveWeight = 1;
         }
     }
 }

@@ -13,12 +13,13 @@ namespace CritRework.Content.Items.Weapons.Gloves
             CreateRecipe()
                 .AddIngredient(ItemID.SilverBar, 5)
                 .AddTile(TileID.Anvils)
-                .Register();
+                .Register()
+                .SortAfterFirstRecipesOf(ItemID.SilverBow);
         }
 
         public override void GloveDefaults()
         {
-            Item.SetWeaponValues(5, //Damage
+            Item.SetWeaponValues(6, //Damage
                 1f, //Knockback
                 0); //Bonus crit
 
@@ -26,7 +27,7 @@ namespace CritRework.Content.Items.Weapons.Gloves
             Item.height = 22;
             Item.shootSpeed = 1.5f;
             Item.value = Item.sellPrice(0, 0, 10, 0);
-            gloveWeight = 2;
+            gloveWeight = 4;
         }
     }
 }

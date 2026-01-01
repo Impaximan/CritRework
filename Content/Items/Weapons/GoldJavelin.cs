@@ -30,7 +30,7 @@ namespace CritRework.Content.Items.Weapons
             Item.height = 36;
             Item.rare = ItemRarityID.White;
             Item.UseSound = SoundID.Item1;
-            Item.DamageType = DamageClass.Ranged;
+            Item.DamageType = CritRework.gloveDamageClass;
             Item.autoReuse = true;
             Item.noUseGraphic = true;
             Item.noMelee = true;

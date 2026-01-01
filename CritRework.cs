@@ -29,6 +29,7 @@ namespace CritRework
         public static bool pirateHijack = true;
         public static bool pirateArmorRework = true;
         public static bool showActiveCrits = true;
+        public static bool hideGloveDescription = true;
 
         public static DamageClass gloveDamageClass = DamageClass.Ranged;
 

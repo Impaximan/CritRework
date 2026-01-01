@@ -6,7 +6,7 @@ namespace CritRework.Content.CritTypes.RandomPool
     {
         public override bool InRandomPool => true;
 
-        public override float GetDamageMult(Player Player, Item Item) => 4.5f;
+        public override float GetDamageMult(Player Player, Item Item) => 3.5f;
 
         public override bool ShowWhenActive => true;
 

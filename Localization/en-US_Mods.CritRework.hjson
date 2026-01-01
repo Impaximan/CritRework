@@ -263,6 +263,21 @@ Items: {
 		DisplayName: Tungsten Gauntlet
 		Tooltip: ""
 	}
+
+	LeatherGlove: {
+		DisplayName: Leather Glove
+		Tooltip: ""
+	}
+
+	SilkGlove: {
+		DisplayName: Silk Glove
+		Tooltip: ""
+	}
+
+	AncientGlove: {
+		DisplayName: Ancient Glove
+		Tooltip: ""
+	}
 }
 
 Whetstone: {
@@ -309,6 +324,11 @@ Configs: {
 			Label: Show active crits in inventory
 			Tooltip: While enabled, items that currently meet a crit condition will glow in your inventory
 		}
+
+		hideGloveDescription: {
+			Label: Hide glove tutorial
+			Tooltip: "When set to true, the tutorial description on gloves will be removed from their tooltip to reduce clutter"
+		}
 	}
 
 	ServerConfig: {
@@ -350,10 +370,10 @@ Configs: {
 		}
 
 		gloveDamageType: {
-			Label: Glove damage class
+			Label: Glove/javelin damage class
 			Tooltip:
 				'''
-				The damage class that glove/gauntlet type weapons will have
+				The damage class that glove/javelin type weapons will have
 				If set to rogue while you don't have Calamity enabled, it will default to ranged
 				Be sure to comment any damage classes you think should be added here on the steam workshop
 				'''
@@ -510,7 +530,7 @@ BronzeHelm.SetBonus:
 GloveDescription:
 	'''
 	Can be used to throw consumable weapons
-	Thrown weapon will inherit this weapon's crit condition & gain bonus stats
+	Thrown consumable will inherit this weapon's crit condition & gain bonus stats
 	Heavier gloves have slower attack speed
 	'''
 GloveUsing: Currently using:

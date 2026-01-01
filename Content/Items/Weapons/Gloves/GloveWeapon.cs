@@ -202,7 +202,7 @@ namespace CritRework.Content.Items.Weapons.Gloves
                 {
                     if (throwable.ModItem.ConsumeItem(player))
                     {
-                        throwable.stack--;
+                        throwable.stack--;  
                     }
 
                     return throwable.ModItem.Shoot(player, source, position, velocity, type, damage, knockback);
@@ -224,7 +224,7 @@ namespace CritRework.Content.Items.Weapons.Gloves
             tooltips.RemoveAll(x => x.Name == "Speed");
             tooltips.RemoveAll(x => x.Name == "Knockback");
 
-            tooltips.Insert(2, new TooltipLine(Mod, "GloveTooltip", gloveDescription.Value));
+            if (!CritRework.hideGloveDescription) tooltips.Insert(2, new TooltipLine(Mod, "GloveTooltip", gloveDescription.Value));
             
             if (GetThrownItem(Main.LocalPlayer, out Item throwable))
             {
@@ -237,7 +237,7 @@ namespace CritRework.Content.Items.Weapons.Gloves
 
             TooltipLine damageLine = tooltips.Find(x => x.Name == "Damage");
             damageLine.Text = damageLine.Text.Insert(damageLine.Text.IndexOf(' '), " " + gloveBonus.Value);
-
+            
             string weightDescriptor = weight[0].Value;
             if (gloveWeight >= 1) weightDescriptor = weight[1].Value;
             if (gloveWeight >= 2) weightDescriptor = weight[2].Value;
