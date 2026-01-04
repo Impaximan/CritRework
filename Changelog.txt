@@ -1,4 +1,6 @@
-﻿-Added Crystal Shield, a new early-hardmode defensive accessory that rewards crits with defense
+﻿-Modified the way crit damage scaling works to be a bit less powerful with high-crit rate conditions (but more powerful with low crit-rate conditions). The original, simpler scaling can still be enabled in the config.
+-Added the option to scale boss and general enemy HP (individually), in case you find this mod to be overpowered and want and an alternate way to nerf it
+-Added Crystal Shield, a new early-hardmode defensive accessory that rewards crits with defense
 -Added Accursed Guillotine, a crit accessory found in the dungeon which boosts critical strike damage to max-health foes
 -Added unique crit condition for Blowpipe and Blowgun
 -Added 2 new randomly assigned crit conditions
@@ -16,3 +18,5 @@
 -Nerfed damage multiplier of 1% crit chance condition
 -Nerfed damage multiplier of 10 second cooldown condition
 -Nerfed damage multiplier of ammo whetstone
+-Removed bonus damage from Noxious Eye
+-Added a 3 second cooldown to Noxious Eye proc

@@ -6,7 +6,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
     {
         public override bool InRandomPool => false;
 
-        public override float GetDamageMult(Player Player, Item Item) => 1.3f;
+        public override float GetDamageMult(Player Player, Item Item) => 1.25f;
 
         //public override string GetDescription() => "Critically strikes when not consuming ammo";
 

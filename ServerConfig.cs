@@ -11,10 +11,28 @@ namespace CritRework
 
         [Header($"BalanceHeader")]
 
+        [DefaultValue("Balanced")]
+        [OptionStrings(
+        [
+            "Balanced",
+            "Simple"
+        ])]
+        public string critScaling = "Balanced";
+
         [DefaultValue(1f)]
         [Increment(0.05f)]
         [Range(0f, 2f)]
         public float critPower = 1f;
+
+        [DefaultValue(1f)]
+        [Increment(0.1f)]
+        [Range(1f, 2f)]
+        public float bossLife = 1f;
+
+        [DefaultValue(1f)]
+        [Increment(0.1f)]
+        [Range(1f, 2f)]
+        public float enemyLife = 1f;
 
         [DefaultValue(0.25f)]
         [Increment(0.01f)]
@@ -46,6 +64,9 @@ namespace CritRework
         public override void OnChanged()
         {
             CritRework.critPower = critPower;
+            CritRework.critScaling = critScaling;
+            CritRework.bossLife = bossLife;
+            CritRework.enemyLife = enemyLife;
             CritRework.randomHijackChance = randomHijackChance;
 
             CritRework.pirateHijack = pirateHijack;

@@ -222,5 +222,26 @@ namespace CritRework.Common.Globals
 
             return Main.rand.Next(potentialDialogues);
         }
+
+        public override void SetDefaults(NPC NPC)
+        {
+            if (NPC.boss || new List<int>() { NPCID.EaterofWorldsHead,
+                NPCID.EaterofWorldsBody,
+                NPCID.EaterofWorldsTail,
+                NPCID.Creeper,
+                NPCID.PlanterasTentacle,
+                NPCID.TheHungry,
+                NPCID.TheHungryII,
+                NPCID.GolemFistLeft,
+                NPCID.GolemFistRight,
+                NPCID.GolemHead}.Contains(NPC.type))
+            {
+                NPC.lifeMax = (int)(NPC.lifeMax * CritRework.bossLife);
+            }
+            else
+            {
+                NPC.lifeMax = (int)(NPC.lifeMax * CritRework.enemyLife);
+            }
+        }
     }
 }

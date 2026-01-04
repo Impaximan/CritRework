@@ -14,7 +14,7 @@
         public override void UpdateEquip(Player player)
         {
             player.AddEquip<MugShot>();
-            player.GetCritChance(DamageClass.Generic) += 10;
+            player.GetCritChance(DamageClass.Ranged) += 10;
         }
     }
 }

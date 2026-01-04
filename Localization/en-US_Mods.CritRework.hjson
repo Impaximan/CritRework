@@ -98,7 +98,7 @@ Items: {
 		DisplayName: Mug Shot
 		Tooltip:
 			'''
-			10% increased crit chance
+			10% increased ranged crit chance
 			Grants a chance to steal money when critically striking
 			25% reduced damage when paired with greedy whetstone
 			'''
@@ -205,9 +205,8 @@ Items: {
 		DisplayName: Noxious Eye
 		Tooltip:
 			'''
-			5% increased critical strike chance
 			Critically striking briefly poisons enemies
-			Critically striking also gains a 10% chance to spawn a heart pickup and inflict extra damage
+			Critically striking also gains a 10% chance to spawn a heart pickup
 			'''
 	}
 
@@ -321,7 +320,7 @@ NecromanticTooltip: +2 lifesteal when inflicting critical damage upon enemies
 
 Configs: {
 	ClientConfig: {
-		DisplayName: Client Config
+		DisplayName: Clientside Config
 		Headers.AestheticHeader: Aesthetic
 
 		overrideCritColor: {
@@ -351,7 +350,7 @@ Configs: {
 	}
 
 	ServerConfig: {
-		DisplayName: Server Config
+		DisplayName: Serverside Config
 
 		Headers: {
 			BalanceHeader: Balance
@@ -396,6 +395,33 @@ Configs: {
 				If set to rogue while you don't have Calamity enabled, it will default to ranged
 				Be sure to comment any damage classes you think should be added here on the steam workshop
 				'''
+		}
+
+		critScaling: {
+			Label: Crit scaling calculations
+			Tooltip:
+				'''
+				Determines the way critical strike damage scales with crit damage/chance bonuses.
+				"Balanced" is the most recommended, but simple is more powerful and easier to understand if that's what you prefer.
+				'''
+		}
+
+		bossLife: {
+			Label: Boss health multiplier
+			Tooltip:
+			'''
+			Allows you to increase boss health with this mod enabled if you so desire
+			In case you find this mod to be overpowered and want a way to nerf it
+			'''
+		}
+
+		enemyLife: {
+			Label: Enemy health multiplier
+			Tooltip: 
+			'''
+			Allows you to increase NON-BOSS health with this mod enabled if you so desire
+			In case you find this mod to be overpowered and want a way to nerf it
+			'''
 		}
 	}
 }
@@ -513,7 +539,7 @@ PiratePants:
 PirateSetBonus:
 	'''
 	While riding a mount, critically striking grants the 'Scallywag' buff for 5 seconds
-	Scallywag increases crit chance by 30%, attack speed by 10%, and defense by 10
+	Scallywag increases crit chance by 15% and defense by 10
 	You will lose the bonus instantly if you stop riding your mount
 	'''
 ScallywagText: Scallywag!

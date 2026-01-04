@@ -11,7 +11,23 @@ namespace CritRework.Common
                 return 1f;
             }
 
-            return MathHelper.Lerp(1f, critType.GetDamageMult(Player, Item) * (1f + (Player.GetWeaponCrit(Item)) / 100f), CritRework.critPower);
+            //Nerfed scaling
+            float s = critType.GetDamageMult(Player, Item);
+            float c = (100f + Player.GetWeaponCrit(Item)) / 100f - 1f;
+
+            float finalValue;
+
+            switch (CritRework.critScaling)
+            {
+                default:
+                    finalValue = ((s - 1) * (c / 2 + 1) + 1) * (1 + c / 2);
+                    break;
+                case "Simple":
+                    finalValue = critType.GetDamageMult(Player, Item) * (1f + Player.GetWeaponCrit(Item) / 100f);
+                    break;
+            }
+           
+            return MathHelper.Lerp(1f, finalValue, CritRework.critPower);
         }
 
         public static T Get<T>() where T : CritType

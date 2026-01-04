@@ -11,8 +11,7 @@ namespace CritRework.Content.Buffs
         public override void Update(Player player, ref int buffIndex)
         {
             player.statDefense += 10;
-            player.GetAttackSpeed(DamageClass.Generic) += 0.1f;
-            player.GetCritChance(DamageClass.Generic) += 30;
+            player.GetCritChance(DamageClass.Generic) += 15;
 
             if (!player.mount.Active)
             {

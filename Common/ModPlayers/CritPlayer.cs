@@ -35,6 +35,7 @@ namespace CritRework.Common.ModPlayers
         public int timeFalling = 0;
         public int timeSinceDaggerBonus = 600;
         public int timeSinceArrowPickup = 0;
+        public int noxiousEyeCooldown = 0;
         public int timeSinceBlowpipe = 0;
         public bool pirateArmor = false;
         public bool allowNewChakram = false;
@@ -110,6 +111,7 @@ namespace CritRework.Common.ModPlayers
             timeSinceDaggerBonus++;
             timeSinceArrowPickup++;
             timeSinceBlowpipe++;
+            if (noxiousEyeCooldown > 0) noxiousEyeCooldown--;
             UpdateSlotMachine();
         }
 
@@ -385,7 +387,7 @@ namespace CritRework.Common.ModPlayers
                 Player.AddBuff(ModContent.BuffType<Scallywag>(), 300);
             }
 
-            if (Player.HasEquip<NoxiousEye>() && hit.Crit)
+            if (Player.HasEquip<NoxiousEye>() && hit.Crit && noxiousEyeCooldown <= 0)
             {
                 target.AddBuff(BuffID.Poisoned, 30);
 
@@ -398,7 +400,8 @@ namespace CritRework.Common.ModPlayers
                     }, target.Center);
 
                     CombatText.NewText(target.getRect(), Color.Crimson, "Exsanguinated", false, true);
-                    target.SimpleStrikeNPC(hit.Damage / 2, 0, false);
+
+                    noxiousEyeCooldown = 180;
 
                     int i = Item.NewItem(new EntitySource_OnHit(Player, target, "NoxiousEyeHit"), target.getRect(), new Item(ItemID.Heart, 1));
                     if (Main.netMode == NetmodeID.MultiplayerClient) NetMessage.SendData(MessageID.SyncItem, number: i, number2: 1);

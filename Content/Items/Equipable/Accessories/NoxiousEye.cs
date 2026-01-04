@@ -14,7 +14,6 @@
         public override void UpdateEquip(Player player)
         {
             player.AddEquip<NoxiousEye>();
-            player.GetCritChance(DamageClass.Generic) += 5;
         }
     }
 }

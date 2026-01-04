@@ -31,9 +31,14 @@ namespace CritRework
         public static bool showActiveCrits = true;
         public static bool hideGloveDescription = true;
 
+        public static string critScaling = "Balanced";
+
         public static DamageClass gloveDamageClass = DamageClass.Ranged;
 
         public static CritRework instance;
+
+        public static float bossLife = 1f;
+        public static float enemyLife = 1f;
 
         public static CritType GetCrit<T>() where T : CritType
         {
