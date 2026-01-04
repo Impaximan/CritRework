@@ -1,4 +1,4 @@
-﻿Critical strikes have been used in many games to add depth to combat and to build crafting. Games like Risk of Rain 2 and Dead Cells come to mind in terms of games with interesting crit mechanics. That's why I've always found Terraria's crit system to be... kind of dissappointing. In effect, a boost to your crit chance is a boost to your average damage output. In vanilla, there's nothing particularly interesting in special that goes into building around crit.
+﻿Critical strikes have been used in many games to add depth to combat and to build crafting. Games like Risk of Rain 2 and Dead Cells come to mind in terms of games with interesting crit mechanics. That's why I've always found Terraria's crit system to be... kind of dissappointing. In effect, a boost to your crit chance is a boost to your average damage output. In vanilla, there's nothing particularly interesting or special that goes into building around crit.
 
 [h1]A complete overhaul[/h1]
 
@@ -6,11 +6,11 @@ That's what this mod aims to fix. It [b]COMPLETELY overhauls the way critical st
 
 [h2]Specifics[/h2]
 
-There are a few ways to modify a weapon's crit condition. For starters, weapons asigned a random crit condition will have it re-rolled either by reforging the item at the goblin tinkerer, or by [b]hijacking[/b] it using the Pirate NPC, using the feature added by the mod. As an alternative, this mod also adds a new item category called Whetstones, which allow you to asign a specific (often more niche and build dependent) crit condition to a weapon.
+There are a few ways to modify a weapon's crit condition. For starters, weapons assigned a random crit condition will have it re-rolled either by reforging the item at the Goblin Tinkerer, or by [b]hijacking[/b] it with the Pirate NPC, using a new feature added by this mod. As an alternative, this mod also adds a new item category called Whetstones, which allow you to assign a specific (often more niche and build dependent) crit condition to a weapon.
 
 The damage that critical strikes deal are now affected by a variety of factors. Most importantly, every critical strike chance bonus (including from other mods) has been automatically replaced with a critical damage bonus. The crit condition assigned to a weapon also affects its critical strike damage. Because crits are consistent in this mod, most crit conditions do not have vanilla's 2x crit damage multiplier. Instead, they tend to vary from about 1.2x to 1.8x (although there are a few that go far above 2x).
 
-[b]The purpose of this mod is to allow for more creative and niche build crafting for the player.[/b] Because of that, there are probably several overpowered builds that I haven't thought of myself. But that's the fun of it! I can't guarentee that this mod will work perfectly with every other mod (ESPECIALLY balance wise), and most crit conditions from other mods will likely be broken (sadly not much I can do about this). All critical strike on-hit effects should work just fine, though.
+[b]The purpose of this mod is to allow for more creative and niche build crafting for the player.[/b] Because of that, there are probably several overpowered builds that I haven't thought of myself. But that's the fun of it! I can't guarentee that this mod will work perfectly with every other mod (ESPECIALLY balance wise). All critical strike on-hit effects should work just fine, though.
 
 [h3]Full content list:[/h3]
 

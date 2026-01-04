@@ -409,19 +409,19 @@ Configs: {
 		bossLife: {
 			Label: Boss health multiplier
 			Tooltip:
-			'''
-			Allows you to increase boss health with this mod enabled if you so desire
-			In case you find this mod to be overpowered and want a way to nerf it
-			'''
+				'''
+				Allows you to increase boss health with this mod enabled if you so desire
+				In case you find this mod to be overpowered and want a way to nerf it
+				'''
 		}
 
 		enemyLife: {
 			Label: Enemy health multiplier
-			Tooltip: 
-			'''
-			Allows you to increase NON-BOSS health with this mod enabled if you so desire
-			In case you find this mod to be overpowered and want a way to nerf it
-			'''
+			Tooltip:
+				'''
+				Allows you to increase NON-BOSS health with this mod enabled if you so desire
+				In case you find this mod to be overpowered and want a way to nerf it
+				'''
 		}
 	}
 }
