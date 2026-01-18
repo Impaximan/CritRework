@@ -1,3 +1,4 @@
 ﻿-The "critically strikes while debuffed" buff now only works with damage over time debuffs
 -Updated for compatibility with Orchid Mod's Shapeshifter class;
--Added "critically strikes on the next attack after using a skill" crit condition (Shapeshifter Class)
+-Added 9 unique critical strike conditions for the shapeshifter class from Orchid mod
+-Assassin's dagger now has a 15 second cooldown instead of a 10 second cooldown

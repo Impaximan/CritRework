@@ -6,6 +6,7 @@ using Terraria;
 
 namespace CritRework.Content.CritTypes.RandomPool
 {
+    [JITWhenModsEnabled("OrchidMod")]
     internal class Shapeshifter_ShapeshiftShawlDash : CritType
     {
         public override bool InRandomPool => true;
@@ -17,7 +18,7 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         public override bool ShowWhenActive => true;
 
-        public override float GetDamageMult(Player Player, Item Item) => 2.35f;
+        public override float GetDamageMult(Player Player, Item Item) => 2f;
 
         public override bool CanApplyTo(Item item)
         {

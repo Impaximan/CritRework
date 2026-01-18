@@ -166,7 +166,7 @@ Items: {
 		DisplayName: Assassin's Dagger
 		Tooltip:
 			'''
-			Doubles your critical strike damage once every 10 seconds
+			Doubles your critical strike damage once every 15 seconds
 			10% increased melee critical strike chance
 			'''
 	}
@@ -504,9 +504,15 @@ CritTypes: {
 	GalacticCrit.Description: Critically strikes if the weapon is thrown upward and then falls at least 10 tiles
 	NonBoss.Description: Critically strikes on non-boss targets
 	Shapeshifter_ShapeshiftSickness.Description: Critically strikes while you are afflicted with Shapeshifting Sickness
-	Shapeshifter_ShapeshiftBleedStackingMedium.Description: Critically strikes when you have inflicted at least 8 stacks of bleed total
 	Shapeshifter_ShapeshiftBleedStackingMedium.Description: Critically strikes when you have inflicted at least 20 stacks of bleed total
 	Shapeshifter_ShapeshiftShawlDash.Description: Critically strikes for a brief moment after using a shawl dash
+	Shapeshifter_ShapeshiftBleedStackingHigh.Description: Critically strikes when you have inflicted at least 20 stacks of bleed total
+	Shapeshifter_ShapeshiftBleedStackingSingle.Description: Critically strikes when you have inflicted at least 5 stacks of bleed on the target enemy
+	Shapeshifter_AfterSkillUse.Description: Critically strikes on the next hit after using this shapeshift's skill
+	Shapeshifter_PredatorHit.Description: Critically strikes for 5 seconds after hitting an enemy as a predator wildshape
+	Shapeshifter_SageHit.Description: Critically strikes for 5 seconds after hitting an enemy as a sage wildshape
+	Shapeshifter_SymbioteHit.Description: Critically strikes for 5 seconds after hitting an enemy as a symbiote wildshape
+	Shapeshifter_WardenHit.Description: Critically strikes for 5 seconds after hitting an enemy as a warden wildshape
 }
 
 UnknownTooltip: Unknown critical strike condition

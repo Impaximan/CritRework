@@ -51,6 +51,36 @@ namespace CritRework.Common.Globals
             {
                 target.AddBuff(BuffID.Poisoned, 1200);
             }
+
+            if (ModLoader.HasMod("OrchidMod"))
+            {
+                OnHitNPC_Orchid(projectile, target, hit, damageDone);
+            }
+        }
+
+        [JITWhenModsEnabled("OrchidMod")]
+        public void OnHitNPC_Orchid(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (projectile.ModProjectile is OrchidMod.Content.Shapeshifter.OrchidModShapeshifterProjectile p && Main.player[projectile.owner].TryGetModPlayer(out CritPlayer c))
+            {
+                switch (p.ShapeshifterShapeshiftType)
+                {
+                    case OrchidMod.Content.Shapeshifter.ShapeshifterShapeshiftType.None:
+                        break;
+                    case OrchidMod.Content.Shapeshifter.ShapeshifterShapeshiftType.Predator:
+                        c.timeSincePredatorHit = 0;
+                        break;
+                    case OrchidMod.Content.Shapeshifter.ShapeshifterShapeshiftType.Symbiote:
+                        c.timeSinceSymbioteHit = 0;
+                        break;
+                    case OrchidMod.Content.Shapeshifter.ShapeshifterShapeshiftType.Sage:
+                        c.timeSinceSageHit = 0;
+                        break;
+                    case OrchidMod.Content.Shapeshifter.ShapeshifterShapeshiftType.Warden:
+                        c.timeSinceWardenHit = 0;
+                        break;
+                }
+            }
         }
 
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)

@@ -42,6 +42,11 @@ namespace CritRework.Common.ModPlayers
 
         //Orchid mod only
         public int timeSinceShawlDash = 600;
+        public bool hasSkillBonus = false;
+        public int timeSincePredatorHit = 600;
+        public int timeSinceSymbioteHit = 600;
+        public int timeSinceSageHit = 600;
+        public int timeSinceWardenHit = 600;
 
         public int crystalShieldDefense = 0;
         int lastShawlCooldown = -1;
@@ -120,17 +125,28 @@ namespace CritRework.Common.ModPlayers
 
             if (ModLoader.HasMod("OrchidMod"))
             {
-                timeSinceShawlDash++;
+                PostUpdate_Orchid();
+            }
 
-                if (Player.TryGetModPlayer(out OrchidMod.OrchidShapeshifter s))
+        }
+
+        [JITWhenModsEnabled("OrchidMod")]
+        public void PostUpdate_Orchid()
+        {
+            timeSinceShawlDash++;
+            timeSincePredatorHit++;
+            timeSinceWardenHit++;
+            timeSinceSymbioteHit++;
+            timeSinceSageHit++;
+
+            if (Player.TryGetModPlayer(out OrchidMod.OrchidShapeshifter s))
+            {
+                if (s.ShapeshifterShawlCooldown > lastShawlCooldown && lastShawlCooldown == 0)
                 {
-                    if (s.ShapeshifterShawlCooldown > lastShawlCooldown && lastShawlCooldown == 0)
-                    {
-                        timeSinceShawlDash = 0;
-                    }
-
-                    lastShawlCooldown = s.ShapeshifterShawlCooldown;
+                    timeSinceShawlDash = 0;
                 }
+
+                lastShawlCooldown = s.ShapeshifterShawlCooldown;
             }
         }
 
@@ -239,7 +255,7 @@ namespace CritRework.Common.ModPlayers
             }
 
 
-            if (Player.velocity.Y == 0 ||
+            if (Player.velocity.Y <= 0 ||
                 Player.wingTime > 0 && Player.controlJump
                 || Player.rocketTime > 0 && Player.controlJump)
             {
@@ -296,7 +312,7 @@ namespace CritRework.Common.ModPlayers
             {
                 modifiers.SetCrit();
                 modifiers.SourceDamage *= CritType.CalculateActualCritMult(critType, item, Player);
-                if (timeSinceDaggerBonus >= 600 && Player.HasEquip<AssassinsDagger>())
+                if (timeSinceDaggerBonus >= 900 && Player.HasEquip<AssassinsDagger>())
                 {
                     modifiers.SourceDamage *= 2;
                     timeSinceDaggerBonus = 0;
