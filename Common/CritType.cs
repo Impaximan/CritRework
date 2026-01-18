@@ -4,6 +4,8 @@ namespace CritRework.Common
 {
     public abstract class CritType : ILoadable
     {
+        bool loaded = false;
+
         public static float CalculateActualCritMult(CritType critType, Item Item, Player Player)
         {
             if (Item == null || Player == null)
@@ -53,6 +55,11 @@ namespace CritRework.Common
             return true;
         }
 
+        public virtual bool ShouldLoad()
+        {
+            return true;
+        }
+
 #nullable enable
         public abstract bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers);
 #nullable disable
@@ -69,6 +76,12 @@ namespace CritRework.Common
 
         public void Load(Mod mod)
         {
+            if (!ShouldLoad())
+            {
+                return;
+            }
+
+            loaded = true;
             description = mod.GetLocalization($"CritTypes.{GetType().Name}.Description");
 
             CritRework.loadedCritTypes.Add(this);
@@ -76,15 +89,35 @@ namespace CritRework.Common
             {
                 CritRework.randomCritPool.Add(this);
             }
+
+            OnLoad(mod);
+        }
+
+        public virtual void OnLoad(Mod mod)
+        {
+
         }
 
         public void Unload()
         {
+            if (!loaded)
+            {
+                return;
+            }
+
+            loaded = false;
             CritRework.loadedCritTypes.Remove(this);
             if (InRandomPool)
             {
                 CritRework.randomCritPool.Remove(this);
             }
+
+            OnUnload();
+        }
+
+        public virtual void OnUnload()
+        {
+
         }
     }
 }

@@ -1,22 +1,3 @@
-﻿-Modified the way crit damage scaling works to be a bit less powerful with high-crit rate conditions (but more powerful with low crit-rate conditions). The original, simpler scaling can still be enabled in the config.
--Added the option to scale boss and general enemy HP (individually), in case you find this mod to be overpowered and want and an alternate way to nerf it
--Added Crystal Shield, a new early-hardmode defensive accessory that rewards crits with defense
--Added Accursed Guillotine, a crit accessory found in the dungeon which boosts critical strike damage to max-health foes
--Added unique crit condition for Blowpipe and Blowgun
--Added 2 new randomly assigned crit conditions
--Added a new weapon type, gloves, which allow you to give crit conditions to consumable weapons;
--Added Leather Glove
--Added Silk Glove
--Added Silver and Tungsten gauntlets
--Added Ancient Glove, which is crafted with sturdy fossils
--Added Galactic Gauntlet, which is crafted with meteorite
--Added the Poisoned Hand, a glove crafted with jungle materials
--Added Satan's Claw, a glove crafted with hellstone
--You can configure the damage type of gloves/javelins added by this mod in the config, including making them rogue
--You can also disable the tutorial description of gloves once you understand how they work
--The "critically strikes while falling" crit condition now displays when it is active, like other crit conditions
--Nerfed damage multiplier of 1% crit chance condition
--Nerfed damage multiplier of 10 second cooldown condition
--Nerfed damage multiplier of ammo whetstone
--Removed bonus damage from Noxious Eye
--Added a 3 second cooldown to Noxious Eye proc
+﻿-The "critically strikes while debuffed" buff now only works with damage over time debuffs
+-Updated for compatibility with Orchid Mod's Shapeshifter class;
+-Added "critically strikes on the next attack after using a skill" crit condition (Shapeshifter Class)

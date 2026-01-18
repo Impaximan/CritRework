@@ -40,7 +40,11 @@ namespace CritRework.Common.ModPlayers
         public bool pirateArmor = false;
         public bool allowNewChakram = false;
 
+        //Orchid mod only
+        public int timeSinceShawlDash = 600;
+
         public int crystalShieldDefense = 0;
+        int lastShawlCooldown = -1;
 
         public Item lastWeaponUsed = null;
 
@@ -113,6 +117,21 @@ namespace CritRework.Common.ModPlayers
             timeSinceBlowpipe++;
             if (noxiousEyeCooldown > 0) noxiousEyeCooldown--;
             UpdateSlotMachine();
+
+            if (ModLoader.HasMod("OrchidMod"))
+            {
+                timeSinceShawlDash++;
+
+                if (Player.TryGetModPlayer(out OrchidMod.OrchidShapeshifter s))
+                {
+                    if (s.ShapeshifterShawlCooldown > lastShawlCooldown && lastShawlCooldown == 0)
+                    {
+                        timeSinceShawlDash = 0;
+                    }
+
+                    lastShawlCooldown = s.ShapeshifterShawlCooldown;
+                }
+            }
         }
 
         public override void UpdateAutopause()

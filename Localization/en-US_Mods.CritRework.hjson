@@ -482,7 +482,7 @@ CritTypes: {
 	ThreeSecondCooldown.Description: Critically strikes if the the last time you crit was at least 3 seconds ago
 	Backstab.Description: Critically strikes when hitting (most) enemies in the back
 	PickUpAmmo.Description: Mods.CritRework.CritTypes.PickUpAmmo.Description
-	HasDebuff.Description: Critically strikes while you are debuffed
+	HasDebuff.Description: Critically strikes while you are inflicted with a damage over time effect (such as On Fire!)
 	ClassyCane.Description: Critically strikes while you are holding at least 50 platinum
 	Katana.Description: Critically strikes while you have 0 defense
 	EyeOfCthulhu.Description: Critically strikes while you have less than 50% of your life left
@@ -503,6 +503,10 @@ CritTypes: {
 	Blowpipe.Description: Critically strikes if the last time you used this weapon was at least 3 seconds ago
 	GalacticCrit.Description: Critically strikes if the weapon is thrown upward and then falls at least 10 tiles
 	NonBoss.Description: Critically strikes on non-boss targets
+	Shapeshifter_ShapeshiftSickness.Description: Critically strikes while you are afflicted with Shapeshifting Sickness
+	Shapeshifter_ShapeshiftBleedStackingMedium.Description: Critically strikes when you have inflicted at least 8 stacks of bleed total
+	Shapeshifter_ShapeshiftBleedStackingMedium.Description: Critically strikes when you have inflicted at least 20 stacks of bleed total
+	Shapeshifter_ShapeshiftShawlDash.Description: Critically strikes for a brief moment after using a shawl dash
 }
 
 UnknownTooltip: Unknown critical strike condition

@@ -3,6 +3,7 @@ using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Weapons.Gloves;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Reflection;
 using Terraria;
 using Terraria.DataStructures;
 
@@ -63,6 +64,11 @@ namespace CritRework.Common.Globals
             return base.OnTileCollide(projectile, oldVelocity);
         }
 
+        public override bool PreAI(Projectile projectile)
+        {
+            return base.PreAI(projectile);
+        }
+
         public override void PostAI(Projectile projectile)
         {
             timeActive++;
@@ -86,6 +92,46 @@ namespace CritRework.Common.Globals
             if (projectile.Center.Y < highestPoint) highestPoint = projectile.Center.Y;
         }
 
+        void InheritItemCrit(Projectile projectile, Item item, Player? player = null)
+        {
+            if (item.TryGetGlobalItem(out CritItem cItem))
+            {
+                critType = item.GetGlobalItem<CritItem>().critType;
+            }
+
+            ogItem = item;
+
+            if (item.type == ModContent.ItemType<PoisonedHand>())
+            {
+                fromPoisonedHand = true;
+            }
+
+            if (item.prefix == ModContent.PrefixType<Content.Prefixes.Weapon.Necromantic>())
+            {
+                fromNecromantic = true;
+            }
+
+            if (player != null)
+            {
+                if (player.TryGetModPlayer(out CritPlayer cPlayer))
+                {
+                    if (player.HasEquip<WiseCracker>() && projectile.minion && critType == null)
+                    {
+                        critType = cPlayer.summonCrit;
+                    }
+
+                    if (item.type == ItemID.Blowpipe || item.type == ItemID.Blowgun)
+                    {
+                        if (cPlayer.timeSinceBlowpipe > 180)
+                        {
+                            blowgunCrit = true;
+                        }
+                        cPlayer.timeSinceBlowpipe = 0;
+                    }
+                }
+            }
+        }
+
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
             targetsHit = 0;
@@ -101,38 +147,7 @@ namespace CritRework.Common.Globals
 
             if (source is EntitySource_ItemUse itemSource)
             {
-                if (itemSource.Item.TryGetGlobalItem(out CritItem cItem))
-                {
-                    critType = itemSource.Item.GetGlobalItem<CritItem>().critType;
-                    ogItem = itemSource.Item;
-                }
-
-                if (itemSource.Item.type == ModContent.ItemType<PoisonedHand>())
-                {
-                    fromPoisonedHand = true;
-                }
-
-                if (itemSource.Item.prefix == ModContent.PrefixType<Content.Prefixes.Weapon.Necromantic>())
-                {
-                    fromNecromantic = true;
-                }
-
-                if (itemSource.Player.TryGetModPlayer(out CritPlayer cPlayer))
-                {
-                    if (itemSource.Player.HasEquip<WiseCracker>() && projectile.minion && critType == null)
-                    {
-                        critType = cPlayer.summonCrit;
-                    }
-
-                    if (itemSource.Item.type == ItemID.Blowpipe || itemSource.Item.type == ItemID.Blowgun)
-                    {
-                        if (cPlayer.timeSinceBlowpipe > 180)
-                        {
-                            blowgunCrit = true;
-                        }
-                        cPlayer.timeSinceBlowpipe = 0;
-                    }
-                }
+                InheritItemCrit(projectile, itemSource.Item, itemSource.Player);
 
                 if (itemSource is EntitySource_ItemUse_WithAmmo ammoSource)
                 {
@@ -153,8 +168,7 @@ namespace CritRework.Common.Globals
                     consumedAmmo = false;
                 }
             }
-
-            if (source is EntitySource_Parent parentSource)
+            else if (source is EntitySource_Parent parentSource)
             {
                 if (parentSource.Entity is Projectile parent)
                 {
@@ -168,7 +182,14 @@ namespace CritRework.Common.Globals
                         timeActive = crit.timeActive;
                     }
                 }
+
+                if (parentSource.Entity is Item item)
+                {
+                    InheritItemCrit(projectile, item, projectile.owner != 255 ? Main.player[projectile.owner] : null);
+                }
             }
         }
+
+
     }
 }

@@ -9,4 +9,9 @@
     <None Remove="Changelog.txt" />
     <None Remove="description_workshop.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="OrchidMod">
+      <HintPath>bin\Debug\net8.0\OrchidMod.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>
