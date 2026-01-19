@@ -513,6 +513,9 @@ CritTypes: {
 	Shapeshifter_SageHit.Description: Critically strikes for 5 seconds after hitting an enemy as a sage wildshape
 	Shapeshifter_SymbioteHit.Description: Critically strikes for 5 seconds after hitting an enemy as a symbiote wildshape
 	Shapeshifter_WardenHit.Description: Critically strikes for 5 seconds after hitting an enemy as a warden wildshape
+	Adrenaline.Description: Critically strikes while in adrenaline mode
+	Rage.Description: Critically strikes while in rage mode
+	StealthStrike.Description: Critically strikes on stealth strikes
 }
 
 UnknownTooltip: Unknown critical strike condition

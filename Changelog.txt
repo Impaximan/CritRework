@@ -1,4 +1,15 @@
-﻿-The "critically strikes while debuffed" buff now only works with damage over time debuffs
+﻿Update 1.3.1.0
+-The "critically strikes while debuffed" buff now only works with damage over time debuffs
+-Assassin's dagger now has a 15 second cooldown instead of a 10 second cooldown
+-Removed "Critically strikes on targets with 3 or more debuffs" crit condition
+
+[b]Added cross mod content/balance changes with various mods[/b]
+
+[b]~~CALAMITY MOD~~[/b]
+-Added 2 new unique critical strike conditions for when rage and adrenaline are active
+-Added 1 new unique critical strike condition for rogue weapons
+
+[b]~~ORCHID MOD~~[/b]
 -Updated for compatibility with Orchid Mod's Shapeshifter class;
 -Added 9 unique critical strike conditions for the shapeshifter class from Orchid mod
--Assassin's dagger now has a 15 second cooldown instead of a 10 second cooldown
+-"Close to foes" crit condition can no longer be added to shapeshifter items
