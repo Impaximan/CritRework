@@ -467,6 +467,23 @@ namespace CritRework.Common.ModPlayers
                 }
             }
 
+            if (Player.HasEquip<SparkingSludge>() && hit.Crit)
+            {
+                if (!target.HasBuff(BuffID.OnFire))
+                {
+                    SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/FireIgnite")
+                    {
+                        Volume = 0.5f,
+                        Pitch = 0f,
+                        PitchVariance = 0.5f,
+                        MaxInstances = 0,
+                        SoundLimitBehavior = SoundLimitBehavior.IgnoreNew,
+                    }, target.Center);
+                }
+
+                target.AddBuff(BuffID.OnFire, 60 * 3);
+            }
+
             if (Player.HasEquip<CrystalShield>() && hit.Crit)
             {
                 crystalShieldDefense++;

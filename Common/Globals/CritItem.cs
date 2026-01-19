@@ -32,6 +32,7 @@ namespace CritRework.Common.Globals
         public bool forceCanCrit = false;
         public bool recoverableArrow = false;
 
+
         public override void SetStaticDefaults()
         {
             necromanticTooltip = Mod.GetLocalization($"NecromanticTooltip");
@@ -49,6 +50,31 @@ namespace CritRework.Common.Globals
             if (critType != null)
             {
                 writer.Write(critType.InternalName);
+            }
+        }
+
+        public override float UseSpeedMultiplier(Item item, Player player)
+        {
+            float mult = 1f;
+            if (item.TryGetGlobalItem(out CritItem critItem))
+            {
+                if (player.HasEquip<SharpenedWrench>())
+                {
+                    if (critItem.critType != null && critItem.critType.ShowWhenActive && (item.pick > 0 || item.axe > 0 || item.hammer > 0) && critItem.critType.ShouldCrit(player, item, null, null, new NPC.HitModifiers()))
+                    {
+                        mult *= 1.3f;
+                    }
+                }
+            }
+
+            return base.UseSpeedMultiplier(item, player) * mult;
+        }
+
+        public override void ModifyWeaponCrit(Item item, Player player, ref float crit)
+        {
+            if (player.HasEquip<SharpenedWrench>() && (item.pick > 0 || item.axe > 0 || item.hammer > 0))
+            {
+                crit += 25;
             }
         }
 
@@ -285,6 +311,9 @@ namespace CritRework.Common.Globals
                 return;
             }
 
+            int rerolls = 0;
+
+            SelectCrit:
 
             foreach (CritType crit in CritRework.loadedCritTypes)
             {
@@ -310,6 +339,20 @@ namespace CritRework.Common.Globals
                     appliedType = Main.rand.Next(CritRework.randomCritPool);
                 }
                 critType = appliedType;
+            }
+
+            if (critType != null && (item.pick > 0 || item.axe > 0 || item.hammer > 0))
+            {
+                if (!critType.ShowWhenActive)
+                {
+                    rerolls++;
+
+                    if (rerolls <= 2) //Reroll up to 2 times for a different crit
+                    {
+                        Main.NewText("hi");
+                        goto SelectCrit;
+                    }
+                }
             }
         }
 

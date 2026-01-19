@@ -10,7 +10,7 @@
 
         public override bool CanApplyTo(Item item)
         {
-            return !item.DamageType.CountsAsClass(DamageClass.Melee);
+            return !item.DamageType.CountsAsClass(DamageClass.Melee) && !item.DamageType.GetType().Name.Contains("GuardianDamageClass");
         }
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)

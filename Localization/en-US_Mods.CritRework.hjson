@@ -296,6 +296,24 @@ Items: {
 			[c/ff655d:While held, you rapidly burn]
 			'''
 	}
+
+	SharpenedWrench: {
+		DisplayName: Sharpened Wrench
+		Tooltip:
+			'''
+			Tools gain 30% increased use speed if their crit condition is met
+			25% increased tool critical strike chance
+			'''
+	}
+
+	SparkingSludge: {
+		DisplayName: Sparking Sludge
+		Tooltip:
+			'''
+			6% increased critical strike chance
+			Critical strikes set enemies ablaze
+			'''
+	}
 }
 
 Whetstone: {

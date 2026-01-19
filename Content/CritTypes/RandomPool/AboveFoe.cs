@@ -8,7 +8,7 @@
 
         public override bool CanApplyTo(Item item)
         {
-            return item.shoot != ProjectileID.None;
+            return item.shoot != ProjectileID.None && item.rare <= ItemRarityID.Orange;
         }
 
         //public override string GetDescription() => "Critically strikes while you are above the target";

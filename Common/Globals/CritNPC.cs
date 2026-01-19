@@ -9,6 +9,7 @@ using Terraria.GameContent.ItemDropRules;
 using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Weapons;
 using CritRework.Content.Items.Weapons.Gloves;
+using System;
 
 namespace CritRework.Common.Globals
 {
@@ -113,6 +114,11 @@ namespace CritRework.Common.Globals
             if (npc.type == NPCID.Drippler)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<NoxiousEye>(), 10));
+            }
+
+            if (npc.aiStyle == NPCAIStyleID.Slime && !npc.friendly && !npc.CountsAsACritter)
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SparkingSludge>(), 75));
             }
         }
 

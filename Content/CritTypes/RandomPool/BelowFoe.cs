@@ -16,6 +16,11 @@
             }
         }
 
+        public override bool CanApplyTo(Item item)
+        {
+            return item.rare <= ItemRarityID.Orange;
+        }
+
         //public override string GetDescription() => "Critically strikes while you are below the target";
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
