@@ -7,7 +7,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
     {
         public override bool InRandomPool => true;
 
-        public override float GetDamageMult(Player Player, Item Item) => 1.3f;
+        public override float GetDamageMult(Player Player, Item Item) => 1.1f;
 
         public override bool ShowWhenActive => true;
 
@@ -18,7 +18,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
         {
-            return Player.GetModPlayer<CritPlayer>().freshItemTime <= 60;
+            return Player.GetModPlayer<CritPlayer>().freshItemTime <= 30;
         }
     }
 }

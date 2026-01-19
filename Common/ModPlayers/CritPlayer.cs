@@ -40,6 +40,11 @@ namespace CritRework.Common.ModPlayers
         public bool pirateArmor = false;
         public bool allowNewChakram = false;
 
+        //Thorium mod only
+        public int lastTechPoints = 0;
+        public int timeSinceTechnique = 600;
+        public int lastTechDecharge = 0;
+
         //Orchid mod only
         public int timeSinceShawlDash = 600;
         public bool hasSkillBonus = false;
@@ -128,6 +133,25 @@ namespace CritRework.Common.ModPlayers
                 PostUpdate_Orchid();
             }
 
+            if (ModLoader.TryGetMod("ThoriumMod", out Mod Thorium))
+            {
+                timeSinceTechnique++;
+
+                ModPlayer mp = Player.GetModPlayer(Thorium.Find<ModPlayer>("ThoriumPlayer"));
+
+                if (mp.GetType().GetField("techPoints").GetValue(mp) is int techPoints && mp.GetType().GetField("techDecharge").GetValue(mp) is int techDecharge)
+                {
+                    int diff = techPoints - lastTechPoints;
+                    lastTechPoints = techPoints;
+
+                    if (diff < 0 && techDecharge == 0 && techDecharge == lastTechDecharge)
+                    {
+                        timeSinceTechnique = 0;
+                    }
+
+                    lastTechDecharge = techDecharge;
+                }
+            }
         }
 
         [JITWhenModsEnabled("OrchidMod")]

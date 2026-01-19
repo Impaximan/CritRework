@@ -452,7 +452,7 @@ CritTypes: {
 	StandingStill.Description: Critically strikes while you are moving less than 10 miles per hour
 	TipOfTheWeapon.Description: Critically strikes when hitting enemies at the tip of the weapon
 	CrystalVileShard.Description: Critically strikes at the tip of the crystals
-	FreshItem.Description: Critically strikes for 1 second after selecting this weapon
+	FreshItem.Description: Critically strikes for a brief moment after selecting this weapon
 	Harpoon.Description: Critically strikes while the target is at least 26 tiles away
 	JustHitByEnemy.Description: Critically strikes for 2.5 seconds after getting hit
 	ProjectileTravel.Description: Critically strikes if the projectile has been travelling for more than 1 second
@@ -516,6 +516,8 @@ CritTypes: {
 	Adrenaline.Description: Critically strikes while in adrenaline mode
 	Rage.Description: Critically strikes while in rage mode
 	StealthStrike.Description: Critically strikes on stealth strikes
+	AfterUseTechnique.Description: Critically strikes for 1 second after using a technique
+	LowInspiration.Description: Critically strikes if you have less than 30% of your max inspiration remaining
 }
 
 UnknownTooltip: Unknown critical strike condition
