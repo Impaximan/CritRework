@@ -334,6 +334,19 @@ Items: {
 			Cleanses enemy debuffs in the process
 			'''
 	}
+
+	ShadowDonut: {
+		LastTooltipLine: "Enemies have [dmg] critical strike damage"
+		DisplayName: Shadow Donut
+		Tooltip:
+			'''
+			Can be given a crit condition
+			While that crit condition is active, [c/ff6868:enemies can critically strike against you]
+			...however, when enemies critically strike against you, gain 'Shadow Frenzy' for 5 seconds
+			Shadow Frenzy greatly increases movement speed, attack speed, critical strike damage, and life regeneration
+			'Glazed with EVIL!!!!!'
+			'''
+	}
 }
 
 Whetstone: {
@@ -616,6 +629,11 @@ Buffs: {
 	ProstheticsActive: {
 		DisplayName: Prosthetics: Active
 		Description: Prosthetic arm's critical strike condition has been met
+	}
+
+	ShadowFrenzy: {
+		DisplayName: Shadow Frenzy
+		Description: PANIC
 	}
 }
 

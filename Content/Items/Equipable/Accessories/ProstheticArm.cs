@@ -67,10 +67,13 @@ namespace CritRework.Content.Items.Equipable.Accessories
 
             if (Item.TryGetGlobalItem(out CritItem cItem) && cItem.critType != null)
             {
-                dmgString = Math.Round((cItem.critType.GetDamageMult(Main.LocalPlayer, Item) - 1f) * 150f).ToString() + "%";
+                dmgString = Math.Round(cItem.critType.GetDamageMult(Main.LocalPlayer, Item) * 150f).ToString() + "%";
             }
 
-            tooltips.Insert(i + 1, new TooltipLine(Mod, "Tooltip3", finalTooltipLine.Value.Replace("[dmg]", dmgString)));
+            if (i != -1)
+            {
+                tooltips.Insert(i + 1, new TooltipLine(Mod, "Tooltip3", finalTooltipLine.Value.Replace("[dmg]", dmgString)));
+            }
         }
     }
 

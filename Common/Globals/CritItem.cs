@@ -344,15 +344,14 @@ namespace CritRework.Common.Globals
                 critType = appliedType;
             }
 
-            if (critType != null && (item.pick > 0 || item.axe > 0 || item.hammer > 0))
+            if (critType != null && (item.pick > 0 || item.axe > 0 || item.hammer > 0 || item.type == ModContent.ItemType<ShadowDonut>()))
             {
                 if (!critType.ShowWhenActive)
                 {
                     rerolls++;
 
-                    if (rerolls <= 2) //Reroll up to 2 times for a different crit
+                    if (rerolls <= 2 || item.type == ModContent.ItemType<ShadowDonut>()) //Reroll up to 2 times for a different crit
                     {
-                        Main.NewText("hi");
                         goto SelectCrit;
                     }
                 }
@@ -394,6 +393,11 @@ namespace CritRework.Common.Globals
 
         public override void UpdateEquip(Item item, Player player)
         {
+            if (critType == null)
+            {
+                AddCritType(item);
+            }
+
             //Add pirate armor effects
             if (CritRework.pirateArmorRework)
             {
@@ -708,7 +712,7 @@ namespace CritRework.Common.Globals
 
                 TooltipLine prostheticCrit = null;
 
-                if (critPlayer.prostheticCrit != null && item.type != ModContent.ItemType<ProstheticArm>() && critPlayer.prostheticCrit != usedCritType)
+                if (critPlayer.prostheticCrit != null && item.type != ModContent.ItemType<ProstheticArm>() && critPlayer.prostheticCrit != usedCritType && (item.type != ModContent.ItemType<ShadowDonut>()))
                 {
                     prostheticCrit = new TooltipLine(Mod, "CritDescription2", critPlayer.prostheticCrit.description.Value);
                     prostheticCrit.OverrideColor = critPlayer.prostheticCrit.Color;

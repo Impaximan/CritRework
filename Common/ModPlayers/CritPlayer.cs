@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.WorldBuilding;
 
 namespace CritRework.Common.ModPlayers
 {
@@ -67,6 +68,8 @@ namespace CritRework.Common.ModPlayers
         //Extra crit types
         public CritType? summonCrit = null;
         public CritType? prostheticCrit = null;
+        public CritType? EVILCrit = null;
+        public ShadowDonut? shadowDonut = null;
 
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
@@ -91,6 +94,8 @@ namespace CritRework.Common.ModPlayers
             pirateArmor = false;
             accessoryEffects.Clear();
             summonCrit = null;
+            EVILCrit = null;
+            shadowDonut = null;
             prostheticCrit = null;
         }
 
@@ -411,6 +416,26 @@ namespace CritRework.Common.ModPlayers
 
 
                 crystalShieldDefense = 0;
+            }
+
+            if (EVILCrit != null && EVILCrit.ShouldCrit(Player, shadowDonut.Item, null, null, new()))
+            {
+                Player.AddBuff(ModContent.BuffType<ShadowFrenzy>(), 60 * 5, false);
+                CombatText.NewText(Player.getRect(), Color.MediumPurple, "CRITICAL STRIKE", true);
+
+                SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/EVILCrit")
+                {
+                    PitchVariance = 0.5f,
+                    Volume = 0.75f
+                }, Player.Center);
+            }
+        }
+
+        public override void ModifyHurt(ref Player.HurtModifiers modifiers)
+        {
+            if (EVILCrit != null && EVILCrit.ShouldCrit(Player, shadowDonut.Item, null, null, new()))
+            {
+                modifiers.FinalDamage *= EVILCrit.GetDamageMult(Player, shadowDonut.Item);
             }
         }
 
