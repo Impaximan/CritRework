@@ -667,7 +667,7 @@ namespace CritRework.Common.Globals
                 tooltips.Add(line);
             }
 
-            if (item.type == ModContent.ItemType<WiseCracker>() && usedCritType == null)
+            if (forceCanCrit && usedCritType == null)
             {
                 TooltipLine line = new TooltipLine(Mod, "NoCrit", unknownTooltip.Value);
                 line.OverrideColor = Color.Gray;

@@ -109,6 +109,19 @@
 
                     if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 11 * 36) //Ice chest
                     {
+                        if (WorldGen.genRand.NextBool(5))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Equipable.Accessories.ThawingCloth>());
+                                    chest.item[inventoryIndex].stack = 1;
+                                    break;
+                                }
+                            }
+                        }
+
                         if (WorldGen.genRand.NextBool(4))
                         {
                             for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)

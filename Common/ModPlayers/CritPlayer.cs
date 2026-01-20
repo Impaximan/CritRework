@@ -339,6 +339,7 @@ namespace CritRework.Common.ModPlayers
             {
                 modifiers.SetCrit();
                 modifiers.SourceDamage *= CritType.CalculateActualCritMult(critType, item, Player);
+
                 if (timeSinceDaggerBonus >= 900 && Player.HasEquip<AssassinsDagger>())
                 {
                     modifiers.SourceDamage *= 2;
@@ -350,10 +351,36 @@ namespace CritRework.Common.ModPlayers
                         Volume = 1f
                     }, target.Center);
                 }
+
                 if (Player.HasEquip<EternalGuillotine>() && target.life == target.lifeMax)
                 {
                     modifiers.CritDamage *= 2f;
                 }
+
+                if (Player.HasEquip<ThawingCloth>())
+                {
+                    int num = 0;
+
+                    List<int> oddExceptions = new()
+                    {
+                        BuffID.OnFire3
+                    };
+
+                    foreach (int type in target.buffType)
+                    {
+                        if (type > 0 && (Main.debuff[type] || oddExceptions.Contains(type)) //FSR some debuffs from the base game are not marked as debuffs. This aims to patch some of those.
+                            && target.buffTime[target.FindBuffIndex(type)] > 0)
+                        {
+                            num++;
+                        }
+                    }
+
+                    if (num > 0)
+                    {
+                        modifiers.CritDamage *= 1f + ThawingCloth.damageBonusPerDebuff * num;
+                    }
+                }
+
                 modifiers.FinalDamage *= 0.5f;
                 if (CritRework.overrideCritColor) modifiers.HideCombatText();
             }
@@ -449,9 +476,45 @@ namespace CritRework.Common.ModPlayers
                 Player.AddBuff(ModContent.BuffType<Scallywag>(), 300);
             }
 
+
+            bool cleansed = false;
+
+            if (Player.HasEquip<ThawingCloth>() && hit.Crit)
+            {
+                List<int> oddExceptions = new()
+                {
+                    BuffID.OnFire3
+                };
+
+                int numCleansed = 0;
+                for (int i = 0; i < target.buffType.Length; i++)
+                {
+                    if (Main.debuff[target.buffType[i]] || oddExceptions.Contains(target.buffType[i]))
+                    {
+                        numCleansed++;
+                        target.buffTime[i] = 0;
+                        cleansed = true;
+                    }
+                }
+
+                if (cleansed)
+                {
+                    SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/Cleanse")
+                    {
+                        Volume = 0.65f,
+                        Pitch = 0.5f,
+                        PitchVariance = 0.5f,
+                        MaxInstances = 0,
+                    }, target.Center);
+
+                    CombatText.NewText(target.getRect(), Color.SkyBlue, "Thawed x" + numCleansed, true, true);
+                }
+
+            }
+
             if (Player.HasEquip<NoxiousEye>() && hit.Crit && noxiousEyeCooldown <= 0)
             {
-                target.AddBuff(BuffID.Poisoned, 30);
+                if (!cleansed) target.AddBuff(BuffID.Poisoned, 30);
 
                 if (Main.rand.NextBool(10) && target.type != NPCID.TargetDummy)
                 {
@@ -470,13 +533,13 @@ namespace CritRework.Common.ModPlayers
                 }
             }
 
-            if (Player.HasEquip<SparkingSludge>() && hit.Crit)
+            if (Player.HasEquip<SparkingSludge>() && hit.Crit && !cleansed)
             {
                 if (!target.HasBuff(BuffID.OnFire))
                 {
                     SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/FireIgnite")
                     {
-                        Volume = 0.5f,
+                        Volume = 0.4f,
                         Pitch = 0f,
                         PitchVariance = 0.5f,
                         MaxInstances = 0,

@@ -40,7 +40,7 @@ namespace CritRework.Content.Items.Equipable.Accessories
             Item.height = 40;
             Item.accessory = true;
             Item.rare = ItemRarityID.Pink;
-            Item.value = Item.buyPrice(0, 20, 0, 0);
+            Item.value = Item.sellPrice(0, 5, 0, 0);
             Item.GetGlobalItem<CritItem>().forceCanCrit = true;
         }
 
@@ -51,6 +51,11 @@ namespace CritRework.Content.Items.Equipable.Accessories
             if (Item.TryGetGlobalItem(out CritItem cItem) && cItem.critType != null)
             {
                 player.GetModPlayer<CritPlayer>().prostheticCrit = cItem.critType;
+
+                if (cItem.critType.ShowWhenActive && cItem.critType.ShouldCrit(player, Item, null, null, new NPC.HitModifiers()))
+                {
+                    player.AddBuff(ModContent.BuffType<ProstheticsActive>(), 2);
+                }
             }
         }
 
@@ -66,6 +71,14 @@ namespace CritRework.Content.Items.Equipable.Accessories
             }
 
             tooltips.Insert(i + 1, new TooltipLine(Mod, "Tooltip3", finalTooltipLine.Value.Replace("[dmg]", dmgString)));
+        }
+    }
+
+    public class ProstheticsActive : ModBuff
+    {
+        public override void SetStaticDefaults()
+        {
+            Main.buffNoTimeDisplay[Type] = true;
         }
     }
 }

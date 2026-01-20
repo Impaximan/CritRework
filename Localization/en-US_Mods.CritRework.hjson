@@ -325,6 +325,15 @@ Items: {
 			Both crit conditions must be met to critically strike
 			'''
 	}
+
+	ThawingCloth: {
+		DisplayName: Thawing Cloth
+		Tooltip:
+			'''
+			Critical strikes deal 30% increased damage per debuff inflicted on the enemy
+			Cleanses enemy debuffs in the process
+			'''
+	}
 }
 
 Whetstone: {
@@ -602,6 +611,11 @@ Buffs: {
 	Repentence: {
 		DisplayName: Repentence
 		Description: Your hands are ravaged by avarice
+	}
+
+	ProstheticsActive: {
+		DisplayName: Prosthetics: Active
+		Description: Prosthetic arm's critical strike condition has been met
 	}
 }
 
