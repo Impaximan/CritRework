@@ -314,6 +314,17 @@ Items: {
 			Critical strikes set enemies ablaze
 			'''
 	}
+
+	ProstheticArm: {
+		LastTooltipLine: "[dmg] increased critical strike damage"
+		DisplayName: Prosthetic Arm
+		Tooltip:
+			'''
+			Can be given a crit condition
+			All weapons will inherit this crit condition, in addition to their own
+			Both crit conditions must be met to critically strike
+			'''
+	}
 }
 
 Whetstone: {
@@ -632,3 +643,4 @@ GloveWeight5: Very heavy weight
 GloveWeight6: Extremely heavy weight
 GloveWeight7: Unbearably heavy weight
 GloveWeight8: Titanic weight
+ProstheticTooltip: Both of the following conditions must be met to critically strike:

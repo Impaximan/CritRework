@@ -29,6 +29,8 @@ namespace CritRework.Common.Globals
         public static LocalizedText piratePantsTooltip;
         public static LocalizedText pirateBonus;
 
+        public static LocalizedText prostheticTooltip;
+
         public bool forceCanCrit = false;
         public bool recoverableArrow = false;
 
@@ -42,6 +44,7 @@ namespace CritRework.Common.Globals
             pirateShirtTooltip = Mod.GetLocalization($"PirateShirt");
             piratePantsTooltip = Mod.GetLocalization($"PiratePants");
             pirateBonus = Mod.GetLocalization($"PirateSetBonus");
+            prostheticTooltip = Mod.GetLocalization($"ProstheticTooltip");
         }
 
         public override void NetSend(Item item, BinaryWriter writer)
@@ -511,6 +514,7 @@ namespace CritRework.Common.Globals
                             TooltipLine line2 = new TooltipLine(Mod, "CritDescription", critPlayer.slotMachineCrit.description.Value);
                             line2.OverrideColor = critPlayer.slotMachineCrit.Color;
 
+
                             int indexA = tooltips.FindLastIndex(x => x.Name.Contains("Tooltip"));
                             int indexB = tooltips.FindIndex(x => x.Name == "Consumable");
                             int indexC = tooltips.FindIndex(x => x.Name == "UseMana");
@@ -697,8 +701,27 @@ namespace CritRework.Common.Globals
 
             if (usedCritType != null)
             {
+                List<TooltipLine> lines = new();
+
                 TooltipLine line = new TooltipLine(Mod, "CritDescription", usedCritType.description.Value);
                 line.OverrideColor = usedCritType.Color;
+
+                TooltipLine prostheticCrit = null;
+
+                if (critPlayer.prostheticCrit != null && item.type != ModContent.ItemType<ProstheticArm>() && critPlayer.prostheticCrit != usedCritType)
+                {
+                    prostheticCrit = new TooltipLine(Mod, "CritDescription2", critPlayer.prostheticCrit.description.Value);
+                    prostheticCrit.OverrideColor = critPlayer.prostheticCrit.Color;
+
+                    lines.Add(new TooltipLine(Mod, "ProstheticTooltip", prostheticTooltip.Value)
+                    {
+                        OverrideColor = Color.Lerp(Color.OrangeRed, Color.White, 0.5f)
+                    });
+                }
+
+                lines.Add(line);
+
+                if (prostheticCrit != null) lines.Add(prostheticCrit);
 
                 int indexA = tooltips.FindLastIndex(x => x.Name.Contains("Tooltip"));
                 int indexB = tooltips.FindIndex(x => x.Name == "Consumable");
@@ -707,23 +730,23 @@ namespace CritRework.Common.Globals
 
                 if (indexA != -1)
                 {
-                    tooltips.Insert(indexA + 1, line);
+                    tooltips.InsertRange(indexA + 1, lines);
                 }
                 else if (indexB != -1)
                 {
-                    tooltips.Insert(indexB + 1, line);
+                    tooltips.InsertRange(indexB + 1, lines);
                 }
                 else if (indexC != -1)
                 {
-                    tooltips.Insert(indexC + 1, line);
+                    tooltips.InsertRange(indexC + 1, lines);
                 }
                 else if (indexD != -1)
                 {
-                    tooltips.Insert(indexD + 1, line);
+                    tooltips.InsertRange(indexD + 1, lines);
                 }
                 else
                 {
-                    tooltips.Add(line);
+                    tooltips.AddRange(lines);
                 }
             }
 

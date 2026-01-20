@@ -1,6 +1,7 @@
-﻿Update 1.3.1.0
+﻿Update 1.4.0.0
 -Added "Sharpened Wrench," a new early game accessory found in chests
 -Added "Sparking Sludge," a new early game accessory dropped by slimes
+-Added "Prosthetic Arm," a new early hardmode accessory crafted with Souls of Fright
 -The "critically strikes while debuffed" buff now only works with damage over time debuffs
 -Above foe and below foe crit conditions can now only apply to items of rarity orange or under
 -Assassin's dagger now has a 15 second cooldown instead of a 10 second cooldown

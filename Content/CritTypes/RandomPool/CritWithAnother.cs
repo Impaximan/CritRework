@@ -11,7 +11,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
 
         public override bool CanApplyTo(Item item)
         {
-            return item.type != ModContent.ItemType<WiseCracker>();
+            return !item.accessory;
         }
 
         public override bool ShowWhenActive => true;

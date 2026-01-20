@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CritRework.Common.ModPlayers;
+using Microsoft.Xna.Framework;
 
 namespace CritRework.Common
 {
@@ -15,6 +16,12 @@ namespace CritRework.Common
 
             //Nerfed scaling
             float s = critType.GetDamageMult(Player, Item);
+
+            if (Player.TryGetModPlayer(out CritPlayer player) && player.prostheticCrit != null && player.prostheticCrit != critType)
+            {
+                s *= (player.prostheticCrit.GetDamageMult(Player, Item) - 1f) * 1.5f + 1f;
+            }
+
             float c = (100f + Player.GetWeaponCrit(Item)) / 100f - 1f;
 
             float finalValue;

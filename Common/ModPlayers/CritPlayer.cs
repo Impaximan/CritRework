@@ -64,7 +64,9 @@ namespace CritRework.Common.ModPlayers
 
         public static LocalizedText scallywagText;
 
+        //Extra crit types
         public CritType? summonCrit = null;
+        public CritType? prostheticCrit = null;
 
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
@@ -89,6 +91,7 @@ namespace CritRework.Common.ModPlayers
             pirateArmor = false;
             accessoryEffects.Clear();
             summonCrit = null;
+            prostheticCrit = null;
         }
 
         int crystalLossCounter = 0;
@@ -332,7 +335,7 @@ namespace CritRework.Common.ModPlayers
 
         private NPC.HitModifiers ApplyModifiers(Item item, Projectile? projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
         {
-            if (critType != null && critType.ShouldCrit(Player, item, projectile, target, modifiers))
+            if (critType != null && critType.ShouldCrit(Player, item, projectile, target, modifiers) && (prostheticCrit == null || prostheticCrit.ShouldCrit(Player, item, projectile, target, modifiers)))
             {
                 modifiers.SetCrit();
                 modifiers.SourceDamage *= CritType.CalculateActualCritMult(critType, item, Player);
