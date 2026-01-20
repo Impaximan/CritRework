@@ -336,7 +336,7 @@ Items: {
 	}
 
 	ShadowDonut: {
-		LastTooltipLine: "Enemies have [dmg] critical strike damage"
+		LastTooltipLine: Enemies have [dmg] critical strike damage
 		DisplayName: Shadow Donut
 		Tooltip:
 			'''
