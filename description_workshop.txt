@@ -19,6 +19,7 @@ The damage that critical strikes deal are now affected by a variety of factors. 
 [*]More than 60 different potential critical strike conditions
 [*]45+ new items
 [*]15 new crit oriented accessories (and more to come!)
+[*][b]Cross mod content with Orchid Mod, Calamity, and Thorium in the form of extra critical strike conditions[/b]
 [*]A variety of weapon specific critical strike conditions designed to make certain weapons more interesting
 [*]A new weapon type, gloves, which allow you to utilize critical strikes with consumable weapons ([b]such as Calamity's rogue weapons[/b])
 [*]15 different whetstones
@@ -30,4 +31,5 @@ The damage that critical strikes deal are now affected by a variety of factors. 
 Special thanks: [list]
 [*]Moonlight Glint: helping to make some of the mod's codebase neater, fixing various problems with crossmod support
 [*]Verveine: helping to make some of the mod's codebase neater, fixing various problems with crossmod support
-[/list]
+[/list][quote=tModLoader CritRework]
+Developed By Impaxim[/quote]
