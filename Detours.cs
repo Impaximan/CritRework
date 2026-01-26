@@ -9,6 +9,8 @@ using Terraria.ModLoader;
 using System.Linq.Expressions;
 using CritRework.Common.Globals;
 using Terraria.GameContent.UI.Chat;
+using CritRework.Content.Prefixes.Weapon;
+using CritRework.Content.Items;
 
 namespace CritRework
 {
@@ -36,6 +38,19 @@ namespace CritRework
                     button2 += " " + Main.LocalPlayer.HeldItem.Name + " (" + Main.ValueToCoins(CritNPC.GetItemHijackCost(Main.LocalPlayer.HeldItem)) + ")";
                 }
             }
+        }
+
+        public static string AffixName(On_Item.orig_AffixName orig, Item self)
+        {
+            if (self != null && !self.IsAir && self.TryGetGlobalItem(out CritItem c))
+            {
+                if (c.critType != null && self.prefix == ModContent.PrefixType<Special>())
+                {
+                    return c.critType.specialPrefixName.Value + " " + self.Name;
+                }
+            }
+
+            return orig(self);
         }
 
         #region Allow other mods to set crits
@@ -75,6 +90,7 @@ namespace CritRework
 
             On_NPC.HitModifiers.SetCrit += SetCrit;
             On_NPC.HitModifiers.DisableCrit += DisableCrit;
+            On_Item.AffixName += AffixName;
         }
 
         public static void Unload()
@@ -82,6 +98,7 @@ namespace CritRework
             SetChatButtonsHook.Undo();
             On_NPC.HitModifiers.SetCrit -= SetCrit;
             On_NPC.HitModifiers.DisableCrit -= DisableCrit;
+            On_Item.AffixName -= AffixName;
         }
     }
 }

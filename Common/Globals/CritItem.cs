@@ -1,6 +1,8 @@
 ﻿using CritRework.Common.ModPlayers;
 using CritRework.Content.CritTypes.WhetstoneSpecific;
+using CritRework.Content.Items;
 using CritRework.Content.Items.Equipable.Accessories;
+using CritRework.Content.Prefixes.Weapon;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,6 +12,7 @@ using System.Linq;
 using System.Reflection;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent.UI;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.Utilities;
@@ -454,6 +457,15 @@ namespace CritRework.Common.Globals
             if (item.DamageType == DamageClass.Summon && critPlayer.summonCrit != null)
             {
                 usedCritType = critPlayer.summonCrit;
+            }
+
+            if (item.prefix == ModContent.PrefixType<Special>())
+            {
+                string sparkle = "[i:" + ModContent.ItemType<SparkleIcon>() + "]";
+
+                TooltipLine name = tooltips.Find(x => x.Name == "ItemName");
+                name.Text = sparkle + " " + name.Text + " " + sparkle;
+                name.OverrideColor = Color.Lerp(ItemRarity.GetColor(item.rare), Color.LightGoldenrodYellow, (float)(Math.Sin(Main._drawInterfaceGameTime.TotalGameTime.TotalSeconds * 6f) + 1f) / 2f);
             }
 
             int index = tooltips.FindIndex(x => x.Name == "CritChance");
