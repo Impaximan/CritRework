@@ -39,7 +39,7 @@ namespace CritRework.Content.Items.Weapons.Gloves
             return item.type == ModContent.ItemType<GalacticGauntlet>();
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Projectile.TryGetGlobalProjectile(out CritProjectile c) && c.thrownUpward && Projectile.Center.Y - c.highestPoint >= 16 * 10;
         }

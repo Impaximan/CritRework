@@ -508,14 +508,14 @@ CritTypes: {
 	CloseToFoe: {
 		Description: Critically strikes while you are closer than 6 tiles away from the target
 		SpecialPrefixName: Vigilant
-		SpecialPrefixTooltip1: Reduces damage taken by 30% while close to foes if holding this weapon
+		SpecialPrefixTooltip1: Critical strike distance extended to 18 tiles
 		SpecialPrefixTooltip2: ""
 	}
 
 	Falling: {
 		Description: Critically strikes while you are falling
 		SpecialPrefixName: Crushing
-		SpecialPrefixTooltip1: Critical strikes crush foes, reducing their armor by 15 for 5 seconds
+		SpecialPrefixTooltip1: Critical strike damage is increased proportionally to how far you fell
 		SpecialPrefixTooltip2: ""
 	}
 
@@ -648,7 +648,7 @@ CritTypes: {
 	FreshItem: {
 		Description: Critically strikes for a brief moment after selecting this weapon
 		SpecialPrefixName: Trickshot
-		SpecialPrefixTooltip1: Critically strikes for longer
+		SpecialPrefixTooltip1: Critically strikes for significantly longer than normal
 		SpecialPrefixTooltip2: ""
 	}
 
@@ -851,7 +851,7 @@ CritTypes: {
 	HasDebuff: {
 		Description: Critically strikes while you are inflicted with a damage over time effect (such as On Fire!)
 		SpecialPrefixName: Vitriolic
-		SpecialPrefixTooltip1: Grants you a slight poison while held
+		SpecialPrefixTooltip1: Poisons you while held
 		SpecialPrefixTooltip2: ""
 	}
 

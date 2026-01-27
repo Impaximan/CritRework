@@ -21,7 +21,7 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         //public override string GetDescription() => "Critically strikes while you are below the target";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             List<int> directionBased = new()
             {

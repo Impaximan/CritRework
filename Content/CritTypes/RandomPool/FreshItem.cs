@@ -16,9 +16,9 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
             return !item.accessory;
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
-            return Player.GetModPlayer<CritPlayer>().freshItemTime <= 30;
+            return Player.GetModPlayer<CritPlayer>().freshItemTime <= (specialPrefix ? 120 : 30);
         }
     }
 }

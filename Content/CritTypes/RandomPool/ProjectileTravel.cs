@@ -13,7 +13,7 @@
             return item.shoot != ProjectileID.None && !ItemID.Sets.Spears[item.type] && item.useStyle != ItemUseStyleID.Rapier && item.type != ModContent.ItemType<Items.Equipable.Accessories.WiseCracker>() && !item.channel;
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             if (Projectile != null)
             {

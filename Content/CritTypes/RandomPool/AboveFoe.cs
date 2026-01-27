@@ -11,9 +11,17 @@
             return item.shoot != ProjectileID.None && item.rare <= ItemRarityID.Orange;
         }
 
-        //public override string GetDescription() => "Critically strikes while you are above the target";
+        public override void SpecialPrefixHoldItem(Item item, Player player)
+        {
+            if (player.controlJump)
+            {
+                if (player.velocity.Y > 0.1f) player.velocity.Y = 0.1f;
+                player.fallStart = (int)player.position.Y;
+                player.noFallDmg = true;
+            }
+        }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Player.position.Y + Player.height < target.position.Y;
         }

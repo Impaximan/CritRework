@@ -16,7 +16,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
 
         public override bool ShowWhenActive => true;
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Player.GetModPlayer<CritPlayer>().timeSinceCrit <= 60 * 3;
         }

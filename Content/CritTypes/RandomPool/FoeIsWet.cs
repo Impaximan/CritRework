@@ -11,7 +11,7 @@
             return item.type == ItemID.ThunderSpear;
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return target.wet || target.HasBuff(BuffID.Wet) || (Player.ZoneOverworldHeight && Main.raining);
         }

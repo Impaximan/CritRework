@@ -15,7 +15,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
 
         public override float GetDamageMult(Player Player, Item Item) => 1.5f;
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Player.statLife <= Player.statLifeMax2 / 2;
         }

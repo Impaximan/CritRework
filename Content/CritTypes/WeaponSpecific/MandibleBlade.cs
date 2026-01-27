@@ -11,7 +11,7 @@
 
         public override float GetDamageMult(Player Player, Item Item) => 1.5f;
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             if (target.velocity == Vector2.Zero) return false;
 

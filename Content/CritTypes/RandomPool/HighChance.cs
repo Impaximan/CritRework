@@ -8,9 +8,10 @@
 
         //public override string GetDescription() => "Critically strikes 50% of the time";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
-            return Main.rand.NextFloat() <= 0.25f + Player.luck * 0.25f;
+            float chance = specialPrefix ? 0.5f : 0.25f;
+            return Main.rand.NextFloat() <= chance + Player.luck * chance;
         }
     }
 }

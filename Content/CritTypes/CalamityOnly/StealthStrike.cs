@@ -29,7 +29,7 @@ namespace CritRework.Content.CritTypes.RandomPool
             return false;
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             if (ModLoader.TryGetMod("CalamityMod", out Mod Calamity))
             {

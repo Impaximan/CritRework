@@ -14,7 +14,7 @@
 //            return item.useAmmo == AmmoID.Arrow;
 //        }
 
-//        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+//        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
 //        {
 //            return Player.GetModPlayer<CritPlayer>().timeSinceArrowPickup <= 180;
 //        }

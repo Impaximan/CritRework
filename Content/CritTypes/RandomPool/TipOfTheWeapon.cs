@@ -15,7 +15,7 @@ namespace CritRework.Content.CritTypes.RandomPool
             return item.noMelee == false && item.DamageType == DamageClass.Melee;
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Projectile == null && Player.Distance(target.getRect().ClosestPointInRect(Player.Center)) - Item.Size.Length() >= 0f;
         }

@@ -52,7 +52,7 @@ namespace CritRework.Content.Items.Equipable.Accessories
             {
                 player.GetModPlayer<CritPlayer>().prostheticCrit = cItem.critType;
 
-                if (cItem.critType.ShowWhenActive && cItem.critType.ShouldCrit(player, Item, null, null, new NPC.HitModifiers()))
+                if (cItem.critType.ShowWhenActive && cItem.critType.ShouldCrit(player, Item, null, null, new NPC.HitModifiers(), Item.prefix == ModContent.PrefixType<Prefixes.Weapon.Special>()))
                 {
                     player.AddBuff(ModContent.BuffType<ProstheticsActive>(), 2);
                 }

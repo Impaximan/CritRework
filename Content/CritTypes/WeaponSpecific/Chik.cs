@@ -14,7 +14,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
 
         public override float GetDamageMult(Player Player, Item Item) => 2f;
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Projectile.TryGetGlobalProjectile(out CritProjectile p) && (p.npcsHit.Count >= 2 || (p.npcsHit.Count == 1 && !p.npcsHit.Contains(target)));
         }

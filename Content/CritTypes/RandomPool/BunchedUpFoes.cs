@@ -14,7 +14,7 @@
         const int minNumber = 4;
         //public override string GetDescription() => "Critically strikes when there are many enemies in close proximity to each other";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             int numberOfEnemies = 0;
 

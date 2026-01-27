@@ -66,7 +66,7 @@ namespace CritRework.Common.Globals
             {
                 if (player.HasEquip<SharpenedWrench>())
                 {
-                    if (critItem.critType != null && critItem.critType.ShowWhenActive && (item.pick > 0 || item.axe > 0 || item.hammer > 0) && critItem.critType.ShouldCrit(player, item, null, null, new NPC.HitModifiers()))
+                    if (critItem.critType != null && critItem.critType.ShowWhenActive && (item.pick > 0 || item.axe > 0 || item.hammer > 0) && critItem.critType.ShouldCrit(player, item, null, null, new NPC.HitModifiers(), item.prefix == ModContent.PrefixType<Special>()))
                     {
                         mult *= 1.3f;
                     }
@@ -119,7 +119,7 @@ namespace CritRework.Common.Globals
                     float baseScale = 30f;
                     if (Main.LocalPlayer.HeldItem == item && !Main.playerInventory) baseScale = 80f;
 
-                    if (c.critType.ShouldCrit(Main.LocalPlayer, item, null, null, new NPC.HitModifiers()))
+                    if (c.critType.ShouldCrit(Main.LocalPlayer, item, null, null, new NPC.HitModifiers(), item.prefix == ModContent.PrefixType<Special>()))
                     {
                         alphaMult += (1f - alphaMult) * 0.2f;
                     }
@@ -210,6 +210,10 @@ namespace CritRework.Common.Globals
             if (critType == null)
             {
                 AddCritType(item);
+            }
+            else if (item.IsSpecial())
+            {
+                critType.SpecialPrefixHoldItem(item, player);
             }
         }
 

@@ -11,13 +11,18 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
 
         public override bool ShowWhenActive => true;
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override void SpecialPrefixHoldItem(Item item, Player player)
+        {
+            player.AddBuff(BuffID.Poisoned, 1);
+        }
+
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             for (int i = 0; i < Player.buffType.Length; i++)
             {
                 int type = Player.buffType[i];
 
-                if (Main.debuff[type] && !Main.buffNoTimeDisplay[type] && Main.TryGetBuffTime(i, out int time) && time > 5 && Player.lifeRegen < 0)
+                if (Main.debuff[type] && !Main.buffNoTimeDisplay[type] && Main.TryGetBuffTime(i, out int time) && Player.lifeRegen < 0)
                 {
                     return true;
                 }

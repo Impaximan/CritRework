@@ -5,6 +5,15 @@ namespace CritRework.Common
 {
     public abstract class CritType : ILoadable
     {
+        #region Special Prefix Overrides
+
+        public virtual void SpecialPrefixHoldItem(Item item, Player player)
+        {
+
+        }
+
+        #endregion
+
         bool loaded = false;
 
         public static float CalculateActualCritMult(CritType critType, Item Item, Player Player)
@@ -71,7 +80,7 @@ namespace CritRework.Common
         }
 
 #nullable enable
-        public abstract bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers);
+        public abstract bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix);
 #nullable disable
 
         public abstract float GetDamageMult(Player Player, Item Item);

@@ -15,7 +15,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
             return item.useAmmo != AmmoID.None;
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return !Projectile.GetGlobalProjectile<CritProjectile>().consumedAmmo;
         }

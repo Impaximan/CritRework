@@ -18,12 +18,20 @@
 
         public override bool CanApplyTo(Item item)
         {
-            return item.rare <= ItemRarityID.Orange;
+            return item.OriginalRarity <= ItemRarityID.Orange;
         }
 
-        //public override string GetDescription() => "Critically strikes while you are below the target";
+        public override void SpecialPrefixHoldItem(Item item, Player player)
+        {
+            if (player.controlDown && player.velocity.Y != 0 && player.jump == 0)
+            {
+                player.velocity.Y = player.maxFallSpeed;
+            }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+            player.noFallDmg = true;
+        }
+
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Player.position.Y > target.position.Y + target.height;
         }

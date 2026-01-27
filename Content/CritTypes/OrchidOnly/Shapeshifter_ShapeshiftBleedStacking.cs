@@ -27,7 +27,7 @@ namespace CritRework.Content.CritTypes.RandomPool
             return false;
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             if (ModLoader.TryGetMod("OrchidMod", out Mod OrchidMod))
             {
@@ -92,7 +92,7 @@ namespace CritRework.Content.CritTypes.RandomPool
             return false;
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             if (ModLoader.TryGetMod("OrchidMod", out Mod OrchidMod))
             {
@@ -163,7 +163,7 @@ namespace CritRework.Content.CritTypes.RandomPool
             return false;
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             if (ModLoader.TryGetMod("OrchidMod", out Mod OrchidMod))
             {

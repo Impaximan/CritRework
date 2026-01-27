@@ -13,7 +13,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
             return item.type != ModContent.ItemType<Items.Equipable.Accessories.WiseCracker>() && item.type != ModContent.ItemType<Items.Bronze.BronzeQuarterstaff>();
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             if (Projectile != null)
             {

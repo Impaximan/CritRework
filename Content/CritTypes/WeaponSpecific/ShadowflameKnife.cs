@@ -13,7 +13,7 @@
 
         //public override string GetDescription() => "Critically strikes after ricocheting off at least one target";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             if (Projectile != null)
             {

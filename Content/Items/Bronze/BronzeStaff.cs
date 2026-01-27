@@ -47,7 +47,7 @@ namespace CritRework.Content.Items.Bronze
             return item.type == ModContent.ItemType<BronzeStaff>();
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Player.statMana <= 20;
         }

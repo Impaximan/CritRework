@@ -10,7 +10,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
 
         public override bool ShowWhenActive => true;
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Player.GetModPlayer<CritPlayer>().timeSinceGoldPickup <= 60 * 3;
         }

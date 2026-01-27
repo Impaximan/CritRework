@@ -51,7 +51,7 @@ namespace CritRework.Content.CritTypes
             return getDamageMult(Player, Item);
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return shouldCrit(Player, Item, Projectile, target, modifiers);
         }

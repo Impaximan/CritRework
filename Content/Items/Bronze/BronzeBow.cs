@@ -47,7 +47,7 @@ namespace CritRework.Content.Items.Bronze
             return item.type == ModContent.ItemType<BronzeBow>();
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             float dist = target.getRect().ClosestPointInRect(Player.Center).Distance(Player.Center);
             return dist > 16f * 15 && dist < 16 * 20f;

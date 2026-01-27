@@ -34,7 +34,7 @@ namespace CritRework.Content.CritTypes.OrchidOnly
             return false;
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Player.TryGetModPlayer(out CritPlayer c) && c.timeSincePredatorHit <= 300;
         }
@@ -64,7 +64,7 @@ namespace CritRework.Content.CritTypes.OrchidOnly
             return false;
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Player.TryGetModPlayer(out CritPlayer c) && c.timeSinceSymbioteHit <= 300;
         }
@@ -94,7 +94,7 @@ namespace CritRework.Content.CritTypes.OrchidOnly
             return false;
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Player.TryGetModPlayer(out CritPlayer c) && c.timeSinceSageHit <= 300;
         }
@@ -124,7 +124,7 @@ namespace CritRework.Content.CritTypes.OrchidOnly
             return false;
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Player.TryGetModPlayer(out CritPlayer c) && c.timeSinceWardenHit <= 300;
         }

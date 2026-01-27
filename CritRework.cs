@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Audio;
 using ReLogic.Content;
 using CritRework.Content.CritTypes;
 using CritRework.Common.ModPlayers;
+using CritRework.Content.Prefixes.Weapon;
 
 namespace CritRework
 {
@@ -119,7 +120,7 @@ namespace CritRework
         //        critMod.Call("AddCritType", //Neccessary argument to indicate what call you're actually using
         //            this, //The instance of your mod
         //            true, //Whether or not the crit type can appear randomly on items. In this case, it can
-        //            (Player player, Item item, Projectile projectile, NPC target, NPC.HitModifiers modifiers) => // A function determining whether or not a given hit should critically strike on the enemy.
+        //            (Player player, Item item, Projectile projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix) => // A function determining whether or not a given hit should critically strike on the enemy.
         //            {
         //                return Main.rand.NextFloat() <= 0.25f + 0.25f * player.luck; //In this example, the crit will happen 25% of the time with default luck
         //            },
@@ -150,6 +151,11 @@ namespace CritRework
             }
 
             return false;
+        }
+
+        public static bool IsSpecial(this Item item)
+        {
+            return item.prefix == ModContent.PrefixType<Special>();
         }
     }
 }

@@ -6,6 +6,7 @@ using CritRework.Content.Items.Bronze.BronzeArmor;
 using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Weapons.Gloves;
 using CritRework.Content.Items.Whetstones;
+using CritRework.Content.Prefixes.Weapon;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -340,7 +341,7 @@ namespace CritRework.Common.ModPlayers
 
         private NPC.HitModifiers ApplyModifiers(Item item, Projectile? projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
         {
-            if (critType != null && critType.ShouldCrit(Player, item, projectile, target, modifiers) && (prostheticCrit == null || prostheticCrit.ShouldCrit(Player, item, projectile, target, modifiers)))
+            if (critType != null && critType.ShouldCrit(Player, item, projectile, target, modifiers, item.prefix == ModContent.PrefixType<Special>()) && (prostheticCrit == null || prostheticCrit.ShouldCrit(Player, item, projectile, target, modifiers, item.prefix == ModContent.PrefixType<Special>())))
             {
                 modifiers.SetCrit();
                 modifiers.SourceDamage *= CritType.CalculateActualCritMult(critType, item, Player);
@@ -418,7 +419,7 @@ namespace CritRework.Common.ModPlayers
                 crystalShieldDefense = 0;
             }
 
-            if (EVILCrit != null && EVILCrit.ShouldCrit(Player, shadowDonut.Item, null, null, new()))
+            if (EVILCrit != null && EVILCrit.ShouldCrit(Player, shadowDonut.Item, null, null, new(), false))
             {
                 Player.AddBuff(ModContent.BuffType<ShadowFrenzy>(), 60 * 5, false);
                 CombatText.NewText(Player.getRect(), Color.MediumPurple, "CRITICAL STRIKE", true);
@@ -433,7 +434,7 @@ namespace CritRework.Common.ModPlayers
 
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
-            if (EVILCrit != null && EVILCrit.ShouldCrit(Player, shadowDonut.Item, null, null, new()))
+            if (EVILCrit != null && EVILCrit.ShouldCrit(Player, shadowDonut.Item, null, null, new(), false))
             {
                 modifiers.FinalDamage *= EVILCrit.GetDamageMult(Player, shadowDonut.Item);
             }

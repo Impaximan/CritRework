@@ -14,7 +14,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
 
         public override float GetDamageMult(Player Player, Item Item) => 2.5f;
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Projectile.TryGetGlobalProjectile(out CritProjectile p) && p.targetsHit >= 10;
         }
@@ -31,7 +31,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
 
         public override float GetDamageMult(Player Player, Item Item) => 1.35f;
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Projectile.TryGetGlobalProjectile(out CritProjectile p) && p.targetsHit >= 20;
         }

@@ -34,7 +34,7 @@ namespace CritRework.Content.Items.Equipable.Accessories
             {
                 if (player.HeldItem.TryGetGlobalItem(out CritItem critItem))
                 {
-                    if (critItem.critType != null && critItem.critType.ShowWhenActive && (player.HeldItem.pick > 0 || player.HeldItem.axe > 0 || player.HeldItem.hammer > 0) && critItem.critType.ShouldCrit(player, player.HeldItem, null, null, new NPC.HitModifiers()))
+                    if (critItem.critType != null && critItem.critType.ShowWhenActive && (player.HeldItem.pick > 0 || player.HeldItem.axe > 0 || player.HeldItem.hammer > 0) && critItem.critType.ShouldCrit(player, player.HeldItem, null, null, new NPC.HitModifiers(), player.HeldItem.prefix == ModContent.PrefixType<Prefixes.Weapon.Special>()))
                     {
                         player.pickSpeed -= 0.30f;
                     }

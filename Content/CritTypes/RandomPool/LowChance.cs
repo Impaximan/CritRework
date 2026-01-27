@@ -11,9 +11,10 @@
             return item.type == ItemID.ZapinatorGray || item.type == ItemID.ZapinatorOrange;
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
-            return Main.rand.NextFloat() <= 0.01f + Player.luck * 0.01f;
+            float chance = specialPrefix ? 0.02f : 0.01f;
+            return Main.rand.NextFloat() <= chance + Player.luck * chance;
         }
     }
 }

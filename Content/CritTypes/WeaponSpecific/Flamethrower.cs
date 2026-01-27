@@ -15,7 +15,7 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         //public override string GetDescription() => "Critically strikes while the target is covered in slime";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             List<int> countedBuffs = new()
             {

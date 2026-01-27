@@ -141,6 +141,12 @@ namespace CritRework.Common.Globals
                 fromNecromantic = true;
             }
 
+            if (item.type == ItemID.Trident && item.IsSpecial())
+            {
+                projectile.usesLocalNPCImmunity = true;
+                projectile.localNPCHitCooldown = 8;
+            }
+
             if (player != null)
             {
                 if (player.TryGetModPlayer(out CritPlayer cPlayer))

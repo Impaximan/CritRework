@@ -13,9 +13,9 @@
             return !item.DamageType.CountsAsClass(DamageClass.Melee) && !item.DamageType.GetType().Name.Contains("ShapeshifterDamageClass") && !item.DamageType.GetType().Name.Contains("GuardianDamageClass");
         }
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
-            return Player.Distance(target.getRect().ClosestPointInRect(Player.Center)) <= 96;
+            return Player.Distance(target.getRect().ClosestPointInRect(Player.Center)) <= 96 * (specialPrefix ? 3f : 1f);
         }
     }
 }

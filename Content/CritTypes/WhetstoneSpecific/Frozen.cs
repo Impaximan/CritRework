@@ -8,7 +8,7 @@
 
         //public override string GetDescription() => "Critically strikes on targets moving less than 10 miles per hour";
 
-        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers)
+        public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return target.velocity.Length() <= 2f;
         }
