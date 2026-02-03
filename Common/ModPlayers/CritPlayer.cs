@@ -39,6 +39,8 @@ namespace CritRework.Common.ModPlayers
         public int timeSinceArrowPickup = 0;
         public int noxiousEyeCooldown = 0;
         public int timeSinceBlowpipe = 0;
+        public int timeSinceMovingSlow = 0;
+        public int timeSinceGravityWell = 0;
         public bool pirateArmor = false;
         public bool allowNewChakram = false;
 
@@ -134,8 +136,15 @@ namespace CritRework.Common.ModPlayers
             timeSinceDaggerBonus++;
             timeSinceArrowPickup++;
             timeSinceBlowpipe++;
+            timeSinceGravityWell++;
+            timeSinceMovingSlow++;
             if (noxiousEyeCooldown > 0) noxiousEyeCooldown--;
             UpdateSlotMachine();
+
+            if (Player.velocity.Length() <= 2f)
+            {
+                timeSinceMovingSlow = 0;
+            }
 
             if (ModLoader.HasMod("OrchidMod"))
             {
@@ -369,7 +378,8 @@ namespace CritRework.Common.ModPlayers
 
                     List<int> oddExceptions = new()
                     {
-                        BuffID.OnFire3
+                        BuffID.OnFire3,
+                        BuffID.Frostburn2
                     };
 
                     foreach (int type in target.buffType)

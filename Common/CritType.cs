@@ -12,6 +12,11 @@ namespace CritRework.Common
 
         }
 
+        public virtual void SpecialPrefixOnHitNPC(Item item, Player player, Projectile? projectile, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+
+        }
+
         #endregion
 
         bool loaded = false;

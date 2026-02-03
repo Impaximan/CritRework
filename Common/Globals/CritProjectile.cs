@@ -56,6 +56,14 @@ namespace CritRework.Common.Globals
             {
                 OnHitNPC_Orchid(projectile, target, hit, damageDone);
             }
+
+            if (ogItem != null)
+            {
+                if (ogItem.IsSpecial() && ogItem.TryGetCritType(out CritType critType))
+                {
+                    critType.SpecialPrefixOnHitNPC(ogItem, Main.player[projectile.owner], projectile, target, hit, damageDone);
+                }
+            }
         }
 
         [JITWhenModsEnabled("OrchidMod")]

@@ -1,4 +1,6 @@
-﻿namespace CritRework.Content.CritTypes.RandomPool
+﻿using CritRework.Common.ModPlayers;
+
+namespace CritRework.Content.CritTypes.RandomPool
 {
     internal class StandingStill : CritType
     {
@@ -10,7 +12,7 @@
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
-            return Player.velocity.Length() <= 2f;
+            return Player.velocity.Length() <= 2f || (specialPrefix && Player.GetModPlayer<CritPlayer>().timeSinceMovingSlow < 60);
         }
     }
 }

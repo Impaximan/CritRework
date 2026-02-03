@@ -2,3 +2,4 @@
 -Added "Special" prefixes, which are prefixes exclusive to weapons with certain critical strike conditions
 -[b]This means over 80 new prefixes[/b]
 -Prosthetic Arm can no longer have cooldown-based crit conditions
+-Reworked "Critically strikes if the projectile has been travelling for more than 1 second" slightly

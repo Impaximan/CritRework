@@ -17,7 +17,7 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
-            return Projectile == null && Player.Distance(target.getRect().ClosestPointInRect(Player.Center)) - Item.Size.Length() >= 0f;
+            return Projectile == null && Player.Distance(target.getRect().ClosestPointInRect(Player.Center)) - Item.Size.Length() * Player.GetAdjustedItemScale(Item) >= 0f;
         }
     }
 }

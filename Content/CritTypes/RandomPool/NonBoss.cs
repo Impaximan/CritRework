@@ -11,6 +11,14 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         public override bool ShowWhenActive => false;
 
+        public override void SpecialPrefixOnHitNPC(Item item, Player player, Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (hit.Crit)
+            {
+                player.AddBuff(BuffID.Mining, 3600);
+            }
+        }
+
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return !target.boss && !new List<int>() { NPCID.EaterofWorldsHead, 

@@ -4,9 +4,7 @@
     {
         public override bool InRandomPool => true;
 
-        public override float GetDamageMult(Player Player, Item Item) => 1.25f;
-
-        //public override string GetDescription() => "Critically strikes if the projectile has been travelling for more than 1 second";
+        public override float GetDamageMult(Player Player, Item Item) => 1.2f;
 
         public override bool CanApplyTo(Item item)
         {
@@ -17,7 +15,8 @@
         {
             if (Projectile != null)
             {
-                return Projectile.GetGlobalProjectile<Common.Globals.CritProjectile>().timeActive >= 60;
+                int t = Projectile.GetGlobalProjectile<Common.Globals.CritProjectile>().timeActive;
+                return t >= 60 && (t < 240 || specialPrefix);
             }
             return false;
         }
