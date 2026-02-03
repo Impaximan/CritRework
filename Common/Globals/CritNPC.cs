@@ -231,6 +231,11 @@ namespace CritRework.Common.Globals
 
         public override void SetDefaults(NPC NPC)
         {
+            if (NPC.lifeMax == int.MaxValue)
+            {
+                return;
+            }
+
             if (NPC.boss || new List<int>() { NPCID.EaterofWorldsHead,
                 NPCID.EaterofWorldsBody,
                 NPCID.EaterofWorldsTail,
