@@ -570,9 +570,9 @@ CritTypes: {
 
 	FoeIsWet: {
 		Description: Critically strikes while the target is wet or underwater
-		SpecialPrefixName: Conducting
-		SpecialPrefixTooltip1: Critical strikes electrify hit enemies
-		SpecialPrefixTooltip2: ""
+		SpecialPrefixName: Bubbling
+		SpecialPrefixTooltip1: Periodically spawns water bubbles that make enemies wet while held
+		SpecialPrefixTooltip2: Chance to spawn additional bubbles on critical strike
 	}
 
 	FoeOnFire: {
@@ -1138,6 +1138,7 @@ Projectiles: {
 	LeadChakramProjectile.DisplayName: Lead Chakram Projectile
 	GoldJavelinProjectile.DisplayName: Gold Javelin Projectile
 	PlatinumJavelinProjectile.DisplayName: Platinum Javelin Projectile
+	WetBubble.DisplayName: Wet Bubble
 }
 
 BronzeHelm.SetBonus:
