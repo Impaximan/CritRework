@@ -1,5 +1,10 @@
 ﻿Update 1.5.0.0
+New additions:
+-Added 6 new vanity accessories which allow you to customize the sounds made by critical strikes
 -Added "Special" prefixes, which are prefixes exclusive to weapons with certain critical strike conditions
 -[b]This means over 80 new prefixes[/b]
+
+Balance changes:
 -Prosthetic Arm can no longer have cooldown-based crit conditions
+-Reduced drop rates of Noxious Eye, Rabid Claw, and Sparking Sludge
 -Reworked "Critically strikes if the projectile has been travelling for more than 1 second" slightly

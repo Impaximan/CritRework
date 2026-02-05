@@ -1,9 +1,20 @@
-﻿namespace CritRework.Common.Systems
+﻿using CritRework.Content.Items.Equipable.Tokens;
+using Terraria.Utilities;
+
+namespace CritRework.Common.Systems
 {
     class ChestLoot : ModSystem
     {
         public override void PostWorldGen()
         {
+            WeightedRandom<int> tokens = new(WorldGen.genRand);
+            tokens.Add(ModContent.ItemType<OrchestraToken>(), 0.5f);
+            tokens.Add(ModContent.ItemType<RockToken>(), 0.8f);
+            tokens.Add(ModContent.ItemType<BoxingToken>(), 1f);
+            tokens.Add(ModContent.ItemType<DuckyToken>(), 1f);
+            tokens.Add(ModContent.ItemType<BoneToken>(), 0.8f);
+            tokens.Add(ModContent.ItemType<MetalPipeToken>(), 0.1f);
+
             for (int i = 0; i < 1000; i++)
             {
                 Chest chest = Main.chest[i];
@@ -200,6 +211,19 @@
                                     chest.item[inventoryIndex].stack = 1;
                                     break;
                                 }
+                            }
+                        }
+                    }
+
+                    if (WorldGen.genRand.NextBool(12) || (Main.drunkWorld && Main.rand.NextBool(5)))
+                    {
+                        for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                        {
+                            if (chest.item[inventoryIndex].type == ItemID.None)
+                            {
+                                chest.item[inventoryIndex].SetDefaults(tokens.Get());
+                                chest.item[inventoryIndex].stack = 1;
+                                break;
                             }
                         }
                     }

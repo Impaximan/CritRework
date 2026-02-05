@@ -44,6 +44,9 @@ namespace CritRework.Common.ModPlayers
         public bool pirateArmor = false;
         public bool allowNewChakram = false;
 
+        //Tokens
+        public SoundStyle? uniqueCritSound = null;
+
         //Thorium mod only
         public int lastTechPoints = 0;
         public int timeSinceTechnique = 600;
@@ -100,6 +103,7 @@ namespace CritRework.Common.ModPlayers
             EVILCrit = null;
             shadowDonut = null;
             prostheticCrit = null;
+            uniqueCritSound = null;
         }
 
         int crystalLossCounter = 0;

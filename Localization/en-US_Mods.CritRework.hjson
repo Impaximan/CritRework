@@ -352,6 +352,36 @@ Items: {
 		DisplayName: Sparkle Icon
 		Tooltip: ""
 	}
+
+	DuckyToken: {
+		DisplayName: Ducky Token
+		Tooltip: Squeaks on critical strike
+	}
+
+	MetalPipeToken: {
+		DisplayName: Metal Pipe Token
+		Tooltip: Makes... a noise. On critical strike
+	}
+
+	BoxingToken: {
+		DisplayName: Boxing Token
+		Tooltip: Plays a punching sound on critical strike
+	}
+
+	BoneToken: {
+		DisplayName: Bone Token
+		Tooltip: Plays a xylophone sound on critical strike
+	}
+
+	RockToken: {
+		DisplayName: Rock Token
+		Tooltip: Makes rock sounds on critical strike
+	}
+
+	OrchestraToken: {
+		DisplayName: Orchestra Token
+		Tooltip: Makes cinematic noises on critical strike
+	}
 }
 
 Whetstone: {
