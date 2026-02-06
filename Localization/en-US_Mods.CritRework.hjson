@@ -382,6 +382,35 @@ Items: {
 		DisplayName: Orchestra Token
 		Tooltip: Makes cinematic noises on critical strike
 	}
+
+	FireInABottle: {
+		DisplayName: Fire In A Bottle
+		Tooltip:
+			'''
+			Allows the holder to double jump after critically striking while midair
+			Critically striking five times while midair allows you to jump yet again
+			'''
+	}
+
+	FireInABalloon: {
+		DisplayName: Fire In A Balloon
+		Tooltip:
+			'''
+			Allows the holder to double jump after critically striking while midair
+			Critically striking five times while midair allows you to jump yet again
+			Increases jump height
+			'''
+	}
+
+	MagmaHorseshoeBalloon: {
+		DisplayName: Magma Horseshoe Balloon
+		Tooltip:
+			'''
+			Allows the holder to double jump after critically striking while midair
+			Critically striking five times while midair allows you to jump yet again
+			Increases jump height and negates fall damage
+			'''
+	}
 }
 
 Whetstone: {

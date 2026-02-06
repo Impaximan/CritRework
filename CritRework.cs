@@ -42,6 +42,7 @@ namespace CritRework
         public static float bossLife = 1f;
         public static float enemyLife = 1f;
 
+
         public static CritType GetCrit<T>() where T : CritType
         {
             return loadedCritTypes.Find(x => x is T);

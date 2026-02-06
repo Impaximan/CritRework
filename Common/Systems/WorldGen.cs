@@ -1,5 +1,8 @@
 ﻿using CritRework.Content.Items.Equipable.Tokens;
+using Mono.Cecil.Cil;
+using Terraria.Map;
 using Terraria.Utilities;
+using Terraria.WorldBuilding;
 
 namespace CritRework.Common.Systems
 {
@@ -19,8 +22,46 @@ namespace CritRework.Common.Systems
             {
                 Chest chest = Main.chest[i];
 
+
                 if (chest != null)
                 {
+                    if (chest.y > GenVars.lavaLine) //Lava layer chests
+                    {
+                        if (WorldGen.genRand.NextBool(5))
+                        {
+                            Item lastItem = null;
+
+                            if (chest.item[0].type == ItemID.CloudinaBottle)
+                            {
+                                chest.item[0].SetDefaults(ModContent.ItemType<Content.Items.Equipable.Accessories.FireInABottle>());
+                                chest.item[0].Prefix(-1);
+                                chest.item[0].stack = 1;
+                            }
+                            else
+                            {
+
+                                for (int inventoryIndex = 1; inventoryIndex < 40; inventoryIndex++)
+                                {
+                                    if (lastItem != null)
+                                    {
+                                        Item newLastItem = chest.item[inventoryIndex].Clone();
+                                        chest.item[inventoryIndex] = lastItem.Clone();
+                                        lastItem = newLastItem;
+                                    }
+                                    else
+                                    {
+                                        lastItem = chest.item[inventoryIndex].Clone();
+                                        chest.item[inventoryIndex].SetDefaults(ItemID.None);
+                                    }
+                                }
+
+                                chest.item[1].SetDefaults(ModContent.ItemType<Content.Items.Equipable.Accessories.FireInABottle>());
+                                chest.item[1].Prefix(-1);
+                                chest.item[1].stack = 1;
+                            }
+                        }
+                    }
+
                     if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 0 * 36) //Wooden chest
                     {
                         if (WorldGen.genRand.NextBool(7))
@@ -30,6 +71,7 @@ namespace CritRework.Common.Systems
                                 if (chest.item[inventoryIndex].type == ItemID.None)
                                 {
                                     chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Equipable.Accessories.SharpenedWrench>());
+                                    chest.item[inventoryIndex].Prefix(-1);
                                     chest.item[inventoryIndex].stack = 1;
                                     break;
                                 }
@@ -51,6 +93,7 @@ namespace CritRework.Common.Systems
                                 if (chest.item[inventoryIndex].type == ItemID.None)
                                 {
                                     chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Equipable.Accessories.SharpenedWrench>());
+                                    chest.item[inventoryIndex].Prefix(-1);
                                     chest.item[inventoryIndex].stack = 1;
                                     break;
                                 }
@@ -82,6 +125,7 @@ namespace CritRework.Common.Systems
                                 if (chest.item[inventoryIndex].type == ItemID.None)
                                 {
                                     chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Equipable.Accessories.EternalGuillotine>());
+                                    chest.item[inventoryIndex].Prefix(-1);
                                     chest.item[inventoryIndex].stack = 1;
                                     break;
                                 }
@@ -111,6 +155,7 @@ namespace CritRework.Common.Systems
                                 if (chest.item[inventoryIndex].type == ItemID.None)
                                 {
                                     chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Equipable.Accessories.ShadowDonut>());
+                                    chest.item[inventoryIndex].Prefix(-1);
                                     chest.item[inventoryIndex].stack = 1;
                                     break;
                                 }
@@ -143,6 +188,7 @@ namespace CritRework.Common.Systems
                                 if (chest.item[inventoryIndex].type == ItemID.None)
                                 {
                                     chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Equipable.Accessories.ThawingCloth>());
+                                    chest.item[inventoryIndex].Prefix(-1);
                                     chest.item[inventoryIndex].stack = 1;
                                     break;
                                 }
@@ -222,6 +268,7 @@ namespace CritRework.Common.Systems
                             if (chest.item[inventoryIndex].type == ItemID.None)
                             {
                                 chest.item[inventoryIndex].SetDefaults(tokens.Get());
+                                chest.item[inventoryIndex].Prefix(-1);
                                 chest.item[inventoryIndex].stack = 1;
                                 break;
                             }
