@@ -432,6 +432,8 @@ namespace CritRework.Common.ModPlayers
 
 
                 crystalShieldDefense = 0;
+
+                Player.AddBuff(ModContent.BuffType<CrystalShieldCooldown>(), 600);
             }
 
             if (EVILCrit != null && EVILCrit.ShouldCrit(Player, shadowDonut.Item, null, null, new(), false))

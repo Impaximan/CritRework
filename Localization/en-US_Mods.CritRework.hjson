@@ -244,7 +244,7 @@ Items: {
 			'''
 			5% increased melee critical strike chance
 			Inflicting critical strikes grants a stacking defense buff, up to 50 defense
-			Upon getting hit, that buff is reset
+			Upon getting hit, that buff is reset and put on a 10 second cooldown
 			'''
 	}
 
@@ -1182,6 +1182,11 @@ Buffs: {
 	ShadowFrenzy: {
 		DisplayName: Shadow Frenzy
 		Description: PANIC
+	}
+
+	CrystalShieldCooldown: {
+		DisplayName: Crystal Shield Broken
+		Description: Your crystal shield is inactive
 	}
 }
 
