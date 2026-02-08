@@ -2,3 +2,4 @@
 -Added "Special" prefixes, which are prefixes exclusive to weapons with certain critical strike conditions
 -[b]This means over 80 new prefixes[/b]
 -Prosthetic Arm can no longer have cooldown-based crit conditions
+-Reduced critical strike damage of the sniper rifle to account for all of the accessory additions that have been made since the mod's release (still very powerful)

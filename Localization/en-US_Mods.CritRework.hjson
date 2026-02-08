@@ -696,8 +696,8 @@ CritTypes: {
 
 	Sniper: {
 		Description: Critically strikes while the target is at least 75 tiles away
-		SpecialPrefixName: Unseen
-		SpecialPrefixTooltip1: Additionally critically strikes on max health enemies
+		SpecialPrefixName: Untraceable
+		SpecialPrefixTooltip1: Also critically strikes on max health enemies
 		SpecialPrefixTooltip2: ""
 	}
 
@@ -865,14 +865,14 @@ CritTypes: {
 	Katana: {
 		Description: Critically strikes while you have 0 defense
 		SpecialPrefixName: Countering
-		SpecialPrefixTooltip1: Critical strikes grant you greatly increased damage reduction for 1 second
+		SpecialPrefixTooltip1: Critical strikes grant you greatly increased damage reduction and knockback immunity for 1 second
 		SpecialPrefixTooltip2: ""
 	}
 
 	EyeOfCthulhu: {
 		Description: Critically strikes while you have less than 50% of your life left
 		SpecialPrefixName: Enraged
-		SpecialPrefixTooltip1: Critical strikes allow the yoyo to crit much more rapidly
+		SpecialPrefixTooltip1: Critical strikes allow the yoyo to hit much more rapidly
 		SpecialPrefixTooltip2: ""
 	}
 
@@ -913,7 +913,7 @@ CritTypes: {
 
 	HelFire: {
 		Description: Critically strikes when rapidly hitting enemies
-		SpecialPrefixName: Wailing
+		SpecialPrefixName: Weeping
 		SpecialPrefixTooltip1: Can hit enemies much more rapidly
 		SpecialPrefixTooltip2: Requires more rapid hits to critically strike
 	}
