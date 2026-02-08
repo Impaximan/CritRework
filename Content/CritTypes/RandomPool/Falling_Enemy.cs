@@ -6,6 +6,14 @@
 
         public override float GetDamageMult(Player Player, Item Item) => 1.6f;
 
+        public override void SpecialPrefixOnHitNPC(Item item, Player player, Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (hit.Crit)
+            {
+                target.velocity.Y = -20f * target.knockBackResist;
+            }
+        }
+
         public override bool CanApplyTo(Item item)
         {
             return true;

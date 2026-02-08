@@ -6,6 +6,14 @@ namespace CritRework.Content.CritTypes.RandomPool
     {
         public override bool InRandomPool => true;
 
+        public override void SpecialPrefixOnHitNPC(Item item, Player player, Projectile? projectile, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (hit.Crit)
+            {
+                target.AddBuff(BuffID.Venom, 60 * 10);
+            }
+        }
+
         public override float GetDamageMult(Player Player, Item Item) => 1.2f;
 
         //public override string GetDescription() => "Critically strikes while the target is poisoned";

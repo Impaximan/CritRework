@@ -10,6 +10,8 @@ using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Weapons;
 using CritRework.Content.Items.Weapons.Gloves;
 using System;
+using CritRework.Common.ModPlayers;
+using Terraria;
 
 namespace CritRework.Common.Globals
 {
@@ -55,7 +57,12 @@ namespace CritRework.Common.Globals
                 Volume = 1.75f
             };
 
-            if (CritRework.critSounds && hit.Crit)
+            if (player.TryGetModPlayer(out CritPlayer c) && c.uniqueCritSound.HasValue)
+            {
+                style = c.uniqueCritSound.Value;
+            }
+
+            if (hit.Crit && (CritRework.critSounds || (c != null && c.uniqueCritSound != null)))
             {
                 if (player.whoAmI == Main.myPlayer)
                 {
@@ -80,7 +87,12 @@ namespace CritRework.Common.Globals
                 Volume = 1.75f
             };
 
-            if (CritRework.critSounds && hit.Crit)
+            if (Main.player[projectile.owner].TryGetModPlayer(out CritPlayer c) && c.uniqueCritSound.HasValue)
+            {
+                style = c.uniqueCritSound.Value;
+            }
+
+            if (hit.Crit && (CritRework.critSounds || (c != null && c.uniqueCritSound != null)))
             {
                 if (projectile.owner == Main.myPlayer)
                 {
@@ -108,17 +120,17 @@ namespace CritRework.Common.Globals
 
             if (npc.type == NPCID.BloodZombie)
             {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RabidClaw>(), 6));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RabidClaw>(), 10));
             }
 
             if (npc.type == NPCID.Drippler)
             {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<NoxiousEye>(), 10));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<NoxiousEye>(), 20));
             }
 
             if (npc.aiStyle == NPCAIStyleID.Slime && !npc.friendly && !npc.CountsAsACritter)
             {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SparkingSludge>(), 75));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SparkingSludge>(), 125));
             }
         }
 
@@ -231,6 +243,11 @@ namespace CritRework.Common.Globals
 
         public override void SetDefaults(NPC NPC)
         {
+            if (NPC.lifeMax == int.MaxValue)
+            {
+                return;
+            }
+
             if (NPC.boss || new List<int>() { NPCID.EaterofWorldsHead,
                 NPCID.EaterofWorldsBody,
                 NPCID.EaterofWorldsTail,

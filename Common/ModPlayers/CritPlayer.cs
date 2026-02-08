@@ -39,8 +39,14 @@ namespace CritRework.Common.ModPlayers
         public int timeSinceArrowPickup = 0;
         public int noxiousEyeCooldown = 0;
         public int timeSinceBlowpipe = 0;
+        public int timeSinceMovingSlow = 0;
+        public int timeSinceGravityWell = 0;
+        public int fireJumpCounter = 0;
         public bool pirateArmor = false;
         public bool allowNewChakram = false;
+
+        //Tokens
+        public SoundStyle? uniqueCritSound = null;
 
         //Thorium mod only
         public int lastTechPoints = 0;
@@ -98,6 +104,7 @@ namespace CritRework.Common.ModPlayers
             EVILCrit = null;
             shadowDonut = null;
             prostheticCrit = null;
+            uniqueCritSound = null;
         }
 
         int crystalLossCounter = 0;
@@ -134,8 +141,15 @@ namespace CritRework.Common.ModPlayers
             timeSinceDaggerBonus++;
             timeSinceArrowPickup++;
             timeSinceBlowpipe++;
+            timeSinceGravityWell++;
+            timeSinceMovingSlow++;
             if (noxiousEyeCooldown > 0) noxiousEyeCooldown--;
             UpdateSlotMachine();
+
+            if (Player.velocity.Length() <= 2f)
+            {
+                timeSinceMovingSlow = 0;
+            }
 
             if (ModLoader.HasMod("OrchidMod"))
             {
@@ -369,7 +383,8 @@ namespace CritRework.Common.ModPlayers
 
                     List<int> oddExceptions = new()
                     {
-                        BuffID.OnFire3
+                        BuffID.OnFire3,
+                        BuffID.Frostburn2
                     };
 
                     foreach (int type in target.buffType)
@@ -417,6 +432,8 @@ namespace CritRework.Common.ModPlayers
 
 
                 crystalShieldDefense = 0;
+
+                Player.AddBuff(ModContent.BuffType<CrystalShieldCooldown>(), 600);
             }
 
             if (EVILCrit != null && EVILCrit.ShouldCrit(Player, shadowDonut.Item, null, null, new(), false))
@@ -538,11 +555,49 @@ namespace CritRework.Common.ModPlayers
 
             }
 
-            if (Player.HasEquip<NoxiousEye>() && hit.Crit && noxiousEyeCooldown <= 0)
+            if (Player.HasEquip<FireInABottle>() && hit.Crit && fireJumpCounter > 0)
+            {
+                fireJumpCounter--;
+
+                //for (int i = 0; i < 15; i++)
+                //{
+                //    float theta = Main.rand.NextFloat(MathHelper.TwoPi);
+
+                //    float distanceMult = Main.rand.NextFloat(0.8f, 1.2f);
+                //    Vector2 velocity = theta.ToRotationVector2() * 2f * -distanceMult;
+                //    Vector2 position = Player.Center + theta.ToRotationVector2() * 30f * distanceMult;
+
+                //    Dust dust = Dust.NewDustPerfect(position, DustID.Torch, velocity);
+                //    dust.noGravity = true;
+                //    dust.scale = 0.75f;
+                //}
+
+                if (fireJumpCounter <= 0)
+                {
+                    SoundEngine.PlaySound(SoundID.Item76, Player.Center);
+                    SoundEngine.PlaySound(SoundID.Item73, Player.Center);
+                    for (int i = 0; i < 60; i++)
+                    {
+                        float theta = Main.rand.NextFloat(MathHelper.TwoPi);
+
+                        float distanceMult = Main.rand.NextFloat(0.8f, 1.3f);
+                        Vector2 velocity = theta.ToRotationVector2() * 6f * -distanceMult;
+                        Vector2 position = Player.Center + theta.ToRotationVector2() * 65f * distanceMult;
+
+                        Dust dust = Dust.NewDustPerfect(position, DustID.Torch, velocity);
+                        dust.noGravity = true;
+                        dust.scale = 1.5f;
+                    }
+
+                    Player.GetJumpState<FireJump>().Available = true;
+                }
+            }
+
+            if (Player.HasEquip<NoxiousEye>() && hit.Crit)
             {
                 if (!cleansed) target.AddBuff(BuffID.Poisoned, 30);
 
-                if (Main.rand.NextBool(10) && target.type != NPCID.TargetDummy)
+                if (noxiousEyeCooldown <= 0 && Main.rand.NextBool(10) && target.type != NPCID.TargetDummy)
                 {
                     SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/Gas")
                     {

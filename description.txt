@@ -11,8 +11,8 @@ The purpose of this mod is to allow for more creative and niche build crafting f
 Full content list:
  - A complete overhaul of how critical strikes work (see above)
  - More than 60 different potential critical strike conditions
- - 50+ new items
- - 15 new crit oriented accessories (and more to come!)
+ - 60+ new items
+ - 20+ new crit oriented accessories (and more to come!)
  - A variety of weapon specific critical strike conditions designed to make certain weapons more interesting
  - A new weapon type, gloves, which allow you to utilize critical strikes with consumable weapons (such as Calamity's rogue weapons)
  - 15 different whetstones

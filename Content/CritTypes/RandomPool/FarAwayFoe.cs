@@ -6,8 +6,6 @@
 
         public override float GetDamageMult(Player Player, Item Item) => 1.2f;
 
-        //public override string GetDescription() => "Critically strikes while you are further than 40 tiles away from the target";
-
         public override bool CanApplyTo(Item item)
         {
             return !item.DamageType.CountsAsClass(DamageClass.Melee) && !item.DamageType.GetType().Name.Contains("GuardianDamageClass");
@@ -15,7 +13,7 @@
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
-            return Player.Distance(target.getRect().ClosestPointInRect(Player.Center)) >= 40 * 16;
+            return Player.Distance(target.getRect().ClosestPointInRect(Player.Center)) >= (specialPrefix ? 30 : 40) * 16;
         }
     }
 }

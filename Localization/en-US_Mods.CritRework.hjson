@@ -244,7 +244,7 @@ Items: {
 			'''
 			5% increased melee critical strike chance
 			Inflicting critical strikes grants a stacking defense buff, up to 50 defense
-			Upon getting hit, that buff is reset
+			Upon getting hit, that buff is reset and put on a 10 second cooldown
 			'''
 	}
 
@@ -351,6 +351,65 @@ Items: {
 	SparkleIcon: {
 		DisplayName: Sparkle Icon
 		Tooltip: ""
+	}
+
+	DuckyToken: {
+		DisplayName: Ducky Token
+		Tooltip: Squeaks on critical strike
+	}
+
+	MetalPipeToken: {
+		DisplayName: Metal Pipe Token
+		Tooltip: Makes... a noise. On critical strike
+	}
+
+	BoxingToken: {
+		DisplayName: Boxing Token
+		Tooltip: Plays a punching sound on critical strike
+	}
+
+	BoneToken: {
+		DisplayName: Bone Token
+		Tooltip: Plays a xylophone sound on critical strike
+	}
+
+	RockToken: {
+		DisplayName: Rock Token
+		Tooltip: Makes rock sounds on critical strike
+	}
+
+	OrchestraToken: {
+		DisplayName: Orchestra Token
+		Tooltip: Makes cinematic noises on critical strike
+	}
+
+	FireInABottle: {
+		DisplayName: Fire In A Bottle
+		Tooltip:
+			'''
+			Allows the holder to double jump after critically striking while midair
+			Critically striking five times while midair allows you to jump yet again
+			'''
+	}
+
+	FireInABalloon: {
+		DisplayName: Fire In A Balloon
+		Tooltip:
+			'''
+			Allows the holder to double jump after critically striking while midair
+			Critically striking five times while midair allows you to jump yet again
+			Increases jump height
+			'''
+	}
+
+	MagmaHorseshoeBalloon: {
+		DisplayName: Magma Horseshoe Balloon
+		Tooltip:
+			'''
+			Allows the holder to double jump after critically striking while midair
+			Critically striking five times while midair allows you to jump yet again
+			Increases jump height and negates fall damage
+			'''
 	}
 }
 
@@ -501,8 +560,8 @@ CritTypes: {
 	BunchedUpFoes: {
 		Description: Critically strikes when there are many enemies in close proximity to each other
 		SpecialPrefixName: Gravitational
-		SpecialPrefixTooltip1: Creates a gravity well that pulls enemies closer to one another on hit
-		SpecialPrefixTooltip2: ""
+		SpecialPrefixTooltip1: Creates a gravity well on hit that pulls enemies together
+		SpecialPrefixTooltip2: On critical strike, the gravity well is also damaging, and increases in size
 	}
 
 	CloseToFoe: {
@@ -521,8 +580,8 @@ CritTypes: {
 
 	FarFromFoe: {
 		Description: Critically strikes while you are further than 40 tiles away from the target
-		SpecialPrefixName: Introverted
-		SpecialPrefixTooltip1: Gains 50% critical strike chance if there are no enemies within 20 tiles of yourself
+		SpecialPrefixName: Extroverted
+		SpecialPrefixTooltip1: Critical strike distance reduced to 30 tiles
 		SpecialPrefixTooltip2: ""
 	}
 
@@ -556,23 +615,23 @@ CritTypes: {
 
 	FoeHasFourDebuffs: {
 		Description: Critically strikes while the target is inflicted with four or more debuffs
-		SpecialPrefixName: Plaguing
+		SpecialPrefixName: Harrowing
 		SpecialPrefixTooltip1: 20% chance to inflict a random debuff on hit
 		SpecialPrefixTooltip2: ""
 	}
 
 	FoeHasTwoDebuffs: {
 		Description: Critically strikes while the target is inflicted with two or more debuffs
-		SpecialPrefixName: Plaguing
+		SpecialPrefixName: Vexing
 		SpecialPrefixTooltip1: 10% chance to inflict a random debuff on hit
 		SpecialPrefixTooltip2: ""
 	}
 
 	FoeIsWet: {
 		Description: Critically strikes while the target is wet or underwater
-		SpecialPrefixName: Conducting
-		SpecialPrefixTooltip1: Critical strikes electrify hit enemies
-		SpecialPrefixTooltip2: ""
+		SpecialPrefixName: Bubbling
+		SpecialPrefixTooltip1: Periodically spawns water bubbles that make enemies wet while held
+		SpecialPrefixTooltip2: Chance to spawn additional bubbles on critical strike
 	}
 
 	FoeOnFire: {
@@ -611,9 +670,9 @@ CritTypes: {
 	}
 
 	MovingFast: {
-		Description: Critically strikes while you are moving faster than 60 miles per hour
+		Description: Critically strikes while you are moving faster than 70 miles per hour
 		SpecialPrefixName: Supersonic
-		SpecialPrefixTooltip1: Greatly increased movement speed while holding this weapon
+		SpecialPrefixTooltip1: Critical strike requirement reduced to 50 miles per hour
 		SpecialPrefixTooltip2: ""
 	}
 
@@ -626,14 +685,14 @@ CritTypes: {
 
 	StandingStill: {
 		Description: Critically strikes while you are moving less than 10 miles per hour
-		SpecialPrefixName: Rooted
-		SpecialPrefixTooltip1: While standing still and holding this weapon, gain knockback immunity and 25 defense
+		SpecialPrefixName: Calm
+		SpecialPrefixTooltip1: Continues critically striking for 1 second after moving less than 10 miles per hour
 		SpecialPrefixTooltip2: ""
 	}
 
 	TipOfTheWeapon: {
 		Description: Critically strikes when hitting enemies at the tip of the weapon
-		SpecialPrefixName: Gigantic
+		SpecialPrefixName: Gargantuan
 		SpecialPrefixTooltip1: Weapon size increased immeasurably
 		SpecialPrefixTooltip2: ""
 	}
@@ -667,9 +726,9 @@ CritTypes: {
 	}
 
 	ProjectileTravel: {
-		Description: Critically strikes if the projectile has been travelling for more than 1 second
+		Description: Critically strikes if the projectile has been travelling for more than 1 second and less than 4 seconds
 		SpecialPrefixName: Patient
-		SpecialPrefixTooltip1: Critical strikes extend the duration of the projectile
+		SpecialPrefixTooltip1: Critically strikes forever past 1 second
 		SpecialPrefixTooltip2: ""
 	}
 
@@ -989,15 +1048,70 @@ CritTypes: {
 	}
 
 	Shapeshifter_ShapeshiftSickness.Description: Critically strikes while you are afflicted with Shapeshifting Sickness
-	Shapeshifter_ShapeshiftBleedStackingMedium.Description: Critically strikes when you have inflicted at least 20 stacks of bleed total
-	Shapeshifter_ShapeshiftShawlDash.Description: Critically strikes for a brief moment after using a shawl dash
-	Shapeshifter_ShapeshiftBleedStackingHigh.Description: Critically strikes when you have inflicted at least 20 stacks of bleed total
-	Shapeshifter_ShapeshiftBleedStackingSingle.Description: Critically strikes when you have inflicted at least 5 stacks of bleed on the target enemy
-	Shapeshifter_AfterSkillUse.Description: Critically strikes on the next hit after using this shapeshift's skill
-	Shapeshifter_PredatorHit.Description: Critically strikes for 5 seconds after hitting an enemy as a predator wildshape
-	Shapeshifter_SageHit.Description: Critically strikes for 5 seconds after hitting an enemy as a sage wildshape
-	Shapeshifter_SymbioteHit.Description: Critically strikes for 5 seconds after hitting an enemy as a symbiote wildshape
-	Shapeshifter_WardenHit.Description: Critically strikes for 5 seconds after hitting an enemy as a warden wildshape
+
+	Shapeshifter_ShapeshiftBleedStackingMedium: {
+		Description: Critically strikes when you have inflicted at least 20 stacks of bleed total
+		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingMedium.SpecialPrefixName
+		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingMedium.SpecialPrefixTooltip1
+		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingMedium.SpecialPrefixTooltip2
+	}
+
+	Shapeshifter_ShapeshiftShawlDash: {
+		Description: Critically strikes for a brief moment after using a shawl dash
+		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftShawlDash.SpecialPrefixName
+		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftShawlDash.SpecialPrefixTooltip1
+		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftShawlDash.SpecialPrefixTooltip2
+	}
+
+	Shapeshifter_ShapeshiftBleedStackingHigh: {
+		Description: Critically strikes when you have inflicted at least 20 stacks of bleed total
+		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingHigh.SpecialPrefixName
+		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingHigh.SpecialPrefixTooltip1
+		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingHigh.SpecialPrefixTooltip2
+	}
+
+	Shapeshifter_ShapeshiftBleedStackingSingle: {
+		Description: Critically strikes when you have inflicted at least 5 stacks of bleed on the target enemy
+		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingSingle.SpecialPrefixName
+		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingSingle.SpecialPrefixTooltip1
+		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingSingle.SpecialPrefixTooltip2
+	}
+
+	Shapeshifter_AfterSkillUse: {
+		Description: Critically strikes on the next hit after using this shapeshift's skill
+		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_AfterSkillUse.SpecialPrefixName
+		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_AfterSkillUse.SpecialPrefixTooltip1
+		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_AfterSkillUse.SpecialPrefixTooltip2
+	}
+
+	Shapeshifter_PredatorHit: {
+		Description: Critically strikes for 5 seconds after hitting an enemy as a predator wildshape
+		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_PredatorHit.SpecialPrefixName
+		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_PredatorHit.SpecialPrefixTooltip1
+		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_PredatorHit.SpecialPrefixTooltip2
+	}
+
+	Shapeshifter_SageHit: {
+		Description: Critically strikes for 5 seconds after hitting an enemy as a sage wildshape
+		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_SageHit.SpecialPrefixName
+		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_SageHit.SpecialPrefixTooltip1
+		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_SageHit.SpecialPrefixTooltip2
+	}
+
+	Shapeshifter_SymbioteHit: {
+		Description: Critically strikes for 5 seconds after hitting an enemy as a symbiote wildshape
+		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_SymbioteHit.SpecialPrefixName
+		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_SymbioteHit.SpecialPrefixTooltip1
+		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_SymbioteHit.SpecialPrefixTooltip2
+	}
+
+	Shapeshifter_WardenHit: {
+		Description: Critically strikes for 5 seconds after hitting an enemy as a warden wildshape
+		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_WardenHit.SpecialPrefixName
+		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_WardenHit.SpecialPrefixTooltip1
+		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_WardenHit.SpecialPrefixTooltip2
+	}
+
 	Adrenaline.Description: Critically strikes while in adrenaline mode
 	Rage.Description: Critically strikes while in rage mode
 	StealthStrike.Description: Critically strikes on stealth strikes
@@ -1069,6 +1183,11 @@ Buffs: {
 		DisplayName: Shadow Frenzy
 		Description: PANIC
 	}
+
+	CrystalShieldCooldown: {
+		DisplayName: Crystal Shield Broken
+		Description: Your crystal shield is inactive
+	}
 }
 
 RecipeGroups: {
@@ -1083,6 +1202,7 @@ Projectiles: {
 	LeadChakramProjectile.DisplayName: Lead Chakram Projectile
 	GoldJavelinProjectile.DisplayName: Gold Javelin Projectile
 	PlatinumJavelinProjectile.DisplayName: Platinum Javelin Projectile
+	WetBubble.DisplayName: Wet Bubble
 }
 
 BronzeHelm.SetBonus:

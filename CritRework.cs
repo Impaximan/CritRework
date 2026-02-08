@@ -11,6 +11,7 @@ using ReLogic.Content;
 using CritRework.Content.CritTypes;
 using CritRework.Common.ModPlayers;
 using CritRework.Content.Prefixes.Weapon;
+using CritRework.Common.Globals;
 
 namespace CritRework
 {
@@ -40,6 +41,7 @@ namespace CritRework
 
         public static float bossLife = 1f;
         public static float enemyLife = 1f;
+
 
         public static CritType GetCrit<T>() where T : CritType
         {
@@ -156,6 +158,28 @@ namespace CritRework
         public static bool IsSpecial(this Item item)
         {
             return item.prefix == ModContent.PrefixType<Special>();
+        }
+
+        public static CritType? GetCritType(this Item item)
+        {
+            if (item.TryGetGlobalItem(out CritItem c))
+            {
+                return c.critType;
+            }
+            return null;
+        }
+
+        public static bool TryGetCritType<T>(this Item item, out T critType) where T : CritType
+        {
+            CritType c = GetCritType(item);
+            critType = null;
+
+            if (c != null && c is T var)
+            {
+                critType = var;
+                return true;
+            }
+            return false;
         }
     }
 }

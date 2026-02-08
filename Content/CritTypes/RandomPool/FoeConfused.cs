@@ -8,7 +8,13 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         public override float GetDamageMult(Player Player, Item Item) => 1.5f;
 
-        //public override string GetDescription() => "Critically strikes while the target is confused";
+        public override void SpecialPrefixOnHitNPC(Item item, Player player, Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (hit.Crit && Main.rand.NextBool(20))
+            {
+                target.AddBuff(BuffID.Confused, 600);
+            }
+        }
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {

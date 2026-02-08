@@ -8,7 +8,25 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         public override float GetDamageMult(Player Player, Item Item) => 1.25f;
 
-        //public override string GetDescription() => "Critically strikes while the target is inflicted with two or more debuffs";
+        public override void SpecialPrefixOnHitNPC(Item item, Player player, Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            float chance = 10f * (1f + player.luck / 2f);
+
+            if (Main.rand.NextFloat(100) < chance)
+            {
+                int buffType = Main.rand.Next(4) switch
+                {
+                    0 => Main.hardMode ? BuffID.OnFire3 : BuffID.OnFire,
+                    1 => Main.hardMode ? BuffID.Venom : BuffID.Poisoned,
+                    2 => BuffID.Confused,
+                    3 => Main.hardMode ? BuffID.Frostburn2 : BuffID.Frostburn,
+                    4 => BuffID.Oiled,
+                    _ => BuffID.OnFire,
+                };
+
+                target.AddBuff(buffType, Main.rand.Next(60, 480));
+            }
+        }
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
@@ -16,7 +34,8 @@ namespace CritRework.Content.CritTypes.RandomPool
 
             List<int> oddExceptions = new()
                 {
-                    BuffID.OnFire3
+                    BuffID.OnFire3,
+                    BuffID.Frostburn2
                 };
 
 

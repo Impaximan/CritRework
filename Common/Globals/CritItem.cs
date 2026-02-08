@@ -1,4 +1,5 @@
 ﻿using CritRework.Common.ModPlayers;
+using CritRework.Content.CritTypes.RandomPool;
 using CritRework.Content.CritTypes.WhetstoneSpecific;
 using CritRework.Content.Items;
 using CritRework.Content.Items.Equipable.Accessories;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent.UI;
@@ -190,6 +192,11 @@ namespace CritRework.Common.Globals
             {
                 player.Heal(Content.Prefixes.Weapon.Necromantic.healAmount);
             }
+
+            if (item.IsSpecial() && item.TryGetCritType(out CritType critType))
+            {
+                critType.SpecialPrefixOnHitNPC(item, player, null, target, hit, damageDone);
+            }
         }
 
         public override bool? UseItem(Item item, Player player)
@@ -214,6 +221,17 @@ namespace CritRework.Common.Globals
             else if (item.IsSpecial())
             {
                 critType.SpecialPrefixHoldItem(item, player);
+            }
+        }
+
+        public override void ModifyItemScale(Item item, Player player, ref float scale)
+        {
+            if (item.IsSpecial() && item.TryGetCritType(out CritType c))
+            {
+                if (c is TipOfTheWeapon)
+                {
+                    scale *= 3f;
+                }
             }
         }
 

@@ -33,8 +33,19 @@
         public override void UpdateEquip(Player player)
         {
             player.GetCritChance(DamageClass.Melee) += 5;
-            player.AddEquip<CrystalShield>();
+            if (!player.HasBuff<CrystalShieldCooldown>())
+            {
+                player.AddEquip<CrystalShield>();
+            }
 
+        }
+    }
+
+    public class CrystalShieldCooldown : ModBuff
+    {
+        public override void SetStaticDefaults()
+        {
+            Main.debuff[Type] = true;
         }
     }
 }

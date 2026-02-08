@@ -59,7 +59,6 @@ namespace CritRework.Content.Items.Bronze
             Projectile.tileCollide = false;
             Projectile.friendly = true;
             Projectile.hostile = false;
-            Projectile.arrow = true;
             Projectile.ai[0] = 1f;
         }
 
