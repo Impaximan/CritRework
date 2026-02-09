@@ -1,10 +1,7 @@
 ﻿using CritRework.Common.Globals;
 using CritRework.Common.ModPlayers;
 using System.Collections.Generic;
-using Terraria.GameContent.UI.Chat;
-using Terraria.GameContent.UI;
 using System;
-using Terraria;
 
 namespace CritRework.Content.Items.Equipable.Accessories
 {

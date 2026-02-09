@@ -1,5 +1,4 @@
-﻿using Microsoft.CodeAnalysis;
-using Terraria.Audio;
+﻿using Terraria.Audio;
 using Terraria.DataStructures;
 
 namespace CritRework.Content.CritTypes.RandomPool

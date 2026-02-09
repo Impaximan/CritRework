@@ -1,5 +1,4 @@
 ﻿using CritRework.Common.ModPlayers;
-using CritRework.Content.Items.Equipable.Accessories;
 
 namespace CritRework.Content.CritTypes.WeaponSpecific
 {

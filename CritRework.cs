@@ -12,6 +12,7 @@ using CritRework.Content.CritTypes;
 using CritRework.Common.ModPlayers;
 using CritRework.Content.Prefixes.Weapon;
 using CritRework.Common.Globals;
+using System.IO;
 
 namespace CritRework
 {

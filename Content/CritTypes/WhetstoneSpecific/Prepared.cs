@@ -1,6 +1,4 @@
-﻿using CritRework.Common.ModPlayers;
-
-namespace CritRework.Content.CritTypes.WhetstoneSpecific
+﻿namespace CritRework.Content.CritTypes.WhetstoneSpecific
 {
     public class Prepared : CritType
     {

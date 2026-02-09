@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace CritRework.Content.CritTypes.WeaponSpecific
+﻿namespace CritRework.Content.CritTypes.WeaponSpecific
 {
     public class EyeOfCthulhu : CritType
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CritRework.Content.CritTypes.RandomPool
+﻿namespace CritRework.Content.CritTypes.RandomPool
 {
     internal class TipOfTheWeapon : CritType
     {

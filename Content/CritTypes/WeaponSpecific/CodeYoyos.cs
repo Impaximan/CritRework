@@ -1,5 +1,4 @@
 ﻿using CritRework.Common.Globals;
-using System.Collections.Generic;
 
 namespace CritRework.Content.CritTypes.WeaponSpecific
 {

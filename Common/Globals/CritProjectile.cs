@@ -1,10 +1,7 @@
 ﻿using CritRework.Common.ModPlayers;
 using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Weapons.Gloves;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Reflection;
-using Terraria;
 using Terraria.DataStructures;
 
 namespace CritRework.Common.Globals

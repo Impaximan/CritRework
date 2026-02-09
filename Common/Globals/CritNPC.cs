@@ -1,17 +1,12 @@
 ﻿using CritRework.Content.Items.Whetstones;
 using System.Collections.Generic;
 using Terraria.Audio;
-using Terraria.GameContent;
 using Terraria.GameContent.UI.Chat;
-using Terraria.ModLoader.IO;
-using Microsoft.Xna.Framework;
 using Terraria.GameContent.ItemDropRules;
 using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Weapons;
 using CritRework.Content.Items.Weapons.Gloves;
-using System;
 using CritRework.Common.ModPlayers;
-using Terraria;
 
 namespace CritRework.Common.Globals
 {
@@ -104,6 +99,11 @@ namespace CritRework.Common.Globals
                     CombatText.NewText(npc.getRect(), CritRework.critColor, hit.Damage, true);
                 }
             }
+        }
+
+        public override void HitEffect(NPC npc, NPC.HitInfo hit)
+        {
+
         }
 
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)

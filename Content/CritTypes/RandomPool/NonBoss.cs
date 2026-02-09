@@ -1,5 +1,4 @@
-﻿using CritRework.Common.ModPlayers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CritRework.Content.CritTypes.RandomPool
 {

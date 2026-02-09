@@ -1,7 +1,4 @@
-﻿
-using CritRework.Common.Globals;
-
-namespace CritRework.Content.CritTypes.RandomPool
+﻿namespace CritRework.Content.CritTypes.RandomPool
 {
     [JITWhenModsEnabled("CalamityMod")]
     internal class StealthStrike : CritType

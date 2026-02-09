@@ -1,6 +1,5 @@
 ﻿using CritRework.Common.Globals;
 using CritRework.Common.ModPlayers;
-using System.Collections.Generic;
 
 namespace CritRework.Content.CritTypes.WeaponSpecific
 {

@@ -1,7 +1,4 @@
-﻿using CritRework.Common.Globals;
-using CritRework.Common.ModPlayers;
-
-namespace CritRework.Content.Items.Equipable.Accessories
+﻿namespace CritRework.Content.Items.Equipable.Accessories
 {
     public class EternalGuillotine : ModItem
     {

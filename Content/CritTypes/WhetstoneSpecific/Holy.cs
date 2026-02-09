@@ -1,6 +1,4 @@
-﻿using CritRework.Common.Globals;
-
-namespace CritRework.Content.CritTypes.WhetstoneSpecific
+﻿namespace CritRework.Content.CritTypes.WhetstoneSpecific
 {
     internal class Holy : CritType
     {

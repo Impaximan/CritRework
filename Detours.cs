@@ -1,16 +1,9 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Reflection;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using MonoMod.RuntimeDetour;
-using MonoMod.RuntimeDetour.HookGen;
-using Terraria.ModLoader;
-using System.Linq.Expressions;
 using CritRework.Common.Globals;
-using Terraria.GameContent.UI.Chat;
 using CritRework.Content.Prefixes.Weapon;
-using CritRework.Content.Items;
+using CritRework.Common.ModPlayers;
 
 namespace CritRework
 {
@@ -53,6 +46,19 @@ namespace CritRework
             return orig(self);
         }
 
+        public static int StrikeNPC(On_NPC.orig_StrikeNPC_HitInfo_bool_bool orig, NPC self, NPC.HitInfo hit, bool fromNet = false, bool noPlayerInteraction = false)
+        {
+            if (fromNet && hit.Crit)
+            {
+                if (Main.LocalPlayer.TryGetModPlayer(out CritPlayer critPlayer))
+                {
+                    critPlayer.timeSinceCrit = 0;
+                }
+            }
+
+            return orig(self, hit, fromNet, noPlayerInteraction);
+        }
+
         #region Allow other mods to set crits
         public static void SetCrit(On_NPC.HitModifiers.orig_SetCrit orig, ref NPC.HitModifiers self)
         {
@@ -91,6 +97,7 @@ namespace CritRework
             On_NPC.HitModifiers.SetCrit += SetCrit;
             On_NPC.HitModifiers.DisableCrit += DisableCrit;
             On_Item.AffixName += AffixName;
+            On_NPC.StrikeNPC_HitInfo_bool_bool += StrikeNPC;
         }
 
         public static void Unload()

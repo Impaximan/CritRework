@@ -1,8 +1,4 @@
 ﻿using CritRework.Common.ModPlayers;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using Terraria;
 
 namespace CritRework.Content.CritTypes.RandomPool
 {

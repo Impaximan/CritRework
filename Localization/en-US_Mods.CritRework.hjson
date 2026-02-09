@@ -594,9 +594,9 @@ CritTypes: {
 
 	FoeAtHighHP: {
 		Description: Critically strikes while the target has more than 85% of its health left
-		SpecialPrefixName: Assassin's
-		SpecialPrefixTooltip1: If an enemy is killed by a critical strike, double the damage of the next critical strike
-		SpecialPrefixTooltip2: ""
+		SpecialPrefixName: Desperado's
+		SpecialPrefixTooltip1: If an enemy is killed by a critical strike, increase the damage of the next critical strike by 30%
+		SpecialPrefixTooltip2: Damage bonuses stack infinitely until you either fail to crit or fail to instakill
 	}
 
 	FoeAtLowHP: {

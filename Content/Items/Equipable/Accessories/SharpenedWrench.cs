@@ -1,5 +1,4 @@
 ﻿using CritRework.Common.Globals;
-using Terraria;
 
 namespace CritRework.Content.Items.Equipable.Accessories
 {

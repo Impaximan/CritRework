@@ -4,18 +4,14 @@ using CritRework.Content.CritTypes.WhetstoneSpecific;
 using CritRework.Content.Items;
 using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Prefixes.Weapon;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent.UI;
-using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.Utilities;
 

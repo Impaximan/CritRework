@@ -1,18 +1,14 @@
 ﻿using CritRework.Common.Globals;
 using CritRework.Content.Buffs;
 using CritRework.Content.CritTypes.WeaponSpecific;
-using CritRework.Content.CritTypes.WhetstoneSpecific;
 using CritRework.Content.Items.Bronze.BronzeArmor;
 using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Weapons.Gloves;
 using CritRework.Content.Items.Whetstones;
 using CritRework.Content.Prefixes.Weapon;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.WorldBuilding;
 
 namespace CritRework.Common.ModPlayers
 {
@@ -42,6 +38,7 @@ namespace CritRework.Common.ModPlayers
         public int timeSinceMovingSlow = 0;
         public int timeSinceGravityWell = 0;
         public int fireJumpCounter = 0;
+        public float highHpCritMult = 1f;
         public bool pirateArmor = false;
         public bool allowNewChakram = false;
 

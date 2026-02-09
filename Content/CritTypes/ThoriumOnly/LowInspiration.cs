@@ -1,14 +1,4 @@
-﻿using CritRework.Common.ModPlayers;
-using MonoMod.RuntimeDetour;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Linq;
-using System;
-using System.Reflection;
-using Terraria;
-using CritRework.Common.Globals;
-
-namespace CritRework.Content.CritTypes.RandomPool
+﻿namespace CritRework.Content.CritTypes.RandomPool
 {
     [JITWhenModsEnabled("ThoriumMod")]
     internal class LowInspiration : CritType

@@ -1,5 +1,4 @@
 ﻿using CritRework.Common.ModPlayers;
-using Microsoft.Xna.Framework;
 
 namespace CritRework.Common
 {

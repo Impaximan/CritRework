@@ -1,11 +1,7 @@
 ﻿using System.Collections.Generic;
-using Terraria.Chat;
 using Terraria.DataStructures;
-using Terraria.Enums;
 using Terraria.GameContent.UI;
 using Terraria.GameContent.UI.Chat;
-using Terraria.ModLoader.IO;
-using Terraria.UI.Chat;
 
 namespace CritRework.Content.Items.Weapons.Gloves
 {

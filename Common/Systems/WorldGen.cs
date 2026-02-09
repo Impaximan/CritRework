@@ -1,6 +1,4 @@
 ﻿using CritRework.Content.Items.Equipable.Tokens;
-using Mono.Cecil.Cil;
-using Terraria.Map;
 using Terraria.Utilities;
 using Terraria.WorldBuilding;
 

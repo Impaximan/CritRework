@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CritRework.Content.Items.Weapons.Gloves
+﻿namespace CritRework.Content.Items.Weapons.Gloves
 {
     public class PoisonedHand : GloveWeapon
     {

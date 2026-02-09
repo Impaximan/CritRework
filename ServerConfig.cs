@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel;
 using Terraria.ModLoader.Config;
-using Microsoft.Xna.Framework;
-using System.IO;
 
 namespace CritRework
 {

@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace CritRework.Content.Items.Bronze
+﻿namespace CritRework.Content.Items.Bronze
 {
     public class BronzePickaxe : ModItem
     {

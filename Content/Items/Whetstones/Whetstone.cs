@@ -1,5 +1,4 @@
 ﻿using CritRework.Common.Globals;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.ModLoader.IO;

@@ -1,7 +1,4 @@
-﻿using CritRework.Common.ModPlayers;
-using CritRework.Content.Items.Equipable.Accessories;
-
-namespace CritRework.Content.CritTypes.WeaponSpecific
+﻿namespace CritRework.Content.CritTypes.WeaponSpecific
 {
     public class HasDebuff : CritType
     {

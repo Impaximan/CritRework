@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Terraria.DataStructures;
-using Terraria.Audio;
+﻿using Terraria.Audio;
 
 namespace CritRework.Content.Items.Bronze
 {
