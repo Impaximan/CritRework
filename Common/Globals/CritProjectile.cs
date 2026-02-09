@@ -99,6 +99,13 @@ namespace CritRework.Common.Globals
         public override bool OnTileCollide(Projectile projectile, Vector2 oldVelocity)
         {
             wallBounces++;
+            if (ogItem != null && ogItem.type == ItemID.ShadowbeamStaff && ogItem.IsSpecial())
+            {
+                foreach (int i in projectile.localNPCImmunity)
+                {
+                    projectile.localNPCImmunity[i] = 0;
+                }
+            }
             return base.OnTileCollide(projectile, oldVelocity);
         }
 
@@ -123,9 +130,19 @@ namespace CritRework.Common.Globals
                     else
                     {
                         critType = null;
-                    }
+                    }   
                 }
             }
+
+            //if (ogItem != null && ogItem.IsSpecial() && projectile.type == ProjectileID.ShadowBeamFriendly && wallBounces >= 1)
+            //{
+            //    int target = projectile.FindTargetWithLineOfSight(800);
+
+            //    if (target != -1)
+            //    {
+            //        projectile.velocity = projectile.velocity.Length() * projectile.velocity.ToRotation().AngleTowards(projectile.DirectionTo(Main.npc[target].Center).ToRotation(), MathHelper.Pi / 45f).ToRotationVector2();
+            //    }
+            //}
 
             if (projectile.Center.Y < highestPoint) highestPoint = projectile.Center.Y;
         }
@@ -154,7 +171,19 @@ namespace CritRework.Common.Globals
                 projectile.usesLocalNPCImmunity = true;
                 projectile.localNPCHitCooldown = 8;
             }
+            
+            if (ogItem.IsSpecial() && item.type == ItemID.ShadowFlameKnife)
+            {
+                projectile.penetrate = -1;
+                projectile.usesLocalNPCImmunity = true;
+                projectile.localNPCHitCooldown = 10;
+            }
 
+            if (ogItem.IsSpecial() && item.type == ItemID.ShadowbeamStaff)
+            {
+                projectile.usesLocalNPCImmunity = true;
+                projectile.localNPCHitCooldown = 10;
+            }
 
             if (player != null)
             {
@@ -243,6 +272,9 @@ namespace CritRework.Common.Globals
 
         }
 
-
+        public override bool TileCollideStyle(Projectile projectile, ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+            return base.TileCollideStyle(projectile, ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+        }
     }
 }

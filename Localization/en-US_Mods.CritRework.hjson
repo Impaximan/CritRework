@@ -649,9 +649,9 @@ CritTypes: {
 	}
 
 	HighChance: {
-		Description: Critically strikes 25% of the time
+		Description: Critically strikes 20% of the time
 		SpecialPrefixName: Fortunate
-		SpecialPrefixTooltip1: Chance increased to 50%
+		SpecialPrefixTooltip1: Chance increased to 30%
 		SpecialPrefixTooltip2: ""
 	}
 
@@ -720,8 +720,8 @@ CritTypes: {
 
 	JustHitByEnemy: {
 		Description: Critically strikes for 2.5 seconds after getting hit
-		SpecialPrefixName: Revenger's
-		SpecialPrefixTooltip1: Increases critical strike damage against the enemy that hit you by 50% for all players
+		SpecialPrefixName: Rallying
+		SpecialPrefixTooltip1: Critical strikes heal you for 3 life
 		SpecialPrefixTooltip2: ""
 	}
 
@@ -735,15 +735,15 @@ CritTypes: {
 	ShadowbeamStaff: {
 		Description: Critically strikes after bouncing off a wall
 		SpecialPrefixName: Refractive
-		SpecialPrefixTooltip1: Homes into targets not already hit after bouncing off a wall
+		SpecialPrefixTooltip1: Can hit single targets an additional time for each wall hit
 		SpecialPrefixTooltip2: ""
 	}
 
 	ShadowflameKnife: {
 		Description: Critically strikes after ricocheting off at least one target
-		SpecialPrefixName: Seeking
-		SpecialPrefixTooltip1: Seeks targets after ricocheting
-		SpecialPrefixTooltip2: ""
+		SpecialPrefixName: Enduring
+		SpecialPrefixTooltip1: Can ricochet infinitely many times
+		SpecialPrefixTooltip2: Multiple knives can strike a single target at once
 	}
 
 	Shuriken: {
@@ -854,7 +854,7 @@ CritTypes: {
 	Boomerangs: {
 		Description: Critically strikes while returning to you
 		SpecialPrefixName: Rebounding
-		SpecialPrefixTooltip1: Critical strikes will bounce the boomerang off of the enemy, allowing it to hit multiple times
+		SpecialPrefixTooltip1: Critical strikes will bounce the boomerang away from oneself, allowing it to hit a target several times
 		SpecialPrefixTooltip2: ""
 	}
 

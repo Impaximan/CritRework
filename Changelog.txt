@@ -11,3 +11,4 @@ Balance changes:
 -Reworked "Critically strikes if the projectile has been travelling for more than 1 second" slightly
 -Crystal shield now has a 10 second cooldown after taking damage
 -Reduced critical strike damage of the sniper rifle to account for all of the accessory additions that have been made since the mod's release (still very powerful)
+-Reduced crit damage of shadowbeam staff

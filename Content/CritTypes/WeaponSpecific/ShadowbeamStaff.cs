@@ -9,7 +9,7 @@
             return item.type == ItemID.ShadowbeamStaff;
         }
 
-        public override float GetDamageMult(Player Player, Item Item) => 2.5f;
+        public override float GetDamageMult(Player Player, Item Item) => 1.75f;
 
         //public override string GetDescription() => "Critically strikes after bouncing off a wall";
 
