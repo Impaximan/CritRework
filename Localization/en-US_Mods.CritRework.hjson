@@ -586,10 +586,10 @@ CritTypes: {
 	}
 
 	Flamethrower: {
-		Description: Critically strikes while the target is covered in slime
-		SpecialPrefixName: Slimy
-		SpecialPrefixTooltip1: Slimed enemies killed by this weapon will spread the slime to nearby enemies
-		SpecialPrefixTooltip2: ""
+		Description: Critically strikes while the target is covered in slime or oil
+		SpecialPrefixName: Epidemic
+		SpecialPrefixTooltip1: Enemies killed by this weapon will spread slime to nearby enemies
+		SpecialPrefixTooltip2: Flame infinitely pierce and travel further on critical strike
 	}
 
 	FoeAtHighHP: {

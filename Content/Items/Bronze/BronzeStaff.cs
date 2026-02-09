@@ -47,6 +47,15 @@ namespace CritRework.Content.Items.Bronze
             return item.type == ModContent.ItemType<BronzeStaff>();
         }
 
+        public override void SpecialPrefixOnHitNPC(Item item, Player player, Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (hit.Crit)
+            {
+                player.statMana += 100;
+                player.ManaEffect(100);
+            }
+        }
+
         public override bool ShouldCrit(Player Player, Item Item, Projectile Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return Player.statMana <= 20;

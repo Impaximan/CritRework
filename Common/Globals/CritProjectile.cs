@@ -155,6 +155,7 @@ namespace CritRework.Common.Globals
                 projectile.localNPCHitCooldown = 8;
             }
 
+
             if (player != null)
             {
                 if (player.TryGetModPlayer(out CritPlayer cPlayer))
@@ -225,6 +226,13 @@ namespace CritRework.Common.Globals
                         targetsHit = crit.targetsHit;
                         timeActive = crit.timeActive;
                     }
+
+                    if (ogItem != null && ogItem.IsSpecial() && (projectile.type == ProjectileID.CrystalVileShardHead || projectile.type == ProjectileID.VilethornTip))
+                    {
+                        Vector2 ogCenter = projectile.Center;
+                        projectile.scale *= 2.5f;
+                        projectile.Center = ogCenter + parent.rotation.ToRotationVector2().RotatedBy(-MathHelper.PiOver2) * 25f;
+                    }
                 }
 
                 if (parentSource.Entity is Item item)
@@ -232,6 +240,7 @@ namespace CritRework.Common.Globals
                     InheritItemCrit(projectile, item, projectile.owner != 255 ? Main.player[projectile.owner] : null);
                 }
             }
+
         }
 
 

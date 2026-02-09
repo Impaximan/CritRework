@@ -555,7 +555,7 @@ namespace CritRework.Common.ModPlayers
 
             }
 
-            if (Player.HasEquip<FireInABottle>() && hit.Crit && fireJumpCounter > 0)
+            if (Player.HasEquip<FireInABottle>() && hit.Crit && fireJumpCounter > 0 && Player.velocity.Y != 0)
             {
                 fireJumpCounter--;
 
