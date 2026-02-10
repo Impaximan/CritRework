@@ -1,9 +1,11 @@
 ﻿Update 1.5.0.0
 New additions:
 -Added Fire in a Bottle, a new accessory which can be found deep underground
+-Added "basic" whetstones, which are now found underground in chests instead of iron/lead whetstones
 -Added 6 new vanity accessories which allow you to customize the sounds made by critical strikes
 -Added "Special" prefixes, which are prefixes exclusive to weapons with certain critical strike conditions
 -[b]This means over 80 new prefixes[/b]
+-Added "icon_small"
 
 Balance changes:
 -Prosthetic Arm can no longer have cooldown-based crit conditions

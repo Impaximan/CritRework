@@ -10,7 +10,7 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         public override void SpecialPrefixOnHitNPC(Item item, Player player, Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (hit.Crit && Main.rand.NextBool(20))
+            if (Main.rand.NextBool(5))
             {
                 target.AddBuff(BuffID.Confused, 600);
             }

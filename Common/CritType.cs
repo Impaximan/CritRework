@@ -67,6 +67,8 @@ namespace CritRework.Common
         public LocalizedText specialPrefixTooltip1;
         public LocalizedText specialPrefixTooltip2;
         public LocalizedText name;
+        public LocalizedText canBeAppliedToDesc;
+        public LocalizedText basicWhetstonePrefix;
 
         public virtual string InternalName => GetType().Name;
         public virtual bool InRandomPool => false;
@@ -109,6 +111,8 @@ namespace CritRework.Common
             specialPrefixName = mod.GetLocalization($"CritTypes.{GetType().Name}.SpecialPrefixName");
             specialPrefixTooltip1 = mod.GetLocalization($"CritTypes.{GetType().Name}.SpecialPrefixTooltip1");
             specialPrefixTooltip2 = mod.GetLocalization($"CritTypes.{GetType().Name}.SpecialPrefixTooltip2");
+            canBeAppliedToDesc = mod.GetLocalization($"CritTypes.{GetType().Name}.CanBeAppliedToDescription");
+            basicWhetstonePrefix = mod.GetLocalization($"CritTypes.{GetType().Name}.BasicWhetstonePrefix");
 
             CritRework.loadedCritTypes.Add(this);
             if (InRandomPool)

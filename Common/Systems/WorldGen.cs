@@ -1,4 +1,5 @@
-﻿using CritRework.Content.Items.Equipable.Tokens;
+﻿using CritRework.Common.Globals;
+using CritRework.Content.Items.Equipable.Tokens;
 using Terraria.Utilities;
 using Terraria.WorldBuilding;
 
@@ -20,9 +21,22 @@ namespace CritRework.Common.Systems
             {
                 Chest chest = Main.chest[i];
 
-
                 if (chest != null)
                 {
+                    if (WorldGen.genRand.NextBool(4))
+                    {
+                        for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                        {
+                            if (chest.item[inventoryIndex].type == ItemID.None)
+                            {
+                                chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Whetstones.BasicWhetstone>());
+                                chest.item[inventoryIndex].GetGlobalItem<CritItem>().AddCritType(chest.item[inventoryIndex]);
+                                chest.item[inventoryIndex].stack = 1;
+                                break;
+                            }
+                        }
+                    }
+
                     if (chest.y > GenVars.lavaLine) //Lava layer chests
                     {
                         if (WorldGen.genRand.NextBool(5))
@@ -92,19 +106,6 @@ namespace CritRework.Common.Systems
                                 {
                                     chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Equipable.Accessories.SharpenedWrench>());
                                     chest.item[inventoryIndex].Prefix(-1);
-                                    chest.item[inventoryIndex].stack = 1;
-                                    break;
-                                }
-                            }
-                        }
-
-                        if (WorldGen.genRand.NextBool(4))
-                        {
-                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
-                            {
-                                if (chest.item[inventoryIndex].type == ItemID.None)
-                                {
-                                    chest.item[inventoryIndex].SetDefaults(WorldGen.SavedOreTiers.Iron == TileID.Iron ? ModContent.ItemType<Content.Items.Whetstones.IronWhetstone>() : ModContent.ItemType<Content.Items.Whetstones.LeadWhetstone>());
                                     chest.item[inventoryIndex].stack = 1;
                                     break;
                                 }

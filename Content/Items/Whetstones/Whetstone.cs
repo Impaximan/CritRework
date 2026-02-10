@@ -23,6 +23,11 @@ namespace CritRework.Content.Items.Whetstones
 
         public override void RightClick(Player player)
         {
+            if (AssociatedCritType == null)
+            {
+                return;
+            }
+
             if (AssociatedCritType.CanApplyTo(Main.mouseItem) && CritItem.CanHaveCrits(Main.mouseItem))
             {
                 if (AssociatedCritType == Main.mouseItem.GetGlobalItem<CritItem>().critType)
@@ -68,6 +73,11 @@ namespace CritRework.Content.Items.Whetstones
 
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
+            if (AssociatedCritType == null)
+            {
+                return;
+            }
+
             int startingIndex = 1;
 
             if (tooltips.Exists(x => x.Name == "FavoriteDesc"))
@@ -80,7 +90,14 @@ namespace CritRework.Content.Items.Whetstones
             {
                 OverrideColor = Color.Lerp(Color.Yellow, Color.White, 0.3f)
             });
-            tooltips.Insert(startingIndex + 2, new TooltipLine(Mod, "WhetstoneTooltip3", Mod.GetLocalization($"Items.{GetType().Name}.CanBeApplied").Value));
+            if (Item.type == ModContent.ItemType<BasicWhetstone>())
+            {
+                tooltips.Insert(startingIndex + 2, new TooltipLine(Mod, "WhetstoneTooltip3", AssociatedCritType.canBeAppliedToDesc.Value));
+            }
+            else
+            {
+                tooltips.Insert(startingIndex + 2, new TooltipLine(Mod, "WhetstoneTooltip3", Mod.GetLocalization($"Items.{GetType().Name}.CanBeApplied").Value));
+            }
             tooltips.Insert(startingIndex + 3, new TooltipLine(Mod, "WhetstoneTooltip2", tooltip2.Value));
         }
     }

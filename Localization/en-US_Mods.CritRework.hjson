@@ -411,6 +411,12 @@ Items: {
 			Increases jump height and negates fall damage
 			'''
 	}
+
+	BasicWhetstone: {
+		CanBeApplied: Mods.CritRework.Items.BasicWhetstone.CanBeApplied
+		DisplayName: Whetstone
+		Tooltip: "'Merely a basic whetstone'"
+	}
 }
 
 Whetstone: {
@@ -548,6 +554,8 @@ CritTypes: {
 		SpecialPrefixName: Hovering
 		SpecialPrefixTooltip1: Hold jump while using this weapon to hover instead of falling
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to weapons of orange rarity or lower
+		BasicWhetstonePrefix: Elevated
 	}
 
 	BelowFoe: {
@@ -555,6 +563,8 @@ CritTypes: {
 		SpecialPrefixName: Diving
 		SpecialPrefixTooltip1: Hold down while using this weapon to fall faster
 		SpecialPrefixTooltip2: Negates fall damage while held
+		CanBeAppliedToDescription: Can be applied to weapons of orange rarity or lower
+		BasicWhetstonePrefix: Rooted
 	}
 
 	BunchedUpFoes: {
@@ -562,6 +572,8 @@ CritTypes: {
 		SpecialPrefixName: Gravitational
 		SpecialPrefixTooltip1: Creates a gravity well on hit that pulls enemies together
 		SpecialPrefixTooltip2: On critical strike, the gravity well is also damaging, and increases in size
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.BunchedUpFoes.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.BunchedUpFoes.BasicWhetstonePrefix
 	}
 
 	CloseToFoe: {
@@ -569,6 +581,8 @@ CritTypes: {
 		SpecialPrefixName: Vigilant
 		SpecialPrefixTooltip1: Critical strike distance extended to 18 tiles
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to non-melee weapons
+		BasicWhetstonePrefix: Aggressive
 	}
 
 	Falling: {
@@ -576,6 +590,8 @@ CritTypes: {
 		SpecialPrefixName: Crushing
 		SpecialPrefixTooltip1: Critical strike damage is increased proportionally to how far you fell
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to melee weapons with no projectile
+		BasicWhetstonePrefix: Falling
 	}
 
 	FarFromFoe: {
@@ -583,6 +599,8 @@ CritTypes: {
 		SpecialPrefixName: Extroverted
 		SpecialPrefixTooltip1: Critical strike distance reduced to 30 tiles
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to non-melee weapons
+		BasicWhetstonePrefix: Cautious
 	}
 
 	Flamethrower: {
@@ -590,6 +608,8 @@ CritTypes: {
 		SpecialPrefixName: Epidemic
 		SpecialPrefixTooltip1: Enemies killed by this weapon will spread slime to nearby enemies
 		SpecialPrefixTooltip2: Flame infinitely pierce and travel further on critical strike
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Flamethrower.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Flamethrower.BasicWhetstonePrefix
 	}
 
 	FoeAtHighHP: {
@@ -597,6 +617,8 @@ CritTypes: {
 		SpecialPrefixName: Desperado's
 		SpecialPrefixTooltip1: If an enemy is killed by a critical strike, increase the damage of the next critical strike by 30%
 		SpecialPrefixTooltip2: Damage bonuses stack infinitely until you either fail to crit or fail to instakill
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Assassin's
 	}
 
 	FoeAtLowHP: {
@@ -604,6 +626,8 @@ CritTypes: {
 		SpecialPrefixName: Ravenous
 		SpecialPrefixTooltip1: Enemies killed by critical strikes have a 100% chance to drop hearts
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Polished
 	}
 
 	FoeConfused: {
@@ -611,6 +635,8 @@ CritTypes: {
 		SpecialPrefixName: Illusory
 		SpecialPrefixTooltip1: 20% chance to confuse enemies for 10 seconds on hit
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Confusing
 	}
 
 	FoeHasFourDebuffs: {
@@ -618,6 +644,8 @@ CritTypes: {
 		SpecialPrefixName: Harrowing
 		SpecialPrefixTooltip1: 20% chance to inflict a random debuff on hit
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Harrowed
 	}
 
 	FoeHasTwoDebuffs: {
@@ -625,6 +653,8 @@ CritTypes: {
 		SpecialPrefixName: Vexing
 		SpecialPrefixTooltip1: 10% chance to inflict a random debuff on hit
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Vexed
 	}
 
 	FoeIsWet: {
@@ -632,6 +662,8 @@ CritTypes: {
 		SpecialPrefixName: Bubbling
 		SpecialPrefixTooltip1: Periodically spawns water bubbles that make enemies wet while held
 		SpecialPrefixTooltip2: Chance to spawn additional bubbles on critical strike
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Damp
 	}
 
 	FoeOnFire: {
@@ -639,6 +671,8 @@ CritTypes: {
 		SpecialPrefixName: Arsonous
 		SpecialPrefixTooltip1: Critical strikes coat enemies in flammable oil
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Fiery
 	}
 
 	FoePoisoned: {
@@ -646,6 +680,8 @@ CritTypes: {
 		SpecialPrefixName: Venomous
 		SpecialPrefixTooltip1: Critical strikes inflict foes with a long lasting venom
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Poison-stained
 	}
 
 	HighChance: {
@@ -653,6 +689,8 @@ CritTypes: {
 		SpecialPrefixName: Fortunate
 		SpecialPrefixTooltip1: Chance increased to 30%
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Fortunate
 	}
 
 	LowChance: {
@@ -660,6 +698,8 @@ CritTypes: {
 		SpecialPrefixName: Deific
 		SpecialPrefixTooltip1: Chance increased to 2%
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Rare
 	}
 
 	MediumChance: {
@@ -667,6 +707,8 @@ CritTypes: {
 		SpecialPrefixName: Blessed
 		SpecialPrefixTooltip1: Chance increased to 20%
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Lucky
 	}
 
 	MovingFast: {
@@ -674,6 +716,8 @@ CritTypes: {
 		SpecialPrefixName: Supersonic
 		SpecialPrefixTooltip1: Critical strike requirement reduced to 50 miles per hour
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Speedy
 	}
 
 	PlayerNohit: {
@@ -681,6 +725,8 @@ CritTypes: {
 		SpecialPrefixName: Virtuoso
 		SpecialPrefixTooltip1: Critical strike damage doubled if you have taken damage in more than 45 seconds
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Perfected
 	}
 
 	StandingStill: {
@@ -688,6 +734,8 @@ CritTypes: {
 		SpecialPrefixName: Calm
 		SpecialPrefixTooltip1: Continues critically striking for 1 second after moving less than 10 miles per hour
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Serene
 	}
 
 	TipOfTheWeapon: {
@@ -695,6 +743,8 @@ CritTypes: {
 		SpecialPrefixName: Gargantuan
 		SpecialPrefixTooltip1: Weapon size increased immeasurably
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to swung melee weapons without projectiles
+		BasicWhetstonePrefix: Pointed
 	}
 
 	CrystalVileShard: {
@@ -702,6 +752,8 @@ CritTypes: {
 		SpecialPrefixName: Growing
 		SpecialPrefixTooltip1: Crystal tip size greatly increased
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.CrystalVileShard.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.CrystalVileShard.BasicWhetstonePrefix
 	}
 
 	FreshItem: {
@@ -709,6 +761,8 @@ CritTypes: {
 		SpecialPrefixName: Trickshot
 		SpecialPrefixTooltip1: Critically strikes for significantly longer than normal
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Fresh
 	}
 
 	Harpoon: {
@@ -716,6 +770,8 @@ CritTypes: {
 		SpecialPrefixName: Restocking
 		SpecialPrefixTooltip1: Critically striking allows you to fire again immediately
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Harpoon.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Harpoon.BasicWhetstonePrefix
 	}
 
 	JustHitByEnemy: {
@@ -723,6 +779,8 @@ CritTypes: {
 		SpecialPrefixName: Rallying
 		SpecialPrefixTooltip1: Critical strikes heal you for 3 life
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Damaged
 	}
 
 	ProjectileTravel: {
@@ -730,6 +788,8 @@ CritTypes: {
 		SpecialPrefixName: Patient
 		SpecialPrefixTooltip1: Critically strikes forever past 1 second
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon which fires a projectile
+		BasicWhetstonePrefix: Old
 	}
 
 	ShadowbeamStaff: {
@@ -737,6 +797,8 @@ CritTypes: {
 		SpecialPrefixName: Refractive
 		SpecialPrefixTooltip1: Can hit single targets an additional time for each wall hit
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.ShadowbeamStaff.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.ShadowbeamStaff.BasicWhetstonePrefix
 	}
 
 	ShadowflameKnife: {
@@ -744,6 +806,8 @@ CritTypes: {
 		SpecialPrefixName: Enduring
 		SpecialPrefixTooltip1: Can ricochet infinitely many times
 		SpecialPrefixTooltip2: Multiple knives can strike a single target at once
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.ShadowflameKnife.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.ShadowflameKnife.BasicWhetstonePrefix
 	}
 
 	Shuriken: {
@@ -751,6 +815,8 @@ CritTypes: {
 		SpecialPrefixName: Mods.CritRework.CritTypes.Shuriken.SpecialPrefixName
 		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shuriken.SpecialPrefixTooltip1
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Shuriken.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Shuriken.BasicWhetstonePrefix
 	}
 
 	Sniper: {
@@ -758,6 +824,8 @@ CritTypes: {
 		SpecialPrefixName: Untraceable
 		SpecialPrefixTooltip1: Also critically strikes on max health enemies
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Sniper.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Sniper.BasicWhetstonePrefix
 	}
 
 	SpikyBall: {
@@ -765,6 +833,8 @@ CritTypes: {
 		SpecialPrefixName: Mods.CritRework.CritTypes.SpikyBall.SpecialPrefixName
 		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.SpikyBall.SpecialPrefixTooltip1
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.SpikyBall.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.SpikyBall.BasicWhetstonePrefix
 	}
 
 	ThrowingKnife: {
@@ -772,6 +842,8 @@ CritTypes: {
 		SpecialPrefixName: Mods.CritRework.CritTypes.ThrowingKnife.SpecialPrefixName
 		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.ThrowingKnife.SpecialPrefixTooltip1
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.ThrowingKnife.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.ThrowingKnife.BasicWhetstonePrefix
 	}
 
 	Vilethorn: {
@@ -779,6 +851,8 @@ CritTypes: {
 		SpecialPrefixName: Growing
 		SpecialPrefixTooltip1: The tip of the vilethorn is much larger
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Vilethorn.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Vilethorn.BasicWhetstonePrefix
 	}
 
 	Adaptive: {
@@ -786,6 +860,8 @@ CritTypes: {
 		SpecialPrefixName: Evolved
 		SpecialPrefixTooltip1: Extends the duration of critical strikes to 10 seconds
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Adaptive.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Adaptive.BasicWhetstonePrefix
 	}
 
 	Ammo: {
@@ -793,6 +869,8 @@ CritTypes: {
 		SpecialPrefixName: Reserved
 		SpecialPrefixTooltip1: 20% additional chance to not consume ammo
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Ammo.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Ammo.BasicWhetstonePrefix
 	}
 
 	Ancient: {
@@ -800,6 +878,8 @@ CritTypes: {
 		SpecialPrefixName: Reanimated
 		SpecialPrefixTooltip1: Extended duration of critical strike condition to 90 seconds
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Ancient.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Ancient.BasicWhetstonePrefix
 	}
 
 	Enchanted: {
@@ -807,6 +887,8 @@ CritTypes: {
 		SpecialPrefixName: Restoring
 		SpecialPrefixTooltip1: Critical strikes regenerate mana
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Enchanted.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Enchanted.BasicWhetstonePrefix
 	}
 
 	Frozen: {
@@ -814,6 +896,8 @@ CritTypes: {
 		SpecialPrefixName: Freezing
 		SpecialPrefixTooltip1: Critical strikes will freeze targets in place
 		SpecialPrefixTooltip2: 20 second cooldown
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Frozen.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Frozen.BasicWhetstonePrefix
 	}
 
 	Greedy: {
@@ -821,6 +905,8 @@ CritTypes: {
 		SpecialPrefixName: Avaricious
 		SpecialPrefixTooltip1: Critical strikes at close range steal money
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Greedy.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Greedy.BasicWhetstonePrefix
 	}
 
 	Necromantic: {
@@ -828,6 +914,8 @@ CritTypes: {
 		SpecialPrefixName: Reviving
 		SpecialPrefixTooltip1: Critical strikes cause players to respawn faster
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Necromantic.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Necromantic.BasicWhetstonePrefix
 	}
 
 	Soaring: {
@@ -835,6 +923,8 @@ CritTypes: {
 		SpecialPrefixName: Soaring
 		SpecialPrefixTooltip1: Grants featherfall while held
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Soaring.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Soaring.BasicWhetstonePrefix
 	}
 
 	Starter: {
@@ -842,6 +932,8 @@ CritTypes: {
 		SpecialPrefixName: Progressed
 		SpecialPrefixTooltip1: Critical strike condition extended to 300 max life
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Starter.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Starter.BasicWhetstonePrefix
 	}
 
 	WebCovered: {
@@ -849,6 +941,8 @@ CritTypes: {
 		SpecialPrefixName: Webbed
 		SpecialPrefixTooltip1: Critical strikes web enemies, allowing you to grapple them
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.WebCovered.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.WebCovered.BasicWhetstonePrefix
 	}
 
 	Boomerangs: {
@@ -856,6 +950,8 @@ CritTypes: {
 		SpecialPrefixName: Rebounding
 		SpecialPrefixTooltip1: Critical strikes will bounce the boomerang away from oneself, allowing it to hit a target several times
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Boomerangs.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Boomerangs.BasicWhetstonePrefix
 	}
 
 	Prepared: {
@@ -863,6 +959,8 @@ CritTypes: {
 		SpecialPrefixName: Dark Knight's
 		SpecialPrefixTooltip1: Critical strikes grant you increased critical strike damage on all weapons
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Prepared.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Prepared.BasicWhetstonePrefix
 	}
 
 	Holy: {
@@ -870,6 +968,8 @@ CritTypes: {
 		SpecialPrefixName: Sacred
 		SpecialPrefixTooltip1: Critical strikes can extend invincibility for up to 2 seconds
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Holy.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Holy.BasicWhetstonePrefix
 	}
 
 	CritWithAnother: {
@@ -877,6 +977,8 @@ CritTypes: {
 		SpecialPrefixName: Cooperative
 		SpecialPrefixTooltip1: Critical strikes from other players also count towards this crit condition
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Shiny
 	}
 
 	BronzeBowCrit: {
@@ -884,6 +986,8 @@ CritTypes: {
 		SpecialPrefixName: Perfected
 		SpecialPrefixTooltip1: Target must now be at least 18 tiles away
 		SpecialPrefixTooltip2: 50% increased critical strike damage
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.BronzeBowCrit.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.BronzeBowCrit.BasicWhetstonePrefix
 	}
 
 	TenSecondCooldown: {
@@ -891,6 +995,8 @@ CritTypes: {
 		SpecialPrefixName: Impatient
 		SpecialPrefixTooltip1: Critical strike cooldown reduced to 7 seconds
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Timely
 	}
 
 	ThreeSecondCooldown: {
@@ -898,6 +1004,8 @@ CritTypes: {
 		SpecialPrefixName: Impatient
 		SpecialPrefixTooltip1: Critical strike cooldown reduced to 2 seconds
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Convenient
 	}
 
 	Backstab: {
@@ -905,6 +1013,8 @@ CritTypes: {
 		SpecialPrefixName: Stealthy
 		SpecialPrefixTooltip1: 300% increased critical strike damage on max health enemies
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Sneaky
 	}
 
 	HasDebuff: {
@@ -912,6 +1022,8 @@ CritTypes: {
 		SpecialPrefixName: Vitriolic
 		SpecialPrefixTooltip1: Poisons you while held
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Stained
 	}
 
 	ClassyCane: {
@@ -919,6 +1031,8 @@ CritTypes: {
 		SpecialPrefixName: Billionaire's
 		SpecialPrefixTooltip1: 100% increased critical strike damage
 		SpecialPrefixTooltip2: Requires 150 platinum to critically strike instead
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.ClassyCane.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.ClassyCane.BasicWhetstonePrefix
 	}
 
 	Katana: {
@@ -926,6 +1040,8 @@ CritTypes: {
 		SpecialPrefixName: Countering
 		SpecialPrefixTooltip1: Critical strikes grant you greatly increased damage reduction and knockback immunity for 1 second
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Katana.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Katana.BasicWhetstonePrefix
 	}
 
 	EyeOfCthulhu: {
@@ -933,6 +1049,8 @@ CritTypes: {
 		SpecialPrefixName: Enraged
 		SpecialPrefixTooltip1: Critical strikes allow the yoyo to hit much more rapidly
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.EyeOfCthulhu.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.EyeOfCthulhu.BasicWhetstonePrefix
 	}
 
 	Chik: {
@@ -940,6 +1058,8 @@ CritTypes: {
 		SpecialPrefixName: Merrier
 		SpecialPrefixTooltip1: Gains critical strike damage for each additional enemy hit
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Chik.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Chik.BasicWhetstonePrefix
 	}
 
 	Code1: {
@@ -947,6 +1067,8 @@ CritTypes: {
 		SpecialPrefixName: Sentient
 		SpecialPrefixTooltip1: Critical strikes ramp in damage
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Code1.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Code1.BasicWhetstonePrefix
 	}
 
 	Code2: {
@@ -954,6 +1076,8 @@ CritTypes: {
 		SpecialPrefixName: Sentient
 		SpecialPrefixTooltip1: Critical strikes ramp in damage
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Code2.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Code2.BasicWhetstonePrefix
 	}
 
 	Valor: {
@@ -961,6 +1085,8 @@ CritTypes: {
 		SpecialPrefixName: Brave
 		SpecialPrefixTooltip1: Grants immunity frames on critical strike
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Valor.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Valor.BasicWhetstonePrefix
 	}
 
 	Amarok: {
@@ -968,6 +1094,8 @@ CritTypes: {
 		SpecialPrefixName: Thawed
 		SpecialPrefixTooltip1: Critically strike immediately after being thrown
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Amarok.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Amarok.BasicWhetstonePrefix
 	}
 
 	HelFire: {
@@ -975,6 +1103,8 @@ CritTypes: {
 		SpecialPrefixName: Weeping
 		SpecialPrefixTooltip1: Can hit enemies much more rapidly
 		SpecialPrefixTooltip2: Requires more rapid hits to critically strike
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.HelFire.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.HelFire.BasicWhetstonePrefix
 	}
 
 	Kraken: {
@@ -982,6 +1112,8 @@ CritTypes: {
 		SpecialPrefixName: Unbound
 		SpecialPrefixTooltip1: Grows in size and critical strike damage with each critical strike
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Kraken.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Kraken.BasicWhetstonePrefix
 	}
 
 	MandibleBlade: {
@@ -989,6 +1121,8 @@ CritTypes: {
 		SpecialPrefixName: Charging
 		SpecialPrefixTooltip1: Critical strikes grant you immunity frames and a burst of movement speed
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.MandibleBlade.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.MandibleBlade.BasicWhetstonePrefix
 	}
 
 	Trident: {
@@ -996,6 +1130,8 @@ CritTypes: {
 		SpecialPrefixName: Poseidon's
 		SpecialPrefixTooltip1: Can hit much more rapidly
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Trident.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Trident.BasicWhetstonePrefix
 	}
 
 	TitaniumTrident: {
@@ -1003,6 +1139,8 @@ CritTypes: {
 		SpecialPrefixName: Riptide
 		SpecialPrefixTooltip1: Launches you forward with each crit
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.TitaniumTrident.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.TitaniumTrident.BasicWhetstonePrefix
 	}
 
 	DemonScytheShadowflameBow: {
@@ -1010,6 +1148,8 @@ CritTypes: {
 		SpecialPrefixName: Deatheater
 		SpecialPrefixTooltip1: Homes into enemies after killing an enemy
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.DemonScytheShadowflameBow.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.DemonScytheShadowflameBow.BasicWhetstonePrefix
 	}
 
 	BronzeStaffCrit: {
@@ -1017,6 +1157,8 @@ CritTypes: {
 		SpecialPrefixName: Resplendent
 		SpecialPrefixTooltip1: Restores 100 mana on crit
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.BronzeStaffCrit.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.BronzeStaffCrit.BasicWhetstonePrefix
 	}
 
 	FallingEnemy: {
@@ -1024,6 +1166,8 @@ CritTypes: {
 		SpecialPrefixName: Juggling
 		SpecialPrefixTooltip1: Critical strikes launch enemies upward
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Fallen
 	}
 
 	Blowpipe: {
@@ -1031,6 +1175,8 @@ CritTypes: {
 		SpecialPrefixName: Inhaling
 		SpecialPrefixTooltip1: Gains 100% increased critical strike damage if you haven't used this weapon in at least 10 seconds
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Blowpipe.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Blowpipe.BasicWhetstonePrefix
 	}
 
 	GalacticCrit: {
@@ -1038,6 +1184,8 @@ CritTypes: {
 		SpecialPrefixName: Meteoric
 		SpecialPrefixTooltip1: Falling projectiles will slightly home into targets
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.GalacticCrit.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.GalacticCrit.BasicWhetstonePrefix
 	}
 
 	NonBoss: {
@@ -1045,6 +1193,8 @@ CritTypes: {
 		SpecialPrefixName: Practical
 		SpecialPrefixTooltip1: Critical strikes increase mining speed for 1 minute
 		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Common
 	}
 
 	Shapeshifter_ShapeshiftSickness.Description: Critically strikes while you are afflicted with Shapeshifting Sickness

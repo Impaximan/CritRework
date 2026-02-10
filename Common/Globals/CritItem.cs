@@ -3,6 +3,7 @@ using CritRework.Content.CritTypes.RandomPool;
 using CritRework.Content.CritTypes.WhetstoneSpecific;
 using CritRework.Content.Items;
 using CritRework.Content.Items.Equipable.Accessories;
+using CritRework.Content.Items.Whetstones;
 using CritRework.Content.Prefixes.Weapon;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -104,7 +105,7 @@ namespace CritRework.Common.Globals
         float alphaMult = 0f;
         public override bool PreDrawInInventory(Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
-            if (!CritRework.showActiveCrits) return base.PreDrawInInventory(item, spriteBatch, position, frame, drawColor, itemColor, origin, scale);
+            if (!CritRework.showActiveCrits || item.type == ModContent.ItemType<BasicWhetstone>()) return base.PreDrawInInventory(item, spriteBatch, position, frame, drawColor, itemColor, origin, scale);
 
             if (item.TryGetGlobalItem(out CritItem c) && c.critType != null && c.critType.ShowWhenActive && Main.LocalPlayer.inventory.Contains(item))
             {
@@ -339,6 +340,12 @@ namespace CritRework.Common.Globals
 
             SelectCrit:
 
+            if (item.type == ModContent.ItemType<BasicWhetstone>())
+            {
+                critType = Main.rand.Next(CritRework.randomCritPool);
+                return;
+            }
+
             foreach (CritType crit in CritRework.loadedCritTypes)
             {
                 if (crit.ForceOnItem(item))
@@ -469,6 +476,11 @@ namespace CritRework.Common.Globals
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
+            if (item.type == ModContent.ItemType<BasicWhetstone>())
+            {
+                return;
+            }
+
             CritPlayer critPlayer = Main.LocalPlayer.GetModPlayer<CritPlayer>();
             CritType usedCritType = critType;
 

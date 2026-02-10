@@ -4,6 +4,8 @@ using MonoMod.RuntimeDetour;
 using CritRework.Common.Globals;
 using CritRework.Content.Prefixes.Weapon;
 using CritRework.Common.ModPlayers;
+using CritRework.Content.CritTypes.WeaponSpecific;
+using CritRework.Content.Items.Whetstones;
 
 namespace CritRework
 {
@@ -35,9 +37,14 @@ namespace CritRework
 
         public static string AffixName(On_Item.orig_AffixName orig, Item self)
         {
-            if (self != null && !self.IsAir && self.TryGetGlobalItem(out CritItem c))
+            if (self != null && !self.IsAir && self.TryGetGlobalItem(out CritItem c) && c.critType != null)
             {
-                if (c.critType != null && self.prefix == ModContent.PrefixType<Special>())
+                if (self.type == ModContent.ItemType<BasicWhetstone>())
+                {
+                    return c.critType.basicWhetstonePrefix.Value + " " + self.Name;
+                }
+
+                if (self.prefix == ModContent.PrefixType<Special>())
                 {
                     return c.critType.specialPrefixName.Value + " " + self.Name;
                 }
@@ -52,7 +59,10 @@ namespace CritRework
             {
                 if (Main.LocalPlayer.TryGetModPlayer(out CritPlayer critPlayer))
                 {
-                    critPlayer.timeSinceCrit = 0;
+                    if (Main.LocalPlayer.HeldItem != null && Main.LocalPlayer.HeldItem.IsSpecial() && Main.LocalPlayer.HeldItem.TryGetCritType(out CritType c) && c is CritWithAnother)
+                    {
+                        critPlayer.timeSinceCrit = 0;
+                    }
                 }
             }
 
