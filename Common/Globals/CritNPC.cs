@@ -10,6 +10,7 @@ using CritRework.Common.ModPlayers;
 using Terraria.ModLoader.IO;
 using Terraria.DataStructures;
 using System.IO;
+using CritRework.Content.Items;
 
 namespace CritRework.Common.Globals
 {
@@ -18,22 +19,6 @@ namespace CritRework.Common.Globals
         public bool travellingMerchantGivenWhetstone = false;
 
         public override bool InstancePerEntity => true;
-
-        public override void SaveData(NPC npc, TagCompound tag)
-        {
-            if (npc.type == NPCID.TravellingMerchant)
-            {
-                tag.Add("GivenWhetstone", travellingMerchantGivenWhetstone);
-            }
-        }
-
-        public override void LoadData(NPC npc, TagCompound tag)
-        {
-            if (npc.type == NPCID.TravellingMerchant)
-            {
-                travellingMerchantGivenWhetstone = tag.GetBool("GivenWhentstone");
-            }
-        }
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -77,6 +62,11 @@ namespace CritRework.Common.Globals
             if (shop.NpcType == NPCID.Pirate)
             {
                 shop.Add<WiseCracker>();
+            }
+
+            if (shop.NpcType == NPCID.SkeletonMerchant)
+            {
+                shop.Add<WhetstoneExtractor>();
             }
         }
 
@@ -203,6 +193,8 @@ namespace CritRework.Common.Globals
                             item.GetGlobalItem<CritItem>().AddCritType(item);
                             Main.LocalPlayer.QuickSpawnItem(new EntitySource_Misc("TravellingMerchantGiveItem"), item);
                         }
+
+                        npc.netUpdate = true;
                     }
                     else
                     {
@@ -229,7 +221,7 @@ namespace CritRework.Common.Globals
                                 cItem.AddCritType(item);
                                 SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/Hijack")
                                 {
-                                    Volume = 0.5f
+                                    Volume = 0.3f
                                 });
                                 SoundEngine.PlaySound(SoundID.Coins);
 

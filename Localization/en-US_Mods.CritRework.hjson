@@ -6,7 +6,7 @@ Items: {
 
 	IronWhetstone: {
 		DisplayName: Iron Whetstone
-		Tooltip: "'The most basic whetstone'"
+		Tooltip: ""
 		CanBeApplied: Can be applied to any weapon
 	}
 
@@ -416,6 +416,16 @@ Items: {
 		CanBeApplied: Mods.CritRework.Items.BasicWhetstone.CanBeApplied
 		DisplayName: Whetstone
 		Tooltip: "'Merely a basic whetstone'"
+	}
+
+	WhetstoneExtractor: {
+		DisplayName: Whetstone Extractor
+		Tooltip:
+			'''
+			Allows you to extract whetstones from weapons with crit conditions
+			To use, hold desired weapon with mouse cursor and right click on this item
+			Doing so will remove the crit condition from that weapon, breaking it in the process
+			'''
 	}
 }
 
@@ -1277,6 +1287,15 @@ CritTypes: {
 	StealthStrike.Description: Critically strikes on stealth strikes
 	AfterUseTechnique.Description: Critically strikes for 1 second after using a technique
 	LowInspiration.Description: Critically strikes if you have less than 30% of your max inspiration remaining
+
+	BrokenCrit: {
+		Description: Cannot critically strike in any situation
+		SpecialPrefixName: Simply Incorrigible
+		SpecialPrefixTooltip1: Has nothing special going for it
+		SpecialPrefixTooltip2: You want to throw it against the ground in a fit of rage
+		CanBeAppliedToDescription: Cannot be applied to anything
+		BasicWhetstonePrefix: Hideous
+	}
 }
 
 UnknownTooltip: Unknown critical strike condition
