@@ -26,11 +26,13 @@ namespace CritRework
         public static bool overrideCritColor = false;
         public static Color critColor = Color.White;
 
+        public static bool abbreviateWhetstoneTooltip = false;
         public static float critPower = 1f;
         public static float randomHijackChance = 0.25f;
         public static bool randomHijackSound = true;
         public static bool pirateHijack = true;
         public static bool pirateArmorRework = true;
+        public static bool travellingMerchantWhetstones = true;
         public static bool showActiveCrits = true;
         public static bool hideGloveDescription = true;
 

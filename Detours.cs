@@ -24,13 +24,25 @@ namespace CritRework
         {
             orig(ref button, ref button2);
 
-            if (Main.LocalPlayer.TalkNPC != null && Main.LocalPlayer.TalkNPC.type == NPCID.Pirate && CritRework.pirateHijack)
+            if (Main.LocalPlayer.TalkNPC != null)
             {
-                button2 = pirateButtonText.Value;
-
-                if (Main.LocalPlayer.HeldItem != null && CritItem.CanHaveCrits(Main.LocalPlayer.HeldItem))
+                if (Main.LocalPlayer.TalkNPC.type == NPCID.Pirate && CritRework.pirateHijack)
                 {
-                    button2 += " " + Main.LocalPlayer.HeldItem.Name + " (" + Main.ValueToCoins(CritNPC.GetItemHijackCost(Main.LocalPlayer.HeldItem)) + ")";
+                    button2 = pirateButtonText.Value;
+
+                    if (Main.LocalPlayer.HeldItem != null && CritItem.CanHaveCrits(Main.LocalPlayer.HeldItem))
+                    {
+                        button2 += " " + Main.LocalPlayer.HeldItem.Name + " (" + Main.ValueToCoins(CritNPC.GetItemHijackCost(Main.LocalPlayer.HeldItem)) + ")";
+                    }
+                }
+
+                if (Main.LocalPlayer.TalkNPC.type == NPCID.TravellingMerchant && CritRework.travellingMerchantWhetstones)
+                {
+                    button2 = travellingMerchantButtonText.Value;
+                    if (!Main.LocalPlayer.TalkNPC.GetGlobalNPC<CritNPC>().travellingMerchantGivenWhetstone)
+                    {
+                        button2 += " (" + Main.ValueToCoins(Item.buyPrice(0, 5, 0, 0)) + ")";
+                    }
                 }
             }
         }
@@ -96,10 +108,12 @@ namespace CritRework
 
         public static Hook SetChatButtonsHook;
         public static LocalizedText pirateButtonText;
+        public static LocalizedText travellingMerchantButtonText;
 
         public static void Load()
         {
             pirateButtonText = CritRework.instance.GetLocalization($"PirateHijack");
+            travellingMerchantButtonText = CritRework.instance.GetLocalization($"TravellingMerchantGiveWhetstone");
             
             SetChatButtonsHook = new Hook(typeof(NPCLoader).GetMethod("SetChatButtons"), SetChatButtons);
             SetChatButtonsHook.Apply();

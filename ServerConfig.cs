@@ -49,6 +49,9 @@ namespace CritRework
         [ReloadRequired]
         public bool pirateArmorRework = true;
 
+        [DefaultValue(true)]
+        public bool travellingMerchantWhetstones = true;
+
         [DefaultValue("Ranged")]
         [OptionStrings(
         [
@@ -70,6 +73,8 @@ namespace CritRework
             CritRework.pirateHijack = pirateHijack;
             CritRework.randomHijackSound = randomHijackSound;
             CritRework.pirateArmorRework = pirateArmorRework;
+
+            CritRework.travellingMerchantWhetstones = travellingMerchantWhetstones;
 
             switch (gloveDamageType)
             {

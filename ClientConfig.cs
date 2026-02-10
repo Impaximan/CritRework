@@ -24,6 +24,9 @@ namespace CritRework
         [DefaultValue(false)]
         public bool hideGloveDescription = false;
 
+        [DefaultValue(false)]
+        public bool abbreviateWhetstoneTooltip = false;
+
         public override void OnChanged()
         {
             CritRework.showActiveCrits = showActiveCrits;
@@ -31,6 +34,7 @@ namespace CritRework
             CritRework.overrideCritColor = overrideCritColor;
             CritRework.critSounds = critSoundEffect;
             CritRework.hideGloveDescription = hideGloveDescription;
+            CritRework.abbreviateWhetstoneTooltip = abbreviateWhetstoneTooltip;
         }
     }
 }

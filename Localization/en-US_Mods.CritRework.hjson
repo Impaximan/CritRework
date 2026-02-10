@@ -469,6 +469,11 @@ Configs: {
 			Label: Hide glove tutorial
 			Tooltip: When set to true, the tutorial description on gloves will be removed from their tooltip to reduce clutter
 		}
+
+		abbreviateWhetstoneTooltip: {
+			Label: Abbreviate whetstone tooltip
+			Tooltip: When set to true, the tutorial description for whetstones will be removed from their tooltip to reduce clutter
+		}
 	}
 
 	ServerConfig: {
@@ -544,6 +549,11 @@ Configs: {
 				Allows you to increase NON-BOSS health with this mod enabled if you so desire
 				In case you find this mod to be overpowered and want a way to nerf it
 				'''
+		}
+
+		travellingMerchantWhetstones: {
+			Label: Travelling merchant whetstones
+			Tooltip: Whether the Travelling Merchant will gain the function to give you basic whetstones or not
 		}
 	}
 }
@@ -1282,6 +1292,16 @@ PirateBroke3: You tryin' to pirate ME? Ya scallywag!
 PirateSuccessful1: There ye go, matey! Good as new.
 PirateSuccessful2: No refunds!
 PirateSuccessful3: Aye aye, matey.
+TravellingMerchantGiveWhetstone: Whetstones
+TravellingMerchantGiveWhetstone1: Here, I found these during my travels. You seem like a fighter, maybe you'll have a use for them.
+TravellingMerchantGiveWhetstone2: Thanks for the tip! Here's something I found on my travels. Perhaps you can make good use of them.
+TravellingMerchantGiveWhetstone3: I appreciate the money. Here, take these.
+TravellingMerchantGiveWhetstone4: Cha-ching! Here you go! I hope these can be of some use.
+TravellingMerchantBroke1: Everything has a price, even if I don't need it; I won't give these to you for free.
+TravellingMerchantBroke2: Sorry, I can't give whetstones. Come back when you're a little... hmmmm... richer?
+TravellingMerchantBroke3: What's that? Oh, you don't have any money. Scraggle off, pal!
+TravellingMerchantAlreadyGiven1: That was all I had! I'll bring some more next time I come around.
+TravellingMerchantAlreadyGiven2: These things don't grow off of trees, you know.
 PirateHat:
 	'''
 	10% increased ranged and summon critical strike chance

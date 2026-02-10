@@ -38,7 +38,7 @@ namespace CritRework.Content.Items.Whetstones
             Item.height = 22;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 1, 0, 0);
-            Item.maxStack = 1;
+            Item.maxStack = 20;
             Item.GetGlobalItem<CritItem>().forceCanCrit = true;
         }
     }

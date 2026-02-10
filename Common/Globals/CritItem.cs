@@ -36,6 +36,18 @@ namespace CritRework.Common.Globals
         public bool forceCanCrit = false;
         public bool recoverableArrow = false;
 
+        public override bool CanStack(Item destination, Item source)
+        {
+            if (destination.TryGetCritType(out CritType crit1) && source.TryGetCritType(out CritType crit2))
+            {
+                if (crit1 != crit2)
+                {
+                    return false;
+                }
+            }
+
+            return base.CanStack(destination, source);
+        }
 
         public override void SetStaticDefaults()
         {
@@ -321,6 +333,14 @@ namespace CritRework.Common.Globals
             if (source is EntitySource_DropAsItem dropSource)
             {
                 recoverableArrow = true;
+            }
+
+            if (source is EntitySource_Loot lootSource)
+            {
+                if (item.type == ModContent.ItemType<BasicWhetstone>())
+                {
+                    item.GetGlobalItem<CritItem>().AddCritType(item);
+                }
             }
         }
 

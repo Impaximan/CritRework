@@ -98,7 +98,7 @@ namespace CritRework.Content.Items.Whetstones
             {
                 tooltips.Insert(startingIndex + 2, new TooltipLine(Mod, "WhetstoneTooltip3", Mod.GetLocalization($"Items.{GetType().Name}.CanBeApplied").Value));
             }
-            tooltips.Insert(startingIndex + 3, new TooltipLine(Mod, "WhetstoneTooltip2", tooltip2.Value));
+            if (!CritRework.abbreviateWhetstoneTooltip) tooltips.Insert(startingIndex + 3, new TooltipLine(Mod, "WhetstoneTooltip2", tooltip2.Value));
         }
     }
 }

@@ -7,11 +7,50 @@ using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Weapons;
 using CritRework.Content.Items.Weapons.Gloves;
 using CritRework.Common.ModPlayers;
+using Terraria.ModLoader.IO;
+using Terraria.DataStructures;
+using System.IO;
 
 namespace CritRework.Common.Globals
 {
     public class CritNPC : GlobalNPC
     {
+        public bool travellingMerchantGivenWhetstone = false;
+
+        public override bool InstancePerEntity => true;
+
+        public override void SaveData(NPC npc, TagCompound tag)
+        {
+            if (npc.type == NPCID.TravellingMerchant)
+            {
+                tag.Add("GivenWhetstone", travellingMerchantGivenWhetstone);
+            }
+        }
+
+        public override void LoadData(NPC npc, TagCompound tag)
+        {
+            if (npc.type == NPCID.TravellingMerchant)
+            {
+                travellingMerchantGivenWhetstone = tag.GetBool("GivenWhentstone");
+            }
+        }
+
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            if (npc.type == NPCID.TravellingMerchant)
+            {
+                bitWriter.WriteBit(travellingMerchantGivenWhetstone);
+            }
+        }
+
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            if (npc.type == NPCID.TravellingMerchant)
+            {
+                travellingMerchantGivenWhetstone = bitReader.ReadBit();
+            }
+        }
+
         public override void ModifyShop(NPCShop shop)
         {
             if (shop.NpcType == NPCID.Merchant)
@@ -134,8 +173,44 @@ namespace CritRework.Common.Globals
             }
         }
 
+        public override void ModifyGlobalLoot(GlobalLoot globalLoot)
+        {
+            globalLoot.Add(ItemDropRule.Common(ModContent.ItemType<BasicWhetstone>(), 250));
+        }
+
         public override void OnChatButtonClicked(NPC npc, bool firstButton)
         {
+            //Travelling merchant basic whetstones
+            if (npc.type == NPCID.TravellingMerchant)
+            {
+                if (!firstButton)
+                {
+                    SoundEngine.PlaySound(SoundID.MenuTick);
+
+                    if (travellingMerchantGivenWhetstone)
+                    {
+                        Main.npcChatText = TravellingMerchantAlreadyGivenWhetstoneDialogue();
+                    }
+                    else if (Main.LocalPlayer.BuyItem(Item.buyPrice(0, 5, 0, 0)))
+                    {
+                        travellingMerchantGivenWhetstone = true;
+                        SoundEngine.PlaySound(SoundID.Coins);
+                        Main.npcChatText = TravellingMerchantGiveWhetstoneDialogue();
+
+                        for (int i = 0; i < Main.rand.Next(2, 5); i++)
+                        {
+                            Item item = new Item(ModContent.ItemType<BasicWhetstone>());
+                            item.GetGlobalItem<CritItem>().AddCritType(item);
+                            Main.LocalPlayer.QuickSpawnItem(new EntitySource_Misc("TravellingMerchantGiveItem"), item);
+                        }
+                    }
+                    else
+                    {
+                        Main.npcChatText = TravellingMerchantBrokeDialogue();
+                    }
+                }
+            }
+
             if (npc.type == NPCID.Pirate)
             {
                 if (!firstButton)
@@ -194,6 +269,52 @@ namespace CritRework.Common.Globals
             }
 
             return num;
+        }
+
+        public string TravellingMerchantGiveWhetstoneDialogue()
+        {
+            List<string> potentialDialogues = new();
+
+            int num = 1;
+            while (Language.Exists("Mods.CritRework.TravellingMerchantGiveWhetstone" + num.ToString()))
+            {
+                potentialDialogues.Add(Language.GetTextValue("Mods.CritRework.TravellingMerchantGiveWhetstone" + num.ToString()));
+
+                num++;
+            }
+
+            return Main.rand.Next(potentialDialogues);
+        }
+
+        public string TravellingMerchantBrokeDialogue()
+        {
+            List<string> potentialDialogues = new();
+
+            int num = 1;
+            while (Language.Exists("Mods.CritRework.TravellingMerchantBroke" + num.ToString()))
+            {
+                potentialDialogues.Add(Language.GetTextValue("Mods.CritRework.TravellingMerchantBroke" + num.ToString()));
+
+                num++;
+            }
+
+            return Main.rand.Next(potentialDialogues);
+        }
+
+
+        public string TravellingMerchantAlreadyGivenWhetstoneDialogue()
+        {
+            List<string> potentialDialogues = new();
+
+            int num = 1;
+            while (Language.Exists("Mods.CritRework.TravellingMerchantAlreadyGiven" + num.ToString()))
+            {
+                potentialDialogues.Add(Language.GetTextValue("Mods.CritRework.TravellingMerchantAlreadyGiven" + num.ToString()));
+
+                num++;
+            }
+
+            return Main.rand.Next(potentialDialogues);
         }
 
         public string GetPirateNoCanDoDialogue()
