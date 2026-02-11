@@ -1,10 +1,14 @@
-﻿namespace CritRework.Content.CritTypes.WhetstoneSpecific
+﻿using CritRework.Content.Items.Whetstones;
+
+namespace CritRework.Content.CritTypes.WhetstoneSpecific
 {
     public class Prepared : CritType
     {
         public override bool InRandomPool => false;
 
         public override float GetDamageMult(Player Player, Item Item) => 1.5f;
+
+        public override int WhetstoneItemType => ModContent.ItemType<PreparedWhetstone>();
 
         public override bool CanApplyTo(Item item)
         {

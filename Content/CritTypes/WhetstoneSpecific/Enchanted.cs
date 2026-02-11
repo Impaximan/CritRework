@@ -1,10 +1,14 @@
-﻿namespace CritRework.Content.CritTypes.WhetstoneSpecific
+﻿using CritRework.Content.Items.Whetstones;
+
+namespace CritRework.Content.CritTypes.WhetstoneSpecific
 {
     internal class Enchanted : CritType
     {
         public override bool InRandomPool => false;
 
         public override float GetDamageMult(Player Player, Item Item) => 1.5f;
+
+        public override int WhetstoneItemType => ModContent.ItemType<EnchantedWhetstone>();
 
         public override bool ShowWhenActive => true;
 

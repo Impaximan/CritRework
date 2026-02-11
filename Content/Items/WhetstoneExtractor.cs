@@ -13,7 +13,6 @@ using Terraria.UI.Chat;
 
 namespace CritRework.Content.Items
 {
-    //TODO: Make this work with special whetstones
     public class WhetstoneExtractor : ModItem
     {
         public override void SetDefaults()
@@ -31,8 +30,8 @@ namespace CritRework.Content.Items
             {
                 if (!critType.ForceOnItem(Main.mouseItem) && critType is not BrokenCrit)
                 {
-                    Item whetstone = new Item(ModContent.ItemType<BasicWhetstone>());
-                    whetstone.GetGlobalItem<CritItem>().critType = critType;
+                    Item whetstone = new Item(critType.WhetstoneItemType);
+                    if (whetstone.type == ModContent.ItemType<BasicWhetstone>()) whetstone.GetGlobalItem<CritItem>().critType = critType;
                     player.QuickSpawnItem(new EntitySource_Misc("WhetstoneExtractor"), whetstone);
                     Main.mouseItem.Prefix(PrefixID.Broken);
                     Main.mouseItem.GetGlobalItem<CritItem>().critType = CritType.Get<BrokenCrit>();

@@ -1,4 +1,5 @@
 ﻿using CritRework.Common.ModPlayers;
+using CritRework.Content.Items.Whetstones;
 
 namespace CritRework.Common
 {
@@ -19,6 +20,8 @@ namespace CritRework.Common
         #endregion
 
         bool loaded = false;
+
+        public virtual int WhetstoneItemType => ModContent.ItemType<BasicWhetstone>();
 
         public static float CalculateActualCritMult(CritType critType, Item Item, Player Player)
         {

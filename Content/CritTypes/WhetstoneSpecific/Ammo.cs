@@ -1,4 +1,5 @@
 ﻿using CritRework.Common.Globals;
+using CritRework.Content.Items.Whetstones;
 
 namespace CritRework.Content.CritTypes.WhetstoneSpecific
 {
@@ -8,7 +9,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
 
         public override float GetDamageMult(Player Player, Item Item) => 1.25f;
 
-        //public override string GetDescription() => "Critically strikes when not consuming ammo";
+        public override int WhetstoneItemType => ModContent.ItemType<AmmoWhetstone>();
 
         public override bool CanApplyTo(Item item)
         {

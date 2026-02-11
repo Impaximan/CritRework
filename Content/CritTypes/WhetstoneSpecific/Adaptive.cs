@@ -1,4 +1,5 @@
 ﻿using CritRework.Common.ModPlayers;
+using CritRework.Content.Items.Whetstones;
 
 namespace CritRework.Content.CritTypes.WhetstoneSpecific
 {
@@ -7,6 +8,8 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
         public override bool InRandomPool => false;
 
         public override float GetDamageMult(Player Player, Item Item) => 1.85f;
+
+        public override int WhetstoneItemType => ModContent.ItemType<AdaptiveWhetstone>();
 
         public override bool ShowWhenActive => true;
 

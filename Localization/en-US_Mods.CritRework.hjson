@@ -424,7 +424,7 @@ Items: {
 			'''
 			Allows you to extract whetstones from weapons with crit conditions
 			To use, hold desired weapon with mouse cursor and right click on this item
-			Doing so will remove the crit condition from that weapon, breaking it in the process
+			Doing so will remove the crit condition and modifier from that weapon
 			'''
 	}
 }
