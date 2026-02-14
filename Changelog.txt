@@ -1,11 +1,13 @@
-﻿Update 1.5.0.0
+﻿Update 1.5.0.0 [b]The Critical Forge Update[/b]
 New additions:
+-Added "Critical Prefixes", which are rare prefixes exclusive to weapons with certain critical strike conditions
+-[b]This means over 80 new prefixes[/b]
+-Added a new item, Divine Ingot, which allows you to give critical prefixes to weapons easily. Has a chance to drop from enemies on first-kill (or much rarer thereafter) and a guarenteed chance to drop from bosses on first kill.
+-Mix and match critical reforges with different crit conditions to find unique synergies. [b]There are even some weapon-unique reforges for you to discover[/b].
 -Added Fire in a Bottle, a new accessory which can be found deep underground
 -Added the whetstone extractor, a new utility item always sold by Skeleton Merchants
 -Added "basic" whetstones, which are now found underground in chests instead of iron/lead whetstones
 -Added 6 new vanity accessories which allow you to customize the sounds made by critical strikes
--Added "Special" prefixes, which are prefixes exclusive to weapons with certain critical strike conditions
--[b]This means over 80 new prefixes[/b]
 -Added "icon_small"
 
 Balance changes:

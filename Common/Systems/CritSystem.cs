@@ -5,8 +5,10 @@ using Terraria.WorldBuilding;
 
 namespace CritRework.Common.Systems
 {
-    class ChestLoot : ModSystem
+    class CritSystem : ModSystem
     {
+        public static bool travellingMerchantSellShard = false;
+
         public override void PostWorldGen()
         {
             WeightedRandom<int> tokens = new(WorldGen.genRand);
@@ -31,6 +33,19 @@ namespace CritRework.Common.Systems
                             {
                                 chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Whetstones.BasicWhetstone>());
                                 chest.item[inventoryIndex].GetGlobalItem<CritItem>().AddCritType(chest.item[inventoryIndex]);
+                                chest.item[inventoryIndex].stack = 1;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (WorldGen.genRand.NextBool(25))
+                    {
+                        for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                        {
+                            if (chest.item[inventoryIndex].type == ItemID.None)
+                            {
+                                chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.DivineShard>());
                                 chest.item[inventoryIndex].stack = 1;
                                 break;
                             }

@@ -11,6 +11,9 @@ using Terraria.ModLoader.IO;
 using Terraria.DataStructures;
 using System.IO;
 using CritRework.Content.Items;
+using CritRework.Common.Systems;
+using Terraria.GameContent.Bestiary;
+using Terraria.ModLoader;
 
 namespace CritRework.Common.Globals
 {
@@ -34,6 +37,14 @@ namespace CritRework.Common.Globals
             if (npc.type == NPCID.TravellingMerchant)
             {
                 travellingMerchantGivenWhetstone = bitReader.ReadBit();
+            }
+        }
+
+        public override void OnSpawn(NPC npc, IEntitySource source)
+        {
+            if (npc.type == NPCID.TravellingMerchant)
+            {
+                CritSystem.travellingMerchantSellShard = Main.rand.NextBool(15);
             }
         }
 
@@ -68,6 +79,11 @@ namespace CritRework.Common.Globals
             if (shop.NpcType == NPCID.SkeletonMerchant)
             {
                 shop.Add<WhetstoneExtractor>();
+            }
+
+            if (shop.NpcType == NPCID.TravellingMerchant)
+            {
+                shop.Add(new Item(ModContent.ItemType<DivineShard>()) { shopCustomPrice = Item.buyPrice(0, 50, 0, 0) }, new Condition("Mods.ExampleMod.Conditions.PlayerHasLifeforceBuff", () => CritSystem.travellingMerchantSellShard));
             }
         }
 
@@ -136,6 +152,49 @@ namespace CritRework.Common.Globals
 
         }
 
+        private class FirstKillDropRule : IItemDropRuleCondition
+        {
+            public bool CanDrop(DropAttemptInfo info)
+            {
+                int bannerID = Item.NPCtoBanner(info.npc.BannerID());
+
+                if (bannerID <= 0 || bannerID > NPC.killCount.Length)
+                {
+                    return false;
+                }
+
+                return NPC.killCount[bannerID] <= 1;
+            }
+
+            public bool CanShowItemDropInUI()
+            {
+                return false;
+            }
+
+            public string GetConditionDescription()
+            {
+                return "";
+            }
+        }
+
+        private class FirstBossKillDropRule : IItemDropRuleCondition
+        {
+            public bool CanDrop(DropAttemptInfo info)
+            {
+                return info.npc.boss && info.npc.realLife == -1 && Main.BestiaryTracker.Kills.GetKillCount(info.npc) <= 1;
+            }
+
+            public bool CanShowItemDropInUI()
+            {
+                return true;
+            }
+
+            public string GetConditionDescription()
+            {
+                return "Drops on first kill only";
+            }
+        }
+
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
             if (npc.type == NPCID.PirateDeadeye)
@@ -162,11 +221,18 @@ namespace CritRework.Common.Globals
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SparkingSludge>(), 125));
             }
+
+            if (npc.boss)
+            {
+                npcLoot.Add(ItemDropRule.ByCondition(new FirstBossKillDropRule(), ModContent.ItemType<DivineShard>()));
+            }
         }
 
         public override void ModifyGlobalLoot(GlobalLoot globalLoot)
         {
             globalLoot.Add(ItemDropRule.Common(ModContent.ItemType<BasicWhetstone>(), 250));
+            globalLoot.Add(ItemDropRule.Common(ModContent.ItemType<DivineShard>(), 750));
+            globalLoot.Add(ItemDropRule.ByCondition(new FirstKillDropRule(), ModContent.ItemType<DivineShard>(), 20));
         }
 
         public override void OnChatButtonClicked(NPC npc, bool firstButton)

@@ -47,7 +47,7 @@ namespace CritRework.Content.Prefixes.Weapon
 
         public override float RollChance(Item item)
         {
-            return 2f;
+            return 0.5f;
         }
     }
 }

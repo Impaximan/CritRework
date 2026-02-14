@@ -427,6 +427,17 @@ Items: {
 			Doing so will remove the crit condition and modifier from that weapon
 			'''
 	}
+
+	DivineShard: {
+		DisplayName: Divine Ingot
+		Tooltip:
+			'''
+			Can be used to enchant weapons with [icon] [c/fffaac:critical reforges] [icon]
+			Critical reforges are unique and change based on the weapon's critical strike condition
+			To use, hold desired weapon with mouse and right click on this item
+			'A shard of some God's sacred whetstone'
+			'''
+	}
 }
 
 Whetstone: {
@@ -1131,7 +1142,7 @@ CritTypes: {
 		Description: Critically strikes once against each hit enemy per yoyo thrown
 		SpecialPrefixName: Unbound
 		SpecialPrefixTooltip1: Grows in size and critical strike damage with each critical strike
-		SpecialPrefixTooltip2: ""
+		SpecialPrefixTooltip2: Retracting the yoyo resets its stats to normal
 		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Kraken.CanBeAppliedToDescription
 		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Kraken.BasicWhetstonePrefix
 	}

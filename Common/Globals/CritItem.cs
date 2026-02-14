@@ -530,7 +530,7 @@ namespace CritRework.Common.Globals
                 usedCritType = critPlayer.summonCrit;
             }
 
-            if (item.prefix == ModContent.PrefixType<Special>())
+            if (item.prefix == ModContent.PrefixType<Special>() || item.type == ModContent.ItemType<DivineShard>())
             {
                 string sparkle = "[i:" + ModContent.ItemType<SparkleIcon>() + "]";
 
