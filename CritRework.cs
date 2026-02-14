@@ -16,7 +16,7 @@ using System.IO;
 
 namespace CritRework
 {
-	public class CritRework : Mod
+	public partial class CritRework : Mod
     {
         public static bool critSounds = true;
 
@@ -140,6 +140,11 @@ namespace CritRework
 
     public static class Extensions
     {
+        public static bool IsGrapple(this Item item)
+        {
+            return Main.projHook[item.type];
+        }
+
         public static void AddEquip<T>(this Player player) where T : ModItem
         {
             if (player.TryGetModPlayer(out CritPlayer cPlayer))

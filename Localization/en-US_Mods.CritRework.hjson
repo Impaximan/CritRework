@@ -787,7 +787,7 @@ CritTypes: {
 
 	Harpoon: {
 		Description: Critically strikes while the target is at least 26 tiles away
-		SpecialPrefixName: Restocking
+		SpecialPrefixName: Repeating
 		SpecialPrefixTooltip1: Critically striking allows you to fire again immediately
 		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Harpoon.CanBeAppliedToDescription
@@ -876,9 +876,9 @@ CritTypes: {
 	}
 
 	Adaptive: {
-		Description: Critically strikes for 3 seconds after healing for at least 20 hp (healing while at max doesn't count)
+		Description: Critically strikes for 5 seconds after healing for at least 20 hp (healing while at max doesn't count)
 		SpecialPrefixName: Evolved
-		SpecialPrefixTooltip1: Extends the duration of critical strikes to 10 seconds
+		SpecialPrefixTooltip1: The critical strikes are more powerful the more you heal
 		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Adaptive.CanBeAppliedToDescription
 		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Adaptive.BasicWhetstonePrefix
@@ -914,8 +914,8 @@ CritTypes: {
 	Frozen: {
 		Description: Critically strikes on targets moving less than 10 miles per hour
 		SpecialPrefixName: Freezing
-		SpecialPrefixTooltip1: Critical strikes will freeze targets in place
-		SpecialPrefixTooltip2: 20 second cooldown
+		SpecialPrefixTooltip1: Continues critically striking for 3 seconds after targets speed up again
+		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Frozen.CanBeAppliedToDescription
 		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Frozen.BasicWhetstonePrefix
 	}
@@ -958,9 +958,9 @@ CritTypes: {
 
 	WebCovered: {
 		Description: Critically strikes for 1 second after grappling yourself to a block, or while grappled
-		SpecialPrefixName: Webbed
-		SpecialPrefixTooltip1: Critical strikes web enemies, allowing you to grapple them
-		SpecialPrefixTooltip2: ""
+		SpecialPrefixName: Grappling
+		SpecialPrefixTooltip1: Allows you to grapple enemies while held
+		SpecialPrefixTooltip2: You will bounce off of enemies upon colliding
 		CanBeAppliedToDescription: Mods.CritRework.CritTypes.WebCovered.CanBeAppliedToDescription
 		BasicWhetstonePrefix: Mods.CritRework.CritTypes.WebCovered.BasicWhetstonePrefix
 	}
@@ -986,7 +986,7 @@ CritTypes: {
 	Holy: {
 		Description: Critically strikes while you have invincibility (such as after taking damage)
 		SpecialPrefixName: Sacred
-		SpecialPrefixTooltip1: Critical strikes can extend invincibility for up to 2 seconds
+		SpecialPrefixTooltip1: Critical strikes grant invincibility to allies
 		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Holy.CanBeAppliedToDescription
 		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Holy.BasicWhetstonePrefix
@@ -1031,7 +1031,7 @@ CritTypes: {
 	Backstab: {
 		Description: Critically strikes when hitting (most) enemies in the back
 		SpecialPrefixName: Stealthy
-		SpecialPrefixTooltip1: 300% increased critical strike damage on max health enemies
+		SpecialPrefixTooltip1: Grants invisibility while held
 		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Can be applied to any weapon
 		BasicWhetstonePrefix: Sneaky
@@ -1050,15 +1050,15 @@ CritTypes: {
 		Description: Critically strikes while you are holding at least 50 platinum
 		SpecialPrefixName: Billionaire's
 		SpecialPrefixTooltip1: 100% increased critical strike damage
-		SpecialPrefixTooltip2: Requires 150 platinum to critically strike instead
+		SpecialPrefixTooltip2: Requires 150 platinum to critically strike
 		CanBeAppliedToDescription: Mods.CritRework.CritTypes.ClassyCane.CanBeAppliedToDescription
 		BasicWhetstonePrefix: Mods.CritRework.CritTypes.ClassyCane.BasicWhetstonePrefix
 	}
 
 	Katana: {
 		Description: Critically strikes while you have 0 defense
-		SpecialPrefixName: Countering
-		SpecialPrefixTooltip1: Critical strikes grant you greatly increased damage reduction and knockback immunity for 1 second
+		SpecialPrefixName: Refined
+		SpecialPrefixTooltip1: Critical strike condition extended to 10 defense or under
 		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Katana.CanBeAppliedToDescription
 		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Katana.BasicWhetstonePrefix
@@ -1076,7 +1076,7 @@ CritTypes: {
 	Chik: {
 		Description: Critically strikes after hitting at least 2 different enemies
 		SpecialPrefixName: Merrier
-		SpecialPrefixTooltip1: Gains critical strike damage for each additional enemy hit
+		SpecialPrefixTooltip1: Gains critical strike damage by 30% for each additional enemy hit
 		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Chik.CanBeAppliedToDescription
 		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Chik.BasicWhetstonePrefix
@@ -1156,8 +1156,8 @@ CritTypes: {
 
 	TitaniumTrident: {
 		Description: Critically strikes when hitting multiple enemies in one use
-		SpecialPrefixName: Riptide
-		SpecialPrefixTooltip1: Launches you forward with each crit
+		SpecialPrefixName: Reaching
+		SpecialPrefixTooltip1: Reaches much further
 		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Mods.CritRework.CritTypes.TitaniumTrident.CanBeAppliedToDescription
 		BasicWhetstonePrefix: Mods.CritRework.CritTypes.TitaniumTrident.BasicWhetstonePrefix
@@ -1193,8 +1193,8 @@ CritTypes: {
 	Blowpipe: {
 		Description: Critically strikes if the last time you used this weapon was at least 3 seconds ago
 		SpecialPrefixName: Inhaling
-		SpecialPrefixTooltip1: Gains 100% increased critical strike damage if you haven't used this weapon in at least 10 seconds
-		SpecialPrefixTooltip2: ""
+		SpecialPrefixTooltip1: Critically strikes after 10 seconds instead of 3
+		SpecialPrefixTooltip2: Significantly increased critical strike damage
 		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Blowpipe.CanBeAppliedToDescription
 		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Blowpipe.BasicWhetstonePrefix
 	}
@@ -1220,10 +1220,12 @@ CritTypes: {
 	Shapeshifter_ShapeshiftSickness.Description: Critically strikes while you are afflicted with Shapeshifting Sickness
 
 	Shapeshifter_ShapeshiftBleedStackingMedium: {
-		Description: Critically strikes when you have inflicted at least 20 stacks of bleed total
+		Description: Critically strikes when you have inflicted at least 8 stacks of bleed total
 		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingMedium.SpecialPrefixName
 		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingMedium.SpecialPrefixTooltip1
 		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingMedium.SpecialPrefixTooltip2
+		CanBeAppliedToDescription: Can be applied to predator wildshapes
+		BasicWhetstonePrefix: Blood-soaked
 	}
 
 	Shapeshifter_ShapeshiftShawlDash: {
@@ -1231,6 +1233,8 @@ CritTypes: {
 		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftShawlDash.SpecialPrefixName
 		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftShawlDash.SpecialPrefixTooltip1
 		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftShawlDash.SpecialPrefixTooltip2
+		CanBeAppliedToDescription: Can be applied to feral weapons
+		BasicWhetstonePrefix: Dashing
 	}
 
 	Shapeshifter_ShapeshiftBleedStackingHigh: {
@@ -1238,6 +1242,8 @@ CritTypes: {
 		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingHigh.SpecialPrefixName
 		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingHigh.SpecialPrefixTooltip1
 		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingHigh.SpecialPrefixTooltip2
+		CanBeAppliedToDescription: Can be applied to predator wildshapes
+		BasicWhetstonePrefix: Bloody
 	}
 
 	Shapeshifter_ShapeshiftBleedStackingSingle: {
@@ -1245,6 +1251,8 @@ CritTypes: {
 		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingSingle.SpecialPrefixName
 		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingSingle.SpecialPrefixTooltip1
 		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingSingle.SpecialPrefixTooltip2
+		CanBeAppliedToDescription: Can be applied to predator wildshapes
+		BasicWhetstonePrefix: Blood-stained
 	}
 
 	Shapeshifter_AfterSkillUse: {
@@ -1252,6 +1260,8 @@ CritTypes: {
 		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_AfterSkillUse.SpecialPrefixName
 		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_AfterSkillUse.SpecialPrefixTooltip1
 		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_AfterSkillUse.SpecialPrefixTooltip2
+		CanBeAppliedToDescription: Can be applied to feral weapons
+		BasicWhetstonePrefix: Combined
 	}
 
 	Shapeshifter_PredatorHit: {
@@ -1259,6 +1269,8 @@ CritTypes: {
 		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_PredatorHit.SpecialPrefixName
 		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_PredatorHit.SpecialPrefixTooltip1
 		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_PredatorHit.SpecialPrefixTooltip2
+		CanBeAppliedToDescription: Can be applied to non-predator wildshapes
+		BasicWhetstonePrefix: Pack
 	}
 
 	Shapeshifter_SageHit: {
@@ -1266,6 +1278,8 @@ CritTypes: {
 		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_SageHit.SpecialPrefixName
 		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_SageHit.SpecialPrefixTooltip1
 		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_SageHit.SpecialPrefixTooltip2
+		CanBeAppliedToDescription: Can be applied to non-sage wildshapes
+		BasicWhetstonePrefix: Wise
 	}
 
 	Shapeshifter_SymbioteHit: {
@@ -1273,6 +1287,8 @@ CritTypes: {
 		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_SymbioteHit.SpecialPrefixName
 		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_SymbioteHit.SpecialPrefixTooltip1
 		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_SymbioteHit.SpecialPrefixTooltip2
+		CanBeAppliedToDescription: Can be applied to non-symbiote wildshapes
+		BasicWhetstonePrefix: Symbiotic
 	}
 
 	Shapeshifter_WardenHit: {
@@ -1280,6 +1296,8 @@ CritTypes: {
 		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_WardenHit.SpecialPrefixName
 		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_WardenHit.SpecialPrefixTooltip1
 		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_WardenHit.SpecialPrefixTooltip2
+		CanBeAppliedToDescription: Can be applied to non-warden wildshapes
+		BasicWhetstonePrefix: Warding
 	}
 
 	Adrenaline.Description: Critically strikes while in adrenaline mode
@@ -1376,6 +1394,11 @@ Buffs: {
 	CrystalShieldCooldown: {
 		DisplayName: Crystal Shield Broken
 		Description: Your crystal shield is inactive
+	}
+
+	Preparation: {
+		DisplayName: Preparation
+		Description: Mods.CritRework.Buffs.Preparation.Description
 	}
 }
 

@@ -1,4 +1,5 @@
-﻿using CritRework.Content.Items.Whetstones;
+﻿using CritRework.Common.Globals;
+using CritRework.Content.Items.Whetstones;
 
 namespace CritRework.Content.CritTypes.WhetstoneSpecific
 {
@@ -12,7 +13,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
-            return target.velocity.Length() <= 2f;
+            return target.velocity.Length() <= 2f || (specialPrefix && target.GetGlobalNPC<CritNPC>().timeSinceSlow < 180);
         }
     }
 }

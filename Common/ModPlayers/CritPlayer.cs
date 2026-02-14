@@ -27,6 +27,7 @@ namespace CritRework.Common.ModPlayers
         public int timeSinceLastTooltipShown = 0;
         public int timeSinceGoldPickup = 0;
         public int timeSinceHeal = 0;
+        public float healPowerMult = 1f;
         public int timeSinceDeath = 0;
         public int timeSinceHook = 0;
         public int timeSinceCrit = 0;
@@ -291,6 +292,7 @@ namespace CritRework.Common.ModPlayers
             if (diff >= 20)
             {
                 timeSinceHeal = 0;
+                healPowerMult = 1f + (diff - 20f) / 100f;
             }
 
             if (Player.grapCount > 0)

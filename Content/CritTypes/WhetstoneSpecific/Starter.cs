@@ -14,7 +14,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
-            return Player.statLifeMax2 < 200;
+            return Player.statLifeMax2 < (specialPrefix ? 300 : 200);
         }
     }
 }

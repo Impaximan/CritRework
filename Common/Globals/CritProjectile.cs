@@ -1,8 +1,13 @@
 ﻿using CritRework.Common.ModPlayers;
+using CritRework.Content.CritTypes.WeaponSpecific;
+using CritRework.Content.CritTypes.WhetstoneSpecific;
 using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Weapons.Gloves;
 using System.Collections.Generic;
+using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.ModLoader;
+using Terraria.WorldBuilding;
 
 namespace CritRework.Common.Globals
 {
@@ -34,14 +39,16 @@ namespace CritRework.Common.Globals
             targetsHit++;
             timeSinceHit = 0;
 
+            Player owner = Main.player[projectile.owner];
+
             if (!npcsHit.Contains(target))
             {
                 npcsHit.Add(target);
             }
 
-            if (fromNecromantic && hit.Crit && !Main.player[projectile.owner].moonLeech)
+            if (fromNecromantic && hit.Crit && !owner.moonLeech)
             {
-                Main.player[projectile.owner].Heal(Content.Prefixes.Weapon.Necromantic.healAmount);
+                owner.Heal(Content.Prefixes.Weapon.Necromantic.healAmount);
             }
 
             if (fromPoisonedHand && hit.Crit)
@@ -54,11 +61,36 @@ namespace CritRework.Common.Globals
                 OnHitNPC_Orchid(projectile, target, hit, damageDone);
             }
 
+
             if (ogItem != null)
             {
                 if (ogItem.IsSpecial() && ogItem.TryGetCritType(out CritType critType))
                 {
-                    critType.SpecialPrefixOnHitNPC(ogItem, Main.player[projectile.owner], projectile, target, hit, damageDone);
+                    critType.SpecialPrefixOnHitNPC(ogItem, owner, projectile, target, hit, damageDone);
+
+                    if (ogItem.type == ItemID.Harpoon && hit.Crit && owner.controlUseItem)
+                    {
+                        Projectile p = Projectile.NewProjectileDirect(new EntitySource_ItemUse(owner, ogItem), owner.Center, ogItem.shootSpeed * owner.DirectionTo(Main.MouseWorld), ogItem.shoot, owner.GetWeaponDamage(ogItem), owner.GetWeaponKnockback(ogItem), owner.whoAmI);
+                        p.netUpdate = true;
+
+                        SoundEngine.PlaySound(ogItem.UseSound, owner.Center);
+                    }
+
+                    if (ogItem.type == ItemID.TheEyeOfCthulhu)
+                    {
+                        if (hit.Crit)
+                        {
+                            if (projectile.idStaticNPCHitCooldown > 5)
+                            {
+                                SoundEngine.PlaySound(SoundID.ForceRoarPitched, projectile.Center);
+                            }
+                            projectile.idStaticNPCHitCooldown = 5;
+                        }
+                        else
+                        {
+                            projectile.idStaticNPCHitCooldown = 10;
+                        }
+                    }
                 }
             }
         }
@@ -90,7 +122,20 @@ namespace CritRework.Common.Globals
 
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
-            base.ModifyHitNPC(projectile, target, ref modifiers);
+            if (projectile.type == ProjectileID.Chik && ogItem != null && ogItem.IsSpecial())
+            {
+                modifiers.CritDamage *= 1f + (npcsHit.Count - 2) * 0.3f;
+            }
+
+            if (projectile.type == ProjectileID.Kraken && ogItem != null && ogItem.IsSpecial())
+            {
+                modifiers.CritDamage *= projectile.scale;
+            }
+
+            if ((projectile.type == ProjectileID.Code1 || projectile.type == ProjectileID.Code2) && ogItem != null && ogItem.IsSpecial())
+            {
+                modifiers.CritDamage *= 1f + (targetsHit - 10) * 0.05f;
+            }
         }
 
         public override bool OnTileCollide(Projectile projectile, Vector2 oldVelocity)
@@ -104,6 +149,18 @@ namespace CritRework.Common.Globals
                 }
             }
             return base.OnTileCollide(projectile, oldVelocity);
+        }
+
+        public override void ModifyDamageHitbox(Projectile projectile, ref Rectangle hitbox)
+        {
+            if (projectile.type == ProjectileID.Kraken && ogItem != null && ogItem.IsSpecial())
+            {
+                Point center = hitbox.Center;
+                hitbox.Width = (int)(hitbox.Width * projectile.scale);
+                hitbox.Height = (int)(hitbox.Height * projectile.scale);
+                hitbox.X = center.X - hitbox.Width / 2;
+                hitbox.Y = center.Y - hitbox.Height / 2;
+            }
         }
 
         public override bool PreAI(Projectile projectile)
@@ -131,17 +188,80 @@ namespace CritRework.Common.Globals
                 }
             }
 
-            //if (ogItem != null && ogItem.IsSpecial() && projectile.type == ProjectileID.ShadowBeamFriendly && wallBounces >= 1)
-            //{
-            //    int target = projectile.FindTargetWithLineOfSight(800);
+            if (ogItem != null && ogItem.IsSpecial())
+            {
+                if (ogItem.type == ModContent.ItemType<GalacticGauntlet>() && projectile.velocity.Y > 0)
+                {
+                    int target = projectile.FindTargetWithLineOfSight(800);
 
-            //    if (target != -1)
-            //    {
-            //        projectile.velocity = projectile.velocity.Length() * projectile.velocity.ToRotation().AngleTowards(projectile.DirectionTo(Main.npc[target].Center).ToRotation(), MathHelper.Pi / 45f).ToRotationVector2();
-            //    }
-            //}
+                    if (target != -1)
+                    {
+                        projectile.velocity = projectile.velocity.Length() * projectile.velocity.ToRotation().AngleTowards(projectile.DirectionTo(Main.npc[target].Center).ToRotation(), MathHelper.Pi / 180f).ToRotationVector2();
+                    }
+                }
+
+                if (ogItem.TryGetCritType(out DemonScytheShadowflameBow _) && targetsKilled > 0)
+                {
+                    int target = projectile.FindTargetWithLineOfSight(800);
+
+                    if (target != -1)
+                    {
+                        projectile.velocity = projectile.velocity.Length() * projectile.velocity.ToRotation().AngleTowards(projectile.DirectionTo(Main.npc[target].Center).ToRotation(), MathHelper.Pi / 120f).ToRotationVector2();
+                    }
+                }
+
+            }
+
+            Player player = Main.player[projectile.owner];
+            //Grapple to enemies
+            if (player.HeldItem != null && player.HeldItem.IsSpecial() && player.HeldItem.TryGetCritType(out WebCovered _) && Main.projHook[projectile.type])
+            {
+                foreach (NPC target in Main.npc)
+                {
+                    if (target != null && target.active && target.getRect().Contains(projectile.Center.ToPoint()))
+                    {
+                        if (!hasGrappled)
+                        {
+                            SoundEngine.PlaySound(target.HitSound, target.Center);
+                        }
+
+                        if (player.getRect().Modified((int)player.velocity.X, (int)player.velocity.Y, 0, 0).Intersects(target.getRect()) && hasGrappled)
+                        {
+                            projectile.timeLeft = 0;
+                            player.velocity = player.DirectionTo(target.Center) * -5f;
+                            player.velocity += target.velocity;
+                            player.immune = true;
+                            player.immuneTime += 10;
+                            SoundEngine.PlaySound(target.HitSound, target.Center);
+                        }
+                        else
+                        {
+                            SetGrapple(target.Center, projectile);
+                        }
+
+                        break;
+                    }
+                }
+            }
 
             if (projectile.Center.Y < highestPoint) highestPoint = projectile.Center.Y;
+        }
+
+        /// <summary>
+        /// Makes a grappling hook think it's grappled onto an object.
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="grapple"></param>
+        public void SetGrapple(Vector2 position, Projectile grapple)
+        {
+            hasGrappled = true;
+            grapple.ai[0] = 2;
+            grapple.position = position;
+            grapple.position -= grapple.Size / 2;
+            Main.player[grapple.owner].grappling[Main.player[grapple.owner].grapCount] = grapple.whoAmI;
+            Main.player[grapple.owner].grapCount++;
+            grapple.velocity = Vector2.Zero;
+            grapple.netUpdate = true;
         }
 
         void InheritItemCrit(Projectile projectile, Item item, Player? player = null)
@@ -169,17 +289,37 @@ namespace CritRework.Common.Globals
                 projectile.localNPCHitCooldown = 8;
             }
             
-            if (ogItem.IsSpecial() && item.type == ItemID.ShadowFlameKnife)
+            if (ogItem.IsSpecial())
             {
-                projectile.penetrate = -1;
-                projectile.usesLocalNPCImmunity = true;
-                projectile.localNPCHitCooldown = 10;
+                switch (item.type)
+                {
+                    case ItemID.ShadowFlameKnife:
+                        projectile.penetrate = -1;
+                        projectile.usesLocalNPCImmunity = true;
+                        projectile.localNPCHitCooldown = 10;
+                        break;
+                    case ItemID.ShadowbeamStaff:
+                        projectile.usesLocalNPCImmunity = true;
+                        projectile.localNPCHitCooldown = 10;
+                        break;
+                    case ItemID.TheEyeOfCthulhu:
+                        projectile.usesIDStaticNPCImmunity = true;
+                        projectile.idStaticNPCHitCooldown = 10;
+                        break;
+                    case ItemID.HelFire:
+                        projectile.usesIDStaticNPCImmunity = true;
+                        projectile.idStaticNPCHitCooldown = 7;
+                        break;
+                    case ItemID.Amarok:
+                        timeSinceHit = 120;
+                        break;
+                    default:
+                        break;
+                }
             }
 
             if (ogItem.IsSpecial() && item.type == ItemID.ShadowbeamStaff)
             {
-                projectile.usesLocalNPCImmunity = true;
-                projectile.localNPCHitCooldown = 10;
             }
 
             if (player != null)
@@ -267,7 +407,11 @@ namespace CritRework.Common.Globals
                 }
             }
 
+            //Hook on spawn
+            hasGrappled = false;
         }
+
+        bool hasGrappled = false;
 
         public override bool TileCollideStyle(Projectile projectile, ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {

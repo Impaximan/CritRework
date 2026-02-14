@@ -15,7 +15,7 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
-            return Projectile.TryGetGlobalProjectile(out CritProjectile p) && p.timeSinceHit < 12;
+            return Projectile.TryGetGlobalProjectile(out CritProjectile p) && p.timeSinceHit < (specialPrefix ? 8 : 12);
         }
     }
 }

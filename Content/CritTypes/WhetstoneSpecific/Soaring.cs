@@ -9,6 +9,11 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
 
         public override float GetDamageMult(Player Player, Item Item) => 1.65f;
 
+        public override void SpecialPrefixHoldItem(Item item, Player player)
+        {
+            player.AddBuff(BuffID.Featherfall, 2);
+        }
+
         public override bool ShowWhenActive => true;
 
         public override int WhetstoneItemType => ModContent.ItemType<SoaringWhetstone>();

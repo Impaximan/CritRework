@@ -20,6 +20,7 @@ namespace CritRework.Common
         #endregion
 
         bool loaded = false;
+        public Mod Mod = null;
 
         public virtual int WhetstoneItemType => ModContent.ItemType<BasicWhetstone>();
 
@@ -116,6 +117,7 @@ namespace CritRework.Common
             specialPrefixTooltip2 = mod.GetLocalization($"CritTypes.{GetType().Name}.SpecialPrefixTooltip2");
             canBeAppliedToDesc = mod.GetLocalization($"CritTypes.{GetType().Name}.CanBeAppliedToDescription");
             basicWhetstonePrefix = mod.GetLocalization($"CritTypes.{GetType().Name}.BasicWhetstonePrefix");
+            Mod = mod;
 
             CritRework.loadedCritTypes.Add(this);
             if (InRandomPool)

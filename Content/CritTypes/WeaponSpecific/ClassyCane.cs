@@ -9,7 +9,7 @@
             return item.type == ItemID.TaxCollectorsStickOfDoom;
         }
 
-        public override float GetDamageMult(Player Player, Item Item) => 100f;
+        public override float GetDamageMult(Player Player, Item Item) => Item.IsSpecial() ? 200f : 100f;
 
         public override bool ShowWhenActive => true;
 
@@ -39,7 +39,7 @@
                 }
             }
 
-            return totalValue >= 50000000;
+            return totalValue >= 1000000 * (specialPrefix ? 250 : 50);
         }
     }
 }

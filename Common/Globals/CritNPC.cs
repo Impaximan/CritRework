@@ -19,6 +19,7 @@ namespace CritRework.Common.Globals
         public bool travellingMerchantGivenWhetstone = false;
 
         public override bool InstancePerEntity => true;
+        public int timeSinceSlow = 0;
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -377,6 +378,16 @@ namespace CritRework.Common.Globals
             else
             {
                 NPC.lifeMax = (int)(NPC.lifeMax * CritRework.enemyLife);
+            }
+        }
+
+        public override void PostAI(NPC npc)
+        {
+            timeSinceSlow++;
+
+            if (npc.velocity.Length() <= 2f)
+            {
+                timeSinceSlow = 0;
             }
         }
     }

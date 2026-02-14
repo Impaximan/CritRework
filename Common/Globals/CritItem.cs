@@ -1,5 +1,6 @@
 ﻿using CritRework.Common.ModPlayers;
 using CritRework.Content.CritTypes.RandomPool;
+using CritRework.Content.CritTypes.WeaponSpecific;
 using CritRework.Content.CritTypes.WhetstoneSpecific;
 using CritRework.Content.Items;
 using CritRework.Content.Items.Equipable.Accessories;
@@ -35,6 +36,7 @@ namespace CritRework.Common.Globals
 
         public bool forceCanCrit = false;
         public bool recoverableArrow = false;
+        public bool harpoonFireAgain = false;
 
         public override bool CanStack(Item destination, Item source)
         {
@@ -85,6 +87,14 @@ namespace CritRework.Common.Globals
             }
 
             return base.UseSpeedMultiplier(item, player) * mult;
+        }
+
+        public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+        {
+            if (item.IsSpecial() && critType is TitaniumTrident)
+            {
+                velocity *= 1.5f;
+            }
         }
 
         public override void ModifyWeaponCrit(Item item, Player player, ref float crit)
@@ -165,6 +175,11 @@ namespace CritRework.Common.Globals
                     });
                 }
             }
+        }
+
+        public override bool CanBeConsumedAsAmmo(Item ammo, Item weapon, Player player)
+        {
+            return base.CanBeConsumedAsAmmo(ammo, weapon, player);
         }
 
         public override int ChoosePrefix(Item item, UnifiedRandom rand)
@@ -436,6 +451,12 @@ namespace CritRework.Common.Globals
             {
                 return false;
             }
+
+            if (weapon.IsSpecial() && weapon.TryGetCritType(out Ammo crit) && Main.rand.NextBool(5))
+            {
+                return false;
+            }
+
             return base.CanConsumeAmmo(weapon, ammo, player);
         }
 

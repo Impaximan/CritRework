@@ -15,7 +15,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
-            return Player.GetModPlayer<CritPlayer>().timeSinceDeath <= 60 * 60;
+            return Player.GetModPlayer<CritPlayer>().timeSinceDeath <= 60 * (specialPrefix ? 90 : 60);
         }
     }
 }
