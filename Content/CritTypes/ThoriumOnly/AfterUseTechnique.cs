@@ -32,7 +32,7 @@ namespace CritRework.Content.CritTypes.RandomPool
         {
             if (Player.TryGetModPlayer(out CritPlayer c))
             {
-                return c.timeSinceTechnique <= 60;
+                return c.timeSinceTechnique <= (specialPrefix ? 120 : 60);
             }
             return false;
         }

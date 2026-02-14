@@ -15,6 +15,11 @@ namespace CritRework.Content.CritTypes.OrchidOnly
             return ModLoader.HasMod("OrchidMod");
         }
 
+        public override void SpecialPrefixHoldItem(Item item, Player player)
+        {
+            player.ClearBuff(ModContent.BuffType<OrchidMod.Content.Shapeshifter.Buffs.Debuffs.ShapeshifterShapeshiftingCooldownDebuff>());
+        }
+
         public override bool ShowWhenActive => true;
 
         public override float GetDamageMult(Player Player, Item Item) => _shapeshifterOtherSubclassHitMult;
@@ -47,6 +52,11 @@ namespace CritRework.Content.CritTypes.OrchidOnly
 
         public override bool ShowWhenActive => true;
 
+        public override void SpecialPrefixHoldItem(Item item, Player player)
+        {
+            player.ClearBuff(ModContent.BuffType<OrchidMod.Content.Shapeshifter.Buffs.Debuffs.ShapeshifterShapeshiftingCooldownDebuff>());
+        }
+
         public override float GetDamageMult(Player Player, Item Item) => Shapeshifter_PredatorHit._shapeshifterOtherSubclassHitMult;
 
         public override bool CanApplyTo(Item item)
@@ -73,6 +83,11 @@ namespace CritRework.Content.CritTypes.OrchidOnly
         public override bool ShouldLoad()
         {
             return ModLoader.HasMod("OrchidMod");
+        }
+
+        public override void SpecialPrefixHoldItem(Item item, Player player)
+        {
+            player.ClearBuff(ModContent.BuffType<OrchidMod.Content.Shapeshifter.Buffs.Debuffs.ShapeshifterShapeshiftingCooldownDebuff>());
         }
 
         public override bool ShowWhenActive => true;
@@ -103,6 +118,12 @@ namespace CritRework.Content.CritTypes.OrchidOnly
         public override bool ShouldLoad()
         {
             return ModLoader.HasMod("OrchidMod");
+        }
+
+
+        public override void SpecialPrefixHoldItem(Item item, Player player)
+        {
+            player.ClearBuff(ModContent.BuffType<OrchidMod.Content.Shapeshifter.Buffs.Debuffs.ShapeshifterShapeshiftingCooldownDebuff>());
         }
 
         public override bool ShowWhenActive => true;

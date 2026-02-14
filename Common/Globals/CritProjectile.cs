@@ -271,6 +271,21 @@ namespace CritRework.Common.Globals
                 critType = item.GetGlobalItem<CritItem>().critType;
             }
 
+
+            if (ModLoader.TryGetMod("CalamityMod", out Mod Calamity))
+            {
+                if (projectile.TryGetGlobalProjectile(Calamity.Find<GlobalProjectile>("CalamityGlobalProjectile"), out var p))
+                {
+                    if (p.GetType().GetField("stealthStrike").GetValue(p) is bool b && b)
+                    {
+                        if (player != null && player.TryGetModPlayer(out CritPlayer critPlayer))
+                        {
+                            critPlayer.timeSinceStealthStrike = 0;
+                        }
+                    }
+                }
+            }
+
             ogItem = item;
 
             if (item.type == ModContent.ItemType<PoisonedHand>())

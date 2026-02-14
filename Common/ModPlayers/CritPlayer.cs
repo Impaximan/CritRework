@@ -59,6 +59,10 @@ namespace CritRework.Common.ModPlayers
         public int timeSinceSageHit = 600;
         public int timeSinceWardenHit = 600;
 
+        //Calamity only
+        public int timeSinceStealthStrike = 0;
+        public int timeWithMaxAdrenaline = 0;
+
         public int crystalShieldDefense = 0;
         int lastShawlCooldown = -1;
 
@@ -171,6 +175,23 @@ namespace CritRework.Common.ModPlayers
                     }
 
                     lastTechDecharge = techDecharge;
+                }
+
+            }
+            if (ModLoader.TryGetMod("CalamityMod", out Mod Calamity))
+            {
+                ModPlayer mp = Player.GetModPlayer(Calamity.Find<ModPlayer>("CalamityPlayer"));
+
+                if (mp.GetType().GetField("adrenalineModeActive").GetValue(mp) is bool adrenalineActive && mp.GetType().GetField("adrenaline ").GetValue(mp) is float adrenaline)
+                {
+                    if (adrenaline >= 100f)
+                    {
+                        timeWithMaxAdrenaline++;
+                    }
+                    else if (!adrenalineActive)
+                    {
+                        timeWithMaxAdrenaline = 0;
+                    }
                 }
             }
         }

@@ -1,4 +1,6 @@
-﻿namespace CritRework.Content.CritTypes.RandomPool
+﻿using CritRework.Common.ModPlayers;
+
+namespace CritRework.Content.CritTypes.RandomPool
 {
     [JITWhenModsEnabled("CalamityMod")]
     internal class StealthStrike : CritType
@@ -28,6 +30,11 @@
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
+            if (specialPrefix && Player.GetModPlayer<CritPlayer>().timeSinceStealthStrike < 60)
+            {
+                return true;
+            }
+
             if (ModLoader.TryGetMod("CalamityMod", out Mod Calamity))
             {
                 if (Projectile == null)

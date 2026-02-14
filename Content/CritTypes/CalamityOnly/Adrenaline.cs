@@ -1,4 +1,6 @@
-﻿namespace CritRework.Content.CritTypes.RandomPool
+﻿using CritRework.Common.ModPlayers;
+
+namespace CritRework.Content.CritTypes.RandomPool
 {
     [JITWhenModsEnabled("CalamityMod")]
     internal class Adrenaline : CritType
@@ -12,7 +14,17 @@
 
         public override bool ShowWhenActive => true;
 
-        public override float GetDamageMult(Player Player, Item Item) => 1.6f;
+        public override float GetDamageMult(Player Player, Item Item)
+        {
+            if (Item.IsSpecial())
+            {
+                if (Player.TryGetModPlayer(out CritPlayer critPlayer))
+                {
+                    return 1.6f + critPlayer.timeWithMaxAdrenaline * 0.075f / 60f;
+                }
+            }
+            return 1.6f;
+        }
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {

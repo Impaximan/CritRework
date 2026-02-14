@@ -17,3 +17,6 @@ Balance changes:
 -Reduced crit damage of shadowbeam staff
 -Adaptive crit condition lasts for longer but has a slightly lower damage multiplier
 -Reduced Amarok crit damage and time to crit
+
+Removals:
+-Removed "low inspiration" crit condition (it was uninteresting imo. If I can figure out how it'll eventually be replaced with something more interesting for bard)

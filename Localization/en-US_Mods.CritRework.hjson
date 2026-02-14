@@ -1217,94 +1217,122 @@ CritTypes: {
 		BasicWhetstonePrefix: Common
 	}
 
-	Shapeshifter_ShapeshiftSickness.Description: Critically strikes while you are afflicted with Shapeshifting Sickness
-
 	Shapeshifter_ShapeshiftBleedStackingMedium: {
 		Description: Critically strikes when you have inflicted at least 8 stacks of bleed total
-		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingMedium.SpecialPrefixName
-		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingMedium.SpecialPrefixTooltip1
-		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingMedium.SpecialPrefixTooltip2
+		SpecialPrefixName: Overkill
+		SpecialPrefixTooltip1: Increased critical strike damage for each additional stack of bleed
+		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Can be applied to predator wildshapes
 		BasicWhetstonePrefix: Blood-soaked
 	}
 
 	Shapeshifter_ShapeshiftShawlDash: {
 		Description: Critically strikes for a brief moment after using a shawl dash
-		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftShawlDash.SpecialPrefixName
-		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftShawlDash.SpecialPrefixTooltip1
-		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftShawlDash.SpecialPrefixTooltip2
+		SpecialPrefixName: Dashing
+		SpecialPrefixTooltip1: Increases critical strike duration
+		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Can be applied to feral weapons
 		BasicWhetstonePrefix: Dashing
 	}
 
 	Shapeshifter_ShapeshiftBleedStackingHigh: {
 		Description: Critically strikes when you have inflicted at least 20 stacks of bleed total
-		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingHigh.SpecialPrefixName
-		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingHigh.SpecialPrefixTooltip1
-		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingHigh.SpecialPrefixTooltip2
+		SpecialPrefixName: Ultrakill
+		SpecialPrefixTooltip1: Close-range critical strikes heal you for 10 life
+		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Can be applied to predator wildshapes
 		BasicWhetstonePrefix: Bloody
 	}
 
 	Shapeshifter_ShapeshiftBleedStackingSingle: {
 		Description: Critically strikes when you have inflicted at least 5 stacks of bleed on the target enemy
-		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingSingle.SpecialPrefixName
-		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingSingle.SpecialPrefixTooltip1
-		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_ShapeshiftBleedStackingSingle.SpecialPrefixTooltip2
+		SpecialPrefixName: Bloodthirsty
+		SpecialPrefixTooltip1: Massively increased critical strike damage
+		SpecialPrefixTooltip2: Critical strikes cleanse targets of all bleed stacks
 		CanBeAppliedToDescription: Can be applied to predator wildshapes
 		BasicWhetstonePrefix: Blood-stained
 	}
 
 	Shapeshifter_AfterSkillUse: {
 		Description: Critically strikes on the next hit after using this shapeshift's skill
-		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_AfterSkillUse.SpecialPrefixName
-		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_AfterSkillUse.SpecialPrefixTooltip1
-		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_AfterSkillUse.SpecialPrefixTooltip2
+		SpecialPrefixName: Evolving
+		SpecialPrefixTooltip1: Critically strikes for a moment after using this shapeshift's skill
+		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Can be applied to feral weapons
 		BasicWhetstonePrefix: Combined
 	}
 
 	Shapeshifter_PredatorHit: {
 		Description: Critically strikes for 5 seconds after hitting an enemy as a predator wildshape
-		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_PredatorHit.SpecialPrefixName
-		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_PredatorHit.SpecialPrefixTooltip1
-		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_PredatorHit.SpecialPrefixTooltip2
+		SpecialPrefixName: Shifting
+		SpecialPrefixTooltip1: Grants immunity to shapeshift sickness while held
+		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Can be applied to non-predator wildshapes
 		BasicWhetstonePrefix: Pack
 	}
 
 	Shapeshifter_SageHit: {
 		Description: Critically strikes for 5 seconds after hitting an enemy as a sage wildshape
-		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_SageHit.SpecialPrefixName
-		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_SageHit.SpecialPrefixTooltip1
-		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_SageHit.SpecialPrefixTooltip2
+		SpecialPrefixName: Shifting
+		SpecialPrefixTooltip1: Grants immunity to shapeshift sickness while held
+		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Can be applied to non-sage wildshapes
 		BasicWhetstonePrefix: Wise
 	}
 
 	Shapeshifter_SymbioteHit: {
 		Description: Critically strikes for 5 seconds after hitting an enemy as a symbiote wildshape
-		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_SymbioteHit.SpecialPrefixName
-		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_SymbioteHit.SpecialPrefixTooltip1
-		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_SymbioteHit.SpecialPrefixTooltip2
+		SpecialPrefixName: Shifting
+		SpecialPrefixTooltip1: Grants immunity to shapeshift sickness while held
+		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Can be applied to non-symbiote wildshapes
 		BasicWhetstonePrefix: Symbiotic
 	}
 
 	Shapeshifter_WardenHit: {
 		Description: Critically strikes for 5 seconds after hitting an enemy as a warden wildshape
-		SpecialPrefixName: Mods.CritRework.CritTypes.Shapeshifter_WardenHit.SpecialPrefixName
-		SpecialPrefixTooltip1: Mods.CritRework.CritTypes.Shapeshifter_WardenHit.SpecialPrefixTooltip1
-		SpecialPrefixTooltip2: Mods.CritRework.CritTypes.Shapeshifter_WardenHit.SpecialPrefixTooltip2
+		SpecialPrefixName: Shifting
+		SpecialPrefixTooltip1: Grants immunity to shapeshift sickness while held
+		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Can be applied to non-warden wildshapes
 		BasicWhetstonePrefix: Warding
 	}
 
-	Adrenaline.Description: Critically strikes while in adrenaline mode
-	Rage.Description: Critically strikes while in rage mode
-	StealthStrike.Description: Critically strikes on stealth strikes
-	AfterUseTechnique.Description: Critically strikes for 1 second after using a technique
-	LowInspiration.Description: Critically strikes if you have less than 30% of your max inspiration remaining
+	Adrenaline: {
+		Description: Critically strikes while in adrenaline mode
+		SpecialPrefixName: Daredevil's
+		SpecialPrefixTooltip1: Critical strike damage increased the longer you hold maximum adrenaline without using it
+		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Untouchable
+	}
+
+	Rage: {
+		Description: Critically strikes while in rage mode
+		SpecialPrefixName: Infuriating
+		SpecialPrefixTooltip1: Non-critical strikes help build up rage
+		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to any weapon
+		BasicWhetstonePrefix: Furious
+	}
+
+	StealthStrike: {
+		Description: Critically strikes on stealth strikes
+		SpecialPrefixName: Finishing
+		SpecialPrefixTooltip1: Continues critically striking for 1 second after a stealth strike
+		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to rogue weapons
+		BasicWhetstonePrefix: Startling
+	}
+
+	AfterUseTechnique: {
+		Description: Critically strikes for 1 second after using a technique
+		SpecialPrefixName: Talented
+		SpecialPrefixTooltip1: Critical strike duration extended to 2 seconds
+		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can be applied to throwing weapons
+		BasicWhetstonePrefix: Talented
+	}
 
 	BrokenCrit: {
 		Description: Cannot critically strike in any situation
