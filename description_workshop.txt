@@ -12,11 +12,17 @@ The damage that critical strikes deal are now affected by a variety of factors. 
 
 [b]The purpose of this mod is to allow for more creative and niche build crafting for the player.[/b] Because of that, there are probably several overpowered builds that I haven't thought of myself. But that's the fun of it! I can't guarentee that this mod will work perfectly with every other mod (ESPECIALLY balance wise). All critical strike on-hit effects should work just fine, though.
 
+[h3]Critical reforging[/h3]
+In addition to unique critical strike conditions, this mod also adds a neq unique reforge for every single critical strike condition, called [b]critical reforges[/b], which are normally rare and difficult to obtain, but can be manually applied to weapons using "Divine Ingots".
+Mix and match critical strike conditions, new equipment, and any of the 75 new unique prefixes to create unique builds tailored to your playstyle.
+
+If you enjoy the mod join the [url=https://discord.gg/XAKc3Ruwuw] discord server! [/url]
+
 [h3]Full content list:[/h3]
 
 [list]
 [*]A complete overhaul of how critical strikes work (see above)
-[*]More than 60 different potential critical strike conditions
+[*]More than 75 different potential critical strike conditions
 [*]60+ new items
 [*]20+ new crit oriented accessories (and more to come!)
 [*][b]Cross mod content with Orchid Mod, Calamity, and Thorium in the form of extra critical strike conditions[/b]
@@ -27,6 +33,10 @@ The damage that critical strikes deal are now affected by a variety of factors. 
 [*]Various new crit-oriented item prefixes
 [*]A complete rework of the pirate NPC, including an crit oriented overhaul of the pirate armor (no longer just vanity; it's now a ranged-summoner hybrid set)
 [/list]
+
+
+[h3]One last note[/h3]
+This mod is frequently updated with balancing adjustments and new features. If you have any requests or concerns, feel free to voice them here on steam workshop or on the mod's discord server.
 
 Special thanks: [list]
 [*]Moonlight Glint: helping to make some of the mod's codebase neater, fixing various problems with crossmod support
