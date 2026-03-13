@@ -443,6 +443,12 @@ Items: {
 		DisplayName: Bronze Bullet
 		Tooltip: Critical strikes pierce
 	}
+
+	FractalWhetstone: {
+		CanBeApplied: "Can be applied to any weapon"
+		DisplayName: Fractal Whetstone
+		Tooltip: ""
+	}
 }
 
 Whetstone: {
@@ -653,7 +659,7 @@ CritTypes: {
 		Description: Critically strikes while the target has more than 85% of its health left
 		SpecialPrefixName: Desperado's
 		SpecialPrefixTooltip1: If an enemy is killed by a critical strike, increase the damage of the next critical strike by 30%
-		SpecialPrefixTooltip2: Damage bonuses stack infinitely until you either fail to crit or fail to instakill
+		SpecialPrefixTooltip2: Damage bonuses stack up to 900% until you either fail to crit or fail to one-shot
 		CanBeAppliedToDescription: Can be applied to any weapon
 		BasicWhetstonePrefix: Assassin's
 	}
@@ -1358,6 +1364,15 @@ CritTypes: {
 		SpecialPrefixTooltip2: You want to throw it against the ground in a fit of rage
 		CanBeAppliedToDescription: Cannot be applied to anything
 		BasicWhetstonePrefix: Hideous
+	}
+
+	Fractal: {
+		Description: Critically strikes on bosses you have previously killed
+		SpecialPrefixName: Determined
+		SpecialPrefixTooltip1: Critically strikes on any boss above 50% life
+		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Fractal.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Fractal.BasicWhetstonePrefix
 	}
 }
 

@@ -26,6 +26,12 @@ namespace CritRework.Content.CritTypes.RandomPool
                     if (!target.CountsAsACritter)
                     {
                         c.highHpCritMult += 0.3f;
+                        
+                        if (c.highHpCritMult > 10f)
+                        {
+                            c.highHpCritMult = 10f;
+                        }
+
                         SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/SpecialReforge")
                         {
                             Pitch = Math.Clamp((c.highHpCritMult - 1f) / 8f, 0f, 1f)

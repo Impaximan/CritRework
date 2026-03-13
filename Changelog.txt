@@ -2,3 +2,7 @@
 New additions:
 -Added "Deliberate" prefix
 -Added Bronze Bullet
+-Added Fractal Whetstone
+
+Balance changes:
+-Desperado damage bonus now caps at 900%
