@@ -438,6 +438,11 @@ Items: {
 			'A shard of some God's sacred whetstone'
 			'''
 	}
+
+	BronzeBullet: {
+		DisplayName: Bronze Bullet
+		Tooltip: Critical strikes pierce
+	}
 }
 
 Whetstone: {
@@ -1455,6 +1460,7 @@ Projectiles: {
 	GoldJavelinProjectile.DisplayName: Gold Javelin Projectile
 	PlatinumJavelinProjectile.DisplayName: Platinum Javelin Projectile
 	WetBubble.DisplayName: Wet Bubble
+	BronzeBulletProjectile.DisplayName: Bronze Bullet Projectile
 }
 
 BronzeHelm.SetBonus:
