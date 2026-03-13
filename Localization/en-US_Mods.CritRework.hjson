@@ -457,6 +457,7 @@ Prefixes: {
 	Blunt.DisplayName: Blunt
 	Necromantic.DisplayName: Necromantic
 	Special.DisplayName: Special
+	Deliberate.DisplayName: Deliberate
 }
 
 NecromanticTooltip: +2 lifesteal when inflicting critical damage upon enemies
