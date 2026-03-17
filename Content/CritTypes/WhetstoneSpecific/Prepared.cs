@@ -20,7 +20,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
 
         public override bool CanApplyTo(Item item)
         {
-            return item.type != ModContent.ItemType<Items.Equipable.Accessories.WiseCracker>() && item.type != ModContent.ItemType<Items.Bronze.BronzeQuarterstaff>();
+            return !item.IsCracker() && item.type != ModContent.ItemType<Items.Bronze.BronzeQuarterstaff>();
         }
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)

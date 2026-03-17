@@ -450,6 +450,18 @@ Items: {
 		DisplayName: Fractal Whetstone
 		Tooltip: ""
 	}
+
+	Beautificracker: {
+		DisplayName: Beautificracker
+		Tooltip:
+			'''
+			Can be given a crit condition
+			While equipped, all minions will inherit this crit condition
+			When minions critically strike, they have a chance to spawn a bonus orb
+			[insert]
+			Bonus orb buff depends on the critical strike condition
+			'''
+	}
 }
 
 Whetstone: {
@@ -1466,6 +1478,21 @@ Buffs: {
 		DisplayName: Thawed
 		Description: Thawing cloth cannot proc
 	}
+
+	BlueOrbBuff: {
+		DisplayName: Blue Beauty
+		Description: Vastly increased movement speed
+	}
+
+	GreenOrbBuff: {
+		DisplayName: Green Beauty
+		Description: Greatly increased life regen
+	}
+
+	RedOrbBuff: {
+		DisplayName: Red Beauty
+		Description: 25% increased consecutive critical strike damage
+	}
 }
 
 RecipeGroups: {
@@ -1482,6 +1509,7 @@ Projectiles: {
 	PlatinumJavelinProjectile.DisplayName: Platinum Javelin Projectile
 	WetBubble.DisplayName: Wet Bubble
 	BronzeBulletProjectile.DisplayName: Bronze Bullet Projectile
+	BeautyOrb.DisplayName: Beauty Orb
 }
 
 BronzeHelm.SetBonus:

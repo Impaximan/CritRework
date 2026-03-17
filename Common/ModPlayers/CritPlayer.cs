@@ -3,6 +3,7 @@ using CritRework.Content.Buffs;
 using CritRework.Content.CritTypes.WeaponSpecific;
 using CritRework.Content.Items.Bronze.BronzeArmor;
 using CritRework.Content.Items.Equipable.Accessories;
+using CritRework.Content.Items.Equipable.Accessories.Crackers;
 using CritRework.Content.Items.Weapons.Gloves;
 using CritRework.Content.Items.Whetstones;
 using CritRework.Content.Prefixes.Weapon;
@@ -42,6 +43,9 @@ namespace CritRework.Common.ModPlayers
         public float highHpCritMult = 1f;
         public bool pirateArmor = false;
         public bool allowNewChakram = false;
+        public float consecutiveCriticalStrikeDamage = 1f;
+
+        private bool lastHitWasCrit = false;
 
         //Tokens
         public SoundStyle? uniqueCritSound = null;
@@ -107,6 +111,7 @@ namespace CritRework.Common.ModPlayers
             shadowDonut = null;
             prostheticCrit = null;
             uniqueCritSound = null;
+            consecutiveCriticalStrikeDamage = 1f;
         }
 
         int crystalLossCounter = 0;
@@ -392,6 +397,11 @@ namespace CritRework.Common.ModPlayers
                     }, target.Center);
                 }
 
+                if (lastHitWasCrit)
+                {
+                    modifiers.SourceDamage *= consecutiveCriticalStrikeDamage;
+                }
+
                 if (Player.HasEquip<EternalGuillotine>() && target.life == target.lifeMax)
                 {
                     modifiers.CritDamage *= 2f;
@@ -491,10 +501,32 @@ namespace CritRework.Common.ModPlayers
             {
                 timeSinceCrit = 0;
             }
+
+
+            if (Player.HasEquip<Beautificracker>() && hit.Crit && proj.minion)
+            {
+                int orbColor = Beautificracker.GetOrbColor(summonCrit, Player, proj.GetGlobalProjectile<CritProjectile>().ogItem);
+
+                float chance = orbColor switch
+                {
+                    0 => 0.15f,
+                    1 => 0.2f,
+                    2 => 0.3f,
+                    _ => 0.1f
+                };
+
+                if (Main.rand.NextFloat() < chance)
+                {
+                    Projectile orb = Projectile.NewProjectileDirect(new EntitySource_OnHit(proj, target), proj.Center, Main.rand.NextVector2Circular(10f, 10f), ModContent.ProjectileType<BeautyOrb>(), 0, 0f, proj.owner, orbColor);
+                    orb.netUpdate = true;
+                }
+            }
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            lastHitWasCrit = hit.Crit;
+
             if (Player.HasEquip<MugShot>() && hit.Crit && target.type != NPCID.TargetDummy)
             {
                 if (Main.rand.NextFloat() <= 0.2f + 0.1f * Player.luck)
@@ -538,7 +570,6 @@ namespace CritRework.Common.ModPlayers
 
                 Player.AddBuff(ModContent.BuffType<Scallywag>(), 300);
             }
-
 
             bool cleansed = false;
 

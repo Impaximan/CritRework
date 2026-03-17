@@ -13,6 +13,8 @@ using CritRework.Common.ModPlayers;
 using CritRework.Content.Prefixes.Weapon;
 using CritRework.Common.Globals;
 using System.IO;
+using CritRework.Content.Items.Equipable.Accessories;
+using CritRework.Content.Items.Equipable.Accessories.Crackers;
 
 namespace CritRework
 {
@@ -140,6 +142,15 @@ namespace CritRework
 
     public static class Extensions
     {
+        public static bool IsCracker(this Item item)
+        {
+            return new List<int>()
+            {
+                ModContent.ItemType<WiseCracker>(),
+                ModContent.ItemType<Beautificracker>(),
+            }.Contains(item.type);
+        }
+
         public static bool IsGrapple(this Item item)
         {
             return Main.projHook[item.type];
