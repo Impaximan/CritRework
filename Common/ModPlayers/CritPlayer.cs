@@ -397,7 +397,7 @@ namespace CritRework.Common.ModPlayers
                     modifiers.CritDamage *= 2f;
                 }
 
-                if (Player.HasEquip<ThawingCloth>())
+                if (Player.HasEquip<ThawingCloth>() && !Player.HasBuff<ThawingClothCooldown>())
                 {
                     int num = 0;
 
@@ -542,8 +542,9 @@ namespace CritRework.Common.ModPlayers
 
             bool cleansed = false;
 
-            if (Player.HasEquip<ThawingCloth>() && hit.Crit)
+            if (Player.HasEquip<ThawingCloth>() && hit.Crit && !Player.HasBuff<ThawingClothCooldown>())
             {
+
                 List<int> oddExceptions = new()
                 {
                     BuffID.OnFire3
@@ -571,6 +572,9 @@ namespace CritRework.Common.ModPlayers
                     }, target.Center);
 
                     CombatText.NewText(target.getRect(), Color.SkyBlue, "Thawed x" + numCleansed, true, true);
+
+                    target.netUpdate = true;
+                    Player.AddBuff(ModContent.BuffType<ThawingClothCooldown>(), 60 * 5);
                 }
 
             }

@@ -27,7 +27,15 @@
         public override void UpdateEquip(Player player)
         {
             player.AddEquip<ThawingCloth>();
-            damageBonusPerDebuff = 0.3f;
+            damageBonusPerDebuff = 0.75f;
+        }
+    }
+
+    public class ThawingClothCooldown : ModBuff
+    {
+        public override void SetStaticDefaults()
+        {
+            Main.debuff[Type] = true;
         }
     }
 }

@@ -330,8 +330,9 @@ Items: {
 		DisplayName: Thawing Cloth
 		Tooltip:
 			'''
-			Critical strikes deal 30% increased damage per debuff inflicted on the enemy
-			Cleanses enemy debuffs in the process
+			Critical strikes deal 75% increased damage per debuff inflicted on the enemy
+			Cleanses each debuff in the process
+			5 second cooldown
 			'''
 	}
 
@@ -445,7 +446,7 @@ Items: {
 	}
 
 	FractalWhetstone: {
-		CanBeApplied: "Can be applied to any weapon"
+		CanBeApplied: Can be applied to any weapon
 		DisplayName: Fractal Whetstone
 		Tooltip: ""
 	}
@@ -1459,6 +1460,11 @@ Buffs: {
 	Preparation: {
 		DisplayName: Preparation
 		Description: Mods.CritRework.Buffs.Preparation.Description
+	}
+
+	ThawingClothCooldown: {
+		DisplayName: Thawed
+		Description: Thawing cloth cannot proc
 	}
 }
 

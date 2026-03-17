@@ -96,6 +96,10 @@ namespace CritRework
 
         public static void DisableCrit(On_NPC.HitModifiers.orig_DisableCrit orig, ref NPC.HitModifiers self)
         {
+            if (ModLoader.HasMod("CalamityMod") && self.DamageType == DamageClass.Summon) //Hacky workaround to fix calamity breaking Wise Cracker. Not sure what else to do.
+            {
+                return;
+            }
             bool? value = (bool?)typeof(NPC.HitModifiers).GetField("_critOverride", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(self);
             if (value == null)
             {

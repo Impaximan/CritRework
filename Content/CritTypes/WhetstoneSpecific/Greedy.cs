@@ -12,7 +12,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
 
         public override void SpecialPrefixOnHitNPC(Item item, Player player, Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (player.Distance(target.getRect().ClosestPointInRect(player.Center)) < 100f)
+            if (player.Distance(target.getRect().ClosestPointInRect(player.Center)) < 100f && hit.Crit)
             {
                 player.QuickSpawnItem(new EntitySource_OnHit(player, target), ItemID.SilverCoin, 1);
             }

@@ -6,3 +6,8 @@ New additions:
 
 Balance changes:
 -Desperado damage bonus now caps at 900%
+-Increased Thawing Cloth bonus damage, but put its effect on a cooldown
+
+Bug fixes:
+-Fixed Wise Cracker accessory affect not working while Calamity is enabled
+-Fixed weapons with "Avaricious" modifier from giving money even when not critcally striking
