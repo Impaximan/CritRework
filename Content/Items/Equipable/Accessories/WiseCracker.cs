@@ -15,6 +15,11 @@ namespace CritRework.Content.Items.Equipable.Accessories
             Item.GetGlobalItem<CritItem>().forceCanCrit = true;
         }
 
+        public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)
+        {
+            return !equippedItem.IsCracker() || !incomingItem.IsCracker();
+        }
+
         public override void UpdateEquip(Player player)
         {
             player.AddEquip<WiseCracker>();

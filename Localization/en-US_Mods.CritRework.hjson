@@ -462,6 +462,17 @@ Items: {
 			Bonus orb buff depends on the critical strike condition
 			'''
 	}
+
+	Deificracker: {
+		DisplayName: Deificracker
+		Tooltip:
+			'''
+			Can be given a crit condition
+			Can be given a [icon] [c/fffaac:critical reforge] [icon]
+			While equipped, all minions will inherit this crit condition
+			If given a critical reforge, minions will also inherit the effects of that reforge
+			'''
+	}
 }
 
 Whetstone: {

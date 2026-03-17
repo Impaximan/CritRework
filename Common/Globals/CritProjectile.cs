@@ -64,9 +64,13 @@ namespace CritRework.Common.Globals
 
             if (ogItem != null)
             {
-                if (ogItem.IsSpecial() && ogItem.TryGetCritType(out CritType critType))
+                if (ogItem.IsSpecial(Main.player[projectile.owner]) && (ogItem.TryGetCritType(out CritType critType) || (ogItem.DamageType == DamageClass.Summon && owner.GetModPlayer<CritPlayer>().summonSpecial)))
                 {
-                    critType.SpecialPrefixOnHitNPC(ogItem, owner, projectile, target, hit, damageDone);
+                    if (ogItem.DamageType == DamageClass.Summon && owner.GetModPlayer<CritPlayer>().summonSpecial)
+                    {
+                        critType = owner.GetModPlayer<CritPlayer>().summonCrit;
+                    }
+                        critType.SpecialPrefixOnHitNPC(ogItem, owner, projectile, target, hit, damageDone);
 
                     if (ogItem.type == ItemID.Harpoon && hit.Crit && owner.controlUseItem)
                     {
@@ -122,17 +126,17 @@ namespace CritRework.Common.Globals
 
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (projectile.type == ProjectileID.Chik && ogItem != null && ogItem.IsSpecial())
+            if (projectile.type == ProjectileID.Chik && ogItem != null && ogItem.IsSpecial(Main.player[projectile.owner]))
             {
                 modifiers.CritDamage *= 1f + (npcsHit.Count - 2) * 0.3f;
             }
 
-            if (projectile.type == ProjectileID.Kraken && ogItem != null && ogItem.IsSpecial())
+            if (projectile.type == ProjectileID.Kraken && ogItem != null && ogItem.IsSpecial(Main.player[projectile.owner]))
             {
                 modifiers.CritDamage *= projectile.scale;
             }
 
-            if ((projectile.type == ProjectileID.Code1 || projectile.type == ProjectileID.Code2) && ogItem != null && ogItem.IsSpecial())
+            if ((projectile.type == ProjectileID.Code1 || projectile.type == ProjectileID.Code2) && ogItem != null && ogItem.IsSpecial(Main.player[projectile.owner]))
             {
                 modifiers.CritDamage *= 1f + (targetsHit - 10) * 0.05f;
             }
@@ -141,7 +145,7 @@ namespace CritRework.Common.Globals
         public override bool OnTileCollide(Projectile projectile, Vector2 oldVelocity)
         {
             wallBounces++;
-            if (ogItem != null && ogItem.type == ItemID.ShadowbeamStaff && ogItem.IsSpecial())
+            if (ogItem != null && ogItem.type == ItemID.ShadowbeamStaff && ogItem.IsSpecial(Main.player[projectile.owner]))
             {
                 foreach (int i in projectile.localNPCImmunity)
                 {
@@ -153,7 +157,7 @@ namespace CritRework.Common.Globals
 
         public override void ModifyDamageHitbox(Projectile projectile, ref Rectangle hitbox)
         {
-            if (projectile.type == ProjectileID.Kraken && ogItem != null && ogItem.IsSpecial())
+            if (projectile.type == ProjectileID.Kraken && ogItem != null && ogItem.IsSpecial(Main.player[projectile.owner]))
             {
                 Point center = hitbox.Center;
                 hitbox.Width = (int)(hitbox.Width * projectile.scale);
@@ -188,7 +192,7 @@ namespace CritRework.Common.Globals
                 }
             }
 
-            if (ogItem != null && ogItem.IsSpecial())
+            if (ogItem != null && ogItem.IsSpecial(Main.player[projectile.owner]))
             {
                 if (ogItem.type == ModContent.ItemType<GalacticGauntlet>() && projectile.velocity.Y > 0)
                 {
@@ -214,7 +218,7 @@ namespace CritRework.Common.Globals
 
             Player player = Main.player[projectile.owner];
             //Grapple to enemies
-            if (player.HeldItem != null && player.HeldItem.IsSpecial() && player.HeldItem.TryGetCritType(out WebCovered _) && Main.projHook[projectile.type])
+            if (player.HeldItem != null && player.HeldItem.IsSpecial(player) && player.HeldItem.TryGetCritType(out WebCovered _) && Main.projHook[projectile.type])
             {
                 foreach (NPC target in Main.npc)
                 {
@@ -298,13 +302,13 @@ namespace CritRework.Common.Globals
                 fromNecromantic = true;
             }
 
-            if (item.type == ItemID.Trident && item.IsSpecial())
+            if (item.type == ItemID.Trident && item.IsSpecial(player))
             {
                 projectile.usesLocalNPCImmunity = true;
                 projectile.localNPCHitCooldown = 8;
             }
             
-            if (ogItem.IsSpecial())
+            if (ogItem.IsSpecial(player))
             {
                 switch (item.type)
                 {
@@ -331,10 +335,6 @@ namespace CritRework.Common.Globals
                     default:
                         break;
                 }
-            }
-
-            if (ogItem.IsSpecial() && item.type == ItemID.ShadowbeamStaff)
-            {
             }
 
             if (player != null)
@@ -408,7 +408,7 @@ namespace CritRework.Common.Globals
                         timeActive = crit.timeActive;
                     }
 
-                    if (ogItem != null && ogItem.IsSpecial() && (projectile.type == ProjectileID.CrystalVileShardHead || projectile.type == ProjectileID.VilethornTip))
+                    if (ogItem != null && ogItem.IsSpecial(Main.player[projectile.owner]) && (projectile.type == ProjectileID.CrystalVileShardHead || projectile.type == ProjectileID.VilethornTip))
                     {
                         Vector2 ogCenter = projectile.Center;
                         projectile.scale *= 2.5f;

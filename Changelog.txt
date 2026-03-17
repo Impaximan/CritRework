@@ -3,6 +3,7 @@ New additions:
 -Added "Deliberate" prefix
 -Added Bronze Bullet
 -Added Fractal Whetstone
+-Added 3 new mutually exclusive upgrades to the wise cracker
 
 Balance changes:
 -Desperado damage bonus now caps at 900%
@@ -11,3 +12,6 @@ Balance changes:
 Bug fixes:
 -Fixed Wise Cracker accessory affect not working while Calamity is enabled
 -Fixed weapons with "Avaricious" modifier from giving money even when not critcally striking
+
+Misc:
+-Whips with tag critical strike chance now say so properly in their inventory, and explain how the mechanic works with this mod enabled

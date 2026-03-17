@@ -80,6 +80,7 @@ namespace CritRework.Common.ModPlayers
 
         //Extra crit types
         public CritType? summonCrit = null;
+        public bool summonSpecial = false;
         public CritType? prostheticCrit = null;
         public CritType? EVILCrit = null;
         public ShadowDonut? shadowDonut = null;
@@ -111,6 +112,7 @@ namespace CritRework.Common.ModPlayers
             shadowDonut = null;
             prostheticCrit = null;
             uniqueCritSound = null;
+            summonSpecial = false;
             consecutiveCriticalStrikeDamage = 1f;
         }
 
@@ -380,7 +382,7 @@ namespace CritRework.Common.ModPlayers
 
         private NPC.HitModifiers ApplyModifiers(Item item, Projectile? projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
         {
-            if (critType != null && critType.ShouldCrit(Player, item, projectile, target, modifiers, item.prefix == ModContent.PrefixType<Special>()) && (prostheticCrit == null || prostheticCrit.ShouldCrit(Player, item, projectile, target, modifiers, item.prefix == ModContent.PrefixType<Special>())))
+            if (critType != null && critType.ShouldCrit(Player, item, projectile, target, modifiers, item.IsSpecial(Main.LocalPlayer)) && (prostheticCrit == null || prostheticCrit.ShouldCrit(Player, item, projectile, target, modifiers, item.prefix == ModContent.PrefixType<Special>())))
             {
                 modifiers.SetCrit();
                 modifiers.SourceDamage *= CritType.CalculateActualCritMult(critType, item, Player);
@@ -511,7 +513,7 @@ namespace CritRework.Common.ModPlayers
                 {
                     0 => 0.15f,
                     1 => 0.2f,
-                    2 => 0.3f,
+                    2 => 0.5f,
                     _ => 0.1f
                 };
 

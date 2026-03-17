@@ -1,5 +1,6 @@
 ﻿using CritRework.Common.Globals;
 using CritRework.Content.CritTypes;
+using CritRework.Content.Items.Equipable.Accessories.Crackers;
 using CritRework.Content.Items.Whetstones;
 using CritRework.Content.Prefixes.Weapon;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace CritRework.Content.Items
                 return;
             }
 
-            if (Main.mouseItem.TryGetCritType(out CritType critType))
+            if (Main.mouseItem.TryGetCritType(out CritType critType) && (!Main.mouseItem.accessory || Main.mouseItem.type == ModContent.ItemType<Deificracker>()))
             {
                 if (Main.mouseItem.CanApplyPrefix(ModContent.PrefixType<Special>()) && Main.mouseItem.TryGetGlobalItem(out CritItem critItem) && CritItem.CanHaveCrits(Main.mouseItem))
                 {

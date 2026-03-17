@@ -9,7 +9,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
 
         public override float GetDamageMult(Player Player, Item Item)
         {
-            if (Item.IsSpecial() && Player.GetModPlayer<CritPlayer>().timeSinceHeal < 300)
+            if (Item.IsSpecial(Player) && Player.GetModPlayer<CritPlayer>().timeSinceHeal < 300)
             {
                 return 1.5f * Player.GetModPlayer<CritPlayer>().healPowerMult;
             }

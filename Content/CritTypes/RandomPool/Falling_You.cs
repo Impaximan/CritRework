@@ -6,7 +6,7 @@
 
         public override float GetDamageMult(Player Player, Item Item)
         {
-            if (Item.IsSpecial() && Player.velocity.Y > 0)
+            if (Item.IsSpecial(Player) && Player.velocity.Y > 0)
             {
                 int fall = Player.fallStart;
                 if (Player.fallStart2 < Player.fallStart) fall = Player.fallStart2;

@@ -91,7 +91,7 @@ namespace CritRework.Common.Globals
 
         public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-            if (item.IsSpecial() && critType is TitaniumTrident)
+            if (item.IsSpecial(player) && critType is TitaniumTrident)
             {
                 velocity *= 1.5f;
             }
@@ -217,7 +217,7 @@ namespace CritRework.Common.Globals
                 player.Heal(Content.Prefixes.Weapon.Necromantic.healAmount);
             }
 
-            if (item.IsSpecial() && item.TryGetCritType(out CritType critType))
+            if (item.IsSpecial(player) && item.TryGetCritType(out CritType critType))
             {
                 critType.SpecialPrefixOnHitNPC(item, player, null, target, hit, damageDone);
             }
@@ -240,9 +240,13 @@ namespace CritRework.Common.Globals
         {
             if (critType == null)
             {
+                if (item.DamageType == DamageClass.Summon && player.GetModPlayer<CritPlayer>().summonSpecial)
+                {
+                    player.GetModPlayer<CritPlayer>().summonCrit.SpecialPrefixHoldItem(item, player);
+                }
                 AddCritType(item);
             }
-            else if (item.IsSpecial())
+            else if (item.IsSpecial(player))
             {
                 critType.SpecialPrefixHoldItem(item, player);
             }
@@ -250,7 +254,7 @@ namespace CritRework.Common.Globals
 
         public override void ModifyItemScale(Item item, Player player, ref float scale)
         {
-            if (item.IsSpecial() && item.TryGetCritType(out CritType c))
+            if (item.IsSpecial(player) && item.TryGetCritType(out CritType c))
             {
                 if (c is TipOfTheWeapon)
                 {
@@ -452,7 +456,7 @@ namespace CritRework.Common.Globals
                 return false;
             }
 
-            if (weapon.IsSpecial() && weapon.TryGetCritType(out Ammo crit) && Main.rand.NextBool(5))
+            if (weapon.IsSpecial(player) && weapon.TryGetCritType(out Ammo crit) && Main.rand.NextBool(5))
             {
                 return false;
             }
@@ -565,13 +569,33 @@ namespace CritRework.Common.Globals
                 }
             }
 
-            foreach (Tuple<string, string> conversion in CritRework.tooltipConversions)
+
+            //Convert chance tooltips
+            if (item.DamageType != DamageClass.SummonMeleeSpeed)
             {
-                foreach (TooltipLine tooltip in tooltips)
+                foreach (Tuple<string, string> conversion in CritRework.tooltipConversions)
                 {
-                    if (tooltip.Text.Contains(conversion.Item1, StringComparison.OrdinalIgnoreCase))
+                    foreach (TooltipLine tooltip in tooltips)
                     {
-                        tooltip.Text = tooltip.Text.Replace(conversion.Item1, conversion.Item2, StringComparison.OrdinalIgnoreCase);
+                        if (tooltip.Text.Contains(conversion.Item1, StringComparison.OrdinalIgnoreCase))
+                        {
+                            tooltip.Text = tooltip.Text.Replace(conversion.Item1, conversion.Item2, StringComparison.OrdinalIgnoreCase);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (Tuple<string, string> conversion in CritRework.tooltipConversions)
+                {
+                    foreach (TooltipLine tooltip in tooltips)
+                    {
+                        if (tooltip.Text.Contains(conversion.Item1, StringComparison.OrdinalIgnoreCase))
+                        {
+                            int n = tooltips.IndexOf(tooltip);
+                            tooltips.Insert(n + 1, new TooltipLine(Mod, "TooltipTagCrit", "Bonus crits enabled by this whip have a damage mult of 2x"));
+                            break;
+                        }
                     }
                 }
             }
@@ -841,6 +865,18 @@ namespace CritRework.Common.Globals
             {
                 int i = tooltips.FindIndex(x => x.Name == "PrefixCritChance");
                 tooltips.Insert(i + 1, new TooltipLine(Mod, "PrefixNecromantic", necromanticTooltip.Value)
+                {
+                    IsModifier = true,
+                });
+            }
+
+            if (critPlayer.summonSpecial && item.DamageType == DamageClass.Summon)
+            {
+                tooltips.Add(new TooltipLine(Mod, "SpecialModifier1_Summon", critPlayer.summonCrit.specialPrefixTooltip1.Value)
+                {
+                    IsModifier = true,
+                });
+                tooltips.Add(new TooltipLine(Mod, "SpecialModifier2_Summon", critPlayer.summonCrit.specialPrefixTooltip2.Value)
                 {
                     IsModifier = true,
                 });

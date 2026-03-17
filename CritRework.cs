@@ -148,6 +148,7 @@ namespace CritRework
             {
                 ModContent.ItemType<WiseCracker>(),
                 ModContent.ItemType<Beautificracker>(),
+                ModContent.ItemType<Deificracker>(),
             }.Contains(item.type);
         }
 
@@ -174,9 +175,9 @@ namespace CritRework
             return false;
         }
 
-        public static bool IsSpecial(this Item item)
+        public static bool IsSpecial(this Item item, Player? owner = null)
         {
-            return item.prefix == ModContent.PrefixType<Special>();
+            return item.prefix == ModContent.PrefixType<Special>() || (owner != null && item.DamageType == DamageClass.Summon && owner.TryGetModPlayer(out CritPlayer critPlayer) && critPlayer.summonSpecial);
         }
 
         public static CritType? GetCritType(this Item item)

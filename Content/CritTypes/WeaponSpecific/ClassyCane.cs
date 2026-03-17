@@ -9,7 +9,7 @@
             return item.type == ItemID.TaxCollectorsStickOfDoom;
         }
 
-        public override float GetDamageMult(Player Player, Item Item) => Item.IsSpecial() ? 200f : 100f;
+        public override float GetDamageMult(Player Player, Item Item) => Item.IsSpecial(Player) ? 200f : 100f;
 
         public override bool ShowWhenActive => true;
 

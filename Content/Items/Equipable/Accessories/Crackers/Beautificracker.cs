@@ -24,6 +24,7 @@ namespace CritRework.Content.Items.Equipable.Accessories.Crackers
                 .AddIngredient<WiseCracker>()
                 .AddIngredient(ItemID.ChlorophyteBar, 15)
                 .AddIngredient(ItemID.TurtleShell, 1)
+                .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
 
@@ -55,28 +56,41 @@ namespace CritRework.Content.Items.Equipable.Accessories.Crackers
             }
         }
 
+        public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)
+        {
+            return !equippedItem.IsCracker() || !incomingItem.IsCracker();
+        }
+
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             string orbText = "Unknown bonus orb effect";
             Color orbColor = Color.Gray;
 
+            int usedOrbColor = 0;
+
             if (Item.TryGetGlobalItem(out CritItem cItem) && cItem.critType != null)
             {
-                switch (GetOrbColor(cItem.critType, Main.LocalPlayer, Item))
-                {
-                    case 0:
-                        orbText = "Collecting the orb will boost consecutive critical strike damage by 25% for 4 seconds";
-                        orbColor = Color.Lerp(Color.Red, Color.Pink, 0.5f);
-                        break;
-                    case 1:
-                        orbText = "Collecting the orb will greatly boost life regen for 5 seconds";
-                        orbColor = Color.Lime;
-                        break;
-                    case 2:
-                        orbText = "Collecting the orb will grant a 1 second burst of movement speed";
-                        orbColor = Color.Cyan;
-                        break;
-                }
+                usedOrbColor = GetOrbColor(cItem.critType, Main.LocalPlayer, Item);
+            }
+            else
+            {
+                usedOrbColor = (int)(Main.gameTimeCache.TotalGameTime.TotalSeconds % 9) / 3;
+            }
+
+            switch (usedOrbColor)
+            {
+                case 0:
+                    orbText = "Collecting the orb will boost consecutive critical strike damage by 25% for 4 seconds";
+                    orbColor = Color.Lerp(Color.Red, Color.Pink, 0.5f);
+                    break;
+                case 1:
+                    orbText = "Collecting the orb will greatly boost life regen for 7 seconds";
+                    orbColor = Color.Lime;
+                    break;
+                case 2:
+                    orbText = "Collecting the orb will grant a 2 second burst of movement speed";
+                    orbColor = Color.Cyan;
+                    break;
             }
 
             foreach (TooltipLine line in tooltips)
@@ -96,7 +110,7 @@ namespace CritRework.Content.Items.Equipable.Accessories.Crackers
         {
             Projectile.width = 14;
             Projectile.height = 14;
-            Projectile.timeLeft = 300;
+            Projectile.timeLeft = 500;
             Projectile.tileCollide = false;
             Projectile.friendly = false;
             Projectile.hostile = false;
@@ -164,10 +178,10 @@ namespace CritRework.Content.Items.Equipable.Accessories.Crackers
                     DoAI(DustID.RedTorch, 300, SoundID.Item4, ModContent.BuffType<RedOrbBuff>(), 240);
                     break;
                 case 1: //Green
-                    DoAI(DustID.GreenTorch, 400, SoundID.Item4, ModContent.BuffType<GreenOrbBuff>(), 300);
+                    DoAI(DustID.GreenTorch, 400, SoundID.Item4, ModContent.BuffType<GreenOrbBuff>(), 60 * 7);
                     break;
                 case 2: //Blue
-                    DoAI(DustID.BlueTorch, 600, SoundID.Item67, ModContent.BuffType<BlueOrbBuff>(), 60);
+                    DoAI(DustID.BlueTorch, 600, SoundID.Item67, ModContent.BuffType<BlueOrbBuff>(), 120);
                     break;
             }
         }

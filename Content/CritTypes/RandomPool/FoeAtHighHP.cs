@@ -10,7 +10,7 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         public override float GetDamageMult(Player Player, Item Item)
         {
-            if (Item != null && Item.IsSpecial() && Player.TryGetModPlayer(out CritPlayer c))
+            if (Item != null && Item.IsSpecial(Player) && Player.TryGetModPlayer(out CritPlayer c))
             {
                 return 2f * c.highHpCritMult;
             }

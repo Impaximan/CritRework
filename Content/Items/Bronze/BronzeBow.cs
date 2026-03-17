@@ -40,7 +40,7 @@
     {
         public override float GetDamageMult(Player Player, Item Item)
         {
-            if (Item.IsSpecial())
+            if (Item.IsSpecial(Player))
             {
                 return 3f;
             }

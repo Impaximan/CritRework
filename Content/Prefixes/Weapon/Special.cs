@@ -1,16 +1,17 @@
 ﻿
 using CritRework.Common.Globals;
+using CritRework.Content.Items.Equipable.Accessories.Crackers;
 using System.Collections.Generic;
 
 namespace CritRework.Content.Prefixes.Weapon
 {
     public class Special : ModPrefix
     {
-        public override PrefixCategory Category => PrefixCategory.AnyWeapon;
+        public override PrefixCategory Category => PrefixCategory.Custom;
 
         public override bool CanRoll(Item item)
         {
-            return CritItem.CanHaveCrits(item);
+            return CritItem.CanHaveCrits(item) && ((!item.accessory && item.damage > 0) || (item.type == ModContent.ItemType<Deificracker>()));
         }
 
         public override void ModifyValue(ref float valueMult)
