@@ -473,6 +473,16 @@ Items: {
 			If given a critical reforge, minions will also inherit the effects of that reforge
 			'''
 	}
+
+	ShortestStraw: {
+		DisplayName: Shortest Straw
+		Tooltip:
+			'''
+			Increases critical strike damage the lower the enemy's life is, up to 35%
+			Increases consecutive critical strike damage by 5%
+			'The fallout has begun, oppressive damage done'
+			'''
+	}
 }
 
 Whetstone: {

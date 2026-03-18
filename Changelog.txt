@@ -4,10 +4,12 @@ New additions:
 -Added Bronze Bullet
 -Added Fractal Whetstone
 -Added 3 new mutually exclusive upgrades to the wise cracker
+-Added the Shortest Straw, an accessory found in the underground jungle	
 
 Balance changes:
 -Desperado damage bonus now caps at 900%
 -Increased Thawing Cloth bonus damage, but put its effect on a cooldown
+-Reduced how frequently the Sharpened Wrench will appear in chests
 
 Bug fixes:
 -Fixed Wise Cracker accessory affect not working while Calamity is enabled

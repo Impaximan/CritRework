@@ -13,8 +13,8 @@
 
         public override void SetDefaults()
         {
-            Item.width = 32;
-            Item.height = 38;
+            Item.width = 22;
+            Item.height = 26;
             Item.accessory = true;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 0, 20, 0);

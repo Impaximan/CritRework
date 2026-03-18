@@ -175,6 +175,11 @@ namespace CritRework
             return false;
         }
 
+        public static void AddConsecutiveCritDamage(this Player player, float bonus)
+        {
+            player.GetModPlayer<CritPlayer>().consecutiveCriticalStrikeDamage += bonus;
+        }
+
         public static bool IsSpecial(this Item item, Player? owner = null)
         {
             return item.prefix == ModContent.PrefixType<Special>() || (owner != null && item.DamageType == DamageClass.Summon && owner.TryGetModPlayer(out CritPlayer critPlayer) && critPlayer.summonSpecial);

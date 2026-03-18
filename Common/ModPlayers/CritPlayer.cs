@@ -399,6 +399,11 @@ namespace CritRework.Common.ModPlayers
                     }, target.Center);
                 }
 
+                if (Player.HasEquip<ShortestStraw>())
+                {
+                    modifiers.SourceDamage *= MathHelper.Lerp(1f, 1.35f, 1f - target.life / (float)target.lifeMax);
+                }
+
                 if (lastHitWasCrit)
                 {
                     modifiers.SourceDamage *= consecutiveCriticalStrikeDamage;
