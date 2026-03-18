@@ -231,8 +231,8 @@ namespace CritRework.Common.Globals
         public override void ModifyGlobalLoot(GlobalLoot globalLoot)
         {
             globalLoot.Add(ItemDropRule.Common(ModContent.ItemType<BasicWhetstone>(), 250));
-            globalLoot.Add(ItemDropRule.Common(ModContent.ItemType<DivineShard>(), 750));
-            globalLoot.Add(ItemDropRule.ByCondition(new FirstKillDropRule(), ModContent.ItemType<DivineShard>(), 20));
+            globalLoot.Add(ItemDropRule.Common(ModContent.ItemType<DivineShard>(), 1000));
+            globalLoot.Add(ItemDropRule.ByCondition(new FirstKillDropRule(), ModContent.ItemType<DivineShard>(), 35));
         }
 
         public override void OnChatButtonClicked(NPC npc, bool firstButton)
