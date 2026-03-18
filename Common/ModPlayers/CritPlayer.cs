@@ -510,7 +510,7 @@ namespace CritRework.Common.ModPlayers
             }
 
 
-            if (Player.HasEquip<Beautificracker>() && hit.Crit && proj.minion)
+            if (Player.HasEquip<Beautificracker>() && hit.Crit && proj.DamageType == DamageClass.Summon)
             {
                 int orbColor = Beautificracker.GetOrbColor(summonCrit, Player, proj.GetGlobalProjectile<CritProjectile>().ogItem);
 

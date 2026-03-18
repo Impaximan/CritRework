@@ -1,21 +1,3 @@
-﻿Update 1.5.1.0
-New additions:
--Added "Deliberate" prefix
--Added Bronze Bullet
--Added Fractal Whetstone
--Added the Beautificracker, a post-mech bosses upgrade to the Wise Cracker
--Added the Deificracker, a post-Plantera upgrade to the Wise Cracker
--Added the Shortest Straw, an accessory found in the underground jungle	
-
-Balance changes:
--Desperado damage bonus now caps at 900%
--Increased Thawing Cloth bonus damage, but put its effect on a cooldown
--Reduced how frequently the Sharpened Wrench will appear in chests
--Increased the rarity of Divine Ingots
-
+﻿Update 1.5.1.1
 Bug fixes:
--Fixed Wise Cracker accessory affect not working while Calamity is enabled
--Fixed weapons with "Avaricious" modifier from giving money even when not critcally striking
-
-Misc:
--Whips with tag critical strike chance now say so properly in their inventory, and explain how the mechanic works with this mod enabled
+-Fixed Beautificracker not properly spawning orbs when the target is hit by a minion's projectiles rather than the minion itself
