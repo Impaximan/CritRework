@@ -14,6 +14,7 @@ using CritRework.Content.Items;
 using CritRework.Common.Systems;
 using Terraria.GameContent.Bestiary;
 using Terraria.ModLoader;
+using CritRework.Content.Items.Materials;
 
 namespace CritRework.Common.Globals
 {
@@ -220,6 +221,12 @@ namespace CritRework.Common.Globals
             if (npc.aiStyle == NPCAIStyleID.Slime && !npc.friendly && !npc.CountsAsACritter)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SparkingSludge>(), 125));
+            }
+
+            if (npc.type == NPCID.Lihzahrd || npc.type == NPCID.LihzahrdCrawler)
+            {
+                npcLoot.Add(ItemDropRule.ByCondition(new FirstKillDropRule(), ModContent.ItemType<Greenprint>()));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Greenprint>(), 75));
             }
 
             if (npc.boss)

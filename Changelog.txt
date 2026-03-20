@@ -1,3 +1,3 @@
-﻿Update 1.5.1.1
-Bug fixes:
--Fixed Beautificracker not properly spawning orbs when the target is hit by a minion's projectiles rather than the minion itself
+﻿Update 1.6.0.0 "Locked and Loaded"
+Additions:
+-Added a new material, the "Greenrprint," which drops from Lihzahrds in the Jungle Temple and can be used to create powerful, crit-powered constructs

@@ -483,6 +483,15 @@ Items: {
 			'The fallout has begun, oppressive damage done'
 			'''
 	}
+
+	Greenprint: {
+		DisplayName: Greenprint
+		Tooltip:
+			'''
+			Details instructions for various Lihzahrd constructs
+			Colored green due to Lihzahrd printing tech, which utilizes plant fiber from the Jungle
+			'''
+	}
 }
 
 Whetstone: {
