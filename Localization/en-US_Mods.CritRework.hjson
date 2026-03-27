@@ -492,6 +492,16 @@ Items: {
 			Colored green due to Lihzahrd printing tech, which utilizes plant fiber from the Jungle
 			'''
 	}
+
+	PocketLightningRod: {
+		DisplayName: Pocket Lightning Rod
+		Tooltip:
+			'''
+			Arcs lightning to hit enemies on critical strike, damaging all in its path
+			May shock you a little
+			Does not activate below 50% life
+			'''
+	}
 }
 
 Whetstone: {
@@ -1540,6 +1550,7 @@ Projectiles: {
 	WetBubble.DisplayName: Wet Bubble
 	BronzeBulletProjectile.DisplayName: Bronze Bullet Projectile
 	BeautyOrb.DisplayName: Beauty Orb
+	PocketLightning.DisplayName: Pocket Lightning
 }
 
 BronzeHelm.SetBonus:

@@ -1,3 +1,4 @@
 ﻿Update 1.6.0.0 "Locked and Loaded"
 Additions:
+-Added a new accessory, the "Pocket Lightning Rod," which can be found in the Underground Desert
 -Added a new material, the "Greenrprint," which drops from Lihzahrds in the Jungle Temple and can be used to create powerful, crit-powered constructs

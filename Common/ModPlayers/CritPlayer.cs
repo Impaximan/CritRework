@@ -621,19 +621,6 @@ namespace CritRework.Common.ModPlayers
             {
                 fireJumpCounter--;
 
-                //for (int i = 0; i < 15; i++)
-                //{
-                //    float theta = Main.rand.NextFloat(MathHelper.TwoPi);
-
-                //    float distanceMult = Main.rand.NextFloat(0.8f, 1.2f);
-                //    Vector2 velocity = theta.ToRotationVector2() * 2f * -distanceMult;
-                //    Vector2 position = Player.Center + theta.ToRotationVector2() * 30f * distanceMult;
-
-                //    Dust dust = Dust.NewDustPerfect(position, DustID.Torch, velocity);
-                //    dust.noGravity = true;
-                //    dust.scale = 0.75f;
-                //}
-
                 if (fireJumpCounter <= 0)
                 {
                     SoundEngine.PlaySound(SoundID.Item76, Player.Center);
@@ -653,6 +640,20 @@ namespace CritRework.Common.ModPlayers
 
                     Player.GetJumpState<FireJump>().Available = true;
                 }
+            }
+
+            if (Player.HasEquip<PocketLightningRod>() && hit.Crit)
+            {
+                SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/Zap")
+                {
+                    Volume = 0.75f,
+                    PitchVariance = 0.5f
+                }, target.Center);
+
+                Projectile p = Projectile.NewProjectileDirect(new EntitySource_OnHurt(target, Player), Player.Center, Vector2.Zero, ModContent.ProjectileType<PocketLightning>(), hit.Damage, 0f, Player.whoAmI);
+                p.ai[2] = target.whoAmI;
+                (p.ModProjectile as PocketLightning).SetTargetPosition();
+                Player.AddBuff(BuffID.Electrified, 10);
             }
 
             if (Player.HasEquip<NoxiousEye>() && hit.Crit)
