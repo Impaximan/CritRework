@@ -536,6 +536,19 @@ Prefixes: {
 	Deliberate.DisplayName: Deliberate
 	Bulky.DisplayName: Bulky
 	Quality_Augment.DisplayName: Quality
+
+	Panicked: {
+		DisableCondition: All augmentation effects are inactive while above 30% life
+		DisplayName: Panicked
+	}
+
+	Timid: {
+		DisableCondition: All augmentation effects are inactive while below 85% life
+		DisplayName: Timid
+	}
+
+	Detrimental.DisplayName: Detrimental
+	Helpful.DisplayName: Helpful
 }
 
 NecromanticTooltip: +2 lifesteal when inflicting critical damage upon enemies
@@ -1602,3 +1615,5 @@ Augmentation: {
 	Tooltip1: Augmentation
 	Tooltip2: To apply, hold an applicable weapon with your mouse and right click on this item
 }
+
+RemoveAugmentation: Right click to remove augmentation

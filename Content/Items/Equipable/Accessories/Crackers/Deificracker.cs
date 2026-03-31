@@ -1,10 +1,6 @@
 ﻿using CritRework.Common.Globals;
 using CritRework.Common.ModPlayers;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CritRework.Content.Items.Equipable.Accessories.Crackers
 {

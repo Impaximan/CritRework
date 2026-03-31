@@ -1,7 +1,6 @@
 ﻿using CritRework.Common.Globals;
 using CritRework.Common.ModPlayers;
 using System.Collections.Generic;
-using Terraria;
 using Terraria.Audio;
 
 namespace CritRework.Content.Items.Equipable.Accessories.Crackers

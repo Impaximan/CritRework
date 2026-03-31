@@ -1,5 +1,4 @@
 ﻿using CritRework.Common.Globals;
-using CritRework.Content.Items.Augmentations;
 using System.Collections.Generic;
 using System;
 
@@ -7,11 +6,19 @@ namespace CritRework.Content.Prefixes.Augmentation
 {
     public abstract class AugmentationPrefix : ModPrefix
     {
+        public const float conditionalWeight = 0.5f;
+
         public override PrefixCategory Category => PrefixCategory.AnyWeapon;
 
         public override bool CanRoll(Item item)
         {
             return item.ModItem is Items.Augmentations.Augmentation;
+        }
+
+        LocalizedText disableTooltip;
+        public override void SetStaticDefaults()
+        {
+            if (ConditionPrefix) disableTooltip = Mod.GetLocalization($"Prefixes.{GetType().Name}.DisableCondition");
         }
 
         public sealed override void SetStats(ref float damageMult, ref float knockbackMult, ref float useTimeMult, ref float scaleMult, ref float shootSpeedMult, ref float manaMult, ref int critBonus)
@@ -37,6 +44,19 @@ namespace CritRework.Content.Prefixes.Augmentation
             valueMult /= useTimeMult;
         }
 
+        /// <summary>
+        /// NPC may be null. Return true when this prefix should disable the augmentation's effect
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="player"></param>
+        /// <param name="npc"></param>
+        public virtual bool DeactivateAugmentation(Item item, Player player, NPC? npc = null)
+        {
+            return false;
+        }
+
+        public virtual bool ConditionPrefix => false;
+
 
         public sealed override IEnumerable<TooltipLine> GetTooltipLines(Item item)
         {
@@ -50,6 +70,15 @@ namespace CritRework.Content.Prefixes.Augmentation
                 float valuemult = 1f;
 
                 SetStats(ref critDamageMult, ref nonCritDamageMult, ref useTimeMult, ref valuemult);
+
+                if (ConditionPrefix)
+                {
+                    lines.Add(new TooltipLine(Mod, "PrefixCondition", "•" + disableTooltip.Value)
+                    {
+                        IsModifier = true,
+                        OverrideColor = new Color(102, 166, 226)
+                    });
+                }
 
                 if (critDamageMult > 1f)
                 {

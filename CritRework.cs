@@ -12,14 +12,13 @@ using CritRework.Content.CritTypes;
 using CritRework.Common.ModPlayers;
 using CritRework.Content.Prefixes.Weapon;
 using CritRework.Common.Globals;
-using System.IO;
 using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Equipable.Accessories.Crackers;
 using CritRework.Content.Items.Augmentations;
 
 namespace CritRework
 {
-	public partial class CritRework : Mod
+    public partial class CritRework : Mod
     {
         public static bool critSounds = true;
 
@@ -146,7 +145,7 @@ namespace CritRework
     {
         public static bool TryGetAugmentation<T>(this Item item, out T augmentation) where T : Augmentation
         {
-            if (item.TryGetGlobalItem(out CritItem critItem) && critItem.augmentation != null && critItem.augmentation is T final)
+            if (item != null && item.TryGetGlobalItem(out CritItem critItem) && critItem.augmentation != null && critItem.augmentation is T final)
             {
                 augmentation = final;
                 return true;

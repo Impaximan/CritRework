@@ -6,8 +6,6 @@ using CritRework.Content.Items.Weapons.Gloves;
 using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.ModLoader;
-using Terraria.WorldBuilding;
 
 namespace CritRework.Common.Globals
 {

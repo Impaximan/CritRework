@@ -1,6 +1,5 @@
 ﻿using CritRework.Common.Globals;
 using CritRework.Content.Items.Equipable.Tokens;
-using Microsoft.Build.Utilities;
 using Terraria.Utilities;
 using Terraria.WorldBuilding;
 

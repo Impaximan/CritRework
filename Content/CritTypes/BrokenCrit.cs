@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CritRework.Content.CritTypes
+﻿namespace CritRework.Content.CritTypes
 {
     public class BrokenCrit : CritType
     {

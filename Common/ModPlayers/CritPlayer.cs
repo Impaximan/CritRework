@@ -383,7 +383,24 @@ namespace CritRework.Common.ModPlayers
 
         private NPC.HitModifiers ApplyModifiers(Item item, Projectile? projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
         {
-            if (!(item.TryGetAugmentation(out Augmentation augmentation) && augmentation.OverrideNormalCritBehavior(Player, item, projectile, modifiers, critType, target)) && critType != null && critType.ShouldCrit(Player, item, projectile, target, modifiers, item.IsSpecial(Main.LocalPlayer)) && (prostheticCrit == null || prostheticCrit.ShouldCrit(Player, item, projectile, target, modifiers, item.prefix == ModContent.PrefixType<Special>())))
+            if (item != null && item.TryGetGlobalItem(out CritItem critItem))
+            {
+                if (critItem.augmentation != null && PrefixLoader.GetPrefix(critItem.augmentation.Item.prefix) is Content.Prefixes.Augmentation.AugmentationPrefix prefix && critItem.AugmentationActive(item, Player, target))
+                {
+                    float critDamage = 1f;
+                    float nonCritDamage = 1f;
+                    float useTimeMult = 1f;
+                    float v = 1f;
+
+                    prefix.SetStats(ref critDamage, ref critDamage, ref useTimeMult, ref v);
+
+                    modifiers.CritDamage *= critDamage;
+                    modifiers.NonCritDamage *= nonCritDamage;
+
+                }
+            }
+
+            if (!(item != null && item.TryGetAugmentation(out Augmentation augmentation) && item.GetGlobalItem<CritItem>().AugmentationActive(item, Player, target) && augmentation.OverrideNormalCritBehavior(Player, item, projectile, modifiers, critType, target)) && critType != null && critType.ShouldCrit(Player, item, projectile, target, modifiers, item.IsSpecial(Main.LocalPlayer)) && (prostheticCrit == null || prostheticCrit.ShouldCrit(Player, item, projectile, target, modifiers, item.prefix == ModContent.PrefixType<Special>())))
             {
                 modifiers.FinalDamage *= 0.5f;
                 modifiers.SetCrit();
@@ -508,7 +525,7 @@ namespace CritRework.Common.ModPlayers
                 timeSinceCrit = 0;
             }
 
-            if (item.TryGetAugmentation(out Augmentation augmentation))
+            if (item.TryGetAugmentation(out Augmentation augmentation) && item.GetGlobalItem<CritItem>().AugmentationActive(item, Player, target))
             {
                 augmentation.AugmentationOnHitNPC(Player, item, null, hit, item.GetCritType(), target);
             }
@@ -523,7 +540,7 @@ namespace CritRework.Common.ModPlayers
                     timeSinceCrit = 0;
                 }
 
-                if (crit.ogItem.TryGetAugmentation(out Augmentation augmentation))
+                if (crit.ogItem.TryGetAugmentation(out Augmentation augmentation) && crit.ogItem.GetGlobalItem<CritItem>().AugmentationActive(crit.ogItem, Player, target))
                 {
                     augmentation.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target);
                 }

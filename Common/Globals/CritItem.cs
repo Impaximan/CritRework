@@ -18,6 +18,8 @@ using Terraria.GameContent.UI;
 using Terraria.ModLoader.IO;
 using Terraria.GameContent.UI.Chat;
 using Terraria.Utilities;
+using CritRework.Content.Prefixes.Augmentation;
+using Microsoft.Xna.Framework.Input;
 
 namespace CritRework.Common.Globals
 {
@@ -35,6 +37,8 @@ namespace CritRework.Common.Globals
         public static LocalizedText pirateBonus;
 
         public static LocalizedText prostheticTooltip;
+
+        public static LocalizedText removeAugmentation;
 
         public bool forceCanCrit = false;
         public bool recoverableArrow = false;
@@ -65,6 +69,7 @@ namespace CritRework.Common.Globals
             piratePantsTooltip = Mod.GetLocalization($"PiratePants");
             pirateBonus = Mod.GetLocalization($"PirateSetBonus");
             prostheticTooltip = Mod.GetLocalization($"ProstheticTooltip");
+            removeAugmentation = Mod.GetLocalization($"RemoveAugmentation");
         }
 
         public override void NetSend(Item item, BinaryWriter writer)
@@ -73,6 +78,38 @@ namespace CritRework.Common.Globals
             if (critType != null)
             {
                 writer.Write(critType.InternalName);
+            }
+
+            writer.Write(augmentation != null); //Does this item have an augmentation
+
+            if (augmentation != null)
+            {
+                writer.Write(augmentation.Type);
+                writer.Write(augmentation.Item.prefix);
+                ItemIO.SendModData(augmentation.Item, writer);
+            }
+        }
+
+        public override void NetReceive(Item item, BinaryReader reader)
+        {
+            if (reader.ReadBoolean()) //Has crit type
+            {
+                critType = CritRework.GetCrit(reader.ReadString());
+            }
+
+            if (reader.ReadBoolean()) //Has augmentation
+            {
+                int type = reader.ReadInt32();
+                int pre = reader.ReadInt32();
+
+                Item instance = new Item(type, 1, pre);
+
+                ItemIO.ReceiveModData(instance, reader);
+
+                if (instance.ModItem is Augmentation a)
+                {
+                    augmentation = a;
+                }
             }
         }
 
@@ -87,6 +124,20 @@ namespace CritRework.Common.Globals
                     {
                         mult *= 1.3f;
                     }
+                }
+            }
+
+            if (augmentation != null && PrefixLoader.GetPrefix(augmentation.Item.prefix) is AugmentationPrefix prefix)
+            {
+                if (AugmentationActive(item, player))
+                {
+                    float c = 1f;
+                    float n = 1f;
+                    float useTimeMult = 1f;
+                    float v = 1f;
+                    prefix.SetStats(ref c, ref n, ref useTimeMult, ref v);
+
+                    mult /= useTimeMult;
                 }
             }
 
@@ -109,13 +160,6 @@ namespace CritRework.Common.Globals
             }
         }
 
-        public override void NetReceive(Item item, BinaryReader reader)
-        {
-            if (reader.ReadBoolean())
-            {
-                critType = CritRework.GetCrit(reader.ReadString());
-            }
-        }
 
         public override void SaveData(Item item, TagCompound tag)
         {
@@ -213,6 +257,14 @@ namespace CritRework.Common.Globals
             return base.CanBeConsumedAsAmmo(ammo, weapon, player);
         }
 
+        public override void PreReforge(Item item)
+        {
+            if (augmentation != null)
+            {
+                RemoveAugmentation(Main.LocalPlayer, item);
+            }
+        }
+
         public override int ChoosePrefix(Item item, UnifiedRandom rand)
         {
             if (critType == null) AddCritType(item);
@@ -224,6 +276,14 @@ namespace CritRework.Common.Globals
             if (critType == null)
             {
                 AddCritType(item);
+            }
+
+            if (Main.HoverItem.type == item.type && Main.HoverItem.GetGlobalItem<CritItem>().augmentation == augmentation)
+            {
+                if (Main.keyState.IsKeyDown(Keys.LeftAlt) && Main.mouseRight)
+                {
+                    RemoveAugmentation(player, item);
+                }
             }
         }
 
@@ -555,6 +615,42 @@ namespace CritRework.Common.Globals
             return base.IsArmorSet(head, body, legs);
         }
 
+        public bool AugmentationActive(Item item, Player player, NPC? npc = null)
+        {
+            if (augmentation == null)
+            {
+                return false;
+            }
+
+            if (augmentation != null && PrefixLoader.GetPrefix(augmentation.Item.prefix) is AugmentationPrefix prefix)
+            {
+                if (prefix.DeactivateAugmentation(item, player, npc))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public void RemoveAugmentation(Player player, Item item)
+        {
+            if (augmentation == null)
+            {
+                return;
+            }
+
+            player.QuickSpawnItem(new EntitySource_ItemOpen(player, augmentation.Item.type, "Remove augmentation"), augmentation.Item);
+            SoundEngine.PlaySound(SoundID.Item37);
+
+            augmentation = null;
+
+            if (Main.netMode != NetmodeID.SinglePlayer)
+            {
+
+            }
+        }
+
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
             if (item.type == ModContent.ItemType<BasicWhetstone>())
@@ -581,9 +677,36 @@ namespace CritRework.Common.Globals
 
             if (augmentation != null)
             {
-                tooltips.Insert(1, new TooltipLine(Mod, "Augmentation", "Has augmentation: " + ItemTagHandler.GenerateTag(augmentation.Item) + " " + $" [c/{ItemRarity.GetColor(augmentation.Item.rare).Hex3()}:" + augmentation.Item.AffixName() + "]"));
-            }
+                tooltips.Insert(1, new TooltipLine(Mod, "Augmentation", "Has augmentation: " + ItemTagHandler.GenerateTag(augmentation.Item) + " " + $" [c/{ItemRarity.GetColor(augmentation.Item.rare).Hex3()}:" + augmentation.Item.AffixName() + "] (hold Left Alt for more info)"));
 
+
+                if (Main.keyState.IsKeyDown(Keys.LeftAlt))
+                {
+                    tooltips.Clear();
+
+                    tooltips.Add(new TooltipLine(Mod, "AugmentationName", $"[c/{ItemRarity.GetColor(item.rare).Hex3()}:Augmentation: ]" + ItemTagHandler.GenerateTag(augmentation.Item) + " " + $"[c/{ItemRarity.GetColor(augmentation.Item.rare).Hex3()}:" + augmentation.Item.AffixName() + "]"));
+
+                    tooltips.Add(new TooltipLine(Mod, "AugmentationCanBeAppliedTo", Mod.GetLocalization($"Items.{augmentation.GetType().Name}.CanBeApplied").Value));
+
+                    for (int i = 0; i < augmentation.Item.ToolTip.Lines; i++)
+                    {
+                        string line = augmentation.Item.ToolTip.GetLine(i);
+                        tooltips.Add(new TooltipLine(Mod, "AugmentationTooltip" + i, line));
+                    }
+
+                    if (PrefixLoader.GetPrefix(augmentation.Item.prefix) is AugmentationPrefix prefix)
+                    {
+                        tooltips.AddRange(prefix.GetTooltipLines(item));
+                    }
+
+                    tooltips.Add(new TooltipLine(Mod, "AugmentationRemoval", removeAugmentation.Value)
+                    {
+                        OverrideColor = Color.Yellow
+                    });
+
+                    return;
+                }
+            }
             int index = tooltips.FindIndex(x => x.Name == "CritChance");
 
             if (critPlayer.slotMachineCritCrafting)

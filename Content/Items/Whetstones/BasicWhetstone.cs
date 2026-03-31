@@ -1,5 +1,4 @@
 ﻿using CritRework.Common.Globals;
-using CritRework.Content.CritTypes.RandomPool;
 using Terraria.DataStructures;
 
 namespace CritRework.Content.Items.Whetstones

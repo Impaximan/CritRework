@@ -1,11 +1,8 @@
 ﻿using CritRework.Common.Globals;
-using CritRework.Content.CritTypes;
 using CritRework.Content.Items.Equipable.Accessories.Crackers;
-using CritRework.Content.Items.Whetstones;
 using CritRework.Content.Prefixes.Weapon;
 using System.Collections.Generic;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent.UI.Chat;
 
 namespace CritRework.Content.Items

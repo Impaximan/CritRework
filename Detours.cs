@@ -7,11 +7,6 @@ using CritRework.Common.ModPlayers;
 using CritRework.Content.CritTypes.WeaponSpecific;
 using CritRework.Content.Items.Whetstones;
 using CritRework.Content.Items.Augmentations;
-using CritRework.Content.CritTypes.RandomPool;
-using Newtonsoft.Json.Linq;
-using static System.Net.Mime.MediaTypeNames;
-using System;
-using Terraria.Utilities;
 
 namespace CritRework
 {

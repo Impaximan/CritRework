@@ -1,6 +1,4 @@
-﻿using Terraria.GameContent.Creative;
-
-namespace CritRework.Content.Items.Materials
+﻿namespace CritRework.Content.Items.Materials
 {
     class Greenprint : ModItem
     {

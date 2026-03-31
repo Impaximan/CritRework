@@ -1,15 +1,9 @@
 ﻿using CritRework.Common.Globals;
 using CritRework.Content.CritTypes;
 using CritRework.Content.Items.Whetstones;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent.UI.Chat;
-using Terraria.UI.Chat;
 
 namespace CritRework.Content.Items
 {

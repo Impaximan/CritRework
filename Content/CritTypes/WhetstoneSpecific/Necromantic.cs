@@ -1,5 +1,4 @@
 ﻿using CritRework.Content.Items.Whetstones;
-using Terraria.ModLoader.IO;
 
 namespace CritRework.Content.CritTypes.WhetstoneSpecific
 {

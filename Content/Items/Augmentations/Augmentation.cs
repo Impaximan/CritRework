@@ -1,10 +1,8 @@
 ﻿using CritRework.Common.Globals;
 using CritRework.Content.Prefixes.Augmentation;
-using System;
 using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.GameContent.UI.Chat;
-using Terraria.Utilities;
 
 namespace CritRework.Content.Items.Augmentations
 {
@@ -53,16 +51,14 @@ namespace CritRework.Content.Items.Augmentations
 
         public override void RightClick(Player player)
         {
-            if (Main.mouseItem != null && Main.mouseItem.damage > 0 && !Main.mouseItem.accessory && CanApplyTo(Main.mouseItem) && CritItem.CanHaveCrits(Main.mouseItem))
+            if (Main.mouseItem != null && Main.mouseItem.damage > 0 && Main.mouseItem.useStyle != ItemUseStyleID.None && !Main.mouseItem.accessory && CanApplyTo(Main.mouseItem) && CritItem.CanHaveCrits(Main.mouseItem))
             {
-                if (Main.mouseItem.TryGetGlobalItem(out CritItem critTarget) && critTarget.augmentation != null && critTarget.augmentation.Item.type == Item.type)
+                if (Main.mouseItem.TryGetGlobalItem(out CritItem critTarget) && critTarget.augmentation != null)
                 {
-                    Main.NewText(ItemTagHandler.GenerateTag(Main.mouseItem) + " already has a " + ItemTagHandler.GenerateTag(Item), new Color(255, 25, 25));
+                    critTarget.RemoveAugmentation(player, Item);
+
                 }
-                else
-                {
-                    Apply(Main.mouseItem, player);
-                }
+                Apply(Main.mouseItem, player);
             }
             else
             {

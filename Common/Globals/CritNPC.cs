@@ -12,8 +12,6 @@ using Terraria.DataStructures;
 using System.IO;
 using CritRework.Content.Items;
 using CritRework.Common.Systems;
-using Terraria.GameContent.Bestiary;
-using Terraria.ModLoader;
 using CritRework.Content.Items.Materials;
 
 namespace CritRework.Common.Globals
