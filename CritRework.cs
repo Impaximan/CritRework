@@ -29,6 +29,7 @@ namespace CritRework
         public static Color critColor = Color.White;
 
         public static bool abbreviateWhetstoneTooltip = false;
+        public static bool abbreviateAugmentationTooltip = false;
         public static float critPower = 1f;
         public static float randomHijackChance = 0.25f;
         public static bool randomHijackSound = true;

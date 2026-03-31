@@ -3,6 +3,7 @@ using CritRework.Content.CritTypes.RandomPool;
 using CritRework.Content.CritTypes.WeaponSpecific;
 using CritRework.Content.CritTypes.WhetstoneSpecific;
 using CritRework.Content.Items;
+using CritRework.Content.Items.Augmentations;
 using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Whetstones;
 using CritRework.Content.Prefixes.Weapon;
@@ -15,6 +16,7 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent.UI;
 using Terraria.ModLoader.IO;
+using Terraria.GameContent.UI.Chat;
 using Terraria.Utilities;
 
 namespace CritRework.Common.Globals
@@ -37,6 +39,8 @@ namespace CritRework.Common.Globals
         public bool forceCanCrit = false;
         public bool recoverableArrow = false;
         public bool harpoonFireAgain = false;
+
+        public Augmentation? augmentation = null;
 
         public override bool CanStack(Item destination, Item source)
         {
@@ -116,11 +120,38 @@ namespace CritRework.Common.Globals
         public override void SaveData(Item item, TagCompound tag)
         {
             if (critType != null) tag.Add("critType", critType.InternalName);
+
+            if (augmentation != null)
+            {
+                tag.Add("augmentation", true);
+                TagCompound itemSave = ItemIO.Save(augmentation.Item);
+
+                foreach (KeyValuePair<string, object> pair in itemSave)
+                {
+                    tag.Add(pair.Key + "_augmentation", pair.Value);
+                }
+            }
         }
 
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.ContainsKey("critType")) critType = CritRework.GetCrit(tag.GetString("critType"));
+
+            if (tag.ContainsKey("augmentation"))
+            {
+                TagCompound itemTag = new();
+
+                foreach (KeyValuePair<string, object> pair in tag.Where(x => x.Key.Contains("_augmentation")))
+                {
+                    itemTag.Add(pair.Key.Replace("_augmentation", ""), pair.Value);
+                }
+
+                Item aug = ItemIO.Load(itemTag);
+                if (aug.ModItem is Augmentation obj)
+                {
+                    augmentation = obj;
+                }
+            }
         }
 
         int counter = 0;
@@ -541,6 +572,11 @@ namespace CritRework.Common.Globals
                 TooltipLine name = tooltips.Find(x => x.Name == "ItemName");
                 name.Text = sparkle + " " + name.Text + " " + sparkle;
                 name.OverrideColor = Color.Lerp(ItemRarity.GetColor(item.rare), Color.LightGoldenrodYellow, (float)(Math.Sin(Main._drawInterfaceGameTime.TotalGameTime.TotalSeconds * 6f) + 1f) / 2f);
+            }
+
+            if (augmentation != null)
+            {
+                tooltips.Insert(1, new TooltipLine(Mod, "Augmentation", "Has augmentation: " + ItemTagHandler.GenerateTag(augmentation.Item) + " " + $" [c/{ItemRarity.GetColor(augmentation.Item.rare).Hex3()}:" + augmentation.Item.AffixName() + "]"));
             }
 
             int index = tooltips.FindIndex(x => x.Name == "CritChance");

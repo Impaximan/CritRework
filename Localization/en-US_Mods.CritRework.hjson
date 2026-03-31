@@ -502,6 +502,12 @@ Items: {
 			Does not activate below 50% life
 			'''
 	}
+
+	AMPL: {
+		CanBeApplied: Can be applied to any ranged weapon
+		DisplayName: A.M.P.L
+		Tooltip: ""
+	}
 }
 
 Whetstone: {
@@ -559,6 +565,11 @@ Configs: {
 		abbreviateWhetstoneTooltip: {
 			Label: Abbreviate whetstone tooltip
 			Tooltip: When set to true, the tutorial description for whetstones will be removed from their tooltip to reduce clutter
+		}
+
+		abbreviateAugmentationTooltip: {
+			Label: Abbreviate augmentation tooltip
+			Tooltip: When set to true, the tutorial description for augmentations will be removed from their tooltip to reduce clutter
 		}
 	}
 
@@ -1578,3 +1589,8 @@ GloveWeight6: Extremely heavy weight
 GloveWeight7: Unbearably heavy weight
 GloveWeight8: Titanic weight
 ProstheticTooltip: Both of the following conditions must be met to critically strike:
+
+Augmentation: {
+	Tooltip1: Augmentation
+	Tooltip2: To apply, hold an applicable weapon with your mouse and right click on this item
+}
