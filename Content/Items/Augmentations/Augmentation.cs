@@ -1,7 +1,10 @@
 ﻿using CritRework.Common.Globals;
+using CritRework.Content.Prefixes.Augmentation;
+using System;
 using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.GameContent.UI.Chat;
+using Terraria.Utilities;
 
 namespace CritRework.Content.Items.Augmentations
 {
@@ -19,6 +22,30 @@ namespace CritRework.Content.Items.Augmentations
             applicableTooltip = Mod.GetLocalization($"Items.{GetType().Name}.CanBeApplied");
         }
 
+        public virtual bool OverrideNormalCritBehavior(Player player, Item item, Projectile? projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
+        {
+            return false;
+        }
+
+        public virtual void AugmentationOnHitNPC(Player player, Item item, Projectile? projectile, NPC.HitInfo hit, CritType critType, NPC target)
+        {
+
+        }
+
+        public override bool AllowPrefix(int pre)
+        {
+            if (PrefixLoader.GetPrefix(pre) != null)
+            {
+                return PrefixLoader.GetPrefix(pre) is AugmentationPrefix;
+            }
+            return false;
+        }
+
+        public sealed override bool WeaponPrefix()
+        {
+            return true;
+        }
+
         public virtual bool CanApplyTo(Item weapon)
         {
             return true;
@@ -26,7 +53,7 @@ namespace CritRework.Content.Items.Augmentations
 
         public override void RightClick(Player player)
         {
-            if (Main.mouseItem != null && Main.mouseItem.damage > 0 && !Main.mouseItem.accessory && CanApplyTo(Main.mouseItem))
+            if (Main.mouseItem != null && Main.mouseItem.damage > 0 && !Main.mouseItem.accessory && CanApplyTo(Main.mouseItem) && CritItem.CanHaveCrits(Main.mouseItem))
             {
                 if (Main.mouseItem.TryGetGlobalItem(out CritItem critTarget) && critTarget.augmentation != null && critTarget.augmentation.Item.type == Item.type)
                 {
@@ -54,7 +81,7 @@ namespace CritRework.Content.Items.Augmentations
             critTarget.augmentation = this;
 
             SoundEngine.PlaySound(Item.UseSound);
-            Main.NewText("Applied " + ItemTagHandler.GenerateTag(Item) + " to " + ItemTagHandler.GenerateTag(Item), Color.Yellow);
+            Main.NewText("Applied " + ItemTagHandler.GenerateTag(Item) + " to " + ItemTagHandler.GenerateTag(target), Color.Yellow);
 
             for (int i = 0; i < player.inventory.Length; i++)
             {
@@ -80,8 +107,8 @@ namespace CritRework.Content.Items.Augmentations
             }
 
             tooltips.Insert(startingIndex, new TooltipLine(Mod, "AugmentationTooltip", tooltip1.Value));
-            tooltips.Insert(startingIndex + 2, new TooltipLine(Mod, "AugmentationTooltip3", Mod.GetLocalization($"Items.{GetType().Name}.CanBeApplied").Value));
-            if (!CritRework.abbreviateAugmentationTooltip) tooltips.Insert(startingIndex + 3, new TooltipLine(Mod, "AugmentationTooltip2", tooltip2.Value));
+            tooltips.Insert(startingIndex + 1, new TooltipLine(Mod, "AugmentationTooltip3", Mod.GetLocalization($"Items.{GetType().Name}.CanBeApplied").Value));
+            if (!CritRework.abbreviateAugmentationTooltip) tooltips.Insert(startingIndex + 2, new TooltipLine(Mod, "AugmentationTooltip2", tooltip2.Value));
         }
     }
 }

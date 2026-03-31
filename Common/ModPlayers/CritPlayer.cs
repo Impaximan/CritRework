@@ -1,6 +1,7 @@
 ﻿using CritRework.Common.Globals;
 using CritRework.Content.Buffs;
 using CritRework.Content.CritTypes.WeaponSpecific;
+using CritRework.Content.Items.Augmentations;
 using CritRework.Content.Items.Bronze.BronzeArmor;
 using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Equipable.Accessories.Crackers;
@@ -382,14 +383,18 @@ namespace CritRework.Common.ModPlayers
 
         private NPC.HitModifiers ApplyModifiers(Item item, Projectile? projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
         {
-            if (critType != null && critType.ShouldCrit(Player, item, projectile, target, modifiers, item.IsSpecial(Main.LocalPlayer)) && (prostheticCrit == null || prostheticCrit.ShouldCrit(Player, item, projectile, target, modifiers, item.prefix == ModContent.PrefixType<Special>())))
+            if (!(item.TryGetAugmentation(out Augmentation augmentation) && augmentation.OverrideNormalCritBehavior(Player, item, projectile, modifiers, critType, target)) && critType != null && critType.ShouldCrit(Player, item, projectile, target, modifiers, item.IsSpecial(Main.LocalPlayer)) && (prostheticCrit == null || prostheticCrit.ShouldCrit(Player, item, projectile, target, modifiers, item.prefix == ModContent.PrefixType<Special>())))
             {
+                modifiers.FinalDamage *= 0.5f;
                 modifiers.SetCrit();
-                modifiers.SourceDamage *= CritType.CalculateActualCritMult(critType, item, Player);
+
+                float finalBonusDamageMult = 1f;
+
+                finalBonusDamageMult *= CritType.CalculateActualCritMult(critType, item, Player);
 
                 if (timeSinceDaggerBonus >= 900 && Player.HasEquip<AssassinsDagger>())
                 {
-                    modifiers.SourceDamage *= 2;
+                    finalBonusDamageMult *= 2;
                     timeSinceDaggerBonus = 0;
                     CombatText.NewText(Player.getRect(), new Color(172, 44, 77), "Assassin's Strike!", true);
                     SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/BloodSlash")
@@ -401,17 +406,17 @@ namespace CritRework.Common.ModPlayers
 
                 if (Player.HasEquip<ShortestStraw>())
                 {
-                    modifiers.SourceDamage *= MathHelper.Lerp(1f, 1.35f, 1f - target.life / (float)target.lifeMax);
+                    finalBonusDamageMult *= MathHelper.Lerp(1f, 1.35f, 1f - target.life / (float)target.lifeMax);
                 }
 
                 if (lastHitWasCrit)
                 {
-                    modifiers.SourceDamage *= consecutiveCriticalStrikeDamage;
+                    finalBonusDamageMult *= consecutiveCriticalStrikeDamage;
                 }
 
                 if (Player.HasEquip<EternalGuillotine>() && target.life == target.lifeMax)
                 {
-                    modifiers.CritDamage *= 2f;
+                    finalBonusDamageMult *= 2f;
                 }
 
                 if (Player.HasEquip<ThawingCloth>() && !Player.HasBuff<ThawingClothCooldown>())
@@ -435,12 +440,14 @@ namespace CritRework.Common.ModPlayers
 
                     if (num > 0)
                     {
-                        modifiers.CritDamage *= 1f + ThawingCloth.damageBonusPerDebuff * num;
+                        finalBonusDamageMult *= 1f + ThawingCloth.damageBonusPerDebuff * num;
                     }
                 }
 
-                modifiers.FinalDamage *= 0.5f;
+
                 if (CritRework.overrideCritColor) modifiers.HideCombatText();
+
+                modifiers.SourceDamage *= finalBonusDamageMult;
             }
             else
             {
@@ -500,13 +507,26 @@ namespace CritRework.Common.ModPlayers
             {
                 timeSinceCrit = 0;
             }
+
+            if (item.TryGetAugmentation(out Augmentation augmentation))
+            {
+                augmentation.AugmentationOnHitNPC(Player, item, null, hit, item.GetCritType(), target);
+            }
         }
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (hit.Crit && proj.TryGetGlobalProjectile(out CritProjectile crit) && crit.critType is not CritWithAnother)
+            if (proj.TryGetGlobalProjectile(out CritProjectile crit))
             {
-                timeSinceCrit = 0;
+                if (hit.Crit && crit.critType is not CritWithAnother)
+                {
+                    timeSinceCrit = 0;
+                }
+
+                if (crit.ogItem.TryGetAugmentation(out Augmentation augmentation))
+                {
+                    augmentation.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target);
+                }
             }
 
 

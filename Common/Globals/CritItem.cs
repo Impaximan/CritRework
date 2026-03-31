@@ -281,6 +281,11 @@ namespace CritRework.Common.Globals
             {
                 critType.SpecialPrefixHoldItem(item, player);
             }
+
+            if (augmentation != null)
+            {
+                augmentation.HoldItem(player);
+            }
         }
 
         public override void ModifyItemScale(Item item, Player player, ref float scale)

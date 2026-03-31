@@ -6,6 +6,12 @@ using CritRework.Content.Prefixes.Weapon;
 using CritRework.Common.ModPlayers;
 using CritRework.Content.CritTypes.WeaponSpecific;
 using CritRework.Content.Items.Whetstones;
+using CritRework.Content.Items.Augmentations;
+using CritRework.Content.CritTypes.RandomPool;
+using Newtonsoft.Json.Linq;
+using static System.Net.Mime.MediaTypeNames;
+using System;
+using Terraria.Utilities;
 
 namespace CritRework
 {
@@ -81,6 +87,19 @@ namespace CritRework
             return orig(self, hit, fromNet, noPlayerInteraction);
         }
 
+        public static bool CanHavePrefixes(On_Item.orig_CanHavePrefixes orig, Item self)
+        {
+            if (self.ModItem != null && self.ModItem is Augmentation)
+            {
+                return true;
+            }
+            else
+            {
+                return orig(self);
+            }
+        }
+        
+
         #region Allow other mods to set crits
         public static void SetCrit(On_NPC.HitModifiers.orig_SetCrit orig, ref NPC.HitModifiers self)
         {
@@ -126,6 +145,7 @@ namespace CritRework
             On_NPC.HitModifiers.DisableCrit += DisableCrit;
             On_Item.AffixName += AffixName;
             On_NPC.StrikeNPC_HitInfo_bool_bool += StrikeNPC;
+            On_Item.CanHavePrefixes += CanHavePrefixes;
         }
 
         public static void Unload()
@@ -134,6 +154,8 @@ namespace CritRework
             On_NPC.HitModifiers.SetCrit -= SetCrit;
             On_NPC.HitModifiers.DisableCrit -= DisableCrit;
             On_Item.AffixName -= AffixName;
+            On_NPC.StrikeNPC_HitInfo_bool_bool -= StrikeNPC;
+            On_Item.CanHavePrefixes -= CanHavePrefixes;
         }
     }
 }

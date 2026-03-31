@@ -505,8 +505,14 @@ Items: {
 
 	AMPL: {
 		CanBeApplied: Can be applied to any ranged weapon
-		DisplayName: A.M.P.L
-		Tooltip: ""
+		DisplayName: A.M.P.L.
+		Tooltip:
+			'''
+			When applied to a weapon, this disables normal crits
+			Instead, when that weapon would critically strike, it will fire a homing missile
+			The homing missile inflicts the weapon's normal critical strike damage
+			1 second cooldown
+			'''
 	}
 }
 
@@ -528,6 +534,8 @@ Prefixes: {
 	Necromantic.DisplayName: Necromantic
 	Special.DisplayName: Special
 	Deliberate.DisplayName: Deliberate
+	Bulky.DisplayName: Bulky
+	Quality_Augment.DisplayName: Quality
 }
 
 NecromanticTooltip: +2 lifesteal when inflicting critical damage upon enemies

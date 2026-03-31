@@ -15,6 +15,7 @@ using CritRework.Common.Globals;
 using System.IO;
 using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Equipable.Accessories.Crackers;
+using CritRework.Content.Items.Augmentations;
 
 namespace CritRework
 {
@@ -143,6 +144,18 @@ namespace CritRework
 
     public static class Extensions
     {
+        public static bool TryGetAugmentation<T>(this Item item, out T augmentation) where T : Augmentation
+        {
+            if (item.TryGetGlobalItem(out CritItem critItem) && critItem.augmentation != null && critItem.augmentation is T final)
+            {
+                augmentation = final;
+                return true;
+            }
+
+            augmentation = null;
+            return false;
+        }
+
         public static bool IsCracker(this Item item)
         {
             return new List<int>()
