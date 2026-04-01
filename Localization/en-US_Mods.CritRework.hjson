@@ -500,11 +500,11 @@ Items: {
 			Arcs lightning to hit enemies on critical strike, damaging all in its path
 			Its power is quite... shocking
 			'''
-		CanBeApplied: Can be applied to any weapon
+		CanBeApplied: ""
 	}
 
 	AMPL: {
-		CanBeApplied: Can be applied to any ranged weapon
+		CanBeApplied: Can only be applied to ranged weapons
 		DisplayName: A.M.P.L.
 		Tooltip:
 			'''
@@ -513,6 +513,17 @@ Items: {
 			The homing missile inflicts the weapon's normal critical strike damage
 			1 second cooldown
 			'''
+	}
+
+	HoneydippedStinger: {
+		CanBeApplied: ""
+		DisplayName: Honeydipped Stinger
+		Tooltip:
+		'''
+		When applied to a weapon, this disables normal crits
+		Instead, when that weapon would normally critically strike, you will heal for some life
+		Healing depends on the critical strike condition
+		'''
 	}
 }
 
