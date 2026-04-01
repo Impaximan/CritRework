@@ -4,6 +4,12 @@ namespace CritRework.Content.Prefixes.Augmentation
 {
     public class Vengeful : AugmentationPrefix
     {
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+            PrefixID.Sets.ReducedNaturalChance[Type] = true;
+        }
+
         public override bool DeactivateAugmentation(Item item, Player player, NPC npc = null)
         {
             return player.TryGetModPlayer(out CritPlayer cPlayer) && cPlayer.timeSinceLastHit > 180;

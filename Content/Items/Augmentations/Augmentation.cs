@@ -13,6 +13,12 @@ namespace CritRework.Content.Items.Augmentations
         static LocalizedText critDamageMult;
         public LocalizedText applicableTooltip;
 
+        public static readonly SoundStyle equipSound = new SoundStyle("CritRework/Assets/Sounds/EquipAugmentation")
+        {
+            PitchVariance = 0.25f,
+            Volume = 0.5f
+        };
+
         public override void SetStaticDefaults()
         {
             tooltip1 = Mod.GetLocalization($"{typeof(Augmentation).Name}.Tooltip1");

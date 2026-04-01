@@ -1,23 +1,35 @@
-﻿using Terraria.DataStructures;
+﻿using System.Security.Policy;
+using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
 
-namespace CritRework.Content.Items.Equipable.Accessories
+namespace CritRework.Content.Items.Augmentations
 {
-    public class PocketLightningRod : ModItem
+    public class PocketLightningRod : Augmentation
     {
         public override void SetDefaults()
         {
             Item.width = 24;
             Item.height = 48;
-            Item.accessory = true;
-            Item.rare = ItemRarityID.Green;
+            Item.rare = ItemRarityID.Blue;
+            Item.UseSound = equipSound;
             Item.value = Item.sellPrice(0, 3, 0, 0);
         }
 
-        public override void UpdateEquip(Player player)
+        public override void AugmentationOnHitNPC(Player Player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
         {
-            if (player.statLife >= player.statLifeMax / 2f)
+            if (hit.Crit)
             {
-                player.AddEquip<PocketLightningRod>();
+                SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/Zap")
+                {
+                    Volume = 0.65f,
+                    PitchVariance = 0.5f
+                }, target.Center);
+
+                Projectile p = Projectile.NewProjectileDirect(new EntitySource_OnHurt(target, Player), Player.Center, Vector2.Zero, ModContent.ProjectileType<PocketLightning>(), hit.Damage, 0f, Player.whoAmI);
+                p.ai[2] = target.whoAmI;
+                (p.ModProjectile as PocketLightning).SetTargetPosition();
+                Player.AddBuff(BuffID.Electrified, 10);
             }
         }
     }

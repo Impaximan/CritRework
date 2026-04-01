@@ -677,7 +677,7 @@ namespace CritRework.Common.Globals
 
             if (augmentation != null)
             {
-                tooltips.Insert(1, new TooltipLine(Mod, "Augmentation", "Has augmentation: " + ItemTagHandler.GenerateTag(augmentation.Item) + " " + $" [c/{ItemRarity.GetColor(augmentation.Item.rare).Hex3()}:" + augmentation.Item.AffixName() + "] (hold Left Alt for more info)"));
+                tooltips.Insert(1, new TooltipLine(Mod, "Augmentation", "Has augmentation: " + ItemTagHandler.GenerateTag(augmentation.Item) + " " + $" [c/{ItemRarity.GetColor(augmentation.Item.rare).Hex3()}:" + augmentation.Item.AffixName() + "]" + (CritRework.abbreviateAugmentationTooltip ? "" : " (hold Left Alt for more info)")));
 
 
                 if (Main.keyState.IsKeyDown(Keys.LeftAlt))

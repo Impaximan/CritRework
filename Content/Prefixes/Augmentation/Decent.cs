@@ -6,7 +6,6 @@
         {
             critDamageMult = 1.07f;
             nonCritDamageMult *= 0.95f;
-            valueMult *= 1.05f;
         }
     }
 }

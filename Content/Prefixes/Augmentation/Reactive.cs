@@ -4,6 +4,12 @@ namespace CritRework.Content.Prefixes.Augmentation
 {
     public class Reactive : AugmentationPrefix
     {
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+            PrefixID.Sets.ReducedNaturalChance[Type] = true;
+        }
+
         public override bool DeactivateAugmentation(Item item, Player player, NPC npc = null)
         {
             return player.TryGetModPlayer(out CritPlayer cPlayer) && cPlayer.timeSinceCrit > 180;
@@ -13,8 +19,8 @@ namespace CritRework.Content.Prefixes.Augmentation
 
         public override void SetStats(ref float critDamageMult, ref float nonCritDamageMult, ref float useTimeMult, ref float valueMult)
         {
-            critDamageMult = 1.1f;
-            valueMult *= 0.9f;
+            critDamageMult = 1.03f;
+            valueMult *= 0.95f;
         }
 
         public override float RollChance(Item item)

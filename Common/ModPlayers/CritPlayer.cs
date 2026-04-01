@@ -679,20 +679,6 @@ namespace CritRework.Common.ModPlayers
                 }
             }
 
-            if (Player.HasEquip<PocketLightningRod>() && hit.Crit)
-            {
-                SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/Zap")
-                {
-                    Volume = 0.75f,
-                    PitchVariance = 0.5f
-                }, target.Center);
-
-                Projectile p = Projectile.NewProjectileDirect(new EntitySource_OnHurt(target, Player), Player.Center, Vector2.Zero, ModContent.ProjectileType<PocketLightning>(), hit.Damage, 0f, Player.whoAmI);
-                p.ai[2] = target.whoAmI;
-                (p.ModProjectile as PocketLightning).SetTargetPosition();
-                Player.AddBuff(BuffID.Electrified, 10);
-            }
-
             if (Player.HasEquip<NoxiousEye>() && hit.Crit)
             {
                 if (!cleansed) target.AddBuff(BuffID.Poisoned, 30);

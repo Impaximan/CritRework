@@ -498,9 +498,9 @@ Items: {
 		Tooltip:
 			'''
 			Arcs lightning to hit enemies on critical strike, damaging all in its path
-			May shock you a little
-			Does not activate below 50% life
+			Its power is quite... shocking
 			'''
+		CanBeApplied: Can be applied to any weapon
 	}
 
 	AMPL: {
@@ -549,6 +549,23 @@ Prefixes: {
 
 	Detrimental.DisplayName: Detrimental
 	Helpful.DisplayName: Helpful
+
+	Reactive: {
+		DisableCondition: All augmentation effects are inactive unless you have critically struck in the last 3 seconds
+		DisplayName: Reactive
+	}
+
+	Vengeful: {
+		DisableCondition: All augmentation effects are inactive unless you have taken damage in the last 3 seconds
+		DisplayName: Vengeful
+	}
+
+	Compensating.DisplayName: Compensating
+	Critical.DisplayName: Critical
+	Decent.DisplayName: Decent
+	Inconvenient.DisplayName: Inconvenient
+	Persistent.DisplayName: Persistent
+	Unreliable.DisplayName: Unreliable
 }
 
 NecromanticTooltip: +2 lifesteal when inflicting critical damage upon enemies

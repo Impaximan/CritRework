@@ -2,6 +2,12 @@
 {
     public class Timid : AugmentationPrefix
     {
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+            PrefixID.Sets.ReducedNaturalChance[Type] = true;
+        }
+
         public override bool DeactivateAugmentation(Item item, Player player, NPC npc = null)
         {
             return player.statLife < player.statLifeMax2 * 0.85f;
