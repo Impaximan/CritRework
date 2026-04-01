@@ -2,3 +2,6 @@
 Additions:
 -Added a new accessory, the "Pocket Lightning Rod," which can be found in the Underground Desert
 -Added a new material, the "Greenrprint," which drops from Lihzahrds in the Jungle Temple and can be used to create powerful, crit-powered constructs
+
+Fixes
+-Updated hitbox for overgrown Vilethorn and Crystal Vile Shard to grow as intended

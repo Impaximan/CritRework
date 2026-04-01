@@ -13,6 +13,7 @@ using System.IO;
 using CritRework.Content.Items;
 using CritRework.Common.Systems;
 using CritRework.Content.Items.Materials;
+using CritRework.Content.Items.Augmentations;
 
 namespace CritRework.Common.Globals
 {
@@ -214,6 +215,21 @@ namespace CritRework.Common.Globals
             if (npc.type == NPCID.Drippler)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<NoxiousEye>(), 20));
+            }
+
+            if (npc.type == NPCID.SkeletonCommando)
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<AMPL>(), 10));
+            }
+
+            if (npc.type == NPCID.Hornet)
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<HoneydippedStinger>(), 500));
+            }
+
+            if (npc.type == NPCID.QueenBee)
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<HoneydippedStinger>(), 3));
             }
 
             if (npc.aiStyle == NPCAIStyleID.Slime && !npc.friendly && !npc.CountsAsACritter)

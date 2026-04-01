@@ -143,6 +143,23 @@ namespace CritRework
 
     public static class Extensions
     {
+        public static void SetAsAugmentCrit(this Projectile projectile)
+        {
+            if (projectile.TryGetGlobalProjectile(out CritProjectile c))
+            {
+                c.critAugment = true;
+            }
+        }
+
+        public static bool IsCritAugment(this Projectile projectile)
+        {
+            if (projectile != null && projectile.TryGetGlobalProjectile(out CritProjectile c) && c.critAugment)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public static bool TryGetAugmentation<T>(this Item item, out T augmentation) where T : Augmentation
         {
             if (item != null && item.TryGetGlobalItem(out CritItem critItem) && critItem.augmentation != null && critItem.augmentation is T final)

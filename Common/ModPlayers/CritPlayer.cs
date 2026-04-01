@@ -400,7 +400,8 @@ namespace CritRework.Common.ModPlayers
                 }
             }
 
-            if (!(item != null && item.TryGetAugmentation(out Augmentation augmentation) && item.GetGlobalItem<CritItem>().AugmentationActive(item, Player, target) && augmentation.OverrideNormalCritBehavior(Player, item, projectile, modifiers, critType, target)) && critType != null && critType.ShouldCrit(Player, item, projectile, target, modifiers, item.IsSpecial(Main.LocalPlayer)) && (prostheticCrit == null || prostheticCrit.ShouldCrit(Player, item, projectile, target, modifiers, item.prefix == ModContent.PrefixType<Special>())))
+            if (((projectile != null && projectile.IsCritAugment()) || !(item != null && item.TryGetAugmentation(out Augmentation augmentation) && item.GetGlobalItem<CritItem>().AugmentationActive(item, Player, target) && augmentation.OverrideNormalCritBehavior(Player, item, projectile, modifiers, critType, target)))
+                && critType != null && ((critType.ShouldCrit(Player, item, projectile, target, modifiers, item.IsSpecial(Main.LocalPlayer)) && (prostheticCrit == null || prostheticCrit.ShouldCrit(Player, item, projectile, target, modifiers, item.prefix == ModContent.PrefixType<Special>()))) || (projectile != null && projectile.IsCritAugment())))
             {
                 modifiers.FinalDamage *= 0.5f;
                 modifiers.SetCrit();

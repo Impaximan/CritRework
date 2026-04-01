@@ -26,6 +26,7 @@ namespace CritRework.Common.Globals
         public bool thrownUpward = false;
         public float highestPoint = 0;
         public bool fromPoisonedHand = false;
+        public bool critAugment = false;
 
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -155,7 +156,7 @@ namespace CritRework.Common.Globals
 
         public override void ModifyDamageHitbox(Projectile projectile, ref Rectangle hitbox)
         {
-            if (projectile.type == ProjectileID.Kraken && ogItem != null && ogItem.IsSpecial(Main.player[projectile.owner]))
+            if ((projectile.type == ProjectileID.Kraken || projectile.type == ProjectileID.VilethornTip || projectile.type == ProjectileID.CrystalVileShardHead) && ogItem != null && ogItem.IsSpecial(Main.player[projectile.owner]))
             {
                 Point center = hitbox.Center;
                 hitbox.Width = (int)(hitbox.Width * projectile.scale);
@@ -404,6 +405,7 @@ namespace CritRework.Common.Globals
                         wallBounces = crit.wallBounces;
                         targetsHit = crit.targetsHit;
                         timeActive = crit.timeActive;
+                        critAugment = crit.critAugment;
                     }
 
                     if (ogItem != null && ogItem.IsSpecial(Main.player[projectile.owner]) && (projectile.type == ProjectileID.CrystalVileShardHead || projectile.type == ProjectileID.VilethornTip))
