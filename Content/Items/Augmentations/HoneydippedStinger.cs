@@ -42,7 +42,7 @@ namespace CritRework.Content.Items.Augmentations
             NPC.HitModifiers modifiers = new NPC.HitModifiers();
             if (player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target))
             {
-                float damageMult = critType.GetDamageMult(player, item);
+                float damageMult = CritType.CalculateActualCritMult(critType, item, player);
 
                 player.GetModPlayer<CritPlayer>().timeSinceCrit = 0;
 
