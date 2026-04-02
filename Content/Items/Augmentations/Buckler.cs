@@ -1,4 +1,5 @@
 ﻿using CritRework.Common.ModPlayers;
+using CritRework.Content.Items.Materials;
 using Terraria;
 using Terraria.Audio;
 
@@ -6,6 +7,16 @@ namespace CritRework.Content.Items.Augmentations
 {
     public class Buckler : Augmentation
     {
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient<BronzeAlloy>(3)
+                .AddRecipeGroup(RecipeGroupID.IronBar, 6)
+                .AddRecipeGroup(RecipeGroupID.Wood, 10)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
+
         public override void SetDefaults()
         {
             Item.width = 24;

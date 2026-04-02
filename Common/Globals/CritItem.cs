@@ -391,6 +391,15 @@ namespace CritRework.Common.Globals
                 }
                 player.GetModPlayer<CritPlayer>().lastWeaponUsed = item;
             }
+
+            if (player.TryGetModPlayer(out CritPlayer cPlayer))
+            {
+                if (item.damage > 0 && item.pick == 0 && item.axe == 0 && item.hammer == 0 && cPlayer.criticalCurses.Count > 0 && !item.TryGetAugmentation<CursersQuill>(out _) && !item.TryGetAugmentation2<CursersQuill>(out _))
+                {
+                    cPlayer.fireCriticalCurse = true;
+                }
+            }
+
             return base.UseItem(item, player);
         }
 

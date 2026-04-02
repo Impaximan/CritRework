@@ -551,6 +551,18 @@ Items: {
 			Afterwards, you are vulnerable for 10 seconds before you can use this again
 			'''
 	}
+
+	CursersQuill: {
+		CanBeApplied: ""
+		DisplayName: Curser's Quill
+		Tooltip:
+			'''
+			When applied to a weapon, this disables normal critical strikes
+			Instead, extra a soul from the struck enemy, storing the critical strike
+			Upon using a different weapon, all stored souls will be released for critical damage
+			Up to 10 souls can be stored
+			'''
+	}
 }
 
 Whetstone: {
@@ -1665,6 +1677,7 @@ Projectiles: {
 	AutoMissile.DisplayName: Auto Missile
 	AutoMissileExplosion.DisplayName: Auto Missile
 	BigBoom.DisplayName: Big Boom
+	CriticalCurse.DisplayName: Critical Curse
 }
 
 BronzeHelm.SetBonus:

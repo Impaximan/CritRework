@@ -49,6 +49,9 @@ namespace CritRework.Common.ModPlayers
         public int clockworkCounter = 0;
         public float bucklerPower = 0f;
 
+        public List<Projectile> criticalCurses = new();
+        public bool fireCriticalCurse = false;
+
         private bool lastHitWasCrit = false;
 
         //Tokens
@@ -252,6 +255,12 @@ namespace CritRework.Common.ModPlayers
             }
         }
 
+        public override void UpdateDead()
+        {
+            criticalCurses.Clear();
+            timeSinceDeath = 0;
+        }
+
         public void UpdateSlotMachine()
         {
             timeSinceLastTooltipShown++;
@@ -322,6 +331,7 @@ namespace CritRework.Common.ModPlayers
         }
 
         int lastHealth = 1000;
+        int curseCounter = 0;
         public override void PostUpdateMiscEffects()
         {
             int diff = Player.statLife - lastHealth;
@@ -347,6 +357,40 @@ namespace CritRework.Common.ModPlayers
             }
 
             ammoUsedThisFrame = false;
+
+            if (fireCriticalCurse && Player.whoAmI == Main.myPlayer)
+            {
+                curseCounter++;
+                if (curseCounter >= 10)
+                {
+                    curseCounter = 0;
+
+                    EndCurse:
+
+                    if (criticalCurses.Count <= 0)
+                    {
+                        fireCriticalCurse = false;
+                    }
+                    else
+                    {
+                        while (criticalCurses.Count > 0 && (criticalCurses[0] == null || !criticalCurses[0].active))
+                        {
+                            criticalCurses.RemoveAt(0);
+                        }
+
+                        if (criticalCurses.Count <= 0)
+                        {
+                            goto EndCurse;
+                        }
+
+                        criticalCurses[0].ai[0] = 1;
+                        criticalCurses[0].velocity = criticalCurses[0].DirectionTo(Main.MouseWorld) * 15f;
+                        criticalCurses[0].netUpdate = true;
+
+                        criticalCurses.RemoveAt(0);
+                    }
+                }
+            }
         }
 
         public override void OnConsumeAmmo(Item weapon, Item ammo)
@@ -357,11 +401,6 @@ namespace CritRework.Common.ModPlayers
         public override void ExtraJumpVisuals(ExtraJump jump)
         {
             timeFalling = 0;
-        }
-
-        public override void UpdateDead()
-        {
-            timeSinceDeath = 0;
         }
 
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)

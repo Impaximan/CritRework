@@ -15,6 +15,7 @@ using CritRework.Common.Globals;
 using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Equipable.Accessories.Crackers;
 using CritRework.Content.Items.Augmentations;
+using Terraria.Audio;
 
 namespace CritRework
 {
@@ -143,6 +144,19 @@ namespace CritRework
 
     public static class Extensions
     {
+        public static void DoManaRechargeEffect(this Player player)
+        {
+            if (player.whoAmI == Main.myPlayer) SoundEngine.PlaySound(SoundID.MaxMana);
+            for (int i = 0; i < 5; i++)
+            {
+                int num3 = Dust.NewDust(player.position, player.width, player.height, 45, 0f, 0f, 255, default(Color), (float)Main.rand.Next(20, 26) * 0.1f);
+                Main.dust[num3].noLight = true;
+                Main.dust[num3].noGravity = true;
+                Dust obj = Main.dust[num3];
+                obj.velocity *= 0.5f;
+            }
+        }
+
         public static void SetAsAugmentCrit(this Projectile projectile)
         {
             if (projectile.TryGetGlobalProjectile(out CritProjectile c))
