@@ -538,6 +538,7 @@ Items: {
 			'It's literally just dynamite you strap to a spear'
 			'''
 	}
+			Upon taking damage while your defense is buffed, the defense is converted into crit damage for 3 seconds
 }
 
 Whetstone: {
