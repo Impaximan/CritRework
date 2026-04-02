@@ -73,7 +73,7 @@ namespace CritRework.Content.Prefixes.Augmentation
 
                 if (ConditionPrefix)
                 {
-                    lines.Add(new TooltipLine(Mod, "PrefixCondition", "•" + disableTooltip.Value)
+                    lines.Add(new TooltipLine(Mod, "PrefixCondition", "• " + disableTooltip.Value)
                     {
                         IsModifier = true,
                         OverrideColor = new Color(102, 166, 226)

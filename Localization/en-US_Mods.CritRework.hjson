@@ -509,7 +509,7 @@ Items: {
 		Tooltip:
 			'''
 			When applied to a weapon, this disables normal crits
-			Instead, when that weapon would critically strike, it will fire a homing missile
+			When that weapon would critically strike, it will fire a homing missile
 			The homing missile inflicts the weapon's normal critical strike damage in a sizeable area
 			1 second cooldown
 			'''
@@ -521,8 +521,21 @@ Items: {
 		Tooltip:
 			'''
 			When applied to a weapon, this disables normal crits
-			Instead, when that weapon would normally critically strike, you will heal for some life
+			When that weapon would normally critically strike, you will heal for some life
 			Healing depends on the critical strike condition
+			'''
+	}
+
+	Boomstickifier: {
+		CanBeApplied: Can only be applied to spears
+		DisplayName: Boomstick-ifier
+		Tooltip:
+			'''
+			When applied to a weapon, this disables normal crits
+			When that weapon would normally critically strike, it will explode for 2x the critical strike damage
+			Shopkeeper not responsible for adverse effects
+			Does not destroy tiles
+			'It's literally just dynamite you strap to a spear'
 			'''
 	}
 }
@@ -1623,6 +1636,7 @@ Projectiles: {
 	PocketLightning.DisplayName: Pocket Lightning
 	AutoMissile.DisplayName: Auto Missile
 	AutoMissileExplosion.DisplayName: Auto Missile
+	BigBoom.DisplayName: Big Boom
 }
 
 BronzeHelm.SetBonus:

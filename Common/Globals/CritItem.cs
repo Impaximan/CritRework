@@ -309,7 +309,7 @@ namespace CritRework.Common.Globals
             {
                 AddCritType(item);
 
-                if (CritRework.randomHijackSound)
+                if (CritRework.randomHijackSound && CanHaveCrits(item))
                 {
                     SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/Hijack")
                     {

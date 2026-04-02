@@ -58,6 +58,7 @@ namespace CritRework.Common.Globals
 
             if (shop.NpcType == NPCID.Demolitionist)
             {
+                shop.Add<Boomstickifier>();
                 shop.Add<VolatileWhetstone>();
             }
 

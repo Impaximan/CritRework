@@ -542,6 +542,7 @@ namespace CritRework.Common.ModPlayers
                 timeSinceCrit = 0;
             }
 
+            target.life += hit.Damage; //So that crit conditions like FoeAtHighHP work correctly
             if (item.TryGetAugmentation(out Augmentation augmentation) && item.GetGlobalItem<CritItem>().AugmentationActive(item, Player, target))
             {
                 augmentation.AugmentationOnHitNPC(Player, item, null, hit, item.GetCritType(), target);
@@ -551,6 +552,7 @@ namespace CritRework.Common.ModPlayers
             {
                 augmentation2.AugmentationOnHitNPC(Player, item, null, hit, item.GetCritType(), target);
             }
+            target.life -= hit.Damage; //So that crit conditions like FoeAtHighHP work correctly
         }
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
@@ -562,6 +564,7 @@ namespace CritRework.Common.ModPlayers
                     timeSinceCrit = 0;
                 }
 
+                target.life += hit.Damage; //So that crit conditions like FoeAtHighHP work correctly
                 if (crit.ogItem.TryGetAugmentation(out Augmentation augmentation))
                 {
                     if (crit.ogItem.TryGetAugmentation2(out Augmentation augmentation2) && crit.ogItem.GetGlobalItem<CritItem>().Augmentation2Active(crit.ogItem, Player, target))
@@ -582,6 +585,7 @@ namespace CritRework.Common.ModPlayers
                         augmentation.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target);
                     }
                 }
+                target.life -= hit.Damage; //So that crit conditions like FoeAtHighHP work correctly
             }
 
 

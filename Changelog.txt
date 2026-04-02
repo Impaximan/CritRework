@@ -4,9 +4,11 @@ Additions:
 -Added A.M.P.L, an augmentation which is dropped by Skeleton Commandos post-Plantera
 -Added Honeydipped Stingeran augmentation which is crafted post-Queen Bee
 -Added Pocket Lightning Rod, an augmentation which is found in the Underground Desert
+-Added Boomstickifier, an augmentation sold by the demolotionist
 -Added a new weapon prefix, "Versatile," which allows you to put multiple augmentations on a weapon
 -Added several new prefixes which can be given to augmentations, including prefixes which cause augmentations to only activate during certain conditions
 -Added a new material, the "Greenrprint," which drops from Lihzahrds in the Jungle Temple and can be used to create powerful, crit-powered constructs
 
 Fixes
 -Updated hitbox for overgrown Vilethorn and Crystal Vile Shard to grow as intended
+-The Goblin Tinkerer will no longer make the hijack sound for items which cannot critically strike anyway

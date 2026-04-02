@@ -39,7 +39,6 @@ namespace CritRework.Content.Items.Augmentations
         {
             NPC.HitModifiers modifiers = new NPC.HitModifiers();
 
-            target.life += hit.Damage; //So that crit conditions like FoeAtHighHP work correctly
             if (cooldown <= 0 && critType.ShouldCrit(player, item, projectile, target, modifiers, item.IsSpecial()))
             {
                 if (projectile != null && projectile.IsCritAugment())
@@ -55,7 +54,6 @@ namespace CritRework.Content.Items.Augmentations
                 missile.netUpdate = true;
                 missile.SetAsAugmentCrit();
             }
-            target.life -= hit.Damage;
         }
     }
 
