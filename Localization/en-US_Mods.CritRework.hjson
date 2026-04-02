@@ -508,7 +508,7 @@ Items: {
 		DisplayName: A.M.P.L.
 		Tooltip:
 			'''
-			When applied to a weapon, this disables normal crits
+			When applied to a weapon, this disables normal critical strikes
 			When that weapon would critically strike, it will fire a homing missile
 			The homing missile inflicts the weapon's normal critical strike damage in a sizeable area
 			1 second cooldown
@@ -520,7 +520,7 @@ Items: {
 		DisplayName: Honeydipped Stinger
 		Tooltip:
 			'''
-			When applied to a weapon, this disables normal crits
+			When applied to a weapon, this disables normal critical strikes
 			When that weapon would normally critically strike, you will heal for some life
 			Healing depends on the critical strike condition
 			'''
@@ -531,14 +531,26 @@ Items: {
 		DisplayName: Boomstick-ifier
 		Tooltip:
 			'''
-			When applied to a weapon, this disables normal crits
+			When applied to a weapon, this disables normal critical strikes
 			When that weapon would normally critically strike, it will explode for 2x the critical strike damage
 			Shopkeeper not responsible for adverse effects
 			Does not destroy tiles
 			'It's literally just dynamite you strap to a spear'
 			'''
 	}
-			Upon taking damage while your defense is buffed, the defense is converted into crit damage for 3 seconds
+
+	Buckler: {
+		CanBeApplied: ""
+		DisplayName: Buckler
+		Tooltip:
+			'''
+			When applied to a weapon, this disables normal critical strikes
+			Instead, gain defense proportional to the critical strike damage for 1 second
+			Upon taking damage while your defense is buffed, the defense is converted into damage for 3 seconds
+			During that time, critical strikes are re-enabled;
+			Afterwards, you are vulnerable for 10 seconds before you can use this again
+			'''
+	}
 }
 
 Whetstone: {
@@ -1616,6 +1628,21 @@ Buffs: {
 	RedOrbBuff: {
 		DisplayName: Red Beauty
 		Description: 25% increased consecutive critical strike damage
+	}
+
+	BucklerDefense: {
+		DisplayName: Buckler Defense
+		Description: Ready...
+	}
+
+	BucklerRetaliation: {
+		DisplayName: Buckler Retaliation
+		Description: Riposte!
+	}
+
+	BucklerDepletion: {
+		DisplayName: Buckler Depletion
+		Description: You are vulnerable
 	}
 }
 

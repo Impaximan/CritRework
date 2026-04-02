@@ -10,6 +10,7 @@ using CritRework.Content.Items.Whetstones;
 using CritRework.Content.Prefixes.Weapon;
 using System.Collections.Generic;
 using Terraria.Audio;
+using Terraria.Graphics.CameraModifiers;
 using Terraria.DataStructures;
 
 namespace CritRework.Common.ModPlayers
@@ -46,6 +47,7 @@ namespace CritRework.Common.ModPlayers
         public bool allowNewChakram = false;
         public float consecutiveCriticalStrikeDamage = 1f;
         public int clockworkCounter = 0;
+        public float bucklerPower = 0f;
 
         private bool lastHitWasCrit = false;
 
@@ -116,6 +118,11 @@ namespace CritRework.Common.ModPlayers
             uniqueCritSound = null;
             summonSpecial = false;
             consecutiveCriticalStrikeDamage = 1f;
+
+            if (!Player.HasBuff<BucklerDefense>() && !Player.HasBuff<BucklerRetaliation>())
+            {
+                bucklerPower = 0f;
+            }
         }
 
         int crystalLossCounter = 0;
@@ -512,6 +519,17 @@ namespace CritRework.Common.ModPlayers
                 crystalShieldDefense = 0;
 
                 Player.AddBuff(ModContent.BuffType<CrystalShieldCooldown>(), 600);
+            }
+
+            if (Player.HasBuff<BucklerDefense>())
+            {
+                Player.ClearBuff(ModContent.BuffType<BucklerDefense>());
+                Player.AddBuff(ModContent.BuffType<BucklerRetaliation>(), 180);
+                SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/HeavyMetal"), Player.Center);
+                CombatText.NewText(Player.getRect(), Color.Pink, "+" + Math.Round(Buckler.GetDamageBoost(bucklerPower) * 100f) + "%", true);
+
+                PunchCameraModifier modifier = new(Player.Center, new Vector2(info.HitDirection, 0f), 10f, 10f, 8, 500f);
+                Main.instance.CameraModifiers.Add(modifier);
             }
 
             if (EVILCrit != null && EVILCrit.ShouldCrit(Player, shadowDonut.Item, null, null, new(), false))

@@ -235,7 +235,7 @@ namespace CritRework.Common.Globals
 
             if (npc.aiStyle == NPCAIStyleID.Slime && !npc.friendly && !npc.CountsAsACritter)
             {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SparkingSludge>(), 125));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SparkingSludge>(), 175));
             }
 
             if (npc.type == NPCID.Lihzahrd || npc.type == NPCID.LihzahrdCrawler)

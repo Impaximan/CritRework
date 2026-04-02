@@ -2,15 +2,6 @@
 {
     public class SparkingSludge : ModItem
     {
-        public override void AddRecipes()
-        {
-            CreateRecipe()
-                .AddIngredient(ItemID.Gel, 25)
-                .AddIngredient(ItemID.Torch, 50)
-                .AddTile(TileID.Anvils)
-                .Register();
-        }
-
         public override void SetDefaults()
         {
             Item.width = 22;
