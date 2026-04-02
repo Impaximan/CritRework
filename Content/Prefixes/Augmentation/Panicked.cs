@@ -10,7 +10,7 @@ namespace CritRework.Content.Prefixes.Augmentation
             PrefixID.Sets.ReducedNaturalChance[Type] = true;
         }
 
-        public override bool DeactivateAugmentation(Item item, Player player, NPC npc = null)
+        public override bool DeactivateAugmentation(Item weapon, Item augmentation, Player player, NPC npc = null)
         {
             return player.statLife > player.statLifeMax2 * 0.3f;
         }

@@ -549,12 +549,12 @@ Prefixes: {
 	Quality_Augment.DisplayName: Quality
 
 	Panicked: {
-		DisableCondition: All augmentation effects are inactive while above 30% life
+		DisableCondition: Only active while below 30% life
 		DisplayName: Panicked
 	}
 
 	Timid: {
-		DisableCondition: All augmentation effects are inactive while below 85% life
+		DisableCondition: Only active while above 85% life
 		DisplayName: Timid
 	}
 
@@ -562,12 +562,12 @@ Prefixes: {
 	Helpful.DisplayName: Helpful
 
 	Reactive: {
-		DisableCondition: All augmentation effects are inactive unless you have critically struck in the last 3 seconds
+		DisableCondition: Only active if you have critically struck in the last 3 seconds
 		DisplayName: Reactive
 	}
 
 	Vengeful: {
-		DisableCondition: All augmentation effects are inactive unless you have taken damage in the last 3 seconds
+		DisableCondition: Only active if you have taken damage in the last 3 seconds
 		DisplayName: Vengeful
 	}
 
@@ -581,6 +581,11 @@ Prefixes: {
 	Versatile: {
 		Description: Can be given 2 different augmentations
 		DisplayName: Versatile
+	}
+
+	Clockwork: {
+		DisableCondition: Only active half the time- active for 2 seconds, then inactive for 2 seconds
+		DisplayName: Clockwork
 	}
 }
 

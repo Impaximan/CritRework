@@ -696,7 +696,7 @@ namespace CritRework.Common.Globals
 
             if (augmentation != null && PrefixLoader.GetPrefix(augmentation.Item.prefix) is AugmentationPrefix prefix)
             {
-                if (prefix.DeactivateAugmentation(item, player, npc))
+                if (prefix.DeactivateAugmentation(item, augmentation.Item, player, npc))
                 {
                     return false;
                 }
@@ -714,7 +714,7 @@ namespace CritRework.Common.Globals
 
             if (augmentation2 != null && PrefixLoader.GetPrefix(augmentation2.Item.prefix) is AugmentationPrefix prefix)
             {
-                if (prefix.DeactivateAugmentation(item, player, npc))
+                if (prefix.DeactivateAugmentation(item, augmentation2.Item, player, npc))
                 {
                     return false;
                 }

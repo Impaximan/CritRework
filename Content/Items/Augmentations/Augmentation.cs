@@ -19,6 +19,12 @@ namespace CritRework.Content.Items.Augmentations
             Volume = 0.5f
         };
 
+        public override bool ReforgePrice(ref int reforgePrice, ref bool canApplyDiscount)
+        {
+            reforgePrice /= 4;
+            return base.ReforgePrice(ref reforgePrice, ref canApplyDiscount);
+        }
+
         public override void SetStaticDefaults()
         {
             tooltip1 = Mod.GetLocalization($"{typeof(Augmentation).Name}.Tooltip1");

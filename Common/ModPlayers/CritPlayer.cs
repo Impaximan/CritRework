@@ -45,6 +45,7 @@ namespace CritRework.Common.ModPlayers
         public bool pirateArmor = false;
         public bool allowNewChakram = false;
         public float consecutiveCriticalStrikeDamage = 1f;
+        public int clockworkCounter = 0;
 
         private bool lastHitWasCrit = false;
 
@@ -153,6 +154,7 @@ namespace CritRework.Common.ModPlayers
             timeSinceBlowpipe++;
             timeSinceGravityWell++;
             timeSinceMovingSlow++;
+            clockworkCounter++;
             if (noxiousEyeCooldown > 0) noxiousEyeCooldown--;
             UpdateSlotMachine();
 

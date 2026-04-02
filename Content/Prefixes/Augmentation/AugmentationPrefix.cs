@@ -50,7 +50,7 @@ namespace CritRework.Content.Prefixes.Augmentation
         /// <param name="item"></param>
         /// <param name="player"></param>
         /// <param name="npc"></param>
-        public virtual bool DeactivateAugmentation(Item item, Player player, NPC? npc = null)
+        public virtual bool DeactivateAugmentation(Item weapon, Item augmentation, Player player, NPC? npc = null)
         {
             return false;
         }
