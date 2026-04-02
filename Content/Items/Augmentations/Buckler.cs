@@ -40,7 +40,7 @@ namespace CritRework.Content.Items.Augmentations
                 return;
             }
 
-            if (critType.ShouldCrit(player, item, projectile, target, modifiers, item.IsSpecial()) && !player.HasBuff<BucklerRetaliation>() && !player.HasBuff<BucklerDepletion>())
+            if (player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target) && !player.HasBuff<BucklerRetaliation>() && !player.HasBuff<BucklerDepletion>())
             {
                 float damageMult = critType.GetDamageMult(player, item);
                 CritPlayer critPlayer = player.GetModPlayer<CritPlayer>();

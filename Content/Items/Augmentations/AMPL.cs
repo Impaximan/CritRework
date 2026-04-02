@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using CritRework.Common.ModPlayers;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria.Audio;
 using Terraria.DataStructures;
 
@@ -39,7 +40,7 @@ namespace CritRework.Content.Items.Augmentations
         {
             NPC.HitModifiers modifiers = new NPC.HitModifiers();
 
-            if (cooldown <= 0 && critType.ShouldCrit(player, item, projectile, target, modifiers, item.IsSpecial()))
+            if (cooldown <= 0 && player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target))
             {
                 if (projectile != null && projectile.IsCritAugment())
                 {

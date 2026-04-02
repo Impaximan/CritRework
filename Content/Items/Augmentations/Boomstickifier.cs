@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using CritRework.Common.ModPlayers;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria.Audio;
 using Terraria.DataStructures;
 
@@ -34,7 +35,7 @@ namespace CritRework.Content.Items.Augmentations
                 return;
             }
 
-            if (projectile.type != ModContent.ProjectileType<BigBoom>() && critType.ShouldCrit(player, item, projectile, target, modifiers, item.IsSpecial()))
+            if (projectile.type != ModContent.ProjectileType<BigBoom>() && player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target))
             {
                 Projectile explosion = Projectile.NewProjectileDirect(new EntitySource_ItemUse(player, item), projectile.Center, projectile.velocity, ModContent.ProjectileType<BigBoom>(), hit.SourceDamage * 3, projectile.knockBack * 3f, projectile.owner);
                 explosion.SetAsAugmentCrit();

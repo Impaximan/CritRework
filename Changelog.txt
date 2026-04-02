@@ -14,4 +14,5 @@ Additions:
 Fixes
 -Updated hitbox for overgrown Vilethorn and Crystal Vile Shard to grow as intended
 -The Goblin Tinkerer will no longer make the hijack sound for items which cannot critically strike anyway
--Fixed Dungeon loot from this mod not spawning properly (oops)
+-Fixed Dungeon loot from this mod not spawning properly
+-Fixed Prosthetic Arm damage bonus displaying incorrectly for the longest time

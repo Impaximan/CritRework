@@ -27,7 +27,6 @@ namespace CritRework.Content.Items.Augmentations
 
         public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
         {
-            modifiers.DisableCrit();
             return true;
         }
 
@@ -41,7 +40,7 @@ namespace CritRework.Content.Items.Augmentations
             }
 
             NPC.HitModifiers modifiers = new NPC.HitModifiers();
-            if (critType.ShouldCrit(player, item, projectile, target, modifiers, item.IsSpecial()))
+            if (player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target))
             {
                 float damageMult = critType.GetDamageMult(player, item);
 

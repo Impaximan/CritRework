@@ -37,7 +37,7 @@ namespace CritRework.Content.Items.Augmentations
         public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
         {
             NPC.HitModifiers modifiers = new NPC.HitModifiers();
-            if (critType.ShouldCrit(player, item, projectile, target, modifiers, item.IsSpecial()) && (projectile == null || projectile.type != ModContent.ProjectileType<CriticalCurse>()))
+            if (player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target) && (projectile == null || projectile.type != ModContent.ProjectileType<CriticalCurse>()))
             {
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<CriticalCurse>()] < max)
                 {

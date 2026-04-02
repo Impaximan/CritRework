@@ -429,6 +429,11 @@ namespace CritRework.Common.ModPlayers
             modifiers = ApplyModifiers(critProj.ogItem, proj, modifiers, critProj.critType, target);
         }
 
+        public bool ShouldNormallyCrit(Item item, Projectile? projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
+        {
+            return critType != null && critType.ShouldCrit(Player, item, projectile, target, modifiers, item.IsSpecial(Main.LocalPlayer)) && (prostheticCrit == null || prostheticCrit.ShouldCrit(Player, item, projectile, target, modifiers, item.prefix == ModContent.PrefixType<Special>()));
+        }
+
         private NPC.HitModifiers ApplyModifiers(Item item, Projectile? projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
         {
             if (item != null && item.TryGetGlobalItem(out CritItem critItem))
@@ -463,7 +468,7 @@ namespace CritRework.Common.ModPlayers
             if (((projectile != null && projectile.IsCritAugment()) || !(item != null && 
                 (item.TryGetAugmentation(out Augmentation augmentation) && item.GetGlobalItem<CritItem>().AugmentationActive(item, Player, target) && augmentation.OverrideNormalCritBehavior(Player, item, projectile, modifiers, critType, target)) ||
                 (item.TryGetAugmentation2(out Augmentation augmentation2) && item.GetGlobalItem<CritItem>().Augmentation2Active(item, Player, target) && augmentation2.OverrideNormalCritBehavior(Player, item, projectile, modifiers, critType, target))))
-                && critType != null && ((critType.ShouldCrit(Player, item, projectile, target, modifiers, item.IsSpecial(Main.LocalPlayer)) && (prostheticCrit == null || prostheticCrit.ShouldCrit(Player, item, projectile, target, modifiers, item.prefix == ModContent.PrefixType<Special>()))) || (projectile != null && projectile.IsCritAugment())))
+                && critType != null && (ShouldNormallyCrit(item, projectile, modifiers, critType, target) || (projectile != null && projectile.IsCritAugment())))
             {
                 modifiers.FinalDamage *= 0.5f;
                 modifiers.SetCrit();

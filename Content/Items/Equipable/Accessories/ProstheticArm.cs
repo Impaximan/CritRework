@@ -64,7 +64,7 @@ namespace CritRework.Content.Items.Equipable.Accessories
 
             if (Item.TryGetGlobalItem(out CritItem cItem) && cItem.critType != null)
             {
-                dmgString = Math.Round(cItem.critType.GetDamageMult(Main.LocalPlayer, Item) * 150f).ToString() + "%";
+                dmgString = Math.Round((cItem.critType.GetDamageMult(Main.LocalPlayer, Item) - 1f) * 150f).ToString() + "%";
             }
 
             if (i != -1)
