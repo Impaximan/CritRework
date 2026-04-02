@@ -45,6 +45,7 @@ namespace CritRework.Common.Globals
         public bool harpoonFireAgain = false;
 
         public Augmentation? augmentation = null;
+        public Augmentation? augmentation2 = null;
 
         public override bool CanStack(Item destination, Item source)
         {
@@ -88,6 +89,16 @@ namespace CritRework.Common.Globals
                 writer.Write(augmentation.Item.prefix);
                 ItemIO.SendModData(augmentation.Item, writer);
             }
+
+
+            writer.Write(augmentation2 != null); //Does this item have a second augmentation
+
+            if (augmentation2 != null)
+            {
+                writer.Write(augmentation2.Type);
+                writer.Write(augmentation2.Item.prefix);
+                ItemIO.SendModData(augmentation2.Item, writer);
+            }
         }
 
         public override void NetReceive(Item item, BinaryReader reader)
@@ -109,6 +120,21 @@ namespace CritRework.Common.Globals
                 if (instance.ModItem is Augmentation a)
                 {
                     augmentation = a;
+                }
+            }
+
+            if (reader.ReadBoolean()) //Has augmentation 2
+            {
+                int type = reader.ReadInt32();
+                int pre = reader.ReadInt32();
+
+                Item instance = new Item(type, 1, pre);
+
+                ItemIO.ReceiveModData(instance, reader);
+
+                if (instance.ModItem is Augmentation a)
+                {
+                    augmentation2 = a;
                 }
             }
         }
@@ -136,6 +162,20 @@ namespace CritRework.Common.Globals
                     float useTimeMult = 1f;
                     float v = 1f;
                     prefix.SetStats(ref c, ref n, ref useTimeMult, ref v);
+
+                    mult /= useTimeMult;
+                }
+
+            }
+            if (augmentation2 != null && PrefixLoader.GetPrefix(augmentation2.Item.prefix) is AugmentationPrefix prefix2)
+            {
+                if (AugmentationActive(item, player))
+                {
+                    float c = 1f;
+                    float n = 1f;
+                    float useTimeMult = 1f;
+                    float v = 1f;
+                    prefix2.SetStats(ref c, ref n, ref useTimeMult, ref v);
 
                     mult /= useTimeMult;
                 }
@@ -175,6 +215,17 @@ namespace CritRework.Common.Globals
                     tag.Add(pair.Key + "_augmentation", pair.Value);
                 }
             }
+
+            if (augmentation2 != null)
+            {
+                tag.Add("2augmentation", true);
+                TagCompound itemSave = ItemIO.Save(augmentation2.Item);
+
+                foreach (KeyValuePair<string, object> pair in itemSave)
+                {
+                    tag.Add(pair.Key + "_2augmentation", pair.Value);
+                }
+            }
         }
 
         public override void LoadData(Item item, TagCompound tag)
@@ -194,6 +245,22 @@ namespace CritRework.Common.Globals
                 if (aug.ModItem is Augmentation obj)
                 {
                     augmentation = obj;
+                }
+            }
+
+            if (tag.ContainsKey("2augmentation"))
+            {
+                TagCompound itemTag = new();
+
+                foreach (KeyValuePair<string, object> pair in tag.Where(x => x.Key.Contains("_2augmentation")))
+                {
+                    itemTag.Add(pair.Key.Replace("_2augmentation", ""), pair.Value);
+                }
+
+                Item aug = ItemIO.Load(itemTag);
+                if (aug.ModItem is Augmentation obj)
+                {
+                    augmentation2 = obj;
                 }
             }
         }
@@ -259,9 +326,9 @@ namespace CritRework.Common.Globals
 
         public override void PreReforge(Item item)
         {
-            if (augmentation != null)
+            if (augmentation != null || augmentation2 != null)
             {
-                RemoveAugmentation(Main.LocalPlayer, item);
+                RemoveAugmentation(Main.LocalPlayer);
             }
         }
 
@@ -278,11 +345,11 @@ namespace CritRework.Common.Globals
                 AddCritType(item);
             }
 
-            if (Main.HoverItem.type == item.type && Main.HoverItem.GetGlobalItem<CritItem>().augmentation == augmentation)
+            if (Main.HoverItem.type == item.type && Main.HoverItem.GetGlobalItem<CritItem>().augmentation != null && Main.HoverItem.GetGlobalItem<CritItem>().augmentation == augmentation)
             {
                 if (Main.keyState.IsKeyDown(Keys.LeftAlt) && Main.mouseRight)
                 {
-                    RemoveAugmentation(player, item);
+                    RemoveAugmentation(player);
                 }
             }
         }
@@ -345,6 +412,11 @@ namespace CritRework.Common.Globals
             if (augmentation != null)
             {
                 augmentation.HoldItem(player);
+            }
+
+            if (augmentation2 != null)
+            {
+                augmentation2.HoldItem(player);
             }
         }
 
@@ -633,21 +705,37 @@ namespace CritRework.Common.Globals
             return true;
         }
 
-        public void RemoveAugmentation(Player player, Item item)
+        public bool Augmentation2Active(Item item, Player player, NPC? npc = null)
         {
-            if (augmentation == null)
+            if (augmentation2 == null)
             {
-                return;
+                return false;
             }
 
-            player.QuickSpawnItem(new EntitySource_ItemOpen(player, augmentation.Item.type, "Remove augmentation"), augmentation.Item);
-            SoundEngine.PlaySound(SoundID.Item37);
-
-            augmentation = null;
-
-            if (Main.netMode != NetmodeID.SinglePlayer)
+            if (augmentation2 != null && PrefixLoader.GetPrefix(augmentation2.Item.prefix) is AugmentationPrefix prefix)
             {
+                if (prefix.DeactivateAugmentation(item, player, npc))
+                {
+                    return false;
+                }
+            }
 
+            return true;
+        }
+
+        public void RemoveAugmentation(Player player)
+        {
+            if (augmentation != null)
+            {
+                player.QuickSpawnItem(new EntitySource_ItemOpen(player, augmentation.Item.type, "Remove augmentation"), augmentation.Item);
+                SoundEngine.PlaySound(SoundID.Item37);
+                augmentation = null;
+            }
+
+            if (augmentation2 != null)
+            {
+                player.QuickSpawnItem(new EntitySource_ItemOpen(player, augmentation2.Item.type, "Remove augmentation"), augmentation2.Item);
+                augmentation2 = null;
             }
         }
 
@@ -677,24 +765,35 @@ namespace CritRework.Common.Globals
 
             if (augmentation != null)
             {
-                tooltips.Insert(1, new TooltipLine(Mod, "Augmentation", "Has augmentation: " + ItemTagHandler.GenerateTag(augmentation.Item) + " " + $" [c/{ItemRarity.GetColor(augmentation.Item.rare).Hex3()}:" + augmentation.Item.AffixName() + "]" + (CritRework.abbreviateAugmentationTooltip ? "" : " (hold Left Alt for more info)")));
-
+                if (!CritRework.abbreviateAugmentationTooltip) tooltips.Insert(1, new TooltipLine(Mod, "Augmentation", "Hold Left Alt for more info")
+                {
+                    IsModifier = true
+                });
+                if (augmentation2 != null) tooltips.Insert(1, new TooltipLine(Mod, "Augmentation2", "Has augmentation: " + ItemTagHandler.GenerateTag(augmentation2.Item) + " " + $" [c/{ItemRarity.GetColor(augmentation2.Item.rare).Hex3()}:" + augmentation2.Item.AffixName() + "]"));
+                tooltips.Insert(1, new TooltipLine(Mod, "Augmentation", "Has augmentation: " + ItemTagHandler.GenerateTag(augmentation.Item) + " " + $" [c/{ItemRarity.GetColor(augmentation.Item.rare).Hex3()}:" + augmentation.Item.AffixName() + "]"));
 
                 if (Main.keyState.IsKeyDown(Keys.LeftAlt))
                 {
                     tooltips.Clear();
 
-                    tooltips.Add(new TooltipLine(Mod, "AugmentationName", $"[c/{ItemRarity.GetColor(item.rare).Hex3()}:Augmentation: ]" + ItemTagHandler.GenerateTag(augmentation.Item) + " " + $"[c/{ItemRarity.GetColor(augmentation.Item.rare).Hex3()}:" + augmentation.Item.AffixName() + "]"));
+                    Augmentation usedAugmentation = augmentation;
 
-                    tooltips.Add(new TooltipLine(Mod, "AugmentationCanBeAppliedTo", Mod.GetLocalization($"Items.{augmentation.GetType().Name}.CanBeApplied").Value));
-
-                    for (int i = 0; i < augmentation.Item.ToolTip.Lines; i++)
+                    if (augmentation2 != null && Main.gameTimeCache.TotalGameTime.TotalSeconds % 6 <= 3f)
                     {
-                        string line = augmentation.Item.ToolTip.GetLine(i);
+                        usedAugmentation = augmentation2;
+                    }
+
+                    tooltips.Add(new TooltipLine(Mod, "AugmentationName", $"[c/{ItemRarity.GetColor(item.rare).Hex3()}:Augmentation: ]" + ItemTagHandler.GenerateTag(usedAugmentation.Item) + " " + $"[c/{ItemRarity.GetColor(usedAugmentation.Item.rare).Hex3()}:" + usedAugmentation.Item.AffixName() + "]"));
+
+                    tooltips.Add(new TooltipLine(Mod, "AugmentationCanBeAppliedTo", Mod.GetLocalization($"Items.{usedAugmentation.GetType().Name}.CanBeApplied").Value));
+
+                    for (int i = 0; i < usedAugmentation.Item.ToolTip.Lines; i++)
+                    {
+                        string line = usedAugmentation.Item.ToolTip.GetLine(i);
                         tooltips.Add(new TooltipLine(Mod, "AugmentationTooltip" + i, line));
                     }
 
-                    if (PrefixLoader.GetPrefix(augmentation.Item.prefix) is AugmentationPrefix prefix)
+                    if (PrefixLoader.GetPrefix(usedAugmentation.Item.prefix) is AugmentationPrefix prefix)
                     {
                         tooltips.AddRange(prefix.GetTooltipLines(item));
                     }

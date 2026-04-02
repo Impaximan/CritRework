@@ -396,11 +396,25 @@ namespace CritRework.Common.ModPlayers
 
                     modifiers.CritDamage *= critDamage;
                     modifiers.NonCritDamage *= nonCritDamage;
+                }
 
+                if (critItem.augmentation2 != null && PrefixLoader.GetPrefix(critItem.augmentation2.Item.prefix) is Content.Prefixes.Augmentation.AugmentationPrefix prefix2 && critItem.AugmentationActive(item, Player, target))
+                {
+                    float critDamage = 1f;
+                    float nonCritDamage = 1f;
+                    float useTimeMult = 1f;
+                    float v = 1f;
+
+                    prefix2.SetStats(ref critDamage, ref critDamage, ref useTimeMult, ref v);
+
+                    modifiers.CritDamage *= critDamage;
+                    modifiers.NonCritDamage *= nonCritDamage;
                 }
             }
 
-            if (((projectile != null && projectile.IsCritAugment()) || !(item != null && item.TryGetAugmentation(out Augmentation augmentation) && item.GetGlobalItem<CritItem>().AugmentationActive(item, Player, target) && augmentation.OverrideNormalCritBehavior(Player, item, projectile, modifiers, critType, target)))
+            if (((projectile != null && projectile.IsCritAugment()) || !(item != null && 
+                (item.TryGetAugmentation(out Augmentation augmentation) && item.GetGlobalItem<CritItem>().AugmentationActive(item, Player, target) && augmentation.OverrideNormalCritBehavior(Player, item, projectile, modifiers, critType, target)) ||
+                (item.TryGetAugmentation2(out Augmentation augmentation2) && item.GetGlobalItem<CritItem>().Augmentation2Active(item, Player, target) && augmentation2.OverrideNormalCritBehavior(Player, item, projectile, modifiers, critType, target))))
                 && critType != null && ((critType.ShouldCrit(Player, item, projectile, target, modifiers, item.IsSpecial(Main.LocalPlayer)) && (prostheticCrit == null || prostheticCrit.ShouldCrit(Player, item, projectile, target, modifiers, item.prefix == ModContent.PrefixType<Special>()))) || (projectile != null && projectile.IsCritAugment())))
             {
                 modifiers.FinalDamage *= 0.5f;
@@ -530,6 +544,11 @@ namespace CritRework.Common.ModPlayers
             {
                 augmentation.AugmentationOnHitNPC(Player, item, null, hit, item.GetCritType(), target);
             }
+
+            if (item.TryGetAugmentation2(out Augmentation augmentation2) && item.GetGlobalItem<CritItem>().Augmentation2Active(item, Player, target))
+            {
+                augmentation2.AugmentationOnHitNPC(Player, item, null, hit, item.GetCritType(), target);
+            }
         }
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
@@ -541,9 +560,25 @@ namespace CritRework.Common.ModPlayers
                     timeSinceCrit = 0;
                 }
 
-                if (crit.ogItem.TryGetAugmentation(out Augmentation augmentation) && crit.ogItem.GetGlobalItem<CritItem>().AugmentationActive(crit.ogItem, Player, target))
+                if (crit.ogItem.TryGetAugmentation(out Augmentation augmentation))
                 {
-                    augmentation.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target);
+                    if (crit.ogItem.TryGetAugmentation2(out Augmentation augmentation2) && crit.ogItem.GetGlobalItem<CritItem>().Augmentation2Active(crit.ogItem, Player, target))
+                    {
+                        if (augmentation.OverrideNormalCritBehavior(Main.player[proj.owner], crit.ogItem, proj, new NPC.HitModifiers(), crit.critType, target) && augmentation2.OverrideNormalCritBehavior(Main.player[proj.owner], crit.ogItem, proj, new NPC.HitModifiers(), crit.critType, target) && crit.ogItem.GetGlobalItem<CritItem>().AugmentationActive(crit.ogItem, Player, target))
+                        {
+                            if (Main.rand.NextBool()) augmentation.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target);
+                            else augmentation2.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target);
+                        }
+                        else
+                        {
+                            if (crit.ogItem.GetGlobalItem<CritItem>().AugmentationActive(crit.ogItem, Player, target)) augmentation.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target);
+                            augmentation2.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target);
+                        }
+                    }
+                    else if (crit.ogItem.GetGlobalItem<CritItem>().AugmentationActive(crit.ogItem, Player, target))
+                    {
+                        augmentation.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target);
+                    }
                 }
             }
 

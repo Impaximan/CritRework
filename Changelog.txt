@@ -1,6 +1,11 @@
 ﻿Update 1.6.0.0 "Locked and Loaded"
 Additions:
--Added a new accessory, the "Pocket Lightning Rod," which can be found in the Underground Desert
+-Added a new type of item, "Augmenations," which can be applied to weapons for altered critical strike behavior
+-Added A.M.P.L, an augmentation which is dropped by Skeleton Commandos post-Plantera
+-Added Honeydipped Stingeran augmentation which is crafted post-Queen Bee
+-Added Pocket Lightning Rod, an augmentation which is found in the Underground Desert
+-Added a new weapon prefix, "Versatile," which allows you to put multiple augmentations on a weapon
+-Added several new prefixes which can be given to augmentations, including prefixes which cause augmentations to only activate during certain conditions
 -Added a new material, the "Greenrprint," which drops from Lihzahrds in the Jungle Temple and can be used to create powerful, crit-powered constructs
 
 Fixes

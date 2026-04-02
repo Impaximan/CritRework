@@ -172,6 +172,18 @@ namespace CritRework
             return false;
         }
 
+        public static bool TryGetAugmentation2<T>(this Item item, out T augmentation2) where T : Augmentation
+        {
+            if (item != null && item.TryGetGlobalItem(out CritItem critItem) && critItem.augmentation2 != null && critItem.augmentation2 is T final)
+            {
+                augmentation2 = final;
+                return true;
+            }
+
+            augmentation2 = null;
+            return false;
+        }
+
         public static bool IsCracker(this Item item)
         {
             return new List<int>()
@@ -208,6 +220,11 @@ namespace CritRework
         public static void AddConsecutiveCritDamage(this Player player, float bonus)
         {
             player.GetModPlayer<CritPlayer>().consecutiveCriticalStrikeDamage += bonus;
+        }
+
+        public static bool IsVersatile(this Item item)
+        {
+            return item.prefix == ModContent.PrefixType<Versatile>();
         }
 
         public static bool IsSpecial(this Item item, Player? owner = null)

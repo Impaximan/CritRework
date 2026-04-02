@@ -17,8 +17,8 @@
 
         public override void SetStats(ref float critDamageMult, ref float nonCritDamageMult, ref float useTimeMult, ref float valueMult)
         {
-            critDamageMult = 1.2f;
-            valueMult *= 0.85f;
+            critDamageMult = 1.08f;
+            valueMult *= 0.93f;
         }
 
         public override float RollChance(Item item)

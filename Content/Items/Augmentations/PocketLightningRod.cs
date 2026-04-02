@@ -18,7 +18,7 @@ namespace CritRework.Content.Items.Augmentations
 
         public override void AugmentationOnHitNPC(Player Player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
         {
-            if (hit.Crit)
+            if (hit.Crit && projectile.type != ModContent.ProjectileType<PocketLightning>())
             {
                 SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/Zap")
                 {
@@ -26,7 +26,7 @@ namespace CritRework.Content.Items.Augmentations
                     PitchVariance = 0.5f
                 }, target.Center);
 
-                Projectile p = Projectile.NewProjectileDirect(new EntitySource_OnHurt(target, Player), Player.Center, Vector2.Zero, ModContent.ProjectileType<PocketLightning>(), hit.Damage, 0f, Player.whoAmI);
+                Projectile p = Projectile.NewProjectileDirect(new EntitySource_ItemUse(Player, Item), Player.Center, Vector2.Zero, ModContent.ProjectileType<PocketLightning>(), hit.Damage, 0f, Player.whoAmI);
                 p.ai[2] = target.whoAmI;
                 (p.ModProjectile as PocketLightning).SetTargetPosition();
                 Player.AddBuff(BuffID.Electrified, 10);

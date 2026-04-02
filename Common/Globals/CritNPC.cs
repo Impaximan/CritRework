@@ -219,7 +219,7 @@ namespace CritRework.Common.Globals
 
             if (npc.type == NPCID.SkeletonCommando)
             {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<AMPL>(), 10));
+                npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<AMPL>(), 12, 6));
             }
 
             if (npc.type == NPCID.Hornet)

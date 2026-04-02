@@ -38,10 +38,13 @@ namespace CritRework.Content.Items.Augmentations
         public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
         {
             NPC.HitModifiers modifiers = new NPC.HitModifiers();
+
+            target.life += hit.Damage; //So that crit conditions like FoeAtHighHP work correctly
             if (cooldown <= 0 && critType.ShouldCrit(player, item, projectile, target, modifiers, item.IsSpecial()))
             {
                 if (projectile != null && projectile.IsCritAugment())
                 {
+                    target.life -= hit.Damage;
                     return;
                 }
 
@@ -52,6 +55,7 @@ namespace CritRework.Content.Items.Augmentations
                 missile.netUpdate = true;
                 missile.SetAsAugmentCrit();
             }
+            target.life -= hit.Damage;
         }
     }
 
@@ -64,8 +68,8 @@ namespace CritRework.Content.Items.Augmentations
 
         public override void SetDefaults()
         {
-            Projectile.width = 18;
-            Projectile.height = 18;
+            Projectile.width = 25;
+            Projectile.height = 25;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.timeLeft = 300;
             Projectile.friendly = true;
@@ -93,6 +97,7 @@ namespace CritRework.Content.Items.Augmentations
 
         public override void AI()
         {
+
             Projectile.rotation = Projectile.velocity.ToRotation();
             Dust dust = Dust.NewDustPerfect(Projectile.Center - Projectile.rotation.ToRotationVector2() * 6f, DustID.Torch);
             dust.velocity = Projectile.rotation.ToRotationVector2() * -10f + Projectile.velocity;
@@ -118,7 +123,7 @@ namespace CritRework.Content.Items.Augmentations
             }
             else
             {
-                target = Projectile.FindTargetWithinRange(1000f);
+                target = Projectile.FindTargetWithinRange(1500f);
             }
 
             if (target != null)
@@ -132,7 +137,13 @@ namespace CritRework.Content.Items.Augmentations
             }
             else
             {
-                Projectile.timeLeft = 0;
+                if (Projectile.ai[1] == 0)
+                {
+                    Projectile.ai[1] = Main.rand.NextBool() ? 1 : -1; //Rotate a random direction each time
+                    Projectile.netUpdate = true;
+                }
+
+                Projectile.velocity = Projectile.velocity.RotatedBy(MathHelper.ToRadians(10f * Projectile.ai[1]));
             }
         }
 
@@ -160,6 +171,7 @@ namespace CritRework.Content.Items.Augmentations
             Projectile.hostile = false;
             Projectile.tileCollide = false;
             Projectile.penetrate = -1;
+            Projectile.alpha = 255;
         }
 
         public override void AI()

@@ -61,8 +61,17 @@ namespace CritRework.Content.Items.Augmentations
             {
                 if (Main.mouseItem.TryGetGlobalItem(out CritItem critTarget) && critTarget.augmentation != null)
                 {
-                    critTarget.RemoveAugmentation(player, Item);
-
+                    if (Main.mouseItem.IsVersatile())
+                    {
+                        if (critTarget.augmentation2 != null || critTarget.augmentation.Type == Type)
+                        {
+                            critTarget.RemoveAugmentation(player);
+                        }
+                    }
+                    else
+                    {
+                        critTarget.RemoveAugmentation(player);
+                    }
                 }
                 Apply(Main.mouseItem, player);
             }
@@ -79,8 +88,16 @@ namespace CritRework.Content.Items.Augmentations
 
         public virtual void Apply(Item target, Player player)
         {
-            Main.mouseItem.TryGetGlobalItem(out CritItem critTarget);
-            critTarget.augmentation = this;
+            target.TryGetGlobalItem(out CritItem critTarget);
+
+            if (target.IsVersatile() && critTarget.augmentation != null)
+            {
+                critTarget.augmentation2 = this;
+            }
+            else
+            {
+                critTarget.augmentation = this;
+            }
 
             SoundEngine.PlaySound(Item.UseSound);
             Main.NewText("Applied " + ItemTagHandler.GenerateTag(Item) + " to " + ItemTagHandler.GenerateTag(target), Color.Yellow);

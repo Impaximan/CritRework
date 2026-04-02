@@ -577,6 +577,11 @@ Prefixes: {
 	Inconvenient.DisplayName: Inconvenient
 	Persistent.DisplayName: Persistent
 	Unreliable.DisplayName: Unreliable
+
+	Versatile: {
+		Description: Can be given 2 different augmentations
+		DisplayName: Versatile
+	}
 }
 
 NecromanticTooltip: +2 lifesteal when inflicting critical damage upon enemies
