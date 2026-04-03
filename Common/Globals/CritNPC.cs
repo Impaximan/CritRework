@@ -148,6 +148,14 @@ namespace CritRework.Common.Globals
             }
         }
 
+        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
+        {
+            if (npc.HasBuff<HuntersMark>() && projectile.DamageType == DamageClass.Ranged && !projectile.arrow)
+            {
+                modifiers.CritDamage *= 1.25f;
+            }
+        }
+
         public override void HitEffect(NPC npc, NPC.HitInfo hit)
         {
 
@@ -216,6 +224,11 @@ namespace CritRework.Common.Globals
             if (npc.type == NPCID.Drippler)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<NoxiousEye>(), 20));
+            }
+
+            if (npc.type == NPCID.SkeletonArcher)
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<HuntersDrawstring>(), 25));
             }
 
             if (npc.type == NPCID.SkeletonCommando)

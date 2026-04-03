@@ -575,6 +575,39 @@ Items: {
 			'Proceed.'
 			'''
 	}
+
+	HuntersDrawstring: {
+		CanBeApplied: Can only be applied to bows and repeaters
+		DisplayName: Hunter's Drawstring
+		Tooltip:
+			'''
+			When applied to a weapon, this disables normal critical strikes
+			Instead, inflict target with 'Hunter's Mark', increasing critical strike damage from non-arrows by 25%
+			Duration of the mark depends on the damage of the critical strike
+			'''
+	}
+
+	ManalyticConverter_Copper: {
+		CanBeApplied: ""
+		DisplayName: Manalytic Converter
+		Tooltip:
+			'''
+			When applied to a weapon, this disables normal critical strikes
+			Instead, gain mana in place of critically striking
+			Mana gained scales with critical strike power
+			'''
+	}
+
+	ManalyticConverter_Tin: {
+		CanBeApplied: ""
+		DisplayName: Manalytic Converter
+		Tooltip:
+			'''
+			When applied to a weapon, this disables normal critical strikes
+			Instead, gain mana in place of critically striking
+			Mana gained scales with critical strike power
+			'''
+	}
 }
 
 Whetstone: {
@@ -1667,6 +1700,11 @@ Buffs: {
 	BucklerDepletion: {
 		DisplayName: Buckler Depletion
 		Description: You are vulnerable
+	}
+
+	HuntersMark: {
+		DisplayName: Hunter's Mark
+		Description: Marked...
 	}
 }
 

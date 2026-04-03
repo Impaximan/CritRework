@@ -11,7 +11,7 @@ namespace CritRework.Content.Items.Augmentations
         {
             CreateRecipe()
                 .AddRecipeGroup(RecipeGroupID.Wood, 5)
-                .AddTile(TileID.WorkBenches)
+                .AddTile(TileID.DemonAltar)
                 .Register()
                 .SortAfterFirstRecipesOf(ItemID.WoodenBow);
         }
@@ -33,7 +33,7 @@ namespace CritRework.Content.Items.Augmentations
                 Volume = 1.5f,
                 PitchVariance = 0.25f
             };
-            Item.rare = ItemRarityID.White;
+            Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 0, 10, 0);
         }
 
@@ -106,6 +106,7 @@ namespace CritRework.Content.Items.Augmentations
                     Projectile.penetrate = 3;
                     Projectile.Center = npc.Center;
                     Projectile.tileCollide = !npc.noTileCollide;
+                    Projectile.netUpdate = true;
                 }
 
                 Projectile.rotation = Projectile.velocity.ToRotation();
