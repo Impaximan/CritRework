@@ -558,9 +558,21 @@ Items: {
 		Tooltip:
 			'''
 			When applied to a weapon, this disables normal critical strikes
-			Instead, extra a soul from the struck enemy, storing the critical strike
+			Instead, extract a soul from the struck enemy, storing the critical strike
 			Upon using a different weapon, all stored souls will be released for critical damage
 			Up to 10 souls can be stored
+			'''
+	}
+
+	ThornRing: {
+		CanBeApplied: ""
+		DisplayName: Thorn Ring
+		Tooltip:
+			'''
+			When applied to a weapon, this disables normal critical strikes
+			Instead, critical strike damage will be dealt over the course of 3 seconds via thorns
+			When an enemy dies, their thorns will launch towards other foes
+			'Proceed.'
 			'''
 	}
 }
@@ -1678,6 +1690,7 @@ Projectiles: {
 	AutoMissileExplosion.DisplayName: Auto Missile
 	BigBoom.DisplayName: Big Boom
 	CriticalCurse.DisplayName: Critical Curse
+	Thorn.DisplayName: Thorn
 }
 
 BronzeHelm.SetBonus:

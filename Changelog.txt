@@ -5,6 +5,7 @@ Additions:
 -Added the Honeydipped Stinger an, augmentation which is crafted post-Queen Bee
 -Added the Pocket Lightning Rod, an augmentation which is found in the Underground Desert
 -Added the Boomstickifier, an augmentation sold by the demolotionist
+-Added the Thorn Ring, an augmentation crafted with wood (and a bit of blood...)
 -Added the Buckler, an augmentation found in golden chests
 -Added the Curser's Quill, an augmentation found in the Dungeon
 -Added a new weapon prefix, "Versatile," which allows you to put multiple augmentations on a weapon

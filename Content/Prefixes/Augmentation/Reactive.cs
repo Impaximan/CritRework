@@ -12,7 +12,7 @@ namespace CritRework.Content.Prefixes.Augmentation
 
         public override bool DeactivateAugmentation(Item weapon, Item augmentation, Player player, NPC npc = null)
         {
-            return player.TryGetModPlayer(out CritPlayer cPlayer) && cPlayer.timeSinceCrit > 180;
+            return player.TryGetModPlayer(out CritPlayer cPlayer) && (cPlayer.timeSinceCrit > 180 || cPlayer.timeSinceCrit == 0);
         }
 
         public override bool ConditionPrefix => true;
