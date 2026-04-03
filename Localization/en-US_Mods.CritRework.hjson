@@ -611,9 +611,16 @@ Items: {
 
 	ReclawPotion: {
 		DisplayName: Reclaw Potion
+		Tooltip: Increases consecutive critical strike damage by 20%
+	}
+
+	Apophis: {
+		CanBeApplied: ""
+		DisplayName: Apophis
 		Tooltip:
 			'''
-			Increases consecutive critical strike damage by 20%
+			When applied to a weapon, critical strikes will summon extremely powerful asteroids
+			The asteroids do not discriminate
 			'''
 	}
 }
@@ -1742,6 +1749,8 @@ Projectiles: {
 	BigBoom.DisplayName: Big Boom
 	CriticalCurse.DisplayName: Critical Curse
 	Thorn.DisplayName: Thorn
+	ApophisAsteroid.DisplayName: Apophis
+	TheExplosionThatKilledTheDinosaurs.DisplayName: The Explosion That Killed The Dinosaurs
 }
 
 BronzeHelm.SetBonus:

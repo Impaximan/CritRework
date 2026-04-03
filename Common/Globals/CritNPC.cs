@@ -236,6 +236,11 @@ namespace CritRework.Common.Globals
                 npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<AMPL>(), 12, 6));
             }
 
+            if (npc.type == NPCID.MeteorHead)
+            {
+                npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<Apophis>(), 1000, 500));
+            }
+
             if (npc.type == NPCID.Hornet)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<HoneydippedStinger>(), 500));
