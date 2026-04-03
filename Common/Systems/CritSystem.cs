@@ -20,6 +20,7 @@ namespace CritRework.Common.Systems
             tokens.Add(ModContent.ItemType<MetalPipeToken>(), 0.1f);
 
             int dungeonNum = 0;
+            int skyNum = WorldGen.genRand.Next(4);
             for (int i = 0; i < 1000; i++)
             {
                 Chest chest = Main.chest[i];
@@ -106,7 +107,7 @@ namespace CritRework.Common.Systems
 
                     if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 0 * 36) //Wooden chest
                     {
-                        if (WorldGen.genRand.NextBool(10))
+                        if (WorldGen.genRand.NextBool(14))
                         {
                             for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
                             {
@@ -371,6 +372,32 @@ namespace CritRework.Common.Systems
 
                     if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 13 * 36) //Skyware Chest
                     {
+                        skyNum++;
+
+                        if (skyNum % 4 == 0)
+                        {
+                            Item lastItem = null;
+
+                            for (int inventoryIndex = 1; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (lastItem != null)
+                                {
+                                    Item newLastItem = chest.item[inventoryIndex].Clone();
+                                    chest.item[inventoryIndex] = lastItem.Clone();
+                                    lastItem = newLastItem;
+                                }
+                                else
+                                {
+                                    lastItem = chest.item[inventoryIndex].Clone();
+                                    chest.item[inventoryIndex].SetDefaults(ItemID.None);
+                                }
+                            }
+
+                            chest.item[1].SetDefaults(ModContent.ItemType<Content.Items.Equipable.Accessories.WindWalker>());
+                            chest.item[1].Prefix(-1);
+                            chest.item[1].stack = 1;
+                        }
+
                         if (WorldGen.genRand.NextBool(3))
                         {
                             for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)

@@ -623,6 +623,14 @@ Items: {
 			The asteroids do not discriminate
 			'''
 	}
+
+	WindWalker: {
+		DisplayName: Windwalker
+		Tooltip:
+			'''
+			Critical strikes grant you a movement speed boost for 3 seconds
+			'''
+	}
 }
 
 Whetstone: {
@@ -1725,6 +1733,11 @@ Buffs: {
 	Reclaw: {
 		DisplayName: Reclaw
 		Description: 20% increased consecutive critical strike damage
+	}
+
+	WalkingWithTheWind: {
+		DisplayName: Walking With The Wind
+		Description: Greatly increased movement speed
 	}
 }
 

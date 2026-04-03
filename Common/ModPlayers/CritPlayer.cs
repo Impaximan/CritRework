@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.Graphics.CameraModifiers;
 using Terraria.DataStructures;
+using Terraria;
 
 namespace CritRework.Common.ModPlayers
 {
@@ -671,9 +672,33 @@ namespace CritRework.Common.ModPlayers
             }
         }
 
+        public override void PostUpdateRunSpeeds()
+        {
+            if (Player.HasBuff<WalkingWithTheWind>())
+            {
+                Player.accRunSpeed += 3f;
+            }
+        }
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             lastHitWasCrit = hit.Crit;
+
+            if (Player.HasEquip<WindWalker>() && hit.Crit)
+            {
+                if (!Player.HasBuff<WalkingWithTheWind>())
+                {
+                    CombatText.NewText(Player.getRect(), Color.LightCyan, "Zoom!", true);
+                    SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/Boost")
+                    {
+                        Volume = 1f,
+                        PitchVariance = 0.5f,
+                    }, Player.Center);
+
+                }
+
+                Player.AddBuff(ModContent.BuffType<WalkingWithTheWind>(), 60 * 3, false);
+            }
 
             if (Player.HasEquip<MugShot>() && hit.Crit && target.type != NPCID.TargetDummy)
             {
