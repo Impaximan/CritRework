@@ -231,7 +231,10 @@ namespace CritRework.Common.Globals
                         if (player.getRect().Modified((int)player.velocity.X, (int)player.velocity.Y, 0, 0).Intersects(target.getRect()) && hasGrappled)
                         {
                             projectile.timeLeft = 0;
-                            player.velocity = player.DirectionTo(target.Center) * -5f;
+                            if (player.Center != target.Center)
+                            {
+                                player.velocity = player.DirectionTo(target.Center) * -5f;
+                            }
                             player.velocity += target.velocity;
                             player.immune = true;
                             player.immuneTime += 10;

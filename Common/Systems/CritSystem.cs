@@ -26,6 +26,20 @@ namespace CritRework.Common.Systems
 
                 if (chest != null)
                 {
+                    if (WorldGen.genRand.NextBool(10))
+                    {
+                        for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                        {
+                            if (chest.item[inventoryIndex].type == ItemID.None)
+                            {
+                                chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Content.Items.Potions.ReclawPotion>());
+                                chest.item[inventoryIndex].GetGlobalItem<CritItem>().AddCritType(chest.item[inventoryIndex]);
+                                chest.item[inventoryIndex].stack = WorldGen.genRand.Next(1, 3);
+                                break;
+                            }
+                        }
+                    }
+
                     if (WorldGen.genRand.NextBool(4))
                     {
                         for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)

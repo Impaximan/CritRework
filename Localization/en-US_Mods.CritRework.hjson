@@ -572,7 +572,7 @@ Items: {
 			When applied to a weapon, this disables normal critical strikes
 			Instead, critical strike damage will be dealt over the course of 3 seconds via thorns
 			When an enemy dies, their thorns will launch towards other foes
-			'Proceed.'
+			'[c/fc0303:Proceed].'
 			'''
 	}
 
@@ -606,6 +606,14 @@ Items: {
 			When applied to a weapon, this disables normal critical strikes
 			Instead, gain mana in place of critically striking
 			Mana gained scales with critical strike power
+			'''
+	}
+
+	ReclawPotion: {
+		DisplayName: Reclaw Potion
+		Tooltip:
+			'''
+			Increases consecutive critical strike damage by 20%
 			'''
 	}
 }
@@ -1705,6 +1713,11 @@ Buffs: {
 	HuntersMark: {
 		DisplayName: Hunter's Mark
 		Description: Marked...
+	}
+
+	Reclaw: {
+		DisplayName: Reclaw
+		Description: 20% increased consecutive critical strike damage
 	}
 }
 

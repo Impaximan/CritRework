@@ -5,7 +5,7 @@ Additions:
 -Added the Honeydipped Stinger an, augmentation which is crafted post-Queen Bee
 -Added the Pocket Lightning Rod, an augmentation which is found in the Underground Desert
 -Added the Boomstickifier, an augmentation sold by the demolotionist
--Added the Thorn Ring, an augmentation crafted with wood (and a bit of blood...)
+-Added the Thorn Ring, an augmentation crafted with wood (and a bit of [HEART SHAPED OBJECT]...)
 -Added the Buckler, an augmentation found in golden chests
 -Added the Curser's Quill, an augmentation found in the Dungeon
 -Added the Hunter's Drawstring, an augmentation which is dropped by Skeleton Archers
@@ -13,9 +13,14 @@ Additions:
 -Added a new weapon prefix, "Versatile," which allows you to put multiple augmentations on a weapon
 -Added several new prefixes which can be given to augmentations, including prefixes which cause augmentations to only activate during certain conditions
 -Added a new material, the "Greenrprint," which drops from Lihzahrds in the Jungle Temple and can be used to create powerful, crit-powered constructs
+-Added Reclaw potions
+
+Changes
+-Starter Whetstones are no longer craftable (you only have the 2 that you started with now)
 
 Fixes
 -Updated hitbox for overgrown Vilethorn and Crystal Vile Shard to grow as intended
 -The Goblin Tinkerer will no longer make the hijack sound for items which cannot critically strike anyway
 -Fixed Dungeon loot from this mod not spawning properly
 -Fixed Prosthetic Arm damage bonus displaying incorrectly for the longest time
+-Fixed weapons critically reforged with the Web Covered Whetstone sometimes sending you away faster than the speed of light, causing you to clip out of the world entirely

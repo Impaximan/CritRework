@@ -14,14 +14,5 @@ namespace CritRework.Content.Items.Whetstones
             Item.value = Item.sellPrice(0, 0, 0, 50);
             Item.maxStack = 20;
         }
-
-        public override void AddRecipes()
-        {
-            CreateRecipe()
-                .AddIngredient(ItemID.StoneBlock, 10)
-                .AddRecipeGroup(RecipeGroupID.Wood, 10)
-                .AddTile(TileID.WorkBenches)
-                .Register();
-        }
     }
 }
