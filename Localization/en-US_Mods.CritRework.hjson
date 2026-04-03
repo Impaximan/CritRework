@@ -571,7 +571,7 @@ Items: {
 			'''
 			When applied to a weapon, this disables normal critical strikes
 			Instead, critical strike damage will be dealt over the course of 3 seconds via thorns
-			When an enemy dies, their thorns will launch towards other foes
+			When an enemy dies, their thorns will be launched towards other foes
 			'[c/fc0303:Proceed].'
 			'''
 	}
@@ -626,10 +626,7 @@ Items: {
 
 	WindWalker: {
 		DisplayName: Windwalker
-		Tooltip:
-			'''
-			Critical strikes grant you a movement speed boost for 3 seconds
-			'''
+		Tooltip: Critical strikes grant you a movement speed boost for 3 seconds
 	}
 }
 
@@ -1798,3 +1795,4 @@ Augmentation: {
 }
 
 RemoveAugmentation: Right click to remove augmentation
+StartingMessage: Mods.CritRework.StartingMessage

@@ -43,7 +43,7 @@ namespace CritRework.Content.Items.Augmentations
 
         public override void AugmentationOnHitNPC(Player Player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
         {
-            if (hit.Crit && projectile.type != ModContent.ProjectileType<ApophisAsteroid>() && cooldown <= 0)
+            if (hit.Crit && (projectile == null || projectile.type != ModContent.ProjectileType<ApophisAsteroid>()) && cooldown <= 0)
             {
                 SoundEngine.PlaySound(SoundID.Item88, target.Center);
                 cooldown = 30;
@@ -96,6 +96,7 @@ namespace CritRework.Content.Items.Augmentations
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
             modifiers.SourceDamage *= (float)Apophis.playerDamage / Projectile.damage;
+            modifiers.SetMaxDamage(target.statLifeMax2 / 2);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
@@ -126,6 +127,16 @@ namespace CritRework.Content.Items.Augmentations
 
             Projectile.tileCollide = Projectile.Bottom.Y > Projectile.ai[0];
             Projectile.rotation += MathHelper.Pi / Projectile.ai[1];
+        }
+
+
+        public override bool CanHitPlayer(Player target)
+        {
+            if (Projectile.alpha > 0)
+            {
+                return false;
+            }
+            return base.CanHitPlayer(target);
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -159,18 +170,10 @@ namespace CritRework.Content.Items.Augmentations
             Projectile.alpha = 255;
         }
 
-        public override bool CanHitPlayer(Player target)
-        {
-            if (Projectile.alpha > 0)
-            {
-                return false;
-            }
-            return base.CanHitPlayer(target);
-        }
-
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
             modifiers.SourceDamage *= (float)Apophis.playerDamage / Projectile.damage;
+            modifiers.SetMaxDamage(target.statLifeMax2 / 3);
         }
 
         public override bool? CanHitNPC(NPC target)

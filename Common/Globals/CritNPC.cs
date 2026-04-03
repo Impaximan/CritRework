@@ -95,7 +95,7 @@ namespace CritRework.Common.Globals
                 PitchVariance = 0.5f,
                 Pitch = -0.3f,
                 SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest,
-                MaxInstances = 10,
+                MaxInstances = 2,
                 Volume = 1.75f
             };
 
@@ -125,7 +125,7 @@ namespace CritRework.Common.Globals
                 PitchVariance = 0.5f,
                 Pitch = -0.3f,
                 SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest,
-                MaxInstances = 10,
+                MaxInstances = 2,
                 Volume = 1.75f
             };
 

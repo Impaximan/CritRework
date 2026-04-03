@@ -1,4 +1,5 @@
 ﻿using CritRework.Common.ModPlayers;
+using Microsoft.Xna.Framework.Content;
 using System;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -46,12 +47,6 @@ namespace CritRework.Content.Items.Augmentations
 
         public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
         {
-            if (target.type == NPCID.TargetDummy || target.SpawnedFromStatue)
-            {
-                return;
-            }
-
-            NPC.HitModifiers modifiers = new NPC.HitModifiers();
             if (player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target) && (projectile == null || projectile.type != ModContent.ProjectileType<Thorn>()))
             {
                 Projectile thorn = Projectile.NewProjectileDirect(new EntitySource_ItemUse(player, item), target.Center, Vector2.Zero, ModContent.ProjectileType<Thorn>(), hit.SourceDamage / 3, 0f, player.whoAmI);
@@ -59,8 +54,8 @@ namespace CritRework.Content.Items.Augmentations
                 thorn.ai[1] = Main.rand.NextFloat(MathHelper.TwoPi);
                 float maxDist = (target.width > target.height ? target.height : target.width) / 2;
                 thorn.ai[2] = Main.rand.NextFloat(maxDist / 3f, maxDist);
-                thorn.netUpdate = true;
                 thorn.SetAsAugmentCrit();
+                thorn.netUpdate = true;
             }
         }
     }
@@ -71,15 +66,16 @@ namespace CritRework.Content.Items.Augmentations
         {
             Projectile.width = 14;
             Projectile.height = 10;
-            Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 60;
             Projectile.tileCollide = false;
             Projectile.friendly = true;
             Projectile.hostile = false;
-            Projectile.timeLeft = 3000;
+            Projectile.timeLeft = 600;
             Projectile.penetrate = 3;
+            Projectile.localNPCHitCooldown = 60;
+            Projectile.usesLocalNPCImmunity = true;
         }
 
+        int counter = 0;
         public override void AI()
         {
             if (Projectile.ai[0] == -1 || !Main.npc[(int)Projectile.ai[0]].active)
@@ -102,6 +98,7 @@ namespace CritRework.Content.Items.Augmentations
                         Projectile.velocity *= Main.rand.Next(7, 12);
                     }
                     Projectile.timeLeft = 300;
+                    Projectile.usesLocalNPCImmunity = true;
                     Projectile.localNPCHitCooldown = -1;
                     Projectile.penetrate = 3;
                     Projectile.Center = npc.Center;
@@ -114,6 +111,7 @@ namespace CritRework.Content.Items.Augmentations
 
                 return;
             }
+
 
             NPC target = Main.npc[(int)Projectile.ai[0]];
 
@@ -133,7 +131,13 @@ namespace CritRework.Content.Items.Augmentations
             {
                 return null;
             }
-            return target.whoAmI == (int)Projectile.ai[0];
+
+            if (target.whoAmI == (int)Projectile.ai[0])
+            {
+                return null;    
+            }
+
+            return false;
         }
     }
 }

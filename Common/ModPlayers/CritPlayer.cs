@@ -13,6 +13,7 @@ using Terraria.Audio;
 using Terraria.Graphics.CameraModifiers;
 using Terraria.DataStructures;
 using Terraria;
+using Terraria.ModLoader.IO;
 
 namespace CritRework.Common.ModPlayers
 {
@@ -49,6 +50,7 @@ namespace CritRework.Common.ModPlayers
         public float consecutiveCriticalStrikeDamage = 1f;
         public int clockworkCounter = 0;
         public float bucklerPower = 0f;
+        public bool firstTimeSpawning = true;
 
         public List<Projectile> criticalCurses = new();
         public bool fireCriticalCurse = false;
@@ -85,6 +87,7 @@ namespace CritRework.Common.ModPlayers
         public List<string> accessoryEffects = new List<string>();
 
         public static LocalizedText scallywagText;
+        public static LocalizedText startingMessage;
 
         //Extra crit types
         public CritType? summonCrit = null;
@@ -93,11 +96,47 @@ namespace CritRework.Common.ModPlayers
         public CritType? EVILCrit = null;
         public ShadowDonut? shadowDonut = null;
 
+
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
             List<Item> list = new();
 
-            if (!mediumCoreDeath)
+            if (NameContains("Noelle"))
+            {
+                list.Add(new Item(ModContent.ItemType<ThornRing>()));
+            }
+
+            if (NameContains("Apophis") || NameContains("Cult"))
+            {
+                list.Add(new Item(ModContent.ItemType<Apophis>()));
+            }
+
+            if (NameContains("Benjamin Franklin") || NameContains("Ben Franklin"))
+            {
+                list.Add(new Item(ModContent.ItemType<PocketLightningRod>()));
+            }
+
+            if ((NameContains("Dark") && NameContains("Soul")) || NameContains("Undead"))
+            {
+                list.Add(new Item(ModContent.ItemType<Buckler>()));
+            }
+
+            if (NameContains("2020") || NameContains("2021") || NameContains("2022"))
+            {
+                list.Add(new Item(ModContent.ItemType<ManalyticConverter_Copper>()));
+            }
+
+            if (NameContains("Light Yagami") || NameContains("Kira ") || Player.name.ToLower() == "kira")
+            {
+                list.Add(new Item(ModContent.ItemType<CursersQuill>()));
+            }
+
+            if (NameContains("Jerry") || NameContains("Seinfeld"))
+            {
+                list.Add(new Item(ModContent.ItemType<CursersQuill>()));
+            }
+
+            if (!mediumCoreDeath && list.Count == 0)
             {
                 list.Add(new Item(ModContent.ItemType<StarterWhetstone>(), 2));
             }
@@ -105,9 +144,25 @@ namespace CritRework.Common.ModPlayers
             return list;
         }
 
+        public bool NameContains(string name)
+        {
+            return Player.name.ToLower().Contains(name.ToLower());
+        }
+
+        public override void SaveData(TagCompound tag)
+        {
+            tag.Add("firstTimeSpawning", firstTimeSpawning);
+        }
+
+        public override void LoadData(TagCompound tag)
+        {
+            firstTimeSpawning = tag.GetBool("firstTimeSpawning");
+        }
+
         public override void Load()
         {
             scallywagText = Mod.GetLocalization($"ScallywagText");
+            startingMessage = Mod.GetLocalization($"StartingMessage");
         }
 
         public override void ResetEffects()
@@ -168,6 +223,13 @@ namespace CritRework.Common.ModPlayers
             clockworkCounter++;
             if (noxiousEyeCooldown > 0) noxiousEyeCooldown--;
             UpdateSlotMachine();
+
+            if (firstTimeSpawning && Player.whoAmI == Main.myPlayer)
+            {
+                firstTimeSpawning = false;
+
+                Main.NewText(startingMessage.Value, Color.Yellow);
+            }
 
             if (Player.velocity.Length() <= 2f)
             {
