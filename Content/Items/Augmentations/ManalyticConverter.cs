@@ -22,7 +22,7 @@ namespace CritRework.Content.Items.Augmentations
             Item.height = 36;
             Item.UseSound = new SoundStyle("CritRework/Assets/Sounds/Zap")
             {
-                Volume = 1f,
+                Volume = 0.75f,
                 PitchVariance = 0.25f
             };
             Item.rare = ItemRarityID.Blue;

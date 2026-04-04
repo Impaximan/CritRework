@@ -10,7 +10,7 @@
 
         public override void SpecialPrefixHoldItem(Item item, Player player)
         {
-            player.AddBuff(BuffID.Poisoned, 1);
+            player.AddBuff(BuffID.OnFire, 1);
         }
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)

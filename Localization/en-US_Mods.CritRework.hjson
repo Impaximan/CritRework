@@ -628,6 +628,18 @@ Items: {
 		DisplayName: Windwalker
 		Tooltip: Critical strikes grant you a movement speed boost for 3 seconds
 	}
+
+	GearOfWar: {
+		CanBeApplied: Can only be applied to guns and magic staffs
+		DisplayName: Gear of War
+		Tooltip:
+			'''
+			Attaches a chainsaw to augmented arnament
+			Critically striking will rev the chainsaw to deal close-range damage
+			Accuracy greatly reduced while chainsaw is active
+			'Mankind might not be dead but this thing will bring it closer'
+			'''
+	}
 }
 
 Whetstone: {
@@ -1289,7 +1301,7 @@ CritTypes: {
 	HasDebuff: {
 		Description: Critically strikes while you are inflicted with a damage over time effect (such as On Fire!)
 		SpecialPrefixName: Vitriolic
-		SpecialPrefixTooltip1: Poisons you while held
+		SpecialPrefixTooltip1: Ignites you while held
 		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Can be applied to any weapon
 		BasicWhetstonePrefix: Stained
@@ -1761,6 +1773,7 @@ Projectiles: {
 	Thorn.DisplayName: Thorn
 	ApophisAsteroid.DisplayName: Apophis
 	TheExplosionThatKilledTheDinosaurs.DisplayName: The Explosion That Killed The Dinosaurs
+	SawedOn.DisplayName: Sawed On
 }
 
 BronzeHelm.SetBonus:

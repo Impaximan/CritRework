@@ -22,10 +22,10 @@ namespace CritRework
         [Range(0f, 2f)]
         public float critPower = 1f;
 
-        [DefaultValue(1f)]
+        [DefaultValue(1.3f)]
         [Increment(0.1f)]
         [Range(1f, 2f)]
-        public float bossLife = 1f;
+        public float bossLife = 1.3f;
 
         [DefaultValue(1f)]
         [Increment(0.1f)]

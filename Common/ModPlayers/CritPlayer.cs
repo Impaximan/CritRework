@@ -51,6 +51,7 @@ namespace CritRework.Common.ModPlayers
         public int clockworkCounter = 0;
         public float bucklerPower = 0f;
         public bool firstTimeSpawning = true;
+        public Projectile sawProjectile = null;
 
         public List<Projectile> criticalCurses = new();
         public bool fireCriticalCurse = false;
@@ -134,6 +135,11 @@ namespace CritRework.Common.ModPlayers
             if (NameContains("Jerry") || NameContains("Seinfeld"))
             {
                 list.Add(new Item(ModContent.ItemType<CursersQuill>()));
+            }
+
+            if ((NameContains("Ultra") && NameContains("Kill")) || NameContains("V1"))
+            {
+                list.Add(new Item(ModContent.ItemType<GearOfWar>()));
             }
 
             if (!mediumCoreDeath && list.Count == 0)
@@ -223,6 +229,11 @@ namespace CritRework.Common.ModPlayers
             clockworkCounter++;
             if (noxiousEyeCooldown > 0) noxiousEyeCooldown--;
             UpdateSlotMachine();
+
+            if (sawProjectile != null && !sawProjectile.active)
+            {
+                sawProjectile = null;
+            }
 
             if (firstTimeSpawning && Player.whoAmI == Main.myPlayer)
             {
@@ -464,6 +475,28 @@ namespace CritRework.Common.ModPlayers
         public override void ExtraJumpVisuals(ExtraJump jump)
         {
             timeFalling = 0;
+        }
+
+        public override void ModifyShootStats(Item item, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+        {
+            if (sawProjectile != null && sawProjectile.ai[0] > 0)
+            {
+                velocity = velocity.RotatedByRandom(MathHelper.ToRadians(30));
+            }
+        }
+
+        public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            if (item.TryGetAugmentation(out GearOfWar aug1) || item.TryGetAugmentation2(out GearOfWar aug2))
+            {
+                if (sawProjectile == null)
+                {
+                    Projectile saw = Projectile.NewProjectileDirect(new EntitySource_ItemUse(Player, item), Player.Center, Vector2.Zero, ModContent.ProjectileType<SawedOn>(), (int)(damage * 20f / item.useTime), 2f, Player.whoAmI);
+                    saw.DamageType = item.DamageType;
+                    sawProjectile = saw;
+                }
+            }
+            return base.Shoot(item, source, position, velocity, type, damage, knockback);
         }
 
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)

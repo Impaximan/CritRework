@@ -10,6 +10,7 @@ Additions:
 -Added the Curser's Quill, an augmentation found in the Dungeon
 -Added the Hunter's Drawstring, an augmentation which is dropped by Skeleton Archers
 -Added the Manalytic Converter, an augmentation crafted with Copper/Tin
+-Added the Gear of War, an augmentation crafted using Crimtane
 -Added Apophis, who does not discriminate
 -Added the Windwalker, an accessory found in Sky Chests
 -Added a new weapon prefix, "Versatile," which allows you to put multiple augmentations on a weapon
@@ -19,6 +20,8 @@ Additions:
 
 Changes
 -Starter Whetstones are no longer craftable (you only have the 2 that you started with now)
+-'Vitriolic' prefix now inflicts you with On Fire! instead of Poisoned
+-Boss HP multiplier is now 1.3x by default (can still be set down to 1)
 
 Fixes
 -Updated hitbox for overgrown Vilethorn and Crystal Vile Shard to grow as intended

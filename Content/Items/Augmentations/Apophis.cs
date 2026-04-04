@@ -48,7 +48,7 @@ namespace CritRework.Content.Items.Augmentations
                 SoundEngine.PlaySound(SoundID.Item88, target.Center);
                 cooldown = 30;
 
-                int damage = hit.Damage * 3;
+                int damage = hit.SourceDamage * 3;
                 if (item.useTime < cooldown)
                 {
                     damage = (int)(damage * (float)cooldown / item.useTime);
