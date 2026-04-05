@@ -10,13 +10,15 @@ Additions:
 -Added the Curser's Quill, an augmentation found in the Dungeon
 -Added the Hunter's Drawstring, an augmentation which is dropped by Skeleton Archers
 -Added the Manalytic Converter, an augmentation crafted with Copper/Tin
--Added the Gear of War, an augmentation crafted using Crimtane
+-Added the Blood Cog, an augmentation crafted using Crimtane
+-Added the Imperfect Storm, an augmentation crafted using Demonite
 -Added Apophis, who does not discriminate
 -Added the Windwalker, an accessory found in Sky Chests
 -Added a new weapon prefix, "Versatile," which allows you to put multiple augmentations on a weapon
 -Added several new prefixes which can be given to augmentations, including prefixes which cause augmentations to only activate during certain conditions
--Added a new material, the "Greenrprint," which drops from Lihzahrds in the Jungle Temple and can be used to create powerful, crit-powered constructs
+-Added a new material, the "Greenprint," which drops from Lihzahrds in the Jungle Temple and can be used to create powerful, crit-powered constructs
 -Added Reclaw potions
+-Added Horrificracker
 
 Changes
 -Starter Whetstones are no longer craftable (you only have the 2 that you started with now)

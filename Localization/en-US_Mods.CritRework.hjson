@@ -652,6 +652,16 @@ Items: {
 			'I am the storm that is approaching'
 			'''
 	}
+
+	Horrificracker: {
+		DisplayName: Horrificracker
+		Tooltip:
+			'''
+			Can be given a crit condition
+			While equipped, all minions will inherit this crit condition
+			Increases your max number of minions by 1
+			'''
+	}
 }
 
 Whetstone: {
