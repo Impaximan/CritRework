@@ -1,6 +1,7 @@
 ﻿using CritRework.Common.Globals;
 using System.Collections.Generic;
 using System;
+using CritRework.Content.Items.Augmentations;
 
 namespace CritRework.Content.Prefixes.Augmentation
 {
@@ -31,7 +32,7 @@ namespace CritRework.Content.Prefixes.Augmentation
 
         }
 
-        public sealed override void ModifyValue(ref float valueMult)
+        public override void ModifyValue(ref float valueMult)
         {
             float critDamageMult = 1f;
             float nonCritDamageMult = 1f;
@@ -58,7 +59,7 @@ namespace CritRework.Content.Prefixes.Augmentation
         public virtual bool ConditionPrefix => false;
 
 
-        public sealed override IEnumerable<TooltipLine> GetTooltipLines(Item item)
+        public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
         {
             if (item.TryGetGlobalItem(out CritItem c))
             {

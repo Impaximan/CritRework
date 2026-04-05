@@ -721,8 +721,32 @@ Prefixes: {
 	}
 
 	Clockwork: {
-		DisableCondition: Only active half the time- active for 2 seconds, then inactive for 2 seconds
+		DisableCondition: Only active half the time; active for 2 seconds, then inactive for 2 seconds
 		DisplayName: Clockwork
+	}
+
+	Intercontinental: {
+		tooltip: +Greatly increased explosion size
+		DisplayName: Intercontinental
+		tooltip2: Mods.CritRework.Prefixes.Intercontinental.tooltip2
+	}
+
+	Gradual: {
+		tooltip: +5 armor penetration for thorns
+		tooltip2: Thorns inflict their damage over a greater amount of time
+		DisplayName: Gradual
+	}
+
+	Apocalyptic: {
+		tooltip: Spawns more asteroids than normal
+		tooltip2: Mods.CritRework.Prefixes.Apocalyptic.tooltip2
+		DisplayName: Apocalyptic
+	}
+
+	Hoarding: {
+		tooltip: +5 maximum souls
+		tooltip2: Mods.CritRework.Prefixes.Hoarding.tooltip2
+		DisplayName: Hoarding
 	}
 }
 
@@ -1798,6 +1822,7 @@ Projectiles: {
 	SawedOn.DisplayName: Sawed On
 	Approach.DisplayName: Approach
 	Storm.DisplayName: Storm
+	IntercontinentalAutoMissileExplosion.DisplayName: Intercontinental Auto Missile Explosion
 }
 
 BronzeHelm.SetBonus:

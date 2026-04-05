@@ -54,7 +54,19 @@ namespace CritRework.Content.Items.Augmentations
                     damage = (int)(damage * (float)cooldown / item.useTime);
                 }
 
-                for (int i = 0; i < Main.rand.Next(1, 3); i++)
+                if (item.useTime > cooldown * 2)
+                {
+                    damage = (int)(damage * (float)(cooldown * 2f) / item.useTime);
+                }
+
+                int num = Main.rand.Next(1, 3);
+
+                if (Item.prefix == ModContent.PrefixType<Apocalyptic>())
+                {
+                    num++;
+                }
+
+                for (int i = 0; i < num; i++)
                 {
                     Projectile p = Projectile.NewProjectileDirect(new EntitySource_ItemUse(Player, Item), Player.Center + new Vector2(Main.rand.Next(-1000, 1000) + Player.velocity.X * 35, -Main.rand.Next(600, 1000)), new Vector2(Main.rand.Next(-5, 5), Main.rand.Next(10, 15)), ModContent.ProjectileType<ApophisAsteroid>(), damage, 10f, Player.whoAmI);
                     p.ai[0] = target.position.Y;
@@ -62,6 +74,18 @@ namespace CritRework.Content.Items.Augmentations
                     p.netUpdate = true;
                 }
             }
+        }
+    }
+
+    public class Apocalyptic : SpecialAugmentationPrefix<Apophis>
+    {
+        public override void AddExtraTooltipLines(Item item, ref List<TooltipLine> tooltips)
+        {
+            tooltips.Add(new TooltipLine(Mod, "ModfierApocalyptic", "• " + tooltip.Value)
+            {
+                IsModifier = true,
+                OverrideColor = new Color(102, 166, 226)
+            });
         }
     }
 

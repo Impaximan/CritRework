@@ -1,6 +1,7 @@
 ﻿using CritRework.Common.ModPlayers;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.DataStructures;
 
@@ -32,11 +33,18 @@ namespace CritRework.Content.Items.Augmentations
         }
 
         static float counter = 0f;
-        const int max = 10;
+        public int max = 10;
 
         public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
         {
             NPC.HitModifiers modifiers = new NPC.HitModifiers();
+
+            max = 10;
+            if (Item.prefix == ModContent.PrefixType<Hoarding>())
+            {
+                max = 15;
+            }
+
             if (player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target) && (projectile == null || projectile.type != ModContent.ProjectileType<CriticalCurse>()))
             {
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<CriticalCurse>()] < max)
@@ -55,6 +63,24 @@ namespace CritRework.Content.Items.Augmentations
                     if (maxed) player.DoManaRechargeEffect();
                 }
             }
+        }
+    }
+
+    public class Hoarding : SpecialAugmentationPrefix<CursersQuill>
+    {
+        public override void AddExtraTooltipLines(Item item, ref List<TooltipLine> tooltips)
+        {
+            tooltips.Add(new TooltipLine(Mod, "ModifierHoarding", tooltip.Value)
+            {
+                IsModifier = true,
+            });
+        }
+
+        public override void ModifyValue(ref float valueMult)
+        {
+            base.ModifyValue(ref valueMult);
+
+            valueMult *= 1.1f;
         }
     }
 

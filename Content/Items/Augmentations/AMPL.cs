@@ -1,5 +1,6 @@
 ﻿using CritRework.Common.ModPlayers;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.DataStructures;
 
@@ -53,6 +54,10 @@ namespace CritRework.Content.Items.Augmentations
                 Projectile missile = Projectile.NewProjectileDirect(new EntitySource_ItemUse(player, item), player.Center, new Vector2(0f, -12f), ModContent.ProjectileType<AutoMissile>(), hit.SourceDamage, 0f, player.whoAmI);
                 missile.ai[0] = target.whoAmI;
                 missile.netUpdate = true;
+                if (Item.prefix == ModContent.PrefixType<Intercontinental>())
+                {
+                    missile.ai[2] = 1;
+                }
                 missile.SetAsAugmentCrit();
             }
         }
@@ -150,7 +155,7 @@ namespace CritRework.Content.Items.Augmentations
         {
             if (Projectile.owner == Main.myPlayer)
             {
-                Projectile explosion = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<AutoMissileExplosion>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile explosion = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center, Projectile.velocity, Projectile.ai[2] == 0 ? ModContent.ProjectileType<AutoMissileExplosion>() : ModContent.ProjectileType<IntercontinentalAutoMissileExplosion>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 explosion.netUpdate = true;
             }
         }
@@ -184,6 +189,61 @@ namespace CritRework.Content.Items.Augmentations
             }
 
             SoundEngine.PlaySound(SoundID.Item62, Projectile.Center);
+        }
+    }
+
+    class Intercontinental : SpecialAugmentationPrefix<AMPL>
+    {
+        public override void AddExtraTooltipLines(Item item, ref List<TooltipLine> tooltips)
+        {
+            tooltips.Add(new TooltipLine(Mod, "PrefixBIG", tooltip.Value)
+            {
+                IsModifier = true,
+            });
+        }
+
+        public override void ModifyValue(ref float valueMult)
+        {
+            base.ModifyValue(ref valueMult);
+
+            valueMult *= 1.1f;
+        }
+    }
+
+    class IntercontinentalAutoMissileExplosion : ModProjectile
+    {
+        public override string Texture => "CritRework/Content/Items/Augmentations/AutoMissile";
+
+        public override void SetDefaults()
+        {
+            Projectile.width = 400;
+            Projectile.height = 400;
+            Projectile.DamageType = DamageClass.Ranged;
+            Projectile.timeLeft = 1;
+            Projectile.friendly = true;
+            Projectile.hostile = false;
+            Projectile.tileCollide = false;
+            Projectile.penetrate = -1;
+            Projectile.alpha = 255;
+        }
+
+        public override void AI()
+        {
+            for (int i = 0; i < 150; i++)
+            {
+                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.RedTorch);
+                dust.velocity = (dust.position - Projectile.Center) / 25f;
+                dust.noGravity = true;
+                dust.scale = 2f;
+            }
+
+            SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/Explosion")
+            {
+                Volume = 1f,
+                PitchVariance = 0.5f,
+                MaxInstances = 3,
+                Pitch = -0.5f
+            }, Projectile.Center);
         }
     }
 }

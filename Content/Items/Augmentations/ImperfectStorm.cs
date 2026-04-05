@@ -48,7 +48,7 @@ namespace CritRework.Content.Items.Augmentations
 
         public override bool CanApplyTo(Item weapon)
         {
-            return weapon.DamageType == DamageClass.Melee;
+            return weapon.DamageType.CountsAsClass(DamageClass.Melee);
         }
 
         public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)

@@ -136,4 +136,38 @@ namespace CritRework.Content.Items.Augmentations
             if (!CritRework.abbreviateAugmentationTooltip) tooltips.Insert(startingIndex + 2, new TooltipLine(Mod, "AugmentationTooltip2", tooltip2.Value));
         }
     }
+
+    public abstract class SpecialAugmentationPrefix<T> : AugmentationPrefix where T : Augmentation
+    {
+        public LocalizedText tooltip;
+        public LocalizedText tooltip2;
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+            tooltip = Mod.GetLocalization($"Prefixes.{GetType().Name}.tooltip");
+            tooltip2 = Mod.GetLocalization($"Prefixes.{GetType().Name}.tooltip2");
+        }
+
+        public override bool CanRoll(Item item)
+        {
+            return base.CanRoll(item) && item.ModItem is T;
+        }
+
+        public override float RollChance(Item item)
+        {
+            return 2f;
+        }
+
+        public sealed override IEnumerable<TooltipLine> GetTooltipLines(Item item)
+        {
+            List<TooltipLine> tooltips = [.. base.GetTooltipLines(item)];
+            AddExtraTooltipLines(item, ref tooltips);
+            return tooltips;
+        }
+
+        public virtual void AddExtraTooltipLines(Item item, ref List<TooltipLine> tooltips)
+        {
+
+        }
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using CritRework.Common.ModPlayers;
 using Microsoft.Xna.Framework.Content;
 using System;
+using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.DataStructures;
 
@@ -56,7 +57,36 @@ namespace CritRework.Content.Items.Augmentations
                 thorn.ai[2] = Main.rand.NextFloat(maxDist / 3f, maxDist);
                 thorn.SetAsAugmentCrit();
                 thorn.netUpdate = true;
+                if (Item.prefix == ModContent.PrefixType<Gradual>())
+                {
+                    thorn.localNPCHitCooldown = 120;
+                    thorn.ArmorPenetration = 5;
+                }
             }
+        }
+    }
+
+    public class Gradual : SpecialAugmentationPrefix<ThornRing>
+    {
+        public override void AddExtraTooltipLines(Item item, ref List<TooltipLine> tooltips)
+        {
+            tooltips.Add(new TooltipLine(Mod, "PrefixGradual", tooltip.Value)
+            {
+                IsModifier = true,
+            });
+
+            tooltips.Add(new TooltipLine(Mod, "PrefixGradual", "• " + tooltip2.Value)
+            {
+                IsModifier = true,
+                OverrideColor = new Color(102, 166, 226)
+            });
+        }
+
+        public override void ModifyValue(ref float valueMult)
+        {
+            base.ModifyValue(ref valueMult);
+
+            valueMult *= 1.1f;
         }
     }
 
@@ -85,7 +115,7 @@ namespace CritRework.Content.Items.Augmentations
                     NPC npc = Main.npc[(int)Projectile.ai[0]];
                     Projectile.ai[0] = -1;
 
-                    NPC newTarget = Projectile.FindTargetWithinRange(300, false);
+                    NPC newTarget = Projectile.FindTargetWithinRange(500, false);
                     if (newTarget != null)
                     {
                         Projectile.velocity = npc.DirectionTo(newTarget.Center);
