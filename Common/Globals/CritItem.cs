@@ -30,6 +30,7 @@ namespace CritRework.Common.Globals
         public static LocalizedText necromanticTooltip;
         public static LocalizedText unknownTooltip;
         public static LocalizedText unableTooltip;
+        public static LocalizedText sawDamageReduced;
 
         public static LocalizedText pirateHatTooltip;
         public static LocalizedText pirateShirtTooltip;
@@ -71,6 +72,7 @@ namespace CritRework.Common.Globals
             pirateBonus = Mod.GetLocalization($"PirateSetBonus");
             prostheticTooltip = Mod.GetLocalization($"ProstheticTooltip");
             removeAugmentation = Mod.GetLocalization($"RemoveAugmentation");
+            sawDamageReduced = Mod.GetLocalization($"sawDamageReduced");
         }
 
         public override void NetSend(Item item, BinaryWriter writer)
@@ -781,6 +783,7 @@ namespace CritRework.Common.Globals
                 if (augmentation2 != null) tooltips.Insert(1, new TooltipLine(Mod, "Augmentation2", "Has augmentation: " + ItemTagHandler.GenerateTag(augmentation2.Item) + " " + $" [c/{ItemRarity.GetColor(augmentation2.Item.rare).Hex3()}:" + augmentation2.Item.AffixName() + "]"));
                 tooltips.Insert(1, new TooltipLine(Mod, "Augmentation", "Has augmentation: " + ItemTagHandler.GenerateTag(augmentation.Item) + " " + $" [c/{ItemRarity.GetColor(augmentation.Item.rare).Hex3()}:" + augmentation.Item.AffixName() + "]"));
 
+                //Augmentation tooltip
                 if (Main.keyState.IsKeyDown(Keys.LeftAlt))
                 {
                     tooltips.Clear();
@@ -794,7 +797,7 @@ namespace CritRework.Common.Globals
 
                     tooltips.Add(new TooltipLine(Mod, "AugmentationName", $"[c/{ItemRarity.GetColor(item.rare).Hex3()}:Augmentation: ]" + ItemTagHandler.GenerateTag(usedAugmentation.Item) + " " + $"[c/{ItemRarity.GetColor(usedAugmentation.Item.rare).Hex3()}:" + usedAugmentation.Item.AffixName() + "]"));
 
-                    tooltips.Add(new TooltipLine(Mod, "AugmentationCanBeAppliedTo", Mod.GetLocalization($"Items.{usedAugmentation.GetType().Name}.CanBeApplied").Value));
+                    //tooltips.Add(new TooltipLine(Mod, "AugmentationCanBeAppliedTo", Mod.GetLocalization($"Items.{usedAugmentation.GetType().Name}.CanBeApplied").Value));
 
                     for (int i = 0; i < usedAugmentation.Item.ToolTip.Lines; i++)
                     {
@@ -811,6 +814,15 @@ namespace CritRework.Common.Globals
                     {
                         OverrideColor = Color.Yellow
                     });
+
+                    if ((augmentation is BloodCog || augmentation2 is BloodCog) && critType is CloseToFoe)
+                    {
+                        tooltips.Add(new TooltipLine(Mod, "SawDamageReduced", sawDamageReduced.Value)
+                        {
+                            IsModifier = true,
+                            IsModifierBad = true
+                        });
+                    }
 
                     return;
                 }
@@ -1151,6 +1163,15 @@ namespace CritRework.Common.Globals
                 tooltips.Add(new TooltipLine(Mod, "SpecialModifier2_Summon", critPlayer.summonCrit.specialPrefixTooltip2.Value)
                 {
                     IsModifier = true,
+                });
+            }
+
+            if ((augmentation is BloodCog || augmentation2 is BloodCog) && critType is CloseToFoe)
+            {
+                tooltips.Add(new TooltipLine(Mod, "SawDamageReduced", sawDamageReduced.Value)
+                {
+                    IsModifier = true,
+                    IsModifierBad = true
                 });
             }
         }

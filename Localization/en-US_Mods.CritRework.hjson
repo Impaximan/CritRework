@@ -629,15 +629,27 @@ Items: {
 		Tooltip: Critical strikes grant you a movement speed boost for 3 seconds
 	}
 
-	GearOfWar: {
+	BloodCog: {
 		CanBeApplied: Can only be applied to guns and magic staffs
-		DisplayName: Gear of War
+		DisplayName: Blood Cog
 		Tooltip:
 			'''
-			Attaches a chainsaw to augmented arnament
+			Attaches a chainsaw to augmented arnament, decreasing accuracy
 			Critically striking will rev the chainsaw to deal close-range damage
 			Accuracy greatly reduced while chainsaw is active
-			'Mankind might not be dead but this thing will bring it closer'
+			'Mankind might not be dead but this thing will make us deader'
+			'''
+	}
+
+	ImperfectStorm: {
+		CanBeApplied: Can only be applied to melee weapons
+		DisplayName: Imperfect Storm
+		Tooltip:
+			'''
+			When applied to a weapon, this disables normal critical strikes
+			Instead, when not critically striking, prepare up to 20 reality slices
+			When you would normally critically strike, cut at every slice at once for critical damage
+			'I am the storm that is approaching'
 			'''
 	}
 }
@@ -1774,6 +1786,8 @@ Projectiles: {
 	ApophisAsteroid.DisplayName: Apophis
 	TheExplosionThatKilledTheDinosaurs.DisplayName: The Explosion That Killed The Dinosaurs
 	SawedOn.DisplayName: Sawed On
+	Approach.DisplayName: Approach
+	Storm.DisplayName: Storm
 }
 
 BronzeHelm.SetBonus:
@@ -1809,3 +1823,4 @@ Augmentation: {
 
 RemoveAugmentation: Right click to remove augmentation
 StartingMessage: Mods.CritRework.StartingMessage
+sawDamageReduced: -Chainsaw damage greatly reduced by this critical strike condition

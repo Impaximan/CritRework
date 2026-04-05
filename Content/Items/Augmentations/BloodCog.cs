@@ -1,5 +1,6 @@
 ﻿using CritRework.Common.Globals;
 using CritRework.Common.ModPlayers;
+using CritRework.Content.Items.Materials;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -7,14 +8,30 @@ using Terraria.Graphics.CameraModifiers;
 
 namespace CritRework.Content.Items.Augmentations
 {
-    public class GearOfWar : Augmentation
+    public class BloodCog : Augmentation
     {
         public override void AddRecipes()
         {
             CreateRecipe()
                 .AddIngredient(ItemID.CrimtaneBar, 10)
-                .AddRecipeGroup(RecipeGroupID.IronBar, 10)
-                .AddIngredient(ItemID.TissueSample, 5);
+                .AddRecipeGroup(RecipeGroupID.IronBar, 5)
+                .AddIngredient(ModContent.ItemType<BronzeAlloy>(), 3)
+                .AddTile(TileID.Anvils)
+                .Register();
+
+            CreateRecipe()
+                .AddIngredient(ItemID.DemoniteBar, 15)
+                .AddIngredient(ItemID.AdamantiteBar, 10)
+                .AddIngredient(ItemID.SoulofNight, 5)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
+
+            CreateRecipe()
+                .AddIngredient(ItemID.DemoniteBar, 15)
+                .AddIngredient(ItemID.TitaniumBar, 10)
+                .AddIngredient(ItemID.SoulofLight, 5)
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
         }
 
         public override void SetDefaults()
@@ -22,13 +39,13 @@ namespace CritRework.Content.Items.Augmentations
             Item.width = 24;
             Item.height = 34;
             Item.UseSound = SoundID.Item22;
-            Item.rare = ItemRarityID.Blue;
-            Item.value = Item.buyPrice(0, 4, 0, 0);
+            Item.rare = ItemRarityID.Orange;
+            Item.value = Item.sellPrice(0, 2, 0, 0);
         }
 
         public override bool CanApplyTo(Item weapon)
         {
-            return (weapon.useAmmo == AmmoID.Bullet || Item.staff[weapon.type]) && weapon.useStyle == ItemUseStyleID.Shoot && !weapon.channel;
+            return (weapon.useAmmo == AmmoID.Bullet || Item.staff[weapon.type] || ItemID.Sets.IsSpaceGun[Type] || weapon.type == ItemID.SpaceGun || weapon.type == ItemID.AquaScepter) && weapon.useStyle == ItemUseStyleID.Shoot && !weapon.channel;
         }
 
         public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
@@ -44,7 +61,7 @@ namespace CritRework.Content.Items.Augmentations
                 {
                     float damageMult = CritType.CalculateActualCritMult(critType, item, player);
                     if (critPlayer.sawProjectile.ai[0] <= 0) SoundEngine.PlaySound(SoundID.Item23, critPlayer.sawProjectile.Center);
-                    critPlayer.sawProjectile.ai[0] = 20 * damageMult + item.useTime;
+                    critPlayer.sawProjectile.ai[0] = 100 * (damageMult - 1f) + item.useTime;
                     critPlayer.sawProjectile.netUpdate = true;
                 }
             }
@@ -111,7 +128,7 @@ namespace CritRework.Content.Items.Augmentations
             critPlayer.sawProjectile = Projectile;
 
             Projectile.rotation = player.itemRotation + (Projectile.direction == -1 ? MathHelper.Pi : 0f);
-            Projectile.Center = player.itemLocation + Projectile.rotation.ToRotationVector2() * (player.itemWidth + 20f) * player.direction;
+            Projectile.Center = player.Center + (Projectile.rotation.ToRotationVector2() * (player.itemWidth + 20f) * player.direction).RotatedBy(MathHelper.ToRadians(-2 * player.direction));
 
             if (Projectile.ai[0] > 0)
             {

@@ -14,6 +14,7 @@ using Terraria.Graphics.CameraModifiers;
 using Terraria.DataStructures;
 using Terraria;
 using Terraria.ModLoader.IO;
+using CritRework.Content.CritTypes.RandomPool;
 
 namespace CritRework.Common.ModPlayers
 {
@@ -55,6 +56,10 @@ namespace CritRework.Common.ModPlayers
 
         public List<Projectile> criticalCurses = new();
         public bool fireCriticalCurse = false;
+
+        public List<Projectile> approaches = new();
+        public bool slashApproach = false;
+        public int slashDamage = 0;
 
         private bool lastHitWasCrit = false;
 
@@ -139,7 +144,7 @@ namespace CritRework.Common.ModPlayers
 
             if ((NameContains("Ultra") && NameContains("Kill")) || NameContains("V1"))
             {
-                list.Add(new Item(ModContent.ItemType<GearOfWar>()));
+                list.Add(new Item(ModContent.ItemType<BloodCog>()));
             }
 
             if (!mediumCoreDeath && list.Count == 0)
@@ -406,6 +411,7 @@ namespace CritRework.Common.ModPlayers
 
         int lastHealth = 1000;
         int curseCounter = 0;
+        int approachCounter = 0;
         public override void PostUpdateMiscEffects()
         {
             int diff = Player.statLife - lastHealth;
@@ -465,6 +471,49 @@ namespace CritRework.Common.ModPlayers
                     }
                 }
             }
+
+            if (slashApproach && Player.whoAmI == Main.myPlayer)
+            {
+                approachCounter++;
+                if (approachCounter >= 2)
+                {
+                    approachCounter = 0;
+
+                    EndApproach:
+
+                    if (approaches.Count <= 0)
+                    {
+                        slashApproach = false;
+                    }
+                    else
+                    {
+                        while (approaches.Count > 0 && (approaches[0] == null || !approaches[0].active))
+                        {
+                            approaches.RemoveAt(0);
+                        }
+
+                        if (approaches.Count <= 0)
+                        {
+                            goto EndApproach;
+                        }
+
+                        approaches[0].ai[0] = 1;
+                        approaches[0].netUpdate = true;
+
+                        float speed = 30f;
+                        float rotation = approaches[0].rotation;
+
+                        Projectile slash = Projectile.NewProjectileDirect(new EntitySource_Parent(approaches[0]), rotation.ToRotationVector2() * speed * -7.5f + approaches[0].Center,
+                            rotation.ToRotationVector2() * speed,
+                            ModContent.ProjectileType<Storm>(), approaches[0].damage, 0f, Player.whoAmI);
+
+                        slash.SetAsAugmentCrit();
+                        slash.netUpdate = true;
+
+                        approaches.RemoveAt(0);
+                    }
+                }
+            }
         }
 
         public override void OnConsumeAmmo(Item weapon, Item ammo)
@@ -479,19 +528,46 @@ namespace CritRework.Common.ModPlayers
 
         public override void ModifyShootStats(Item item, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-            if (sawProjectile != null && sawProjectile.ai[0] > 0)
+            if (item.TryGetAugmentation(out BloodCog _) || item.TryGetAugmentation2(out BloodCog _))
             {
-                velocity = velocity.RotatedByRandom(MathHelper.ToRadians(30));
+                velocity = velocity.RotatedByRandom(MathHelper.ToRadians(sawProjectile != null && sawProjectile.ai[0] > 0 ? 40 : 15));
             }
         }
 
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (item.TryGetAugmentation(out GearOfWar aug1) || item.TryGetAugmentation2(out GearOfWar aug2))
+            if (item.TryGetAugmentation(out BloodCog aug1) || item.TryGetAugmentation2(out BloodCog aug2))
             {
                 if (sawProjectile == null)
                 {
-                    Projectile saw = Projectile.NewProjectileDirect(new EntitySource_ItemUse(Player, item), Player.Center, Vector2.Zero, ModContent.ProjectileType<SawedOn>(), (int)(damage * 20f / item.useTime), 2f, Player.whoAmI);
+                    float rarityMult = 1f;
+
+                    if (item.OriginalRarity > ItemRarityID.Orange)
+                    {
+                        rarityMult = 1.3f;
+                    }
+
+                    if (item.OriginalRarity > ItemRarityID.Lime)
+                    {
+                        rarityMult = 1.7f;
+                    }
+
+                    if (new List<int>() { 
+                        ItemID.Shotgun, 
+                        ItemID.Boomstick, 
+                        ItemID.QuadBarrelShotgun, 
+                        ItemID.OnyxBlaster }
+                    .Contains(item.type))
+                    {
+                        rarityMult *= 2f;
+                    }
+
+                    if (item.GetGlobalItem<CritItem>().critType is CloseToFoe)
+                    {
+                        rarityMult /= 6f;
+                    }
+
+                    Projectile saw = Projectile.NewProjectileDirect(new EntitySource_ItemUse(Player, item), Player.Center, Vector2.Zero, ModContent.ProjectileType<SawedOn>(), (int)(damage * 20f * rarityMult / item.useTime), 2f, Player.whoAmI);
                     saw.DamageType = item.DamageType;
                     sawProjectile = saw;
                 }
