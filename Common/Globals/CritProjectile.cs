@@ -45,10 +45,10 @@ namespace CritRework.Common.Globals
                 npcsHit.Add(target);
             }
 
-            if (fromNecromantic && hit.Crit && !owner.moonLeech)
-            {
-                owner.Heal(Content.Prefixes.Weapon.Necromantic.healAmount);
-            }
+            //if (fromNecromantic && hit.Crit && !owner.moonLeech)
+            //{
+            //    owner.Heal(Content.Prefixes.Weapon.Necromantic.healAmount);
+            //}
 
             if (fromPoisonedHand && hit.Crit)
             {
@@ -299,10 +299,10 @@ namespace CritRework.Common.Globals
                 fromPoisonedHand = true;
             }
 
-            if (item.prefix == ModContent.PrefixType<Content.Prefixes.Weapon.Necromantic>())
-            {
-                fromNecromantic = true;
-            }
+            //if (item.prefix == ModContent.PrefixType<Content.Prefixes.Weapon.Necromantic>())
+            //{
+            //    fromNecromantic = true;
+            //}
 
             if (item.type == ItemID.Trident && item.IsSpecial(player))
             {

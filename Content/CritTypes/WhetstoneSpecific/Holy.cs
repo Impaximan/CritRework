@@ -6,7 +6,7 @@ namespace CritRework.Content.CritTypes.WhetstoneSpecific
     {
         public override bool InRandomPool => false;
 
-        public override float GetDamageMult(Player Player, Item Item) => 4.5f;
+        public override float GetDamageMult(Player Player, Item Item) => 3f;
 
         public override void SpecialPrefixOnHitNPC(Item item, Player player, Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {

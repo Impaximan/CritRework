@@ -372,10 +372,10 @@ namespace CritRework.Common.Globals
 
         public override void OnHitNPC(Item item, Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (hit.Crit && item.prefix == ModContent.PrefixType<Content.Prefixes.Weapon.Necromantic>() && !player.moonLeech)
-            {
-                player.Heal(Content.Prefixes.Weapon.Necromantic.healAmount);
-            }
+            //if (hit.Crit && item.prefix == ModContent.PrefixType<Content.Prefixes.Weapon.Necromantic>() && !player.moonLeech)
+            //{
+            //    player.Heal(Content.Prefixes.Weapon.Necromantic.healAmount);
+            //}
 
             if (item.IsSpecial(player) && item.TryGetCritType(out CritType critType))
             {
@@ -1145,14 +1145,14 @@ namespace CritRework.Common.Globals
                 }
             }
 
-            if (item.prefix == ModContent.PrefixType<Content.Prefixes.Weapon.Necromantic>())
-            {
-                int i = tooltips.FindIndex(x => x.Name == "PrefixCritChance");
-                tooltips.Insert(i + 1, new TooltipLine(Mod, "PrefixNecromantic", necromanticTooltip.Value)
-                {
-                    IsModifier = true,
-                });
-            }
+            //if (item.prefix == ModContent.PrefixType<Content.Prefixes.Weapon.Necromantic>())
+            //{
+            //    int i = tooltips.FindIndex(x => x.Name == "PrefixCritChance");
+            //    tooltips.Insert(i + 1, new TooltipLine(Mod, "PrefixNecromantic", necromanticTooltip.Value)
+            //    {
+            //        IsModifier = true,
+            //    });
+            //}
 
             if (critPlayer.summonSpecial && item.DamageType == DamageClass.Summon)
             {

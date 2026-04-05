@@ -1,4 +1,5 @@
-﻿using System.Security.Policy;
+﻿using System.Collections.Generic;
+using System.Security.Policy;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -82,6 +83,25 @@ namespace CritRework.Content.Items.Augmentations
             get
             {
                 return Main.npc[(int)Projectile.ai[2]];
+            }
+        }
+
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            List<int> resistantEnemies = new()
+            {
+                NPCID.TheDestroyer,
+                NPCID.TheDestroyerBody,
+                NPCID.TheDestroyerTail,
+                NPCID.EaterofWorldsHead,
+                NPCID.EaterofWorldsBody,
+                NPCID.EaterofWorldsTail,
+                NPCID.Creeper
+            };
+
+            if (resistantEnemies.Contains(target.type))
+            {
+                modifiers.SourceDamage /= 3f;
             }
         }
 

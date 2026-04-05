@@ -567,7 +567,7 @@ namespace CritRework.Common.ModPlayers
                         rarityMult /= 6f;
                     }
 
-                    Projectile saw = Projectile.NewProjectileDirect(new EntitySource_ItemUse(Player, item), Player.Center, Vector2.Zero, ModContent.ProjectileType<SawedOn>(), (int)(damage * 20f * rarityMult / item.useTime), 2f, Player.whoAmI);
+                    Projectile saw = Projectile.NewProjectileDirect(new EntitySource_ItemUse(Player, item), Player.Center, Vector2.Zero, ModContent.ProjectileType<SawedOn>(), (int)(damage * 12f * rarityMult / item.useTime), 2f, Player.whoAmI);
                     saw.DamageType = item.DamageType;
                     sawProjectile = saw;
                 }

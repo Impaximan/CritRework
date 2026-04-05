@@ -30,6 +30,15 @@ namespace CritRework.Content.Items.Augmentations
             return true;
         }
 
+        public override void HoldItem(Player player)
+        {
+            if (cooldown > 0)
+            {
+                cooldown--;
+            }
+        }
+
+        int cooldown = 0;
         static float counter = 0f;
 
         public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
@@ -52,16 +61,20 @@ namespace CritRework.Content.Items.Augmentations
                     Volume = 1.5f
                 }, target.Center);
 
-                counter += (damageMult - 1f) * 2.5f; //The amount healed per crit
-
-                if ((int)counter > 0)
+                if (cooldown <= 0)
                 {
-                    if (!player.moonLeech)
+                    cooldown = 15;
+                    counter += (damageMult - 1f) * 3f; //The amount healed per crit
+
+                    if ((int)counter > 0)
                     {
-                        player.Heal((int)counter);
-                        if (Main.netMode != NetmodeID.SinglePlayer) NetMessage.SendData(MessageID.PlayerHeal, number: player.whoAmI, number2: (int)counter);
+                        if (!player.moonLeech)
+                        {
+                            player.Heal((int)counter);
+                            if (Main.netMode != NetmodeID.SinglePlayer) NetMessage.SendData(MessageID.PlayerHeal, number: player.whoAmI, number2: (int)counter);
+                        }
+                        counter -= (int)counter;
                     }
-                    counter -= (int)counter;
                 }
             }
         }

@@ -24,6 +24,8 @@ Changes
 -Starter Whetstones are no longer craftable (you only have the 2 that you started with now)
 -'Vitriolic' prefix now inflicts you with On Fire! instead of Poisoned
 -Boss HP multiplier is now 1.3x by default (can still be set down to 1)
+-Reduced damage multiplier of holy whetstone
+-Removed "Necromantic" prefix
 
 Fixes
 -Updated hitbox for overgrown Vilethorn and Crystal Vile Shard to grow as intended

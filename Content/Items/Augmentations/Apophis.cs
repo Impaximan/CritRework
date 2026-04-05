@@ -30,7 +30,7 @@ namespace CritRework.Content.Items.Augmentations
             Item.value = Item.sellPrice(0, 10, 0, 0);
         }
 
-        public const int playerDamage = 30;
+        public const int playerDamage = 35;
 
         static int cooldown = 0;
         public override void HoldItem(Player player)
@@ -48,7 +48,7 @@ namespace CritRework.Content.Items.Augmentations
                 SoundEngine.PlaySound(SoundID.Item88, target.Center);
                 cooldown = 30;
 
-                int damage = hit.SourceDamage * 3;
+                int damage = (int)(hit.SourceDamage * 2.5f);
                 if (item.useTime < cooldown)
                 {
                     damage = (int)(damage * (float)cooldown / item.useTime);
@@ -184,6 +184,21 @@ namespace CritRework.Content.Items.Augmentations
             }
 
             return base.CanHitNPC(target);
+        }
+
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            List<int> resistantEnemies = new()
+            {
+                NPCID.TheDestroyer,
+                NPCID.TheDestroyerBody,
+                NPCID.TheDestroyerTail,
+            };
+
+            if (resistantEnemies.Contains(target.type))
+            {
+                modifiers.SourceDamage /= 12f;
+            }
         }
 
         int timeActive = 0;
