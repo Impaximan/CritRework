@@ -662,6 +662,15 @@ Items: {
 			Increases your max number of minions by 1
 			'''
 	}
+
+	GildedRemains: {
+		DisplayName: Gilded Remains
+		Tooltip:
+			'''
+			Only active while favorited
+			While active, eforging an item at the Goblin Tinkerer cannot change an item's critical stike condition
+			'''
+	}
 }
 
 Whetstone: {

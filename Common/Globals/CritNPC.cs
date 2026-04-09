@@ -75,6 +75,7 @@ namespace CritRework.Common.Globals
             if (shop.NpcType == NPCID.Pirate)
             {
                 shop.Add<WiseCracker>();
+                shop.Add<GildedRemains>();
             }
 
             if (shop.NpcType == NPCID.SkeletonMerchant)

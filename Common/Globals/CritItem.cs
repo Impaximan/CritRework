@@ -307,7 +307,7 @@ namespace CritRework.Common.Globals
 
         public override void PostReforge(Item item)
         {
-            if (Main.rand.NextFloat() < CritRework.randomHijackChance)
+            if (Main.rand.NextFloat() < CritRework.randomHijackChance && !Main.LocalPlayer.HasEquip<GildedRemains>())
             {
                 AddCritType(item);
 
