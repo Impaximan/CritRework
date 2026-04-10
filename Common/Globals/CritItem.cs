@@ -190,6 +190,11 @@ namespace CritRework.Common.Globals
             {
                 crit += 25;
             }
+
+            if (player.HasEquip<ContaminatedSapling>())
+            {
+                crit += 12 * augmentations.Count;
+            }
         }
 
 

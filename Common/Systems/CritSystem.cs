@@ -12,12 +12,14 @@ namespace CritRework.Common.Systems
         public override void PostWorldGen()
         {
             WeightedRandom<int> tokens = new(WorldGen.genRand);
-            tokens.Add(ModContent.ItemType<OrchestraToken>(), 0.5f);
-            tokens.Add(ModContent.ItemType<RockToken>(), 0.8f);
+            tokens.Add(ModContent.ItemType<OrchestraToken>(), 0.6f);
+            tokens.Add(ModContent.ItemType<RockToken>(), 0.6f);
             tokens.Add(ModContent.ItemType<BoxingToken>(), 1f);
-            tokens.Add(ModContent.ItemType<DuckyToken>(), 1f);
-            tokens.Add(ModContent.ItemType<BoneToken>(), 0.8f);
+            tokens.Add(ModContent.ItemType<DuckyToken>(), 0.6f);
+            tokens.Add(ModContent.ItemType<BoneToken>(), 0.9f);
             tokens.Add(ModContent.ItemType<MetalPipeToken>(), 0.1f);
+            tokens.Add(ModContent.ItemType<RainToken>(), 0.7f);
+            tokens.Add(ModContent.ItemType<HomunculusToken>(), 0.7f);
 
             int dungeonNum = 0;
             int skyNum = WorldGen.genRand.Next(4);

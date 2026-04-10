@@ -13,7 +13,7 @@ namespace CritRework.Content.Items
         {
             Item.width = 18;
             Item.height = 16;
-            Item.value = Item.sellPrice(0, 20, 0, 0);
+            Item.value = Item.sellPrice(0, 8, 0, 0);
             Item.rare = ItemRarityID.Yellow;
             Item.maxStack = 9999;
         }

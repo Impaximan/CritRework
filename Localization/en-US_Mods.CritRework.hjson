@@ -692,6 +692,25 @@ Items: {
 			Both crit conditions must be met to critically strike
 			'''
 	}
+
+	ContaminatedSapling: {
+		DisplayName: Contaminated Sapling
+		Tooltip:
+			'''
+			12% increased critical strike chance per augmentation on a given weapon
+			'Seed will rock you'
+			'''
+	}
+
+	RainToken: {
+		DisplayName: Risky Token
+		Tooltip: Makes a familiar sound on critical strike
+	}
+
+	HomunculusToken: {
+		DisplayName: Homunculus Token
+		Tooltip: Makes a familiar sound on critical strike
+	}
 }
 
 Whetstone: {
