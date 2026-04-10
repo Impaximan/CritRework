@@ -33,10 +33,9 @@ namespace CritRework.Content.Prefixes.Weapon
         {
             List<TooltipLine> lines =
             [
-                new TooltipLine(Mod, "PrefixSpecial", "• " + description.Value)
+                new TooltipLine(Mod, "PrefixSpecial", "+" + description.Value)
                 {
-                    IsModifier = true,
-                    OverrideColor = new Color(102, 166, 226)
+                    IsModifier = true
                 },
             ];
 

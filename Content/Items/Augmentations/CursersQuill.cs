@@ -27,7 +27,7 @@ namespace CritRework.Content.Items.Augmentations
             Item.value = Item.sellPrice(0, 5, 0, 0);
         }
 
-        public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
+         public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers? modifiers, CritType critType, NPC target)
         {
             return true;
         }
@@ -35,7 +35,7 @@ namespace CritRework.Content.Items.Augmentations
         static float counter = 0f;
         public int max = 10;
 
-        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
+        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target, bool critCondition)
         {
             NPC.HitModifiers modifiers = new NPC.HitModifiers();
 
@@ -45,7 +45,7 @@ namespace CritRework.Content.Items.Augmentations
                 max = 15;
             }
 
-            if (player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target) && (projectile == null || projectile.type != ModContent.ProjectileType<CriticalCurse>()))
+            if (critCondition && (projectile == null || projectile.type != ModContent.ProjectileType<CriticalCurse>()))
             {
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<CriticalCurse>()] < max)
                 {

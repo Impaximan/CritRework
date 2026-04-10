@@ -41,7 +41,7 @@ namespace CritRework.Content.Items.Augmentations
             }
         }
 
-        public override void AugmentationOnHitNPC(Player Player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
+        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target, bool critCondition)
         {
             if (hit.Crit && (projectile == null || projectile.type != ModContent.ProjectileType<ApophisAsteroid>()) && cooldown <= 0)
             {
@@ -68,7 +68,7 @@ namespace CritRework.Content.Items.Augmentations
 
                 for (int i = 0; i < num; i++)
                 {
-                    Projectile p = Projectile.NewProjectileDirect(new EntitySource_ItemUse(Player, Item), Player.Center + new Vector2(Main.rand.Next(-1000, 1000) + Player.velocity.X * 35, -Main.rand.Next(600, 1000)), new Vector2(Main.rand.Next(-5, 5), Main.rand.Next(10, 15)), ModContent.ProjectileType<ApophisAsteroid>(), damage, 10f, Player.whoAmI);
+                    Projectile p = Projectile.NewProjectileDirect(new EntitySource_ItemUse(player, Item), player.Center + new Vector2(Main.rand.Next(-1000, 1000) + player.velocity.X * 35, -Main.rand.Next(600, 1000)), new Vector2(Main.rand.Next(-5, 5), Main.rand.Next(10, 15)), ModContent.ProjectileType<ApophisAsteroid>(), damage, 10f, player.whoAmI);
                     p.ai[0] = target.position.Y;
                     p.ai[1] = Main.rand.NextFloat(-30f, 30f);
                     p.netUpdate = true;

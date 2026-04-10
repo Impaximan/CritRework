@@ -21,12 +21,12 @@ namespace CritRework.Content.Items.Augmentations
             return ItemID.Sets.Spears[weapon.type];
         }
 
-        public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
+         public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers? modifiers, CritType critType, NPC target)
         {
             return true;
         }
 
-        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
+        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target, bool critCondition)
         {
             NPC.HitModifiers modifiers = new NPC.HitModifiers();
 
@@ -35,7 +35,7 @@ namespace CritRework.Content.Items.Augmentations
                 return;
             }
 
-            if (projectile.type != ModContent.ProjectileType<BigBoom>() && player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target))
+            if (projectile.type != ModContent.ProjectileType<BigBoom>() && critCondition)
             {
                 Projectile explosion = Projectile.NewProjectileDirect(new EntitySource_ItemUse(player, item), projectile.Center, projectile.velocity, ModContent.ProjectileType<BigBoom>(), hit.SourceDamage * 3, projectile.knockBack * 3f, projectile.owner);
                 explosion.SetAsAugmentCrit();

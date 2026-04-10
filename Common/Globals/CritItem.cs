@@ -45,8 +45,28 @@ namespace CritRework.Common.Globals
         public bool recoverableArrow = false;
         public bool harpoonFireAgain = false;
 
-        public Augmentation? augmentation = null;
-        public Augmentation? augmentation2 = null;
+        public int extraMaxAugmentations = 0;
+
+        public List<Augmentation> augmentations = new List<Augmentation>();
+
+        public int MaxAugmentations(Item item, Player player)
+        {
+            int max = 1;
+
+            if (item.IsVersatile())
+            {
+                max++;
+            }
+
+            if (player.TryGetModPlayer(out CritPlayer critPlayer))
+            {
+                max += critPlayer.maxAugmentations;
+            }
+
+            max += extraMaxAugmentations;
+
+            return max;
+        }
 
         public override bool CanStack(Item destination, Item source)
         {
@@ -83,23 +103,13 @@ namespace CritRework.Common.Globals
                 writer.Write(critType.InternalName);
             }
 
-            writer.Write(augmentation != null); //Does this item have an augmentation
+            writer.Write(augmentations.Count); //Does this item have an augmentation
 
-            if (augmentation != null)
+            foreach (Augmentation augmentation in augmentations)
             {
                 writer.Write(augmentation.Type);
                 writer.Write(augmentation.Item.prefix);
                 ItemIO.SendModData(augmentation.Item, writer);
-            }
-
-
-            writer.Write(augmentation2 != null); //Does this item have a second augmentation
-
-            if (augmentation2 != null)
-            {
-                writer.Write(augmentation2.Type);
-                writer.Write(augmentation2.Item.prefix);
-                ItemIO.SendModData(augmentation2.Item, writer);
             }
         }
 
@@ -110,7 +120,9 @@ namespace CritRework.Common.Globals
                 critType = CritRework.GetCrit(reader.ReadString());
             }
 
-            if (reader.ReadBoolean()) //Has augmentation
+            int augmentationNumber = reader.ReadInt32();
+
+            for (int i = 0; i < augmentationNumber; i++)
             {
                 int type = reader.ReadInt32();
                 int pre = reader.ReadInt32();
@@ -121,22 +133,7 @@ namespace CritRework.Common.Globals
 
                 if (instance.ModItem is Augmentation a)
                 {
-                    augmentation = a;
-                }
-            }
-
-            if (reader.ReadBoolean()) //Has augmentation 2
-            {
-                int type = reader.ReadInt32();
-                int pre = reader.ReadInt32();
-
-                Item instance = new Item(type, 1, pre);
-
-                ItemIO.ReceiveModData(instance, reader);
-
-                if (instance.ModItem is Augmentation a)
-                {
-                    augmentation2 = a;
+                    augmentations.Add(a);
                 }
             }
         }
@@ -155,31 +152,21 @@ namespace CritRework.Common.Globals
                 }
             }
 
-            if (augmentation != null && PrefixLoader.GetPrefix(augmentation.Item.prefix) is AugmentationPrefix prefix)
+            foreach (Augmentation augmentation in augmentations)
             {
-                if (AugmentationActive(item, player))
+                if (PrefixLoader.GetPrefix(augmentation.Item.prefix) is AugmentationPrefix prefix)
                 {
-                    float c = 1f;
-                    float n = 1f;
-                    float useTimeMult = 1f;
-                    float v = 1f;
-                    prefix.SetStats(ref c, ref n, ref useTimeMult, ref v);
+                    if (AugmentationActive(augmentation, item, player))
+                    {
+                        float c = 1f;
+                        float n = 1f;
+                        float useTimeMult = 1f;
+                        float v = 1f;
+                        prefix.SetStats(ref c, ref n, ref useTimeMult, ref v);
 
-                    mult /= useTimeMult;
-                }
+                        mult /= useTimeMult;
+                    }
 
-            }
-            if (augmentation2 != null && PrefixLoader.GetPrefix(augmentation2.Item.prefix) is AugmentationPrefix prefix2)
-            {
-                if (AugmentationActive(item, player))
-                {
-                    float c = 1f;
-                    float n = 1f;
-                    float useTimeMult = 1f;
-                    float v = 1f;
-                    prefix2.SetStats(ref c, ref n, ref useTimeMult, ref v);
-
-                    mult /= useTimeMult;
                 }
             }
 
@@ -207,25 +194,15 @@ namespace CritRework.Common.Globals
         {
             if (critType != null) tag.Add("critType", critType.InternalName);
 
-            if (augmentation != null)
+            tag.Add("NumAugmentations", augmentations.Count);
+
+            for (int i = 0; i < augmentations.Count; i++)
             {
-                tag.Add("augmentation", true);
-                TagCompound itemSave = ItemIO.Save(augmentation.Item);
+                TagCompound itemSave = ItemIO.Save(augmentations[i].Item);
 
                 foreach (KeyValuePair<string, object> pair in itemSave)
                 {
-                    tag.Add(pair.Key + "_augmentation", pair.Value);
-                }
-            }
-
-            if (augmentation2 != null)
-            {
-                tag.Add("2augmentation", true);
-                TagCompound itemSave = ItemIO.Save(augmentation2.Item);
-
-                foreach (KeyValuePair<string, object> pair in itemSave)
-                {
-                    tag.Add(pair.Key + "_2augmentation", pair.Value);
+                    tag.Add(pair.Key + "_augmentation_" + i, pair.Value);
                 }
             }
         }
@@ -234,35 +211,21 @@ namespace CritRework.Common.Globals
         {
             if (tag.ContainsKey("critType")) critType = CritRework.GetCrit(tag.GetString("critType"));
 
-            if (tag.ContainsKey("augmentation"))
+            int num = tag.GetInt("NumAugmentations");
+
+            for (int i = 0; i < num; i++)
             {
                 TagCompound itemTag = new();
 
-                foreach (KeyValuePair<string, object> pair in tag.Where(x => x.Key.Contains("_augmentation")))
+                foreach (KeyValuePair<string, object> pair in tag.Where(x => x.Key.Contains("_augmentation_" + i)))
                 {
-                    itemTag.Add(pair.Key.Replace("_augmentation", ""), pair.Value);
+                    itemTag.Add(pair.Key.Replace("_augmentation_" + i, ""), pair.Value);
                 }
 
                 Item aug = ItemIO.Load(itemTag);
                 if (aug.ModItem is Augmentation obj)
                 {
-                    augmentation = obj;
-                }
-            }
-
-            if (tag.ContainsKey("2augmentation"))
-            {
-                TagCompound itemTag = new();
-
-                foreach (KeyValuePair<string, object> pair in tag.Where(x => x.Key.Contains("_2augmentation")))
-                {
-                    itemTag.Add(pair.Key.Replace("_2augmentation", ""), pair.Value);
-                }
-
-                Item aug = ItemIO.Load(itemTag);
-                if (aug.ModItem is Augmentation obj)
-                {
-                    augmentation2 = obj;
+                    augmentations.Add(obj);
                 }
             }
         }
@@ -328,7 +291,7 @@ namespace CritRework.Common.Globals
 
         public override void PreReforge(Item item)
         {
-            if (augmentation != null || augmentation2 != null)
+            if (augmentations.Count > 0)
             {
                 RemoveAugmentation(Main.LocalPlayer);
             }
@@ -347,7 +310,7 @@ namespace CritRework.Common.Globals
                 AddCritType(item);
             }
 
-            if (Main.HoverItem.type == item.type && Main.HoverItem.GetGlobalItem<CritItem>().augmentation != null && Main.HoverItem.GetGlobalItem<CritItem>().augmentation == augmentation)
+            if (Main.HoverItem.type == item.type && Main.HoverItem.GetGlobalItem<CritItem>().augmentations == augmentations)
             {
                 if (Main.keyState.IsKeyDown(Keys.LeftAlt) && Main.mouseRight)
                 {
@@ -396,7 +359,7 @@ namespace CritRework.Common.Globals
 
             if (player.TryGetModPlayer(out CritPlayer cPlayer))
             {
-                if (item.damage > 0 && item.pick == 0 && item.axe == 0 && item.hammer == 0 && cPlayer.criticalCurses.Count > 0 && !item.TryGetAugmentation<CursersQuill>(out _) && !item.TryGetAugmentation2<CursersQuill>(out _))
+                if (item.damage > 0 && item.pick == 0 && item.axe == 0 && item.hammer == 0 && cPlayer.criticalCurses.Count > 0 && !item.TryGetAugmentation<CursersQuill>(out _))
                 {
                     cPlayer.fireCriticalCurse = true;
                 }
@@ -420,14 +383,9 @@ namespace CritRework.Common.Globals
                 critType.SpecialPrefixHoldItem(item, player);
             }
 
-            if (augmentation != null)
+            foreach (Augmentation augmentation in augmentations)
             {
                 augmentation.HoldItem(player);
-            }
-
-            if (augmentation2 != null)
-            {
-                augmentation2.HoldItem(player);
             }
         }
 
@@ -698,56 +656,69 @@ namespace CritRework.Common.Globals
             return base.IsArmorSet(head, body, legs);
         }
 
-        public bool AugmentationActive(Item item, Player player, NPC? npc = null)
+        public bool AugmentationActive(Augmentation augmentation, Item item, Player player, NPC? npc = null)
         {
-            if (augmentation == null)
-            {
-                return false;
-            }
+            return AugmentationActive(augmentation.Type, item, player, npc);
+        }
 
-            if (augmentation != null && PrefixLoader.GetPrefix(augmentation.Item.prefix) is AugmentationPrefix prefix)
+        public bool AugmentationActive(int augmentationType, Item item, Player player, NPC? npc = null)
+        {
+            if (TryGetAugmentation(augmentationType, out Augmentation augmentation))
             {
-                if (prefix.DeactivateAugmentation(item, augmentation.Item, player, npc))
+                if (PrefixLoader.GetPrefix(augmentation.Item.prefix) is AugmentationPrefix prefix)
                 {
-                    return false;
+                    if (prefix.DeactivateAugmentation(item, augmentation.Item, player, augmentations.IndexOf(augmentation), npc))
+                    {
+                        return false;
+                    }
                 }
             }
 
             return true;
         }
 
-        public bool Augmentation2Active(Item item, Player player, NPC? npc = null)
+        public bool AugmentationActive<T>(Item item, Player player, NPC? npc = null) where T : Augmentation
         {
-            if (augmentation2 == null)
+            return AugmentationActive(ModContent.ItemType<T>(), item, player, npc);
+        }
+
+        public bool TryGetAugmentation(int type, out Augmentation augmentation)
+        {
+            if (augmentations.Exists(x => x.Type == type))
             {
-                return false;
+                augmentation = augmentations.First(x => x.Type == type);
+                return true;
             }
 
-            if (augmentation2 != null && PrefixLoader.GetPrefix(augmentation2.Item.prefix) is AugmentationPrefix prefix)
+            augmentation = null;
+            return false;
+        }
+
+        public bool TryGetAugmentation<T>(out T augmentation) where T : Augmentation
+        {
+            if (TryGetAugmentation(ModContent.ItemType<T>(), out Augmentation aug))
             {
-                if (prefix.DeactivateAugmentation(item, augmentation2.Item, player, npc))
-                {
-                    return false;
-                }
+                augmentation = aug as T;
+                return true;
             }
 
-            return true;
+            augmentation = null;
+            return false;
         }
 
         public void RemoveAugmentation(Player player)
         {
-            if (augmentation != null)
+            if (augmentations.Count > 0)
             {
-                player.QuickSpawnItem(new EntitySource_ItemOpen(player, augmentation.Item.type, "Remove augmentation"), augmentation.Item);
                 SoundEngine.PlaySound(SoundID.Item37);
-                augmentation = null;
             }
 
-            if (augmentation2 != null)
+            for (int i = 0; i < augmentations.Count; i++)
             {
-                player.QuickSpawnItem(new EntitySource_ItemOpen(player, augmentation2.Item.type, "Remove augmentation"), augmentation2.Item);
-                augmentation2 = null;
+                player.QuickSpawnItem(new EntitySource_ItemOpen(player, augmentations[i].Item.type, "Remove augmentation"), augmentations[i].Item);
             }
+
+            augmentations.Clear();
         }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -774,27 +745,26 @@ namespace CritRework.Common.Globals
                 name.OverrideColor = Color.Lerp(ItemRarity.GetColor(item.rare), Color.LightGoldenrodYellow, (float)(Math.Sin(Main._drawInterfaceGameTime.TotalGameTime.TotalSeconds * 6f) + 1f) / 2f);
             }
 
-            if (augmentation != null)
+            if (augmentations.Count > 0)
             {
                 if (!CritRework.abbreviateAugmentationTooltip) tooltips.Insert(1, new TooltipLine(Mod, "Augmentation", "Hold Left Alt for more info")
                 {
                     IsModifier = true
                 });
-                if (augmentation2 != null) tooltips.Insert(1, new TooltipLine(Mod, "Augmentation2", "Has augmentation: " + ItemTagHandler.GenerateTag(augmentation2.Item) + " " + $" [c/{ItemRarity.GetColor(augmentation2.Item.rare).Hex3()}:" + augmentation2.Item.AffixName() + "]"));
-                tooltips.Insert(1, new TooltipLine(Mod, "Augmentation", "Has augmentation: " + ItemTagHandler.GenerateTag(augmentation.Item) + " " + $" [c/{ItemRarity.GetColor(augmentation.Item.rare).Hex3()}:" + augmentation.Item.AffixName() + "]"));
+
+                for (int i = 0; i < augmentations.Count; i++)
+                {
+                    tooltips.Insert(1, new TooltipLine(Mod, "Augmentation" + i, "Has augmentation: " + ItemTagHandler.GenerateTag(augmentations[i].Item) + " " + $" [c/{ItemRarity.GetColor(augmentations[i].Item.rare).Hex3()}:" + augmentations[i].Item.AffixName() + "]"));
+                }
 
                 //Augmentation tooltip
                 if (Main.keyState.IsKeyDown(Keys.LeftAlt))
                 {
                     tooltips.Clear();
 
-                    Augmentation usedAugmentation = augmentation;
+                    int n = (int)(Main.gameTimeCache.TotalGameTime.TotalSeconds / 3) % augmentations.Count;
 
-                    if (augmentation2 != null && Main.gameTimeCache.TotalGameTime.TotalSeconds % 6 <= 3f)
-                    {
-                        usedAugmentation = augmentation2;
-                    }
-
+                    Augmentation usedAugmentation = augmentations[n];
                     tooltips.Add(new TooltipLine(Mod, "AugmentationName", $"[c/{ItemRarity.GetColor(item.rare).Hex3()}:Augmentation: ]" + ItemTagHandler.GenerateTag(usedAugmentation.Item) + " " + $"[c/{ItemRarity.GetColor(usedAugmentation.Item.rare).Hex3()}:" + usedAugmentation.Item.AffixName() + "]"));
 
                     //tooltips.Add(new TooltipLine(Mod, "AugmentationCanBeAppliedTo", Mod.GetLocalization($"Items.{usedAugmentation.GetType().Name}.CanBeApplied").Value));
@@ -815,7 +785,7 @@ namespace CritRework.Common.Globals
                         OverrideColor = Color.Yellow
                     });
 
-                    if ((augmentation is BloodCog || augmentation2 is BloodCog) && critType is CloseToFoe)
+                    if ((augmentations.Exists(x => x is BloodCog)) && critType is CloseToFoe)
                     {
                         tooltips.Add(new TooltipLine(Mod, "SawDamageReduced", sawDamageReduced.Value)
                         {
@@ -1166,7 +1136,7 @@ namespace CritRework.Common.Globals
                 });
             }
 
-            if ((augmentation is BloodCog || augmentation2 is BloodCog) && critType is CloseToFoe)
+            if (augmentations.Exists(x => x is BloodCog) && critType is CloseToFoe)
             {
                 tooltips.Add(new TooltipLine(Mod, "SawDamageReduced", sawDamageReduced.Value)
                 {

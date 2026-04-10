@@ -32,12 +32,12 @@ namespace CritRework.Content.Items.Augmentations
             applicableTooltip = Mod.GetLocalization($"Items.{GetType().Name}.CanBeApplied");
         }
 
-        public virtual bool OverrideNormalCritBehavior(Player player, Item item, Projectile? projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
+        public virtual bool OverrideNormalCritBehavior(Player player, Item item, Projectile? projectile, NPC.HitModifiers? modifiers, CritType critType, NPC target)
         {
             return false;
         }
 
-        public virtual void AugmentationOnHitNPC(Player player, Item item, Projectile? projectile, NPC.HitInfo hit, CritType critType, NPC target)
+        public virtual void AugmentationOnHitNPC(Player player, Item item, Projectile? projectile, NPC.HitInfo hit, CritType critType, NPC target, bool critCondition)
         {
 
         }
@@ -65,17 +65,13 @@ namespace CritRework.Content.Items.Augmentations
         {
             if (Main.mouseItem != null && Main.mouseItem.damage > 0 && Main.mouseItem.useStyle != ItemUseStyleID.None && !Main.mouseItem.accessory && CanApplyTo(Main.mouseItem) && CritItem.CanHaveCrits(Main.mouseItem))
             {
-                if (Main.mouseItem.TryGetGlobalItem(out CritItem critTarget) && critTarget.augmentation != null)
+                int maxAugmentations = Main.mouseItem.MaxAugmentations(player);
+
+                if (Main.mouseItem.TryGetGlobalItem(out CritItem critTarget))
                 {
-                    if (Main.mouseItem.IsVersatile())
+                    if (critTarget.augmentations.Exists(x => x.Type == Type) || critTarget.augmentations.Count >= maxAugmentations)
                     {
-                        if (critTarget.augmentation2 != null || critTarget.augmentation.Type == Type)
-                        {
-                            critTarget.RemoveAugmentation(player);
-                        }
-                    }
-                    else
-                    {
+                        Main.NewText("hi");
                         critTarget.RemoveAugmentation(player);
                     }
                 }
@@ -96,14 +92,7 @@ namespace CritRework.Content.Items.Augmentations
         {
             target.TryGetGlobalItem(out CritItem critTarget);
 
-            if (target.IsVersatile() && critTarget.augmentation != null)
-            {
-                critTarget.augmentation2 = this;
-            }
-            else
-            {
-                critTarget.augmentation = this;
-            }
+            critTarget.augmentations.Add(this);
 
             SoundEngine.PlaySound(Item.UseSound);
             Main.NewText("Applied " + ItemTagHandler.GenerateTag(Item) + " to " + ItemTagHandler.GenerateTag(target), Color.Yellow);

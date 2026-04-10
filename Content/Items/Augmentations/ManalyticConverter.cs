@@ -29,14 +29,14 @@ namespace CritRework.Content.Items.Augmentations
             Item.value = Item.sellPrice(0, 3, 0, 0);
         }
 
-        public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
+         public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers? modifiers, CritType critType, NPC target)
         {
             return true;
         }
 
         static float counter = 0f;
 
-        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
+        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target, bool critCondition)
         {
             if (target.type == NPCID.TargetDummy || target.SpawnedFromStatue)
             {
@@ -44,7 +44,7 @@ namespace CritRework.Content.Items.Augmentations
             }
 
             NPC.HitModifiers modifiers = new NPC.HitModifiers();
-            if (player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target))
+            if (critCondition)
             {
                 float damageMult = CritType.CalculateActualCritMult(critType, item, player);
 
@@ -96,14 +96,14 @@ namespace CritRework.Content.Items.Augmentations
             Item.value = Item.sellPrice(0, 3, 0, 0);
         }
 
-        public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
+         public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers? modifiers, CritType critType, NPC target)
         {
             return true;
         }
 
         static float counter = 0f;
 
-        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
+        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target, bool critCondition)
         {
             if (target.type == NPCID.TargetDummy || target.SpawnedFromStatue)
             {

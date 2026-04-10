@@ -17,7 +17,7 @@ namespace CritRework.Content.Items.Augmentations
             Item.value = Item.sellPrice(0, 3, 0, 0);
         }
 
-        public override void AugmentationOnHitNPC(Player Player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
+        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target, bool critCondition)
         {
             if (hit.Crit && projectile.type != ModContent.ProjectileType<PocketLightning>())
             {
@@ -27,10 +27,10 @@ namespace CritRework.Content.Items.Augmentations
                     PitchVariance = 0.5f
                 }, target.Center);
 
-                Projectile p = Projectile.NewProjectileDirect(new EntitySource_ItemUse(Player, Item), Player.Center, Vector2.Zero, ModContent.ProjectileType<PocketLightning>(), hit.Damage, 0f, Player.whoAmI);
+                Projectile p = Projectile.NewProjectileDirect(new EntitySource_ItemUse(player, Item), player.Center, Vector2.Zero, ModContent.ProjectileType<PocketLightning>(), hit.Damage, 0f, player.whoAmI);
                 p.ai[2] = target.whoAmI;
                 (p.ModProjectile as PocketLightning).SetTargetPosition();
-                Player.AddBuff(BuffID.Electrified, 10);
+                player.AddBuff(BuffID.Electrified, 10);
             }
         }
     }

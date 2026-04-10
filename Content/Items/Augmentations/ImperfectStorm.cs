@@ -51,17 +51,17 @@ namespace CritRework.Content.Items.Augmentations
             return weapon.DamageType.CountsAsClass(DamageClass.Melee);
         }
 
-        public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
+         public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers? modifiers, CritType critType, NPC target)
         {
             return true;
         }
 
         const int max = 20;
 
-        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
+        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target, bool critCondition)
         {
             NPC.HitModifiers modifiers = new NPC.HitModifiers();
-            if (player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target) && (projectile == null || projectile.type != ModContent.ProjectileType<Storm>()))
+            if ((critCondition || (projectile != null && projectile.IsCritAugment())) && (projectile == null || projectile.type != ModContent.ProjectileType<Storm>()))
             {
                 player.GetModPlayer<CritPlayer>().timeSinceCrit = 0;
                 if (player.GetModPlayer<CritPlayer>().approaches.Count > 0 && !player.GetModPlayer<CritPlayer>().slashApproach)

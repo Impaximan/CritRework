@@ -39,16 +39,16 @@ namespace CritRework.Content.Items.Augmentations
             Item.value = Item.sellPrice(0, 0, 10, 0);
         }
 
-        public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
+         public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers? modifiers, CritType critType, NPC target)
         {
             return true;
         }
 
         static float counter = 0f;
 
-        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
+        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target, bool critCondition)
         {
-            if (player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target) && (projectile == null || projectile.type != ModContent.ProjectileType<Thorn>()))
+            if (critCondition && (projectile == null || projectile.type != ModContent.ProjectileType<Thorn>()))
             {
                 Projectile thorn = Projectile.NewProjectileDirect(new EntitySource_ItemUse(player, item), target.Center, Vector2.Zero, ModContent.ProjectileType<Thorn>(), hit.SourceDamage / 3, 0f, player.whoAmI);
                 thorn.ai[0] = target.whoAmI;

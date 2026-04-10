@@ -22,9 +22,8 @@ namespace CritRework.Content.Items.Augmentations
             return weapon.DamageType == DamageClass.Ranged;
         }
 
-        public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
+        public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers? modifiers, CritType critType, NPC target)
         {
-            modifiers.DisableCrit();
             return true;
         }
 
@@ -37,11 +36,11 @@ namespace CritRework.Content.Items.Augmentations
             }
         }
 
-        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
+        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target, bool critCondition)
         {
             NPC.HitModifiers modifiers = new NPC.HitModifiers();
 
-            if (cooldown <= 0 && player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target))
+            if (cooldown <= 0 && critCondition)
             {
                 if (projectile != null && projectile.IsCritAugment())
                 {

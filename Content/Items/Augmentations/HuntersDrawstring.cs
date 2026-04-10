@@ -19,12 +19,12 @@ namespace CritRework.Content.Items.Augmentations
             return weapon.useAmmo == AmmoID.Arrow;
         }
 
-        public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
+         public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers? modifiers, CritType critType, NPC target)
         {
             return true;
         }
 
-        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
+        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target, bool critCondition)
         {
             NPC.HitModifiers modifiers = new NPC.HitModifiers();
 
@@ -33,7 +33,7 @@ namespace CritRework.Content.Items.Augmentations
                 return;
             }
 
-            if (player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target))
+            if (critCondition)
             {
                 float damageMult = CritType.CalculateActualCritMult(critType, item, player);
                 target.AddBuff(ModContent.BuffType<HuntersMark>(), 10 + (int)((damageMult - 1f) * 120));

@@ -48,12 +48,12 @@ namespace CritRework.Content.Items.Augmentations
             return (weapon.useAmmo == AmmoID.Bullet || Item.staff[weapon.type] || ItemID.Sets.IsSpaceGun[Type] || weapon.type == ItemID.SpaceGun || weapon.type == ItemID.AquaScepter) && weapon.useStyle == ItemUseStyleID.Shoot && !weapon.channel;
         }
 
-        public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
+         public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers? modifiers, CritType critType, NPC target)
         {
             return false;
         }
 
-        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
+        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target, bool critCondition)
         {
             if (player.TryGetModPlayer(out CritPlayer critPlayer))
             {

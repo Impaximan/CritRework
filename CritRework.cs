@@ -174,27 +174,25 @@ namespace CritRework
             return false;
         }
 
+        public static int MaxAugmentations(this Item item, Player player)
+        {
+            if (item.TryGetGlobalItem(out CritItem critItem))
+            {
+                return critItem.MaxAugmentations(item, player);
+            }
+
+            return 0;
+        }
+
         public static bool TryGetAugmentation<T>(this Item item, out T augmentation) where T : Augmentation
         {
-            if (item != null && item.TryGetGlobalItem(out CritItem critItem) && critItem.augmentation != null && critItem.augmentation is T final)
+            if (item.TryGetGlobalItem(out CritItem critItem) && critItem.TryGetAugmentation(out T a))
             {
-                augmentation = final;
+                augmentation = a;
                 return true;
             }
 
             augmentation = null;
-            return false;
-        }
-
-        public static bool TryGetAugmentation2<T>(this Item item, out T augmentation2) where T : Augmentation
-        {
-            if (item != null && item.TryGetGlobalItem(out CritItem critItem) && critItem.augmentation2 != null && critItem.augmentation2 is T final)
-            {
-                augmentation2 = final;
-                return true;
-            }
-
-            augmentation2 = null;
             return false;
         }
 

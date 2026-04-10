@@ -26,12 +26,12 @@ namespace CritRework.Content.Items.Augmentations
             Item.value = Item.sellPrice(0, 1, 0, 0);
         }
 
-        public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
+         public override bool OverrideNormalCritBehavior(Player player, Item item, Projectile projectile, NPC.HitModifiers? modifiers, CritType critType, NPC target)
         {
             return !player.HasBuff<BucklerRetaliation>();
         }
 
-        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target)
+        public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target, bool critCondition)
         {
             NPC.HitModifiers modifiers = new NPC.HitModifiers();
 
@@ -40,7 +40,7 @@ namespace CritRework.Content.Items.Augmentations
                 return;
             }
 
-            if (player.GetModPlayer<CritPlayer>().ShouldNormallyCrit(item, projectile, new NPC.HitModifiers(), critType, target) && !player.HasBuff<BucklerRetaliation>() && !player.HasBuff<BucklerDepletion>())
+            if (critCondition && !player.HasBuff<BucklerRetaliation>() && !player.HasBuff<BucklerDepletion>())
             {
                 float damageMult = CritType.CalculateActualCritMult(critType, item, player);
                 CritPlayer critPlayer = player.GetModPlayer<CritPlayer>();

@@ -15,6 +15,7 @@ using Terraria.DataStructures;
 using Terraria;
 using Terraria.ModLoader.IO;
 using CritRework.Content.CritTypes.RandomPool;
+using System.Linq;
 
 namespace CritRework.Common.ModPlayers
 {
@@ -62,6 +63,8 @@ namespace CritRework.Common.ModPlayers
         public int slashDamage = 0;
 
         private bool lastHitWasCrit = false;
+
+        public int maxAugmentations = 0;
 
         //Tokens
         public SoundStyle? uniqueCritSound = null;
@@ -528,7 +531,7 @@ namespace CritRework.Common.ModPlayers
 
         public override void ModifyShootStats(Item item, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-            if (item.TryGetAugmentation(out BloodCog _) || item.TryGetAugmentation2(out BloodCog _))
+            if (item.TryGetAugmentation(out BloodCog _))
             {
                 velocity = velocity.RotatedByRandom(MathHelper.ToRadians(sawProjectile != null && sawProjectile.ai[0] > 0 ? 40 : 15));
             }
@@ -536,7 +539,7 @@ namespace CritRework.Common.ModPlayers
 
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (item.TryGetAugmentation(out BloodCog aug1) || item.TryGetAugmentation2(out BloodCog aug2))
+            if (item.TryGetAugmentation(out BloodCog _))
             {
                 if (sawProjectile == null)
                 {
@@ -606,109 +609,123 @@ namespace CritRework.Common.ModPlayers
             return critType != null && critType.ShouldCrit(Player, item, projectile, target, modifiers, item.IsSpecial(Main.LocalPlayer)) && (prostheticCrit == null || prostheticCrit.ShouldCrit(Player, item, projectile, target, modifiers, item.prefix == ModContent.PrefixType<Special>()));
         }
 
+        public bool hitWouldCrit = false;
+
         private NPC.HitModifiers ApplyModifiers(Item item, Projectile? projectile, NPC.HitModifiers modifiers, CritType critType, NPC target)
         {
+            bool augmentationOverride = false;
+
             if (item != null && item.TryGetGlobalItem(out CritItem critItem))
             {
-                if (critItem.augmentation != null && PrefixLoader.GetPrefix(critItem.augmentation.Item.prefix) is Content.Prefixes.Augmentation.AugmentationPrefix prefix && critItem.AugmentationActive(item, Player, target))
+                foreach (Augmentation a in critItem.augmentations)
                 {
-                    float critDamage = 1f;
-                    float nonCritDamage = 1f;
-                    float useTimeMult = 1f;
-                    float v = 1f;
 
-                    prefix.SetStats(ref critDamage, ref critDamage, ref useTimeMult, ref v);
+                    if (critItem.AugmentationActive(a, item, Player, target))
+                    {
+                        if (PrefixLoader.GetPrefix(a.Item.prefix) is Content.Prefixes.Augmentation.AugmentationPrefix prefix)
+                        {
+                            float critDamage = 1f;
+                            float nonCritDamage = 1f;
+                            float useTimeMult = 1f;
+                            float v = 1f;
 
-                    modifiers.CritDamage *= critDamage;
-                    modifiers.NonCritDamage *= nonCritDamage;
-                }
+                            prefix.SetStats(ref critDamage, ref critDamage, ref useTimeMult, ref v);
 
-                if (critItem.augmentation2 != null && PrefixLoader.GetPrefix(critItem.augmentation2.Item.prefix) is Content.Prefixes.Augmentation.AugmentationPrefix prefix2 && critItem.AugmentationActive(item, Player, target))
-                {
-                    float critDamage = 1f;
-                    float nonCritDamage = 1f;
-                    float useTimeMult = 1f;
-                    float v = 1f;
+                            modifiers.CritDamage *= critDamage;
+                            modifiers.NonCritDamage *= nonCritDamage;
+                        }
 
-                    prefix2.SetStats(ref critDamage, ref critDamage, ref useTimeMult, ref v);
-
-                    modifiers.CritDamage *= critDamage;
-                    modifiers.NonCritDamage *= nonCritDamage;
+                        if (a.OverrideNormalCritBehavior(Player, item, projectile, modifiers, critType, target))
+                        {
+                            augmentationOverride = true;
+                        }
+                    }
                 }
             }
 
-            if (((projectile != null && projectile.IsCritAugment()) || !(item != null && 
-                (item.TryGetAugmentation(out Augmentation augmentation) && item.GetGlobalItem<CritItem>().AugmentationActive(item, Player, target) && augmentation.OverrideNormalCritBehavior(Player, item, projectile, modifiers, critType, target)) ||
-                (item.TryGetAugmentation2(out Augmentation augmentation2) && item.GetGlobalItem<CritItem>().Augmentation2Active(item, Player, target) && augmentation2.OverrideNormalCritBehavior(Player, item, projectile, modifiers, critType, target))))
-                && critType != null && (ShouldNormallyCrit(item, projectile, modifiers, critType, target) || (projectile != null && projectile.IsCritAugment())))
+            hitWouldCrit = false;
+
+            if (critType != null && ShouldNormallyCrit(item, projectile, modifiers, critType, target) || (projectile != null && projectile.IsCritAugment()))
             {
-                modifiers.FinalDamage *= 0.5f;
-                modifiers.SetCrit();
+                hitWouldCrit = true;
 
-                float finalBonusDamageMult = 1f;
-
-                finalBonusDamageMult *= CritType.CalculateActualCritMult(critType, item, Player);
-
-                if (timeSinceDaggerBonus >= 900 && Player.HasEquip<AssassinsDagger>())
+                if (!augmentationOverride || (projectile != null && projectile.IsCritAugment()))
                 {
-                    finalBonusDamageMult *= 2;
-                    timeSinceDaggerBonus = 0;
-                    CombatText.NewText(Player.getRect(), new Color(172, 44, 77), "Assassin's Strike!", true);
-                    SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/BloodSlash")
+                    modifiers.FinalDamage *= 0.5f;
+                    modifiers.SetCrit();
+
+                    float finalBonusDamageMult = 1f;
+
+                    finalBonusDamageMult *= CritType.CalculateActualCritMult(critType, item, Player);
+
+                    if (timeSinceDaggerBonus >= 900 && Player.HasEquip<AssassinsDagger>())
                     {
-                        PitchVariance = 0.5f,
-                        Volume = 1f
-                    }, target.Center);
-                }
+                        finalBonusDamageMult *= 2;
+                        timeSinceDaggerBonus = 0;
+                        CombatText.NewText(Player.getRect(), new Color(172, 44, 77), "Assassin's Strike!", true);
+                        SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/BloodSlash")
+                        {
+                            PitchVariance = 0.5f,
+                            Volume = 1f
+                        }, target.Center);
+                    }
 
-                if (Player.HasEquip<ShortestStraw>())
-                {
-                    finalBonusDamageMult *= MathHelper.Lerp(1f, 1.35f, 1f - target.life / (float)target.lifeMax);
-                }
+                    if (Player.HasEquip<ShortestStraw>())
+                    {
+                        finalBonusDamageMult *= MathHelper.Lerp(1f, 1.35f, 1f - target.life / (float)target.lifeMax);
+                    }
 
-                if (lastHitWasCrit)
-                {
-                    finalBonusDamageMult *= consecutiveCriticalStrikeDamage;
-                }
+                    if (lastHitWasCrit)
+                    {
+                        finalBonusDamageMult *= consecutiveCriticalStrikeDamage;
+                    }
 
-                if (Player.HasEquip<EternalGuillotine>() && target.life == target.lifeMax)
-                {
-                    finalBonusDamageMult *= 2f;
-                }
+                    if (Player.HasEquip<EternalGuillotine>() && target.life == target.lifeMax)
+                    {
+                        finalBonusDamageMult *= 2f;
+                    }
 
-                if (Player.HasEquip<ThawingCloth>() && !Player.HasBuff<ThawingClothCooldown>())
-                {
-                    int num = 0;
+                    if (Player.HasEquip<ThawingCloth>() && !Player.HasBuff<ThawingClothCooldown>())
+                    {
+                        int num = 0;
 
-                    List<int> oddExceptions = new()
+                        List<int> oddExceptions = new()
                     {
                         BuffID.OnFire3,
                         BuffID.Frostburn2
                     };
 
-                    foreach (int type in target.buffType)
-                    {
-                        if (type > 0 && (Main.debuff[type] || oddExceptions.Contains(type)) //FSR some debuffs from the base game are not marked as debuffs. This aims to patch some of those.
-                            && target.buffTime[target.FindBuffIndex(type)] > 0)
+                        foreach (int type in target.buffType)
                         {
-                            num++;
+                            if (type > 0 && (Main.debuff[type] || oddExceptions.Contains(type)) //FSR some debuffs from the base game are not marked as debuffs. This aims to patch some of those.
+                                && target.buffTime[target.FindBuffIndex(type)] > 0)
+                            {
+                                num++;
+                            }
+                        }
+
+                        if (num > 0)
+                        {
+                            finalBonusDamageMult *= 1f + ThawingCloth.damageBonusPerDebuff * num;
                         }
                     }
 
-                    if (num > 0)
+
+                    if (CritRework.overrideCritColor) modifiers.HideCombatText();
+
+                    modifiers.SourceDamage *= finalBonusDamageMult;
+                }
+                else if (item != null)
+                {
+                    if (item.DamageType.UseStandardCritCalcs)
                     {
-                        finalBonusDamageMult *= 1f + ThawingCloth.damageBonusPerDebuff * num;
+                        modifiers.DisableCrit();
                     }
                 }
-
-
-                if (CritRework.overrideCritColor) modifiers.HideCombatText();
-
-                modifiers.SourceDamage *= finalBonusDamageMult;
             }
             else
             {
-                if (item != null && item.TryGetGlobalItem(out CritItem cItem))
+                if (item != null)
                 {
                     if (item.DamageType.UseStandardCritCalcs)
                     {
@@ -771,22 +788,27 @@ namespace CritRework.Common.ModPlayers
 
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (hit.Crit && item.TryGetGlobalItem(out CritItem critItem) && critItem.critType is not CritWithAnother)
+            if (item.TryGetGlobalItem(out CritItem critItem))
             {
-                timeSinceCrit = 0;
-            }
+                if (hit.Crit && critItem.critType is not CritWithAnother)
+                {
+                    timeSinceCrit = 0;
+                }
 
-            target.life += hit.Damage; //So that crit conditions like FoeAtHighHP work correctly
-            if (item.TryGetAugmentation(out Augmentation augmentation) && item.GetGlobalItem<CritItem>().AugmentationActive(item, Player, target))
-            {
-                augmentation.AugmentationOnHitNPC(Player, item, null, hit, item.GetCritType(), target);
-            }
+                List<Augmentation> overrides = critItem.augmentations.Where(x => x.OverrideNormalCritBehavior(Player, item, null, null, critItem.critType, target)).ToList();
 
-            if (item.TryGetAugmentation2(out Augmentation augmentation2) && item.GetGlobalItem<CritItem>().Augmentation2Active(item, Player, target))
-            {
-                augmentation2.AugmentationOnHitNPC(Player, item, null, hit, item.GetCritType(), target);
+                if (overrides.Count > 0)
+                {
+                    Augmentation overAug = Main.rand.Next(overrides);
+
+                    overAug.AugmentationOnHitNPC(Player, item, null, hit, critItem.critType, target, hitWouldCrit);
+                }
+
+                foreach (Augmentation augmentation in critItem.augmentations.Where(x => !overrides.Contains(x)))
+                {
+                    augmentation.AugmentationOnHitNPC(Player, item, null, hit, critItem.critType, target, hitWouldCrit);
+                }
             }
-            target.life -= hit.Damage; //So that crit conditions like FoeAtHighHP work correctly
         }
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
@@ -798,28 +820,22 @@ namespace CritRework.Common.ModPlayers
                     timeSinceCrit = 0;
                 }
 
-                target.life += hit.Damage; //So that crit conditions like FoeAtHighHP work correctly
-                if (crit.ogItem.TryGetAugmentation(out Augmentation augmentation))
+                if (crit.ogItem.TryGetGlobalItem(out CritItem critItem))
                 {
-                    if (crit.ogItem.TryGetAugmentation2(out Augmentation augmentation2) && crit.ogItem.GetGlobalItem<CritItem>().Augmentation2Active(crit.ogItem, Player, target))
+                    List<Augmentation> overrides = critItem.augmentations.Where(x => x.OverrideNormalCritBehavior(Player, crit.ogItem, proj, null, crit.critType, target)).ToList();
+
+                    if (overrides.Count > 0)
                     {
-                        if (augmentation.OverrideNormalCritBehavior(Main.player[proj.owner], crit.ogItem, proj, new NPC.HitModifiers(), crit.critType, target) && augmentation2.OverrideNormalCritBehavior(Main.player[proj.owner], crit.ogItem, proj, new NPC.HitModifiers(), crit.critType, target) && crit.ogItem.GetGlobalItem<CritItem>().AugmentationActive(crit.ogItem, Player, target))
-                        {
-                            if (Main.rand.NextBool()) augmentation.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target);
-                            else augmentation2.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target);
-                        }
-                        else
-                        {
-                            if (crit.ogItem.GetGlobalItem<CritItem>().AugmentationActive(crit.ogItem, Player, target)) augmentation.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target);
-                            augmentation2.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target);
-                        }
+                        Augmentation overAug = Main.rand.Next(overrides);
+
+                        overAug.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target,  hitWouldCrit);
                     }
-                    else if (crit.ogItem.GetGlobalItem<CritItem>().AugmentationActive(crit.ogItem, Player, target))
+
+                    foreach (Augmentation augmentation in critItem.augmentations.Where(x => !overrides.Contains(x)))
                     {
-                        augmentation.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target);
+                        augmentation.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target, hitWouldCrit);
                     }
                 }
-                target.life -= hit.Damage; //So that crit conditions like FoeAtHighHP work correctly
             }
 
 

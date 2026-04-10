@@ -11,9 +11,9 @@ namespace CritRework.Content.Items
     {
         public override void SetDefaults()
         {
-            Item.width = 34;
-            Item.height = 38;
-            Item.value = Item.buyPrice(0, 70, 0, 0);
+            Item.width = 30;
+            Item.height = 32;
+            Item.value = Item.buyPrice(0, 25, 0, 0);
             Item.rare = ItemRarityID.Red;
         }
 

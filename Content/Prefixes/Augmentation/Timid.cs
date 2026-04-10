@@ -8,7 +8,7 @@
             PrefixID.Sets.ReducedNaturalChance[Type] = true;
         }
 
-        public override bool DeactivateAugmentation(Item weapon, Item augmentation, Player player, NPC npc = null)
+        public override bool DeactivateAugmentation(Item weapon, Item augmentation, Player player, int index, NPC npc = null)
         {
             return player.statLife < player.statLifeMax2 * 0.85f;
         }
