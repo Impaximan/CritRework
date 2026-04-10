@@ -20,6 +20,7 @@ using Terraria.GameContent.UI.Chat;
 using Terraria.Utilities;
 using CritRework.Content.Prefixes.Augmentation;
 using Microsoft.Xna.Framework.Input;
+using CritRework.Content.Buffs;
 
 namespace CritRework.Common.Globals
 {
@@ -31,6 +32,7 @@ namespace CritRework.Common.Globals
         public static LocalizedText unknownTooltip;
         public static LocalizedText unableTooltip;
         public static LocalizedText sawDamageReduced;
+        public static LocalizedText overclockedTooltip;
 
         public static LocalizedText pirateHatTooltip;
         public static LocalizedText pirateShirtTooltip;
@@ -93,6 +95,7 @@ namespace CritRework.Common.Globals
             prostheticTooltip = Mod.GetLocalization($"ProstheticTooltip");
             removeAugmentation = Mod.GetLocalization($"RemoveAugmentation");
             sawDamageReduced = Mod.GetLocalization($"sawDamageReduced");
+            overclockedTooltip = Mod.GetLocalization($"overclockedTooltip");
         }
 
         public override void NetSend(Item item, BinaryWriter writer)
@@ -363,6 +366,11 @@ namespace CritRework.Common.Globals
                 {
                     cPlayer.fireCriticalCurse = true;
                 }
+            }
+
+            if (augmentations.Count > MaxAugmentations(item, player))
+            {
+                player.AddBuff(ModContent.BuffType<Overclocked>(), item.useTime);
             }
 
             return base.UseItem(item, player);
@@ -762,7 +770,7 @@ namespace CritRework.Common.Globals
                 {
                     tooltips.Clear();
 
-                    int n = (int)(Main.gameTimeCache.TotalGameTime.TotalSeconds / 3) % augmentations.Count;
+                    int n = (int)(Main.gameTimeCache.TotalGameTime.TotalSeconds / 2) % augmentations.Count;
 
                     Augmentation usedAugmentation = augmentations[n];
                     tooltips.Add(new TooltipLine(Mod, "AugmentationName", $"[c/{ItemRarity.GetColor(item.rare).Hex3()}:Augmentation: ]" + ItemTagHandler.GenerateTag(usedAugmentation.Item) + " " + $"[c/{ItemRarity.GetColor(usedAugmentation.Item.rare).Hex3()}:" + usedAugmentation.Item.AffixName() + "]"));
@@ -1142,6 +1150,16 @@ namespace CritRework.Common.Globals
                 {
                     IsModifier = true,
                     IsModifierBad = true
+                });
+            }
+
+            if (augmentations.Count > MaxAugmentations(item, Main.LocalPlayer))
+            {
+                tooltips.Add(new TooltipLine(Mod, "Overclocked", overclockedTooltip.Value)
+                {
+                    IsModifier = true,
+                    IsModifierBad = true,
+                    OverrideColor = Color.Red
                 });
             }
         }

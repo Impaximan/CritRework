@@ -14,7 +14,7 @@ namespace CritRework.Content.Items
             Item.width = 30;
             Item.height = 32;
             Item.value = Item.buyPrice(0, 25, 0, 0);
-            Item.rare = ItemRarityID.Red;
+            Item.rare = ItemRarityID.Yellow;
         }
 
 

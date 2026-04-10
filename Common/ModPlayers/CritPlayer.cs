@@ -191,6 +191,7 @@ namespace CritRework.Common.ModPlayers
             uniqueCritSound = null;
             summonSpecial = false;
             consecutiveCriticalStrikeDamage = 1f;
+            maxAugmentations = 0;
 
             if (!Player.HasBuff<BucklerDefense>() && !Player.HasBuff<BucklerRetaliation>())
             {
@@ -334,6 +335,22 @@ namespace CritRework.Common.ModPlayers
                 }
 
                 Player.lifeRegen -= 30;
+            }
+
+            if (Player.HasBuff<Overclocked>())
+            {
+                if (Player.HeldItem != null && Player.HeldItem.TryGetGlobalItem(out CritItem critItem))
+                {
+                    int stack = critItem.augmentations.Count - critItem.MaxAugmentations(Player.HeldItem, Player);
+
+                    if (Player.lifeRegen > 0)
+                    {
+                        Player.lifeRegen = 0;
+                        Player.lifeRegenTime = 0;
+                    }
+
+                    Player.lifeRegen -= 30 * stack;
+                }
             }
         }
 

@@ -2,10 +2,11 @@
 using CritRework.Common.ModPlayers;
 using System.Collections.Generic;
 using System;
+using CritRework.Content.Items.Materials;
 
 namespace CritRework.Content.Items.Equipable.Accessories
 {
-    public class ProstheticArm : ModItem
+    public class GraftedSling : ModItem
     {
 
         public static LocalizedText finalTooltipLine;
@@ -13,18 +14,12 @@ namespace CritRework.Content.Items.Equipable.Accessories
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.HallowedBar, 15)
-                .AddIngredient(ItemID.AdamantiteBar, 10)
-                .AddIngredient(ItemID.SoulofFright, 15)
-                .AddIngredient(ItemID.SoulofNight, 8)
-                .AddTile(TileID.MythrilAnvil)
-                .Register();
-            CreateRecipe()
-                .AddIngredient(ItemID.HallowedBar, 15)
-                .AddIngredient(ItemID.TitaniumBar, 10)
-                .AddIngredient(ItemID.SoulofFright, 15)
-                .AddIngredient(ItemID.SoulofNight, 8)
-                .AddTile(TileID.MythrilAnvil)
+                .AddIngredient<ProstheticArm>()
+                .AddIngredient<SkywardSling>()
+                .AddIngredient(ItemID.ChlorophyteBar, 15)
+                .AddIngredient<BronzeAlloy>(10)
+                .AddIngredient(ItemID.SoulofFlight, 5)
+                .AddTile(TileID.TinkerersWorkbench)
                 .Register();
         }
 
@@ -38,7 +33,7 @@ namespace CritRework.Content.Items.Equipable.Accessories
             Item.width = 22;
             Item.height = 40;
             Item.accessory = true;
-            Item.rare = ItemRarityID.Pink;
+            Item.rare = ItemRarityID.Lime;
             Item.value = Item.sellPrice(0, 5, 0, 0);
             Item.GetGlobalItem<CritItem>().forceCanCrit = true;
         }
@@ -56,6 +51,20 @@ namespace CritRework.Content.Items.Equipable.Accessories
                     player.AddBuff(ModContent.BuffType<ProstheticsActive>(), 2);
                 }
             }
+
+
+            player.GetModPlayer<CritPlayer>().maxAugmentations++;
+        }
+
+        public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)
+        {
+            if (equippedItem.type == ModContent.ItemType<ProstheticArm>() || equippedItem.type == ModContent.ItemType<SkywardSling>()
+                || incomingItem.type == ModContent.ItemType<ProstheticArm>() || incomingItem.type == ModContent.ItemType<SkywardSling>())
+            {
+                return false;
+            }
+
+            return base.CanAccessoryBeEquippedWith(equippedItem, incomingItem, player);
         }
 
         public override void ModifyTooltips(List<TooltipLine> tooltips)
@@ -73,14 +82,6 @@ namespace CritRework.Content.Items.Equipable.Accessories
             {
                 tooltips.Insert(i + 1, new TooltipLine(Mod, "Tooltip3", finalTooltipLine.Value.Replace("[dmg]", dmgString)));
             }
-        }
-    }
-
-    public class ProstheticsActive : ModBuff
-    {
-        public override void SetStaticDefaults()
-        {
-            Main.buffNoTimeDisplay[Type] = true;
         }
     }
 }

@@ -71,7 +71,6 @@ namespace CritRework.Content.Items.Augmentations
                 {
                     if (critTarget.augmentations.Exists(x => x.Type == Type) || critTarget.augmentations.Count >= maxAugmentations)
                     {
-                        Main.NewText("hi");
                         critTarget.RemoveAugmentation(player);
                     }
                 }

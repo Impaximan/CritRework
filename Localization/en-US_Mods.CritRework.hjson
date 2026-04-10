@@ -115,7 +115,7 @@ Items: {
 
 	BronzeAlloy: {
 		DisplayName: Bronze Alloy
-		Tooltip: ""
+		Tooltip: "'A new age begins'"
 	}
 
 	BronzeArrow: {
@@ -670,6 +670,26 @@ Items: {
 			Only active while favorited
 			While active, reforging an item at the Goblin Tinkerer cannot change an item's critical stike condition
 			'Supposedly touched by Midas. Its authenticity is... dubious.'
+			'''
+	}
+
+	SkywardSling: {
+		DisplayName: Skyward Sling
+		Tooltip:
+			'''
+			Allows you to add an additional augmentation to weapons
+			5% increased critical strike chance
+			'''
+	}
+
+	GraftedSling: {
+		DisplayName: Grafted Sling
+		Tooltip:
+			'''
+			Allows you to add an additional augmentation to weapons
+			Can be given a crit condition
+			All weapons will inherit this crit condition, in addition to their own
+			Both crit conditions must be met to critically strike
 			'''
 	}
 }
@@ -1804,6 +1824,11 @@ Buffs: {
 		DisplayName: Walking With The Wind
 		Description: Greatly increased movement speed
 	}
+
+	Overclocked: {
+		DisplayName: Overclocked
+		Description: You have too many augmentations on this weapon!
+	}
 }
 
 RecipeGroups: {
@@ -1869,3 +1894,4 @@ Augmentation: {
 RemoveAugmentation: Right click to remove augmentation
 StartingMessage: Mods.CritRework.StartingMessage
 sawDamageReduced: -Chainsaw damage greatly reduced by this critical strike condition
+overclockedTooltip: Overclocked: Greater than max number of augmentations causes you to take damage upon use

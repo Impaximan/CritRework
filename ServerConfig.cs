@@ -34,7 +34,7 @@ namespace CritRework
 
         [DefaultValue(0.25f)]
         [Increment(0.01f)]
-        [Range(0f, 1f)]
+        [Range(0.2f, 1f)]
         public float randomHijackChance = 0.25f;
 
         [DefaultValue(true)]

@@ -14,6 +14,7 @@ Additions:
 -Added the Imperfect Storm, an augmentation crafted using Demonite
 -Added Apophis, who does not discriminate
 -Added the Windwalker, an accessory found in Sky Chests
+-Added Skyward Sling, a new accessory crafted with feathers and bronze
 -Added a new weapon prefix, "Versatile," which allows you to put multiple augmentations on a weapon
 -Added several new prefixes which can be given to augmentations, including prefixes which cause augmentations to only activate during certain conditions
 -Added a new material, the "Greenprint," which drops from Lihzahrds in the Jungle Temple and can be used to create powerful, crit-powered constructs
@@ -27,6 +28,8 @@ Changes
 -Boss HP multiplier is now 1.3x by default (can still be set down to 1)
 -Reduced damage multiplier of holy whetstone
 -Removed "Necromantic" prefix
+-Added a tooltip for Bronze alloy
+-Reforge hijack chance is now 20% at minimum
 
 Fixes
 -Updated hitbox for overgrown Vilethorn and Crystal Vile Shard to grow as intended
