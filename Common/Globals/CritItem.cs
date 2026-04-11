@@ -193,7 +193,12 @@ namespace CritRework.Common.Globals
 
             if (player.HasEquip<ContaminatedSapling>())
             {
-                crit += 12 * augmentations.Count;
+                crit += ContaminatedSapling.damagePerAugmentation * augmentations.Count;
+            }
+
+            if (augmentations.Count > 0)
+            {
+                crit += player.GetModPlayer<CritPlayer>().augmentedWeaponCritBoost;
             }
         }
 

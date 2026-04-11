@@ -54,6 +54,7 @@ namespace CritRework.Common.ModPlayers
         public float bucklerPower = 0f;
         public bool firstTimeSpawning = true;
         public Projectile sawProjectile = null;
+        public float augmentedWeaponCritBoost = 0f;
 
         public List<Projectile> criticalCurses = new();
         public bool fireCriticalCurse = false;
@@ -192,6 +193,7 @@ namespace CritRework.Common.ModPlayers
             summonSpecial = false;
             consecutiveCriticalStrikeDamage = 1f;
             maxAugmentations = 0;
+            augmentedWeaponCritBoost = 0f;
 
             if (!Player.HasBuff<BucklerDefense>() && !Player.HasBuff<BucklerRetaliation>())
             {

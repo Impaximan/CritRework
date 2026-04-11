@@ -722,6 +722,29 @@ Items: {
 			'The wall on which the prophets wrote is cracking at the seams'
 			'''
 	}
+
+	ConstructHelmet: {
+		DisplayName: Construct Helmet
+		Tooltip: 15% increased critical strike chance on augmented weapons
+	}
+
+	ConstructGreaves: {
+		DisplayName: Construct Greaves
+		Tooltip:
+			'''
+			10% increased critical strike chance on augmented weapons
+			Increased jump speed
+			'''
+	}
+
+	ConstructPlating: {
+		DisplayName: Construct Plating
+		Tooltip:
+			'''
+			12% increased critical strike chance on augmented weapons
+			5% increased damage
+			'''
+	}
 }
 
 Whetstone: {
@@ -1937,3 +1960,4 @@ RemoveAugmentation: Right click to remove augmentation
 StartingMessage: Mods.CritRework.StartingMessage
 sawDamageReduced: -Chainsaw damage greatly reduced by this critical strike condition
 overclockedTooltip: Overclocked: Greater than max number of augmentations causes you to take damage upon use
+ConstructHelmet.SetBonus: Allows you to add an additional augmentation to weapons
