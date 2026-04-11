@@ -20,6 +20,7 @@ Additions:
 -Added a new weapon prefix, "Versatile," which allows you to put multiple augmentations on a weapon
 -Added several new prefixes which can be given to augmentations, including prefixes which cause augmentations to only activate during certain conditions
 -Added a new material, the "Greenprint," which drops from Lihzahrds in the Jungle Temple and can be used to create powerful, crit-powered constructs
+-Added Construct Armor
 -Added Reclaw potions
 -Added Horrificracker
 -Added Gilded Remains, a new utility item sold by the Pirate NPC
@@ -27,6 +28,7 @@ Additions:
 -Added Homunculus Token
 
 Changes
+-Rewrote critical strike damage tooltips to say critical strike power instead (for consistency with augmentations and less misleading behavior)
 -Starter Whetstones are no longer craftable (you only have the 2 that you started with now)
 -'Vitriolic' prefix now inflicts you with On Fire! instead of Poisoned
 -Boss HP multiplier is now 1.3x by default (can still be set down to 1)

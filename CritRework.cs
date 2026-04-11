@@ -62,10 +62,10 @@ namespace CritRework
 
         public static List<Tuple<string, string>> tooltipConversions = new()
         {
-            new("critical strike chance", "critical strike damage"),
-            new("crit chance", "crit damage"),
-            new("critical chance", "critical damage"),
-            new("chance to inflict crit", "damage for critical strikes")
+            new("critical strike chance", "critical strike power"),
+            new("crit chance", "crit power"),
+            new("critical chance", "critical power"),
+            new("chance to inflict crit", "power for critical strikes")
         };
 
         public override void Load()

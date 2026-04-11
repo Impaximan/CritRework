@@ -532,7 +532,7 @@ Items: {
 		Tooltip:
 			'''
 			When applied to a weapon, this disables normal critical strikes
-			When that weapon would normally critically strike, it will explode for 2x the critical strike damage
+			When that weapon would normally critically strike, it will explode for 2x the critical strike's damage
 			Shopkeeper not responsible for adverse effects
 			Does not destroy tiles
 			'It's literally just dynamite you strap to a spear'
@@ -545,7 +545,7 @@ Items: {
 		Tooltip:
 			'''
 			When applied to a weapon, this disables normal critical strikes
-			Instead, gain defense proportional to the critical strike damage for 1 second
+			Instead, gain defense proportional to the critical strike power for 1 second
 			Upon taking damage while your defense is buffed, the defense is converted into damage for 3 seconds
 			During that time, critical strikes are re-enabled;
 			Afterwards, you are vulnerable for 10 seconds before you can use this again
@@ -636,6 +636,7 @@ Items: {
 			'''
 			Attaches a chainsaw to augmented arnament, decreasing accuracy
 			Critically striking will rev the chainsaw to deal close-range damage
+			Chainsaw duration depends on critical strike power
 			Accuracy greatly reduced while chainsaw is active
 			'Mankind might not be dead but this thing will make us deader'
 			'''
