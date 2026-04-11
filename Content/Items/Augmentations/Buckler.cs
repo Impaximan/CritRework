@@ -44,6 +44,7 @@ namespace CritRework.Content.Items.Augmentations
             {
                 float damageMult = CritType.CalculateActualCritMult(critType, item, player);
                 CritPlayer critPlayer = player.GetModPlayer<CritPlayer>();
+                critPlayer.timeSinceCrit = 0;
                 if (critPlayer.bucklerPower < damageMult - 1f)
                 {
                     critPlayer.bucklerPower = damageMult - 1f;

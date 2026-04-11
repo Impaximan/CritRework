@@ -155,6 +155,19 @@ namespace CritRework.Common.Globals
             {
                 modifiers.CritDamage *= 1.25f;
             }
+
+            if (npc.HasBuff<Doom>())
+            {
+                modifiers.ArmorPenetration += 20;
+            }
+        }
+
+        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
+        {
+            if (npc.HasBuff<Doom>())
+            {
+                modifiers.ArmorPenetration += 20;
+            }
         }
 
         public override void HitEffect(NPC npc, NPC.HitInfo hit)
@@ -245,6 +258,11 @@ namespace CritRework.Common.Globals
             if (npc.type == NPCID.Hornet)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<HoneydippedStinger>(), 500));
+            }
+
+            if (NPCID.Sets.Skeletons[npc.type])
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Epitaph>(), 75));
             }
 
             if (npc.type == NPCID.QueenBee)

@@ -2,6 +2,7 @@
 Additions:
 -Added a new type of item, "Augmenations," which can be applied to weapons for altered critical strike behavior
 -Added A.M.P.L, an augmentation which is dropped by Skeleton Commandos post-Plantera
+-Added Epitaph, an augmentation dropped rarely by skeletons
 -Added the Honeydipped Stinger an, augmentation which is crafted post-Queen Bee
 -Added the Pocket Lightning Rod, an augmentation which is found in the Underground Desert
 -Added the Boomstickifier, an augmentation sold by the demolotionist

@@ -711,6 +711,17 @@ Items: {
 		DisplayName: Homunculus Token
 		Tooltip: Makes a familiar sound on critical strike
 	}
+
+	Epitaph: {
+		CanBeApplied: ""
+		DisplayName: Epitaph
+		Tooltip:
+			'''
+			When applied to a weapon, if an enemy is killed by a critical strike, spawn a doomstone
+			All enemies and players near the doomstone are given 'Doom', lowering defense
+			'The wall on which the prophets wrote is cracking at the seams'
+			'''
+	}
 }
 
 Whetstone: {
@@ -796,6 +807,12 @@ Prefixes: {
 		tooltip: +5 maximum souls
 		tooltip2: Mods.CritRework.Prefixes.Hoarding.tooltip2
 		DisplayName: Hoarding
+	}
+
+	Grieving: {
+		tooltip: +50% doomstone range
+		tooltip2: Mods.CritRework.Prefixes.Grieving.tooltip2
+		DisplayName: Grieving
 	}
 }
 
@@ -1848,6 +1865,11 @@ Buffs: {
 		DisplayName: Overclocked
 		Description: You have too many augmentations on this weapon!
 	}
+
+	Doom: {
+		DisplayName: Doom
+		Description: Reduced defense
+	}
 }
 
 RecipeGroups: {
@@ -1877,6 +1899,7 @@ Projectiles: {
 	Approach.DisplayName: Approach
 	Storm.DisplayName: Storm
 	IntercontinentalAutoMissileExplosion.DisplayName: Intercontinental Auto Missile Explosion
+	DoomTomb.DisplayName: Doom Tomb
 }
 
 BronzeHelm.SetBonus:
