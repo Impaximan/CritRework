@@ -40,6 +40,14 @@ Changes
 -Added a tooltip for Bronze alloy
 -Reforge hijack chance is now 20% at minimum
 -Reduced the sell value of Divine Ingots
+-Made some changes to reduce bloat/poor design on random crit condition pool;
+-Above foe, below foe, and On Fire crit conditions now only apply to green rarity or lower
+-Non-boss and 4 debuff rit condition now only applies to weapons of orange rarity or higher
+-20% chance to critically strike no longer appears in the random crit condition pool
+-Reduced damage of low HP crit condition. This won't affect its normal gameplay for the most part, since it's still enough to finish off enemies, but will no longer be as powerful against bosses
+-Reduced power of 10% critical strike chance condition, as it's one of the few crit conditions which introduces no gameplay and thus should not be particularly powerful by comparison to more interesting conditions
+-Reduced chance bonus of Blessed and Deific prefixes
+-10 second cooldown crit power now changes depending on weapon tier (it felt too powerful early game and too weak later, this should make it a more interesting option at all stages of progression)
 
 Fixes
 -Updated hitbox for overgrown Vilethorn and Crystal Vile Shard to grow as intended

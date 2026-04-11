@@ -18,6 +18,11 @@ namespace CritRework.Content.CritTypes.RandomPool
             }
         }
 
+        public override bool CanApplyTo(Item item)
+        {
+            return item.OriginalRarity > ItemRarityID.Green;
+        }
+
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
             return !target.boss && !new List<int>() { NPCID.EaterofWorldsHead, 

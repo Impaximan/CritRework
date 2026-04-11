@@ -7,7 +7,20 @@ namespace CritRework.Content.CritTypes.RandomPool
     {
         public override bool InRandomPool => true;
 
-        public override float GetDamageMult(Player Player, Item Item) => 3.5f;
+        public override float GetDamageMult(Player Player, Item Item)
+        {
+            if (Item.OriginalRarity <= ItemRarityID.Green)
+            {
+                return 3f;
+            }
+
+            if (Item.OriginalRarity <= ItemRarityID.Pink)
+            {
+                return 4f;
+            }
+
+            return 5f;
+        }
 
         public override bool CanApplyTo(Item item)
         {

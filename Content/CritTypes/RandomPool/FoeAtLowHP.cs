@@ -6,7 +6,7 @@ namespace CritRework.Content.CritTypes.RandomPool
     {
         public override bool InRandomPool => true;
 
-        public override float GetDamageMult(Player Player, Item Item) => 3f;
+        public override float GetDamageMult(Player Player, Item Item) => 2f;
 
         public override void SpecialPrefixOnHitNPC(Item item, Player player, Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {

@@ -18,7 +18,7 @@
 
         public override bool CanApplyTo(Item item)
         {
-            return item.OriginalRarity <= ItemRarityID.Orange;
+            return item.OriginalRarity <= ItemRarityID.Green;
         }
 
         public override void SpecialPrefixHoldItem(Item item, Player player)

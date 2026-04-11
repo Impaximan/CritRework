@@ -8,6 +8,11 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         public override float GetDamageMult(Player Player, Item Item) => 1.75f;
 
+        public override bool CanApplyTo(Item item)
+        {
+            return item.OriginalRarity > ItemRarityID.Green;
+        }
+
         public override void SpecialPrefixOnHitNPC(Item item, Player player, Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             float chance = 20f * (1f + player.luck / 2f);

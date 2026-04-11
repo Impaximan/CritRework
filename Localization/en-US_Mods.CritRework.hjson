@@ -980,7 +980,7 @@ CritTypes: {
 		SpecialPrefixName: Hovering
 		SpecialPrefixTooltip1: Hold jump while using this weapon to hover instead of falling
 		SpecialPrefixTooltip2: ""
-		CanBeAppliedToDescription: Can be applied to weapons of orange rarity or lower
+		CanBeAppliedToDescription: Can be applied to weapons of green rarity or lower
 		BasicWhetstonePrefix: Elevated
 	}
 
@@ -989,7 +989,7 @@ CritTypes: {
 		SpecialPrefixName: Diving
 		SpecialPrefixTooltip1: Hold down while using this weapon to fall faster
 		SpecialPrefixTooltip2: Negates fall damage while held
-		CanBeAppliedToDescription: Can be applied to weapons of orange rarity or lower
+		CanBeAppliedToDescription: Can be applied to weapons of green rarity or lower
 		BasicWhetstonePrefix: Rooted
 	}
 
@@ -1070,7 +1070,7 @@ CritTypes: {
 		SpecialPrefixName: Harrowing
 		SpecialPrefixTooltip1: 20% chance to inflict a random debuff on hit
 		SpecialPrefixTooltip2: ""
-		CanBeAppliedToDescription: Can be applied to any weapon
+		CanBeAppliedToDescription: Can be applied to weapons of orange rarity or higher
 		BasicWhetstonePrefix: Harrowed
 	}
 
@@ -1122,7 +1122,7 @@ CritTypes: {
 	LowChance: {
 		Description: Critically strikes 1% of the time
 		SpecialPrefixName: Deific
-		SpecialPrefixTooltip1: Chance increased to 2%
+		SpecialPrefixTooltip1: Chance increased to 1.5%
 		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Can be applied to any weapon
 		BasicWhetstonePrefix: Rare
@@ -1131,7 +1131,7 @@ CritTypes: {
 	MediumChance: {
 		Description: Critically strikes 10% of the time
 		SpecialPrefixName: Blessed
-		SpecialPrefixTooltip1: Chance increased to 20%
+		SpecialPrefixTooltip1: Chance increased to 15%
 		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Can be applied to any weapon
 		BasicWhetstonePrefix: Lucky
@@ -1426,9 +1426,9 @@ CritTypes: {
 	}
 
 	ThreeSecondCooldown: {
-		Description: Critically strikes if the the last time you crit was at least 3 seconds ago
+		Description: Critically strikes if the the last time you crit was at least 5 seconds ago
 		SpecialPrefixName: Impatient
-		SpecialPrefixTooltip1: Critical strike cooldown reduced to 2 seconds
+		SpecialPrefixTooltip1: Critical strike cooldown reduced to 3 seconds
 		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Can be applied to any weapon
 		BasicWhetstonePrefix: Convenient
@@ -1619,7 +1619,7 @@ CritTypes: {
 		SpecialPrefixName: Practical
 		SpecialPrefixTooltip1: Critical strikes increase mining speed for 1 minute
 		SpecialPrefixTooltip2: ""
-		CanBeAppliedToDescription: Can be applied to any weapon
+		CanBeAppliedToDescription: Can be applied to weapons of orange rarity or higher
 		BasicWhetstonePrefix: Common
 	}
 

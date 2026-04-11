@@ -1,8 +1,9 @@
 ﻿namespace CritRework.Content.CritTypes.RandomPool
 {
+    //Removed from random pool and thus unobtainable... for now, at least
     internal class HighChance : CritType
     {
-        public override bool InRandomPool => true;
+        public override bool InRandomPool => false;
 
         public override float GetDamageMult(Player Player, Item Item) => 1.3f;
 

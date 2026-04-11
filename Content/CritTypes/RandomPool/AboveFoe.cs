@@ -8,7 +8,7 @@
 
         public override bool CanApplyTo(Item item)
         {
-            return item.shoot != ProjectileID.None && item.rare <= ItemRarityID.Orange;
+            return item.shoot != ProjectileID.None && item.OriginalRarity <= ItemRarityID.Green;
         }
 
         public override void SpecialPrefixHoldItem(Item item, Player player)

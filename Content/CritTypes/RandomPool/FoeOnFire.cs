@@ -8,6 +8,11 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         public override float GetDamageMult(Player Player, Item Item) => 1.2f;
 
+        public override bool CanApplyTo(Item item)
+        {
+            return item.shoot != ProjectileID.None && item.OriginalRarity <= ItemRarityID.Green;
+        }
+
         public override void SpecialPrefixOnHitNPC(Item item, Player player, Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (hit.Crit)
