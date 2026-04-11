@@ -31,7 +31,7 @@ namespace CritRework.Content.Items.Equipable.Armor.Construct
             CreateRecipe()
                 .AddIngredient<Greenprint>()
                 .AddIngredient(ItemID.LunarTabletFragment, 6)
-                .AddTile(TileID.Anvils)
+                .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
     }

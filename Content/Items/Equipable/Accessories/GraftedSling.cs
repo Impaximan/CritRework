@@ -18,7 +18,7 @@ namespace CritRework.Content.Items.Equipable.Accessories
                 .AddIngredient<SkywardSling>()
                 .AddIngredient(ItemID.ChlorophyteBar, 15)
                 .AddIngredient<BronzeAlloy>(10)
-                .AddIngredient(ItemID.SoulofFlight, 5)
+                .AddIngredient<Greenprint>()
                 .AddTile(TileID.TinkerersWorkbench)
                 .Register();
         }

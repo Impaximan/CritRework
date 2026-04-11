@@ -32,7 +32,7 @@ namespace CritRework.Content.Items.Equipable.Armor.Construct
                 .AddIngredient<Greenprint>()
                 .AddIngredient(ItemID.LunarTabletFragment, 7)
                 .AddIngredient(ItemID.LihzahrdPowerCell)
-                .AddTile(TileID.Anvils)
+                .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
     }

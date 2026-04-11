@@ -21,11 +21,11 @@
             Item.value = Item.sellPrice(0, 3, 0, 0);
         }
 
-        public static float damagePerAugmentation = 12f;
+        public static float damagePerAugmentation = 10f;
 
         public override void UpdateEquip(Player player)
         {
-            damagePerAugmentation = 12f;
+            damagePerAugmentation = 10f;
             player.AddEquip<ContaminatedSapling>();
         }
     }

@@ -698,7 +698,7 @@ Items: {
 		DisplayName: Contaminated Sapling
 		Tooltip:
 			'''
-			12% increased critical strike chance per augmentation on a given weapon
+			10% increased critical strike chance per augmentation on a given weapon
 			'Seed will rock you'
 			'''
 	}
@@ -744,6 +744,15 @@ Items: {
 			'''
 			12% increased critical strike chance on augmented weapons
 			5% increased damage
+			'''
+	}
+
+	SaplingSimulacrum: {
+		DisplayName: Sapling Simulacrum
+		Tooltip:
+			'''
+			10% increasd critical strike chance
+			10% additional critical strike chance per augmentation on a given weapon
 			'''
 	}
 }
@@ -1958,7 +1967,13 @@ Augmentation: {
 }
 
 RemoveAugmentation: Right click to remove augmentation
-StartingMessage: Mods.CritRework.StartingMessage
+StartingMessage:
+	'''
+	Welcome to [c/77ffb9:Critical Strikes Overhaul]!
+	FYI, this mod increases boss HP by 30% by default for balancing purposes; you can undo this change via the configm
+	If you have any questions or feedback on how the mod functions, feel free to ask on the Discord server, linked on the workshop
+	Have fun!
+	'''
 sawDamageReduced: -Chainsaw damage greatly reduced by this critical strike condition
 overclockedTooltip: Overclocked: Greater than max number of augmentations causes you to take damage upon use
 ConstructHelmet.SetBonus: Allows you to add an additional augmentation to weapons

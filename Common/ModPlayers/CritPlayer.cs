@@ -151,6 +151,11 @@ namespace CritRework.Common.ModPlayers
                 list.Add(new Item(ModContent.ItemType<BloodCog>()));
             }
 
+            if (NameContains("Vergil"))
+            {
+                list.Add(new Item(ModContent.ItemType<ImperfectStorm>()));
+            }
+
             if (!mediumCoreDeath && list.Count == 0)
             {
                 list.Add(new Item(ModContent.ItemType<StarterWhetstone>(), 2));
