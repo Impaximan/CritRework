@@ -751,7 +751,7 @@ Items: {
 		DisplayName: Sapling Simulacrum
 		Tooltip:
 			'''
-			10% increasd critical strike chance
+			10% increased critical strike chance
 			10% additional critical strike chance per augmentation on a given weapon
 			'''
 	}
@@ -764,6 +764,17 @@ Items: {
 			When applied to a weapon, this disables normal critical strikes
 			Instead, critical strikes will reduce all debuff times, including potion sickness
 			Debuff reduction scales with critical strike power
+			'''
+	}
+
+	BouncyBall: {
+		CanBeApplied: ""
+		DisplayName: Bouncy Ball
+		Tooltip:
+			'''
+			When applied to a weapon, this disables normal critical strikes
+			Instead, critical strikes will increase the knockback of the attack
+			Knockback scales with critical strike power and potency
 			'''
 	}
 }
