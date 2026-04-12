@@ -717,7 +717,7 @@ namespace CritRework.Common.ModPlayers
 
                     if (Player.HasEquip<ShortestStraw>())
                     {
-                        finalBonusDamageMult *= MathHelper.Lerp(1f, 1.35f, 1f - target.life / (float)target.lifeMax);
+                        finalBonusDamageMult *= MathHelper.Lerp(1f, 1.25f, 1f - target.life / (float)target.lifeMax);
                     }
 
                     if (lastHitWasCrit)

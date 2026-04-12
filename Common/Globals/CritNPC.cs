@@ -270,6 +270,11 @@ namespace CritRework.Common.Globals
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<HoneydippedStinger>(), 3));
             }
 
+            if (npc.type == NPCID.Ghost)
+            {
+                npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<FatedFlame>(), 3, 5));
+            }
+
             if (npc.aiStyle == NPCAIStyleID.Slime && !npc.friendly && !npc.CountsAsACritter)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SparkingSludge>(), 175));

@@ -18,12 +18,14 @@ Additions:
 -Added Apophis, who does not discriminate
 -Added the Windwalker, an accessory found in Sky Chests
 -Added Skyward Sling, a new accessory crafted with feathers and bronze
+-Added Grafted Sling, a combination of the Prosthetic Arm and Skyward Sling
 -Added Sapling Simulacrum, a combination between Eye of the Golem and Contaminated Sapling
+-Added Fated Flame, an accessory dropped by ghosts
+-Added the Last Straw, a combination of the Fated Flame and the Shortest Straw
 -Added a new weapon prefix, "Versatile," which allows you to put multiple augmentations on a weapon
 -Added a new weapon prefix, "Potent," which increases critical strike potency substantially
 -Added several new prefixes which can be given to augmentations, including prefixes which cause augmentations to only activate during certain conditions
 -Added a new material, the "Greenprint," which drops from Lihzahrds in the Jungle Temple and can be used to create powerful, crit-powered constructs
--Added Grafted Sling, a combination of the Prosthetic Arm and Skyward Sling
 -Added the Contaminated Sapling, a new accessory crafted with jungle spores and glowing mushrooms
 -Added Construct Armor
 -Added Reclaw potions

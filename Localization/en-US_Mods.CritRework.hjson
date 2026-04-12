@@ -478,7 +478,7 @@ Items: {
 		DisplayName: Shortest Straw
 		Tooltip:
 			'''
-			Increases critical strike damage the lower the enemy's life is, up to 35%
+			Increases critical strike damage the lower the enemy's life is, up to 25%
 			Increases consecutive critical strike damage by 5%
 			'The fallout has begun, oppressive damage done'
 			'''
@@ -757,7 +757,7 @@ Items: {
 		Tooltip:
 			'''
 			10% increased critical strike chance
-			10% additional critical strike chance per augmentation on a given weapon
+			8% additional critical strike chance per augmentation on a given weapon
 			'''
 	}
 
@@ -780,6 +780,25 @@ Items: {
 			When applied to a weapon, this disables normal critical strikes
 			Instead, critical strikes will increase the knockback of the attack
 			Knockback scales with critical strike power and potency
+			'''
+	}
+
+	FatedFlame: {
+		DisplayName: Fated Flame
+		Tooltip:
+			'''
+			Increases critical strike potency by 30% while at least half of your HP is missing
+			'It burns on both ends'
+			'''
+	}
+
+	LastStraw: {
+		DisplayName: Last Straw
+		Tooltip:
+			'''
+			Increases critical strike potency by 30% while at least half of your HP is missing
+			Increases critical strike damage the lower the enemy's life is, up to 25%
+			'Increases damage dealt to camels'
 			'''
 	}
 }

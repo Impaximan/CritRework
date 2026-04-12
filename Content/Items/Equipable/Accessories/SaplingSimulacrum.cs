@@ -39,7 +39,7 @@ namespace CritRework.Content.Items.Equipable.Accessories
         public override void UpdateEquip(Player player)
         {
             player.GetCritChance(DamageClass.Generic) += 10;
-            damagePerAugmentation = 19f;
+            ContaminatedSapling.damagePerAugmentation = 8f;
             player.AddEquip<ContaminatedSapling>();
         }
     }
