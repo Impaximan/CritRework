@@ -755,6 +755,17 @@ Items: {
 			10% additional critical strike chance per augmentation on a given weapon
 			'''
 	}
+
+	Ambrosia: {
+		CanBeApplied: ""
+		DisplayName: Ambrosia
+		Tooltip:
+			'''
+			When applied to a weapon, this disables normal critical strikes
+			Instead, critical strikes will reduce all debuff times, including potion sickness
+			Debuff reduction scales with critical strike power
+			'''
+	}
 }
 
 Whetstone: {
@@ -1229,9 +1240,9 @@ CritTypes: {
 
 	ShadowflameKnife: {
 		Description: Critically strikes after ricocheting off at least one target
-		SpecialPrefixName: Enduring
-		SpecialPrefixTooltip1: Can ricochet infinitely many times
-		SpecialPrefixTooltip2: Multiple knives can strike a single target at once
+		SpecialPrefixName: Advanced
+		SpecialPrefixTooltip1: Can ricochet off of walls
+		SpecialPrefixTooltip2: ""
 		CanBeAppliedToDescription: Mods.CritRework.CritTypes.ShadowflameKnife.CanBeAppliedToDescription
 		BasicWhetstonePrefix: Mods.CritRework.CritTypes.ShadowflameKnife.BasicWhetstonePrefix
 	}

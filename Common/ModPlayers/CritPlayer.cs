@@ -55,6 +55,8 @@ namespace CritRework.Common.ModPlayers
         public bool firstTimeSpawning = true;
         public Projectile sawProjectile = null;
         public float augmentedWeaponCritBoost = 0f;
+        public int ambrosiaTextCounter = 0;
+        public int ambrosiaTotal = 0;
 
         public List<Projectile> criticalCurses = new();
         public bool fireCriticalCurse = false;
@@ -249,6 +251,20 @@ namespace CritRework.Common.ModPlayers
             if (sawProjectile != null && !sawProjectile.active)
             {
                 sawProjectile = null;
+            }
+
+            if (ambrosiaTextCounter > 0)
+            {
+                ambrosiaTextCounter--;
+                
+                if (ambrosiaTextCounter <= 0)
+                {
+                    float seconds = ambrosiaTotal / 60f;
+
+                    CombatText.NewText(Player.getRect(), Color.LightCoral, "-" + Math.Round(seconds, 1).ToString() + "s");
+
+                    ambrosiaTotal = 0;
+                }
             }
 
             if (firstTimeSpawning && Player.whoAmI == Main.myPlayer)
@@ -844,7 +860,7 @@ namespace CritRework.Common.ModPlayers
                     timeSinceCrit = 0;
                 }
 
-                if (crit.ogItem.TryGetGlobalItem(out CritItem critItem))
+                if (crit.ogItem != null && crit.ogItem.TryGetGlobalItem(out CritItem critItem))
                 {
                     List<Augmentation> overrides = critItem.augmentations.Where(x => x.OverrideNormalCritBehavior(Player, crit.ogItem, proj, null, crit.critType, target)).ToList();
 

@@ -8,6 +8,7 @@ Additions:
 -Added the Boomstickifier, an augmentation sold by the demolotionist
 -Added the Thorn Ring, an augmentation crafted with wood (and a bit of [HEART SHAPED OBJECT]...)
 -Added the Buckler, an augmentation found in golden chests
+-Added Ambrosia, an augmentation crafted with Pixie Dust in early hardmode
 -Added the Curser's Quill, an augmentation found in the Dungeon
 -Added the Hunter's Drawstring, an augmentation which is dropped by Skeleton Archers
 -Added the Manalytic Converter, an augmentation crafted with Copper/Tin
@@ -48,6 +49,7 @@ Changes
 -Reduced power of 10% critical strike chance condition, as it's one of the few crit conditions which introduces no gameplay and thus should not be particularly powerful by comparison to more interesting conditions
 -Reduced chance bonus of Blessed and Deific prefixes
 -10 second cooldown crit power now changes depending on weapon tier (it felt too powerful early game and too weak later, this should make it a more interesting option at all stages of progression)
+-Reworked critical prefix of Shadowflame Knife and reduced Shadowflame Knife critical strike power slightly
 
 Fixes
 -Updated hitbox for overgrown Vilethorn and Crystal Vile Shard to grow as intended

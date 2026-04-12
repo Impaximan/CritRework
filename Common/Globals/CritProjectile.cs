@@ -151,6 +151,31 @@ namespace CritRework.Common.Globals
                     projectile.localNPCImmunity[i] = 0;
                 }
             }
+
+            if (ogItem != null && ogItem.type == ItemID.ShadowFlameKnife && ogItem.IsSpecial(Main.player[projectile.owner]))
+            {
+                if (oldVelocity.X != projectile.velocity.X) projectile.velocity.X = -oldVelocity.X;
+                if (oldVelocity.Y != projectile.velocity.Y) projectile.velocity.Y = -oldVelocity.Y;
+
+                projectile.timeLeft -= 1000;
+                targetsHit++;
+
+                SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/MetalClink3")
+                {
+                    PitchVariance = 0.67f,
+                    Volume = 0.2f,
+                    MaxInstances = 10,
+                }, projectile.Center);
+                projectile.ai[0] += 30;
+
+                if (projectile.timeLeft <= 0)
+                {
+                    projectile.timeLeft = 0;
+                }
+
+                return false;
+            }
+
             return base.OnTileCollide(projectile, oldVelocity);
         }
 
@@ -314,11 +339,6 @@ namespace CritRework.Common.Globals
             {
                 switch (item.type)
                 {
-                    case ItemID.ShadowFlameKnife:
-                        projectile.penetrate = -1;
-                        projectile.usesLocalNPCImmunity = true;
-                        projectile.localNPCHitCooldown = 10;
-                        break;
                     case ItemID.ShadowbeamStaff:
                         projectile.usesLocalNPCImmunity = true;
                         projectile.localNPCHitCooldown = 10;
