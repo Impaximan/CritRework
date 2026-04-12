@@ -54,8 +54,8 @@ namespace CritRework.Content.Items.Augmentations
 
                 direction.Normalize();
 
-                target.velocity = direction * power * hit.Knockback * target.knockBackResist;
-                target.velocity.Y -= 0.5f * power * hit.Knockback * target.knockBackResist;
+                target.velocity = direction * power * hit.Knockback * target.knockBackResist * player.GetPotency(item);
+                target.velocity.Y -= 0.5f * power * hit.Knockback * target.knockBackResist * player.GetPotency(item);
                 SoundEngine.PlaySound(SoundID.Item56, target.Center);
             }
         }

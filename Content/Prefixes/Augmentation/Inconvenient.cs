@@ -2,9 +2,9 @@
 {
     public class Inconvenient : AugmentationPrefix
     {
-        public override void SetStats(ref float critDamageMult, ref float nonCritDamageMult, ref float useTimeMult, ref float valueMult)
+        public override void SetStats(ref float critDamageMult, ref float nonCritDamageMult, ref float useTimeMult, ref float valueMult, ref float potencyMult)
         {
-            useTimeMult *= 1.3f;
+            useTimeMult *= 1.2f;
         }
     }
 }

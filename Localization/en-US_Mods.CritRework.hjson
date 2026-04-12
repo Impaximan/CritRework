@@ -522,7 +522,7 @@ Items: {
 			'''
 			When applied to a weapon, this disables normal critical strikes
 			When that weapon would normally critically strike, you will heal for some life
-			Healing depends on the critical strike condition
+			Healing scales with critical strike power and potency
 			'''
 	}
 
@@ -545,7 +545,7 @@ Items: {
 		Tooltip:
 			'''
 			When applied to a weapon, this disables normal critical strikes
-			Instead, gain defense proportional to the critical strike power for 1 second
+			Instead, gain defense proportional to the critical strike power and potency for 1 second
 			Upon taking damage while your defense is buffed, the defense is converted into damage for 3 seconds
 			During that time, critical strikes are re-enabled;
 			Afterwards, you are vulnerable for 10 seconds before you can use this again
@@ -560,7 +560,7 @@ Items: {
 			When applied to a weapon, this disables normal critical strikes
 			Instead, extract a soul from the struck enemy, storing the critical strike
 			Upon using a different weapon, all stored souls will be released for critical damage
-			Up to 10 souls can be stored
+			Up to 10 souls can be stored by default, plus 1 per 10% potency
 			'''
 	}
 
@@ -583,7 +583,7 @@ Items: {
 			'''
 			When applied to a weapon, this disables normal critical strikes
 			Instead, inflict target with 'Hunter's Mark', increasing critical strike damage from non-arrows by 25%
-			Duration of the mark depends on the damage of the critical strike
+			Duration of the mark depends on the power and potency of the critical strike
 			'''
 	}
 
@@ -594,7 +594,7 @@ Items: {
 			'''
 			When applied to a weapon, this disables normal critical strikes
 			Instead, gain mana in place of critically striking
-			Mana gained scales with critical strike power
+			Mana gained scales with critical strike power and potency
 			'''
 	}
 
@@ -605,7 +605,7 @@ Items: {
 			'''
 			When applied to a weapon, this disables normal critical strikes
 			Instead, gain mana in place of critically striking
-			Mana gained scales with critical strike power
+			Mana gained scales with critical strike power and potency
 			'''
 	}
 
@@ -636,7 +636,7 @@ Items: {
 			'''
 			Attaches a chainsaw to augmented arnament, decreasing accuracy
 			Critically striking will rev the chainsaw to deal close-range damage
-			Chainsaw duration depends on critical strike power
+			Rev duration depends on critical strike power and potency
 			Accuracy greatly reduced while chainsaw is active
 			'Mankind might not be dead but this thing will make us deader'
 			'''
@@ -720,13 +720,18 @@ Items: {
 			'''
 			When applied to a weapon, if an enemy is killed by a critical strike, spawn a doomstone
 			All enemies and players near the doomstone are given 'Doom', lowering defense
+			Range of Doom scales with critical strike potency
 			'The wall on which the prophets wrote is cracking at the seams'
 			'''
 	}
 
 	ConstructHelmet: {
 		DisplayName: Construct Helmet
-		Tooltip: 15% increased critical strike chance on augmented weapons
+		Tooltip:
+			'''
+			15% increased critical strike chance on augmented weapons
+			15% increased critical strike potency
+			'''
 	}
 
 	ConstructGreaves: {
@@ -763,7 +768,7 @@ Items: {
 			'''
 			When applied to a weapon, this disables normal critical strikes
 			Instead, critical strikes will reduce all debuff times, including potion sickness
-			Debuff reduction scales with critical strike power
+			Debuff reduction scales with critical strike power and potency
 			'''
 	}
 
@@ -869,6 +874,15 @@ Prefixes: {
 		tooltip2: Mods.CritRework.Prefixes.Grieving.tooltip2
 		DisplayName: Grieving
 	}
+
+	Potent: {
+		Tooltip: +30% critical strike potency
+		DisplayName: Potent
+	}
+
+	Effective.DisplayName: Effective
+	Impotent.DisplayName: Impotent
+	Particular.DisplayName: Particular
 }
 
 NecromanticTooltip: +2 lifesteal when inflicting critical damage upon enemies
@@ -939,7 +953,7 @@ Configs: {
 
 		randomHijackChance: {
 			Label: Reforge hijack chance
-			Tooltip: The chance for a weapon to be "hijacked"" when reforged by the goblin tinkerer, changing its crit condition.
+			Tooltip: The chance for a weapon to be "hijacked" when reforged by the goblin tinkerer, changing its crit condition.
 		}
 
 		randomHijackSound: {
@@ -966,8 +980,8 @@ Configs: {
 			Label: Crit scaling calculations
 			Tooltip:
 				'''
-				Determines the way critical strike damage scales with crit damage/chance bonuses.
-				"Balanced" is the most recommended, but simple is more powerful and easier to understand if that's what you prefer.
+				Determines the way critical strike damage scales with crit power/chance bonuses.
+				"Balanced" is the most recommended, but simple is generally more powerful and easier to understand if that's what you prefer.
 				'''
 		}
 
@@ -1998,4 +2012,8 @@ StartingMessage:
 	'''
 sawDamageReduced: -Chainsaw damage greatly reduced by this critical strike condition
 overclockedTooltip: Overclocked: Greater than max number of augmentations causes you to take damage upon use
-ConstructHelmet.SetBonus: Allows you to add an additional augmentation to weapons
+ConstructHelmet.SetBonus:
+	'''
+	Allows you to add an additional augmentation to weapons
+	25% increased critical strike potency
+	'''

@@ -45,26 +45,27 @@ namespace CritRework.Content.Items.Augmentations
                 float damageMult = CritType.CalculateActualCritMult(critType, item, player);
                 CritPlayer critPlayer = player.GetModPlayer<CritPlayer>();
                 critPlayer.timeSinceCrit = 0;
+                critPlayer.bucklerWeapon = item;
                 if (critPlayer.bucklerPower < damageMult - 1f)
                 {
                     critPlayer.bucklerPower = damageMult - 1f;
 
                     SoundEngine.PlaySound(SoundID.Item37, player.Center);
-                    CombatText.NewText(player.getRect(), new Color(220, 220, 240), GetDefense(critPlayer.bucklerPower));
+                    CombatText.NewText(player.getRect(), new Color(220, 220, 240), GetDefense(critPlayer.bucklerPower, player));
                 }
 
                 player.AddBuff(ModContent.BuffType<BucklerDefense>(), 60);
             }
         }
 
-        public static int GetDefense(float bucklerPower)
+        public static int GetDefense(float bucklerPower, Player player)
         {
-            return 10 + (int)(bucklerPower * 15);
+            return (int)((10 + bucklerPower * 15) * player.GetPotency(player.GetModPlayer<CritPlayer>().bucklerWeapon));
         }
 
-        public static float GetDamageBoost(float bucklerPower)
+        public static float GetDamageBoost(float bucklerPower, Player player)
         {
-            return bucklerPower / 2f;
+            return bucklerPower / 3f * player.GetPotency(player.GetModPlayer<CritPlayer>().bucklerWeapon);
         }
     }
 
@@ -77,7 +78,7 @@ namespace CritRework.Content.Items.Augmentations
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.statDefense += Buckler.GetDefense(player.GetModPlayer<CritPlayer>().bucklerPower);
+            player.statDefense += Buckler.GetDefense(player.GetModPlayer<CritPlayer>().bucklerPower, player);
         }
     }
 
@@ -90,7 +91,7 @@ namespace CritRework.Content.Items.Augmentations
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.GetDamage(DamageClass.Generic) += Buckler.GetDamageBoost(player.GetModPlayer<CritPlayer>().bucklerPower);
+            player.GetDamage(DamageClass.Generic) += Buckler.GetDamageBoost(player.GetModPlayer<CritPlayer>().bucklerPower, player);
 
             if (player.buffTime[buffIndex] <= 0)
             {

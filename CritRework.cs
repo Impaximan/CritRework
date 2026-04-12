@@ -144,6 +144,32 @@ namespace CritRework
 
     public static class Extensions
     {
+        public static void AddPotency(this Player player, float amount)
+        {
+            if (player.TryGetModPlayer(out CritPlayer critPlayer))
+            {
+                critPlayer.potency += amount;
+            }
+        }
+
+        public static float GetPotency(this Player player, Item weapon)
+        {
+            if (player.TryGetModPlayer(out CritPlayer critPlayer))
+            {
+                return critPlayer.potency * weapon.GetPotency();
+            }
+            return 1f;
+        }
+
+        public static float GetPotency(this Item item)
+        {
+            if (item.TryGetGlobalItem(out CritItem critItem))
+            {
+                return critItem.Potency(item);
+            }
+            return 1f;
+        }
+
         public static void DoManaRechargeEffect(this Player player)
         {
             if (player.whoAmI == Main.myPlayer) SoundEngine.PlaySound(SoundID.MaxMana);

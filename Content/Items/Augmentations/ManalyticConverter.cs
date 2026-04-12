@@ -56,7 +56,7 @@ namespace CritRework.Content.Items.Augmentations
                     Volume = 0.65f
                 }, target.Center);
 
-                counter += (damageMult - 1f) * 10f; //The amount gained per crit
+                counter += (damageMult - 1f) * 10f * player.GetPotency(item); //The amount gained per crit
 
                 if ((int)counter > 0)
                 {
@@ -123,7 +123,7 @@ namespace CritRework.Content.Items.Augmentations
                     Volume = 0.65f
                 }, target.Center);
 
-                counter += (damageMult - 1f) * 10f; //The amount gained per crit
+                counter += (damageMult - 1f) * 10f * player.GetPotency(item); //The amount gained per crit
 
                 if ((int)counter > 0)
                 {

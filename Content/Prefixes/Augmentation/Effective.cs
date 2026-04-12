@@ -1,11 +1,10 @@
 ﻿namespace CritRework.Content.Prefixes.Augmentation
 {
-    public class Unreliable : AugmentationPrefix
+    public class Effective : AugmentationPrefix
     {
         public override void SetStats(ref float critDamageMult, ref float nonCritDamageMult, ref float useTimeMult, ref float valueMult, ref float potencyMult)
         {
-            nonCritDamageMult = 0.85f;
-            valueMult *= 0.95f;
+            potencyMult += 0.12f;
         }
     }
 }

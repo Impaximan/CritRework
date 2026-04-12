@@ -15,7 +15,7 @@
 
         public override bool ConditionPrefix => true;
 
-        public override void SetStats(ref float critDamageMult, ref float nonCritDamageMult, ref float useTimeMult, ref float valueMult)
+        public override void SetStats(ref float critDamageMult, ref float nonCritDamageMult, ref float useTimeMult, ref float valueMult, ref float potencyMult)
         {
             critDamageMult = 1.08f;
             valueMult *= 0.93f;

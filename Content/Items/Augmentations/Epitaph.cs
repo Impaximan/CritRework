@@ -35,7 +35,7 @@ namespace CritRework.Content.Items.Augmentations
                     }
                 }
 
-                float range = 700f;
+                float range = 700f * player.GetPotency(item);
 
                 if (item.prefix == ModContent.PrefixType<Grieving>())
                 {

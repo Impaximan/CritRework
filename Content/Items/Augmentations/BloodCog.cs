@@ -61,7 +61,7 @@ namespace CritRework.Content.Items.Augmentations
                 {
                     float damageMult = CritType.CalculateActualCritMult(critType, item, player);
                     if (critPlayer.sawProjectile.ai[0] <= 0) SoundEngine.PlaySound(SoundID.Item23, critPlayer.sawProjectile.Center);
-                    critPlayer.sawProjectile.ai[0] = 100 * (damageMult - 1f) + item.useTime;
+                    critPlayer.sawProjectile.ai[0] = (100 * (damageMult - 1f) + item.useTime) * player.GetPotency(item);
                     critPlayer.sawProjectile.netUpdate = true;
                 }
             }

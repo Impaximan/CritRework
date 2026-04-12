@@ -55,6 +55,7 @@ namespace CritRework.Common.ModPlayers
         public bool firstTimeSpawning = true;
         public Projectile sawProjectile = null;
         public float augmentedWeaponCritBoost = 0f;
+        public float potency = 1f;
         public int ambrosiaTextCounter = 0;
         public int ambrosiaTotal = 0;
 
@@ -107,6 +108,8 @@ namespace CritRework.Common.ModPlayers
         public CritType? prostheticCrit = null;
         public CritType? EVILCrit = null;
         public ShadowDonut? shadowDonut = null;
+
+        public Item? bucklerWeapon = null;
 
 
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
@@ -199,6 +202,7 @@ namespace CritRework.Common.ModPlayers
             uniqueCritSound = null;
             summonSpecial = false;
             consecutiveCriticalStrikeDamage = 1f;
+            potency = 1f;
             maxAugmentations = 0;
             augmentedWeaponCritBoost = 0f;
 
@@ -668,8 +672,9 @@ namespace CritRework.Common.ModPlayers
                             float nonCritDamage = 1f;
                             float useTimeMult = 1f;
                             float v = 1f;
+                            float p = 1f;
 
-                            prefix.SetStats(ref critDamage, ref critDamage, ref useTimeMult, ref v);
+                            prefix.SetStats(ref critDamage, ref critDamage, ref useTimeMult, ref v, ref p);
 
                             modifiers.CritDamage *= critDamage;
                             modifiers.NonCritDamage *= nonCritDamage;
@@ -799,7 +804,7 @@ namespace CritRework.Common.ModPlayers
                 Player.ClearBuff(ModContent.BuffType<BucklerDefense>());
                 Player.AddBuff(ModContent.BuffType<BucklerRetaliation>(), 180);
                 SoundEngine.PlaySound(new SoundStyle("CritRework/Assets/Sounds/HeavyMetal"), Player.Center);
-                CombatText.NewText(Player.getRect(), Color.Pink, "+" + Math.Round(Buckler.GetDamageBoost(bucklerPower) * 100f) + "%", true);
+                CombatText.NewText(Player.getRect(), Color.Pink, "+" + Math.Round(Buckler.GetDamageBoost(bucklerPower, Player) * 100f) + "%", true);
 
                 PunchCameraModifier modifier = new(Player.Center, new Vector2(info.HitDirection, 0f), 10f, 10f, 8, 500f);
                 Main.instance.CameraModifiers.Add(modifier);

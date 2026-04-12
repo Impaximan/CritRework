@@ -36,7 +36,7 @@ namespace CritRework.Content.Items.Augmentations
             if (critCondition)
             {
                 float damageMult = CritType.CalculateActualCritMult(critType, item, player);
-                target.AddBuff(ModContent.BuffType<HuntersMark>(), 10 + (int)((damageMult - 1f) * 120));
+                target.AddBuff(ModContent.BuffType<HuntersMark>(), (int)((10 + ((damageMult - 1f) * 120)) * player.GetPotency(item)));
             }
         }
     }

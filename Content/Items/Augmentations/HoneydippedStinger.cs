@@ -64,7 +64,7 @@ namespace CritRework.Content.Items.Augmentations
                 if (cooldown <= 0)
                 {
                     cooldown = 15;
-                    counter += (damageMult - 1f) * 3f; //The amount healed per crit
+                    counter += (damageMult - 1f) * 2.25f * player.GetPotency(item); //The amount healed per crit
 
                     if ((int)counter > 0)
                     {

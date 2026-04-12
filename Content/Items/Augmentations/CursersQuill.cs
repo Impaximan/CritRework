@@ -45,6 +45,8 @@ namespace CritRework.Content.Items.Augmentations
                 max = 15;
             }
 
+            max += (int)((player.GetPotency(item) - 1f) * 10f);
+
             if (critCondition && (projectile == null || projectile.type != ModContent.ProjectileType<CriticalCurse>()))
             {
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<CriticalCurse>()] < max)

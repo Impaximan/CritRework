@@ -62,7 +62,7 @@ namespace CritRework.Content.Items.Augmentations
                     MaxInstances = 10,
                 }, player.Center);
 
-                ReduceAllDebuffs(player, (int)(power * 10f));
+                ReduceAllDebuffs(player, (int)(power * 7.5f * player.GetPotency(item)));
             }
         }
 

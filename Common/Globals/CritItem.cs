@@ -47,6 +47,34 @@ namespace CritRework.Common.Globals
         public bool recoverableArrow = false;
         public bool harpoonFireAgain = false;
 
+        public float Potency(Item item)
+        {
+            float amount = 1f;
+
+            if (item.prefix == ModContent.PrefixType<Content.Prefixes.Weapon.Potent>())
+            {
+                amount += Content.Prefixes.Weapon.Potent.potencyBonus;
+            }
+
+            float c = 1f;
+            float n = 1f;
+            float u = 1f;
+            float v = 1f;
+            float potency = 1f;
+
+            foreach (Augmentation augmentation in augmentations)
+            {
+                if (PrefixLoader.GetPrefix(augmentation.Item.prefix) is AugmentationPrefix prefix)
+                {
+                    prefix.SetStats(ref c, ref n, ref u, ref v, ref potency);
+                }
+            }
+
+            amount += potency - 1f;
+
+            return amount;
+        }
+
         public int extraMaxAugmentations = 0;
 
         public List<Augmentation> augmentations = new List<Augmentation>();
@@ -165,7 +193,8 @@ namespace CritRework.Common.Globals
                         float n = 1f;
                         float useTimeMult = 1f;
                         float v = 1f;
-                        prefix.SetStats(ref c, ref n, ref useTimeMult, ref v);
+                        float p = 1f;
+                        prefix.SetStats(ref c, ref n, ref useTimeMult, ref v, ref p);
 
                         mult /= useTimeMult;
                     }

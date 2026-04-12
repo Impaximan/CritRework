@@ -26,6 +26,7 @@ namespace CritRework.Content.Items.Equipable.Armor.Construct
         public override void UpdateEquip(Player player)
         {
             player.GetModPlayer<CritPlayer>().augmentedWeaponCritBoost += 15f;
+            player.AddPotency(0.15f);
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
@@ -39,6 +40,7 @@ namespace CritRework.Content.Items.Equipable.Armor.Construct
             player.setBonus = SetBonus.Value;
 
             player.GetModPlayer<CritPlayer>().maxAugmentations++;
+            player.AddPotency(0.25f);
         }
 
         public override void AddRecipes()

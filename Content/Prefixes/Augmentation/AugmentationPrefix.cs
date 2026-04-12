@@ -27,7 +27,7 @@ namespace CritRework.Content.Prefixes.Augmentation
             base.SetStats(ref damageMult, ref knockbackMult, ref useTimeMult, ref scaleMult, ref shootSpeedMult, ref manaMult, ref critBonus);
         }
 
-        public virtual void SetStats(ref float critDamageMult, ref float nonCritDamageMult, ref float useTimeMult, ref float valueMult)
+        public virtual void SetStats(ref float critDamageMult, ref float nonCritDamageMult, ref float useTimeMult, ref float valueMult, ref float potencyMult)
         {
 
         }
@@ -37,11 +37,13 @@ namespace CritRework.Content.Prefixes.Augmentation
             float critDamageMult = 1f;
             float nonCritDamageMult = 1f;
             float useTimeMult = 1f;
+            float potencyMult = 1f;
 
-            SetStats(ref critDamageMult, ref nonCritDamageMult, ref useTimeMult, ref valueMult);
+            SetStats(ref critDamageMult, ref nonCritDamageMult, ref useTimeMult, ref valueMult, ref potencyMult);
 
             valueMult *= critDamageMult;
             valueMult *= nonCritDamageMult;
+            valueMult *= potencyMult;
             valueMult /= useTimeMult;
         }
 
@@ -69,8 +71,9 @@ namespace CritRework.Content.Prefixes.Augmentation
                 float nonCritDamageMult = 1f;
                 float useTimeMult = 1f;
                 float valuemult = 1f;
+                float potencyMult = 1f;
 
-                SetStats(ref critDamageMult, ref nonCritDamageMult, ref useTimeMult, ref valuemult);
+                SetStats(ref critDamageMult, ref nonCritDamageMult, ref useTimeMult, ref valuemult, ref potencyMult);
 
                 if (ConditionPrefix)
                 {
@@ -107,6 +110,23 @@ namespace CritRework.Content.Prefixes.Augmentation
                 else if (nonCritDamageMult < 1f)
                 {
                     lines.Add(new TooltipLine(Mod, "PrefixDamage", "-" + Math.Round((nonCritDamageMult - 1f) * -100f).ToString() + "% non-critical strike damage")
+                    {
+                        IsModifier = true,
+                        IsModifierBad = true
+                    });
+                }
+
+
+                if (potencyMult > 1f)
+                {
+                    lines.Add(new TooltipLine(Mod, "PrefixPotency", "+" + Math.Round((potencyMult - 1f) * 100f).ToString() + "% critical strike potency")
+                    {
+                        IsModifier = true
+                    });
+                }
+                else if (potencyMult < 1f)
+                {
+                    lines.Add(new TooltipLine(Mod, "PrefixPotency", "-" + Math.Round((potencyMult - 1f) * -100f).ToString() + "% critical strike potency")
                     {
                         IsModifier = true,
                         IsModifierBad = true
