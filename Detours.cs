@@ -72,7 +72,7 @@ namespace CritRework
             {
                 if (Main.LocalPlayer.TryGetModPlayer(out CritPlayer critPlayer))
                 {
-                    if (Main.LocalPlayer.HeldItem != null && Main.LocalPlayer.HeldItem.IsSpecial() && Main.LocalPlayer.HeldItem.TryGetCritType(out CritType c) && c is CritWithAnother)
+                    if (Main.LocalPlayer.HeldItem != null && Main.LocalPlayer.HeldItem.IsSpecial(Main.LocalPlayer) && Main.LocalPlayer.HeldItem.TryGetCritType(out CritType c) && c is CritWithAnother)
                     {
                         critPlayer.timeSinceCrit = 0;
                     }

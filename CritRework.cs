@@ -16,6 +16,7 @@ using CritRework.Content.Items.Equipable.Accessories;
 using CritRework.Content.Items.Equipable.Accessories.Crackers;
 using CritRework.Content.Items.Augmentations;
 using Terraria.Audio;
+using CritRework.Content.Items.Equipable.Armor.Fraud;
 
 namespace CritRework
 {
@@ -267,7 +268,7 @@ namespace CritRework
 
         public static bool IsSpecial(this Item item, Player? owner = null)
         {
-            return item.prefix == ModContent.PrefixType<Special>() || (owner != null && item.DamageType == DamageClass.Summon && owner.TryGetModPlayer(out CritPlayer critPlayer) && critPlayer.summonSpecial);
+            return item.prefix == ModContent.PrefixType<Special>() || (owner != null && item.DamageType == DamageClass.Summon && owner.TryGetModPlayer(out CritPlayer critPlayer) && critPlayer.summonSpecial) || (owner != null && owner.HasEquip<FraudCrown>());
         }
 
         public static CritType? GetCritType(this Item item)

@@ -6,11 +6,6 @@ namespace CritRework.Content.Items.Equipable.Armor.Construct
     [AutoloadEquip(EquipType.Legs)]
     public class ConstructGreaves : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            //ArmorIDs.Body.Sets.HidesTopSkin[EquipLoader.GetEquipSlot(Mod, Name, EquipType.Legs)] = true;
-        }
-
         public override void SetDefaults()
         {
             Item.width = 30;

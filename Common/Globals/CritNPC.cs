@@ -225,6 +225,11 @@ namespace CritRework.Common.Globals
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MugShot>(), 15));
             }
 
+            if (npc.type == NPCID.Demon || npc.type == NPCID.VoodooDemon)
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Lie>(), 3, 2, 3));
+            }
+
             if (npc.type == NPCID.GoblinThief)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<AssassinsDagger>(), 6));

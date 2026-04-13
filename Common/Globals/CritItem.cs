@@ -21,6 +21,7 @@ using Terraria.Utilities;
 using CritRework.Content.Prefixes.Augmentation;
 using Microsoft.Xna.Framework.Input;
 using CritRework.Content.Buffs;
+using CritRework.Content.Items.Equipable.Armor.Fraud;
 
 namespace CritRework.Common.Globals
 {
@@ -56,7 +57,7 @@ namespace CritRework.Common.Globals
                 amount += Potent.potencyBonus;
             }
 
-            if (item.IsSpecial() && player.HasEquip<TiaraShard>())
+            if (item.IsSpecial(player) && player.HasEquip<TiaraShard>())
             {
                 amount += TiaraShard.potencyAdded;
             }
@@ -230,7 +231,7 @@ namespace CritRework.Common.Globals
                 crit += ContaminatedSapling.damagePerAugmentation * augmentations.Count;
             }
 
-            if (player.HasEquip<CrownShard>() && item.IsSpecial())
+            if (player.HasEquip<CrownShard>() && item.IsSpecial(player))
             {
                 crit += 15;
             }
@@ -299,7 +300,7 @@ namespace CritRework.Common.Globals
                     float baseScale = 30f;
                     if (Main.LocalPlayer.HeldItem == item && !Main.playerInventory) baseScale = 80f;
 
-                    if (c.critType.ShouldCrit(Main.LocalPlayer, item, null, null, new NPC.HitModifiers(), item.prefix == ModContent.PrefixType<Special>()))
+                    if (c.critType.ShouldCrit(Main.LocalPlayer, item, null, null, new NPC.HitModifiers(), item.IsSpecial(Main.LocalPlayer)))
                     {
                         alphaMult += (1f - alphaMult) * 0.2f;
                     }
@@ -788,6 +789,8 @@ namespace CritRework.Common.Globals
             CritPlayer critPlayer = Main.LocalPlayer.GetModPlayer<CritPlayer>();
             CritType usedCritType = critType;
 
+            string sparkle = "[i:" + ModContent.ItemType<SparkleIcon>() + "]";
+
             if (item.DamageType == DamageClass.Summon && critPlayer.summonCrit != null)
             {
                 usedCritType = critPlayer.summonCrit;
@@ -795,7 +798,6 @@ namespace CritRework.Common.Globals
 
             if (item.prefix == ModContent.PrefixType<Special>() || item.type == ModContent.ItemType<DivineShard>())
             {
-                string sparkle = "[i:" + ModContent.ItemType<SparkleIcon>() + "]";
 
                 TooltipLine name = tooltips.Find(x => x.Name == "ItemName");
                 name.Text = sparkle + " " + name.Text + " " + sparkle;
@@ -1191,6 +1193,29 @@ namespace CritRework.Common.Globals
                 {
                     IsModifier = true,
                 });
+            }
+
+            if (Main.LocalPlayer.HasEquip<FraudCrown>() && item.prefix != ModContent.PrefixType<Special>() && critType != null)
+            {
+                int num = tooltips.Count;
+
+                if (tooltips.Exists(x => x.Name.Contains("Prefix") && x.Mod == "Terraria"))
+                {
+                    num = tooltips.FindIndex(x => x.Name.Contains("Prefix") && x.Mod == "Terraria");
+                }
+
+                tooltips.Insert(num, new TooltipLine(Mod, "SpecialModifier1", sparkle + " " + critType.specialPrefixTooltip1.Value)
+                {
+                    IsModifier = true,
+                });
+
+                if (critType.specialPrefixTooltip2.Value != "")
+                {
+                    tooltips.Insert(num + 1, new TooltipLine(Mod, "SpecialModifier2", sparkle + " " + critType.specialPrefixTooltip2.Value)
+                    {
+                        IsModifier = true,
+                    });
+                }
             }
 
             if (augmentations.Exists(x => x is BloodCog) && critType is CloseToFoe)

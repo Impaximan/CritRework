@@ -821,6 +821,31 @@ Items: {
 		DisplayName: Tiara Shard
 		Tooltip: 20% increased critical strike potency on critically reforged weapons
 	}
+
+	FraudCrown: {
+		SetBonus: All weapons gain critical reforge modifiers, regardless of what prefix they have
+		DisplayName: Falsehood's Crown
+		Tooltip: 8% increased critical strike chance
+	}
+
+	FraudPants: {
+		DisplayName: Falsehood's Trousers
+		Tooltip:
+			'''
+			5% increased critical strike chance
+			10% increased critical strike potency
+			'''
+	}
+
+	FraudVest: {
+		DisplayName: Falsehood's Vest
+		Tooltip: 10% increased critical strike chance
+	}
+
+	Lie: {
+		DisplayName: Lie
+		Tooltip: "'It's the little lies that add up'"
+	}
 }
 
 Whetstone: {

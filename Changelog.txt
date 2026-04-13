@@ -31,6 +31,7 @@ Additions:
 -Added a new material, the "Greenprint," which drops from Lihzahrds in the Jungle Temple and can be used to create powerful, crit-powered constructs
 -Added the Contaminated Sapling, a new accessory crafted with jungle spores and glowing mushrooms
 -Added Construct Armor
+-Added Falsehood's Armor
 -Added Reclaw potions
 -Added Horrificracker
 -Added Gilded Remains, a new utility item sold by the Pirate NPC
