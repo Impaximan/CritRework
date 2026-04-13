@@ -156,16 +156,16 @@ namespace CritRework
         {
             if (player.TryGetModPlayer(out CritPlayer critPlayer))
             {
-                return critPlayer.potency * weapon.GetPotency();
+                return critPlayer.potency * weapon.GetPotency(player);
             }
             return 1f;
         }
 
-        public static float GetPotency(this Item item)
+        public static float GetPotency(this Item item, Player player)
         {
             if (item.TryGetGlobalItem(out CritItem critItem))
             {
-                return critItem.Potency(item);
+                return critItem.Potency(item, player);
             }
             return 1f;
         }

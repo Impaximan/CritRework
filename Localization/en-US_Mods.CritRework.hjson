@@ -801,6 +801,26 @@ Items: {
 			'Increases damage dealt to camels'
 			'''
 	}
+
+	CrownShard: {
+		DisplayName: Crown Shard
+		Tooltip: 20% increased critical strike chance on critically reforged weapons
+	}
+
+	ReuinitedCoronet: {
+		DisplayName: Reuinited Coronet
+		Tooltip:
+			'''
+			15% increased critical strike chance on critically reforged weapons
+			20% increased critical strike potency on critically reforged weapons
+			'Happily ever after'
+			'''
+	}
+
+	TiaraShard: {
+		DisplayName: Tiara Shard
+		Tooltip: 20% increased critical strike potency on critically reforged weapons
+	}
 }
 
 Whetstone: {
@@ -825,12 +845,12 @@ Prefixes: {
 	Quality_Augment.DisplayName: Quality
 
 	Panicked: {
-		DisableCondition: Only active while below 30% life
+		DisableCondition: Only active while below 25% life
 		DisplayName: Panicked
 	}
 
 	Timid: {
-		DisableCondition: Only active while above 85% life
+		DisableCondition: Only active while above 65% life
 		DisplayName: Timid
 	}
 
@@ -2021,7 +2041,7 @@ Augmentation: {
 	Tooltip2: To apply, hold an applicable weapon with your mouse and right click on this item
 }
 
-RemoveAugmentation: Right click to remove augmentation
+RemoveAugmentation: Right click to remove augmentations
 StartingMessage:
 	'''
 	Welcome to [c/77ffb9:Critical Strikes Overhaul]!

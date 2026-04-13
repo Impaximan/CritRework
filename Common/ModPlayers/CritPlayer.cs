@@ -840,7 +840,7 @@ namespace CritRework.Common.ModPlayers
                     timeSinceCrit = 0;
                 }
 
-                List<Augmentation> overrides = critItem.augmentations.Where(x => x.OverrideNormalCritBehavior(Player, item, null, null, critItem.critType, target)).ToList();
+                List<Augmentation> overrides = critItem.augmentations.Where(x => x.Active(item, Player, critItem.augmentations.IndexOf(x), target) && x.OverrideNormalCritBehavior(Player, item, null, null, critItem.critType, target)).ToList();
 
                 if (overrides.Count > 0)
                 {
@@ -849,7 +849,7 @@ namespace CritRework.Common.ModPlayers
                     overAug.AugmentationOnHitNPC(Player, item, null, hit, critItem.critType, target, hitWouldCrit);
                 }
 
-                foreach (Augmentation augmentation in critItem.augmentations.Where(x => !overrides.Contains(x)))
+                foreach (Augmentation augmentation in critItem.augmentations.Where(x => x.Active(item, Player, critItem.augmentations.IndexOf(x), target) && !overrides.Contains(x)))
                 {
                     augmentation.AugmentationOnHitNPC(Player, item, null, hit, critItem.critType, target, hitWouldCrit);
                 }
@@ -867,7 +867,7 @@ namespace CritRework.Common.ModPlayers
 
                 if (crit.ogItem != null && crit.ogItem.TryGetGlobalItem(out CritItem critItem))
                 {
-                    List<Augmentation> overrides = critItem.augmentations.Where(x => x.OverrideNormalCritBehavior(Player, crit.ogItem, proj, null, crit.critType, target)).ToList();
+                    List<Augmentation> overrides = critItem.augmentations.Where(x => x.Active(crit.ogItem, Player, critItem.augmentations.IndexOf(x), target) && x.OverrideNormalCritBehavior(Player, crit.ogItem, proj, null, crit.critType, target)).ToList();
 
                     if (overrides.Count > 0)
                     {
@@ -876,7 +876,7 @@ namespace CritRework.Common.ModPlayers
                         overAug.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target,  hitWouldCrit);
                     }
 
-                    foreach (Augmentation augmentation in critItem.augmentations.Where(x => !overrides.Contains(x)))
+                    foreach (Augmentation augmentation in critItem.augmentations.Where(x => x.Active(crit.ogItem, Player, critItem.augmentations.IndexOf(x), target) && !overrides.Contains(x)))
                     {
                         augmentation.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target, hitWouldCrit);
                     }

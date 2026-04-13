@@ -270,6 +270,22 @@ namespace CritRework.Common.Globals
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<HoneydippedStinger>(), 3));
             }
 
+            if (npc.type == NPCID.KingSlime)
+            {
+                IItemDropRule dropRule1 = ItemDropRule.Common(ModContent.ItemType<CrownShard>(), 4);
+                IItemDropRule dropRule2 = dropRule1.OnFailedRoll(ItemDropRule.ByCondition(new FirstBossKillDropRule(), ModContent.ItemType<CrownShard>()));
+
+                npcLoot.Add(dropRule1);
+            }
+
+            if (npc.type == NPCID.QueenSlimeBoss)
+            {
+                IItemDropRule dropRule1 = ItemDropRule.Common(ModContent.ItemType<TiaraShard>(), 4);
+                IItemDropRule dropRule2 = dropRule1.OnFailedRoll(ItemDropRule.ByCondition(new FirstBossKillDropRule(), ModContent.ItemType<TiaraShard>()));
+
+                npcLoot.Add(dropRule1);
+            }
+
             if (npc.type == NPCID.Ghost)
             {
                 npcLoot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<FatedFlame>(), 3, 5));

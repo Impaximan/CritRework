@@ -42,6 +42,20 @@ namespace CritRework.Content.Items.Augmentations
 
         }
 
+        public bool Active(Item weapon, Player player, int index, NPC? npc = null)
+        {
+            if (Item.prefix == 0)
+            {
+                return true;
+            }
+
+            if (PrefixLoader.GetPrefix(Item.prefix) is AugmentationPrefix pre)
+            {
+                return !pre.DeactivateAugmentation(weapon, Item, player, index, npc);
+            }
+            return false;
+        }
+
         public override bool AllowPrefix(int pre)
         {
             if (PrefixLoader.GetPrefix(pre) != null)

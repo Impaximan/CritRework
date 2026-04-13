@@ -120,6 +120,7 @@ namespace CritRework.Content.Items.Augmentations
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
             modifiers.SourceDamage *= (float)Apophis.playerDamage / Projectile.damage;
+            modifiers.ScalingArmorPenetration += 1f;
             modifiers.SetMaxDamage(target.statLifeMax2 / 2);
         }
 
@@ -197,6 +198,7 @@ namespace CritRework.Content.Items.Augmentations
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
             modifiers.SourceDamage *= (float)Apophis.playerDamage / Projectile.damage;
+            modifiers.ScalingArmorPenetration += 1f;
             modifiers.SetMaxDamage(target.statLifeMax2 / 3);
         }
 

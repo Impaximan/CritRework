@@ -19,8 +19,7 @@ namespace CritRework.Content.Prefixes.Augmentation
 
         public override void SetStats(ref float critDamageMult, ref float nonCritDamageMult, ref float useTimeMult, ref float valueMult, ref float potencyMult)
         {
-            critDamageMult = 1.03f;
-            valueMult *= 0.95f;
+
         }
 
         public override float RollChance(Item item)

@@ -22,6 +22,9 @@ Additions:
 -Added Sapling Simulacrum, a combination between Eye of the Golem and Contaminated Sapling
 -Added Fated Flame, an accessory dropped by ghosts
 -Added the Last Straw, a combination of the Fated Flame and the Shortest Straw
+-Added Crown Shard, an accessory dropped by King Slime
+-Added Tiara Shard, an accessory dropped by Queen Slime
+-Added Ruinited Coronet, an accessory combining the Crown Shard and Tiara Shard
 -Added a new weapon prefix, "Versatile," which allows you to put multiple augmentations on a weapon
 -Added a new weapon prefix, "Potent," which increases critical strike potency substantially
 -Added several new prefixes which can be given to augmentations, including prefixes which cause augmentations to only activate during certain conditions

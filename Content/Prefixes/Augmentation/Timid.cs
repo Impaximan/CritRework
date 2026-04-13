@@ -10,15 +10,14 @@
 
         public override bool DeactivateAugmentation(Item weapon, Item augmentation, Player player, int index, NPC npc = null)
         {
-            return player.statLife < player.statLifeMax2 * 0.85f;
+            return player.statLife < player.statLifeMax2 * 0.65f;
         }
 
         public override bool ConditionPrefix => true;
 
         public override void SetStats(ref float critDamageMult, ref float nonCritDamageMult, ref float useTimeMult, ref float valueMult, ref float potencyMult)
         {
-            critDamageMult = 1.08f;
-            valueMult *= 0.93f;
+
         }
 
         public override float RollChance(Item item)

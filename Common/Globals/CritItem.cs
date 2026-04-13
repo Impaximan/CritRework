@@ -47,13 +47,18 @@ namespace CritRework.Common.Globals
         public bool recoverableArrow = false;
         public bool harpoonFireAgain = false;
 
-        public float Potency(Item item)
+        public float Potency(Item item, Player player)
         {
             float amount = 1f;
 
             if (item.prefix == ModContent.PrefixType<Content.Prefixes.Weapon.Potent>())
             {
-                amount += Content.Prefixes.Weapon.Potent.potencyBonus;
+                amount += Potent.potencyBonus;
+            }
+
+            if (item.IsSpecial() && player.HasEquip<TiaraShard>())
+            {
+                amount += TiaraShard.potencyAdded;
             }
 
             float c = 1f;
@@ -223,6 +228,11 @@ namespace CritRework.Common.Globals
             if (player.HasEquip<ContaminatedSapling>())
             {
                 crit += ContaminatedSapling.damagePerAugmentation * augmentations.Count;
+            }
+
+            if (player.HasEquip<CrownShard>() && item.IsSpecial())
+            {
+                crit += 15;
             }
 
             if (augmentations.Count > 0)
