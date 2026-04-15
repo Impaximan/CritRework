@@ -1857,6 +1857,15 @@ CritTypes: {
 		CanBeAppliedToDescription: Mods.CritRework.CritTypes.Fractal.CanBeAppliedToDescription
 		BasicWhetstonePrefix: Mods.CritRework.CritTypes.Fractal.BasicWhetstonePrefix
 	}
+
+	Guardian_Riposte: {
+		Description: Critically strikes after parrying an attack
+		SpecialPrefixName: Vigorous
+		SpecialPrefixTooltip1: 50% chance to critically strike an additional time
+		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Can only be applied to opposing weapons
+		BasicWhetstonePrefix: Riposte
+	}
 }
 
 UnknownTooltip: Unknown critical strike condition

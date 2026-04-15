@@ -39,6 +39,9 @@ Additions:
 -Added Homunculus Token
 -Added a new message that appears when entering a world for the first time with this mod enabled
 
+Cross mod additions:
+-Added a new unique critical strike condition for guardian weapons from Orchid Mod
+
 Changes
 -Rewrote critical strike damage tooltips to say critical strike power instead (for consistency with augmentations and less misleading behavior)
 -Starter Whetstones are no longer craftable (you only have the 2 that you started with now)

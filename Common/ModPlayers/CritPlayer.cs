@@ -85,6 +85,7 @@ namespace CritRework.Common.ModPlayers
         public int timeSinceSymbioteHit = 600;
         public int timeSinceSageHit = 600;
         public int timeSinceWardenHit = 600;
+        public bool parryCrit = false;
 
         //Calamity only
         public int timeSinceStealthStrike = 0;
