@@ -16,12 +16,12 @@ namespace CritRework.Content.CritTypes.WeaponSpecific
 
         public override float GetDamageMult(Player Player, Item Item)
         {
-            if (Player.TryGetModPlayer(out CritPlayer cPlayer))
+            if (Item.IsSpecial(Player))
             {
-                return 10f;
+                return 8f;
             }
 
-            return 3.5f;
+            return 2.5f;
         }
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)

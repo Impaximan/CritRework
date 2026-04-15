@@ -297,6 +297,8 @@ namespace CritRework.Common.Globals
 
         void InheritItemCrit(Projectile projectile, Item item, Player? player = null)
         {
+            hasInheritedItem = true;
+
             if (item.TryGetGlobalItem(out CritItem cItem))
             {
                 critType = item.GetGlobalItem<CritItem>().critType;
@@ -380,6 +382,7 @@ namespace CritRework.Common.Globals
             }
         }
 
+        bool hasInheritedItem = false;
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
             targetsHit = 0;
@@ -392,6 +395,7 @@ namespace CritRework.Common.Globals
             thrownUpward = projectile.velocity.Y < 0;
             highestPoint = projectile.Center.Y;
             fromPoisonedHand = false;
+            hasInheritedItem = false;
 
             if (source is EntitySource_ItemUse itemSource)
             {
@@ -443,6 +447,12 @@ namespace CritRework.Common.Globals
                 {
                     InheritItemCrit(projectile, item, projectile.owner != 255 ? Main.player[projectile.owner] : null);
                 }
+            }
+
+            //Unfortunately neccessary failsafe
+            if (!hasInheritedItem && projectile.friendly && projectile.owner == Main.myPlayer && Main.LocalPlayer != null && Main.LocalPlayer.HeldItem != null)
+            {
+                InheritItemCrit(projectile, Main.LocalPlayer.HeldItem, Main.LocalPlayer);
             }
 
             //Hook on spawn

@@ -60,7 +60,9 @@ Changes
 -Reworked critical prefix of Shadowflame Knife and reduced Shadowflame Knife critical strike power slightly
 
 Fixes
+-Added a failsafe so that more modded weapons should be compatible with this mod, even when mods do not make proper use of tModLoader's EntitySource system
 -Updated hitbox for overgrown Vilethorn and Crystal Vile Shard to grow as intended
+-Fixed the blowpipe critical strike modifier being way higher than intended (by like, several times)
 -The Goblin Tinkerer will no longer make the hijack sound for items which cannot critically strike anyway
 -Fixed Dungeon loot from this mod not spawning properly
 -Fixed Prosthetic Arm damage bonus displaying incorrectly for the longest time

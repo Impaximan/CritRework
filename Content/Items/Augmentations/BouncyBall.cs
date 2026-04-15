@@ -36,7 +36,7 @@ namespace CritRework.Content.Items.Augmentations
         public override void AugmentationOnHitNPC(Player player, Item item, Projectile projectile, NPC.HitInfo hit, CritType critType, NPC target, bool critCondition)
         {
             float power = CritType.CalculateActualCritMult(critType, item, player) - 1f;
-            power *= 3f;
+            power *= 5f;
             power += 1f;
 
             if (target.knockBackResist != 0 && critCondition)
@@ -55,7 +55,7 @@ namespace CritRework.Content.Items.Augmentations
                 direction.Normalize();
 
                 target.velocity = direction * power * hit.Knockback * target.knockBackResist * player.GetPotency(item);
-                target.velocity.Y -= 0.5f * power * hit.Knockback * target.knockBackResist * player.GetPotency(item);
+                target.velocity.Y -= 1f + 0.5f * power * hit.Knockback * target.knockBackResist * player.GetPotency(item);
                 SoundEngine.PlaySound(SoundID.Item56, target.Center);
             }
         }

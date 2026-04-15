@@ -663,7 +663,6 @@ namespace CritRework.Common.ModPlayers
             {
                 foreach (Augmentation a in critItem.augmentations)
                 {
-
                     if (critItem.AugmentationActive(a, item, Player, target))
                     {
                         if (PrefixLoader.GetPrefix(a.Item.prefix) is Content.Prefixes.Augmentation.AugmentationPrefix prefix)
