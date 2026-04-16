@@ -16,10 +16,10 @@ namespace CritRework.Content.CritTypes.RandomPool
 
             if (Item.OriginalRarity <= ItemRarityID.Pink)
             {
-                return 4f;
+                return 3.8f;
             }
 
-            return 5f;
+            return 4.5f;
         }
 
         public override bool CanApplyTo(Item item)

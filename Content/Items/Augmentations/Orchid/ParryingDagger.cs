@@ -62,13 +62,15 @@ namespace CritRework.Content.Items.Augmentations.Orchid
             }
 
             NPC.HitModifiers modifiers = new NPC.HitModifiers();
-            if (critCondition)
+            if (critCondition && cooldown <= 0)
             {
                 float power = CritType.CalculateActualCritMult(critType, item, player) - 1f;
 
+                cooldown = 10;
+
                 player.GetModPlayer<CritPlayer>().timeSinceCrit = 0;
 
-                counter += power * player.GetPotency(item);
+                counter += power * player.GetPotency(item) * 0.75f;
 
                 if (counter >= 1f)
                 {
