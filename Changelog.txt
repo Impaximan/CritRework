@@ -41,6 +41,7 @@ Additions:
 
 Cross mod additions:
 -Added a new unique critical strike condition for guardian weapons from Orchid Mod
+-Added the Parrying Dagger, an augmentation that can only be obtained with Orchid Mod enabled
 
 Changes
 -Rewrote critical strike damage tooltips to say critical strike power instead (for consistency with augmentations and less misleading behavior)

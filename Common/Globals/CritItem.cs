@@ -233,7 +233,7 @@ namespace CritRework.Common.Globals
 
             if (player.HasEquip<CrownShard>() && item.IsSpecial(player))
             {
-                crit += 15;
+                crit += 20;
             }
 
             if (augmentations.Count > 0)

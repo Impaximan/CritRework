@@ -261,8 +261,13 @@ namespace CritRework.Common.Globals
                                 player.velocity = player.DirectionTo(target.Center) * -5f;
                             }
                             player.velocity += target.velocity;
-                            player.immune = true;
-                            player.immuneTime += 10;
+
+                            if (!player.immune)
+                            {
+                                player.immune = true;
+                                player.immuneTime += 10;
+                            }
+
                             SoundEngine.PlaySound(target.HitSound, target.Center);
                         }
                         else

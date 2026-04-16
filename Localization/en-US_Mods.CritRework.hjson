@@ -846,6 +846,17 @@ Items: {
 		DisplayName: Lie
 		Tooltip: "'It's the little lies that add up'"
 	}
+
+	ParryingDagger: {
+		CanBeApplied: Can only be applied to pavises
+		DisplayName: Parrying Dagger
+		Tooltip:
+			'''
+			When applied to a weapon, this disables normal critical strikes
+			Instead, critical strikes will restore guard counters over time
+			The frequency of restoration scales with critical strike power and potency
+			'''
+	}
 }
 
 Whetstone: {
