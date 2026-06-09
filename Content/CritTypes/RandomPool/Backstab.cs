@@ -1,15 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace CritRework.Content.CritTypes.RandomPool
+﻿namespace CritRework.Content.CritTypes.RandomPool
 {
+	[ReinitializeDuringResizeArrays]
     internal class Backstab : CritType
     {
+		static readonly bool[] CanCrit = NPCID.Sets.Factory.CreateNamedSet("Backstab_CanCrit")
+		.Description("The Backstab crit type can crit against enemies in this set, regardless of ai style")
+		.RegisterBoolSet();
+		static readonly bool[] UsesDirection = NPCID.Sets.Factory.CreateNamedSet("Backstab_UsesDirection")
+		.Description("The Backstab crit type will use NPC.direction instead of NPC.spriteDirection against enemies in this set")
+		.RegisterBoolSet();
         public override bool InRandomPool => true;
 
         public override float GetDamageMult(Player Player, Item Item)
         {
-            if (Item.shoot == ProjectileID.None)
+            if (Item.shoot == ProjectileID.None || ContentSamples.ProjectilesByType[Item.shoot].aiStyle == ProjAIStyleID.ShortSword)
             {
                 return 3f;
             }
@@ -28,69 +32,41 @@ namespace CritRework.Content.CritTypes.RandomPool
 
         public override bool ShouldCrit(Player Player, Item Item, Projectile? Projectile, NPC target, NPC.HitModifiers modifiers, bool specialPrefix)
         {
-            List<int> directionBased = new()
-            {
-                NPCAIStyleID.Fighter,
-                NPCAIStyleID.DD2Fighter,
-                NPCAIStyleID.Caster,
-                NPCAIStyleID.Flying,
-                NPCAIStyleID.Bat,
-                NPCAIStyleID.DemonEye,
-                NPCAIStyleID.Vulture,
-                NPCAIStyleID.HoveringFighter,
-                NPCAIStyleID.Unicorn,
-                NPCAIStyleID.Snowman,
-                NPCAIStyleID.Rider,
-                NPCAIStyleID.Mothron,
-                NPCAIStyleID.Mimic,
-                NPCAIStyleID.BiomeMimic,
-                NPCAIStyleID.DD2Flying,
-            };
+			switch (target.aiStyle) {
+				case NPCAIStyleID.Fighter:
+				case NPCAIStyleID.DD2Fighter:
+				case NPCAIStyleID.Caster:
+				case NPCAIStyleID.DemonEye:
+				case NPCAIStyleID.Flying:
+				case NPCAIStyleID.Bat:
+				case NPCAIStyleID.Vulture:
+				case NPCAIStyleID.HoveringFighter:
+				case NPCAIStyleID.Unicorn:
+				case NPCAIStyleID.Snowman:
+				case NPCAIStyleID.Rider:
+				case NPCAIStyleID.Mothron:
+				case NPCAIStyleID.Mimic:
+				case NPCAIStyleID.BiomeMimic:
+				case NPCAIStyleID.DD2Flying:
+				break;
+				default:
+				if (CanCrit[target.type]) break;
+				return false;
+			}
 
-            List<int> spriteDirectionBased = new()
-            {
-                NPCAIStyleID.Fighter,
-                NPCAIStyleID.DD2Fighter,
-                NPCAIStyleID.Caster,
-                NPCAIStyleID.DemonEye,
-                NPCAIStyleID.Flying,
-                NPCAIStyleID.Bat,
-                NPCAIStyleID.Vulture,
-                NPCAIStyleID.HoveringFighter,
-                NPCAIStyleID.Unicorn,
-                NPCAIStyleID.Snowman,
-                NPCAIStyleID.Rider,
-                NPCAIStyleID.Mothron,
-                NPCAIStyleID.Mimic,
-                NPCAIStyleID.BiomeMimic,
-                NPCAIStyleID.DD2Flying,
-            };
+            int direction = target.spriteDirection;
+            if (UsesDirection[target.type]) direction = target.direction;
 
-            int direction = target.direction;
-            if (spriteDirectionBased.Contains(target.type)) direction = target.spriteDirection;
+            if (Projectile != null) {
+				if (Player.heldProj == Projectile.whoAmI && !ItemID.Sets.Yoyo[Item.type]) {
+					return Math.Sign(target.Center.X - Player.Center.X) == direction;
+				} else {
+					return (Projectile.velocity.Length() <= 2f && Math.Sign(target.Center.X - Projectile.Center.X) == direction)
+						|| Math.Sign(Projectile.velocity.X) == direction;
+				}
+			}
 
-            if (Projectile != null)
-            {
-                if (directionBased.Contains(target.aiStyle))
-                {
-                    if (Player.heldProj == Projectile.whoAmI && !ItemID.Sets.Yoyo[Item.type])
-                    {
-                        return Math.Sign(target.Center.X - Player.Center.X) == direction;
-                    }
-                    else
-                    {
-                        return (Projectile.velocity.Length() <= 2f && Math.Sign(target.Center.X - Projectile.Center.X) == direction) 
-                            || Math.Sign(Projectile.velocity.X) == direction;
-                    }
-                }
-            }
-
-            if (directionBased.Contains(target.aiStyle))
-            {
-                return Math.Sign(target.Center.X - Player.Center.X) == direction;
-            }
-
-            return false;
+			return Math.Sign(target.Center.X - Player.Center.X) == direction;
         }
     }
 }
