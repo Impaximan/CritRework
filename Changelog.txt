@@ -1,73 +1,9 @@
-﻿Update 1.6.0.0 "Locked and Loaded"
+﻿Update 1.6.1.0 "Locked and Loaded"
 Additions:
--Added a new type of item, "Augmenations," which can be applied to weapons for altered critical strike behavior
--Added a new stat, "critical strike potency," which interacts with various augmentations
--Added A.M.P.L, an augmentation which is dropped by Skeleton Commandos post-Plantera
--Added Epitaph, an augmentation dropped rarely by skeletons
--Added the Honeydipped Stinger an, augmentation which is crafted post-Queen Bee
--Added the Pocket Lightning Rod, an augmentation which is found in the Underground Desert
--Added the Boomstickifier, an augmentation sold by the demolotionist
--Added the Thorn Ring, an augmentation crafted with wood (and a bit of [HEART SHAPED OBJECT]...)
--Added the Buckler, an augmentation found in golden chests
--Added Ambrosia, an augmentation crafted with Pixie Dust in early hardmode
--Added the Curser's Quill, an augmentation found in the Dungeon
--Added the Hunter's Drawstring, an augmentation which is dropped by Skeleton Archers
--Added the Manalytic Converter, an augmentation crafted with Copper/Tin
--Added the Blood Cog, an augmentation crafted using Crimtane
--Added the Imperfect Storm, an augmentation crafted using Demonite
--Added Apophis, who does not discriminate
--Added the Windwalker, an accessory found in Sky Chests
--Added Skyward Sling, a new accessory crafted with feathers and bronze
--Added Grafted Sling, a combination of the Prosthetic Arm and Skyward Sling
--Added Sapling Simulacrum, a combination between Eye of the Golem and Contaminated Sapling
--Added Fated Flame, an accessory dropped by ghosts
--Added the Last Straw, a combination of the Fated Flame and the Shortest Straw
--Added Crown Shard, an accessory dropped by King Slime
--Added Tiara Shard, an accessory dropped by Queen Slime
--Added Ruinited Coronet, an accessory combining the Crown Shard and Tiara Shard
--Added a new weapon prefix, "Versatile," which allows you to put multiple augmentations on a weapon
--Added a new weapon prefix, "Potent," which increases critical strike potency substantially
--Added several new prefixes which can be given to augmentations, including prefixes which cause augmentations to only activate during certain conditions
--Added a new material, the "Greenprint," which drops from Lihzahrds in the Jungle Temple and can be used to create powerful, crit-powered constructs
--Added the Contaminated Sapling, a new accessory crafted with jungle spores and glowing mushrooms
--Added Construct Armor
--Added Falsehood's Armor
--Added Reclaw potions
--Added Horrificracker
--Added Gilded Remains, a new utility item sold by the Pirate NPC
--Added Risky Token
--Added Homunculus Token
--Added a new message that appears when entering a world for the first time with this mod enabled
+-Added Target Practice, a new augmentation for yoyos
 
-Cross mod additions:
--Added a new unique critical strike condition for guardian weapons from Orchid Mod
--Added the Parrying Dagger, an augmentation that can only be obtained with Orchid Mod enabled
+Changes:
+-Backstab crit can now work with custom AI types, and can now be applied to shortswords (courtesy @Moonlight Glint)
 
-Changes
--Rewrote critical strike damage tooltips to say critical strike power instead (for consistency with augmentations and less misleading behavior)
--Starter Whetstones are no longer craftable (you only have the 2 that you started with now)
--'Vitriolic' prefix now inflicts you with On Fire! instead of Poisoned
--Boss HP multiplier is now 1.3x by default (can still be set down to 1)
--Reduced damage multiplier of holy whetstone
--Removed "Necromantic" prefix
--Added a tooltip for Bronze alloy
--Reforge hijack chance is now 20% at minimum
--Reduced the sell value of Divine Ingots
--Made some changes to reduce bloat/poor design on random crit condition pool;
--Above foe, below foe, and On Fire crit conditions now only apply to green rarity or lower
--Non-boss and 4 debuff rit condition now only applies to weapons of orange rarity or higher
--20% chance to critically strike no longer appears in the random crit condition pool
--Reduced damage of low HP crit condition. This won't affect its normal gameplay for the most part, since it's still enough to finish off enemies, but will no longer be as powerful against bosses
--Reduced power of 10% critical strike chance condition, as it's one of the few crit conditions which introduces no gameplay and thus should not be particularly powerful by comparison to more interesting conditions
--Reduced chance bonus of Blessed and Deific prefixes
--10 second cooldown crit power now changes depending on weapon tier (it felt too powerful early game and too weak later, this should make it a more interesting option at all stages of progression)
--Reworked critical prefix of Shadowflame Knife and reduced Shadowflame Knife critical strike power slightly
-
-Fixes
--Added a failsafe so that more modded weapons should be compatible with this mod, even when mods do not make proper use of tModLoader's EntitySource system
--Updated hitbox for overgrown Vilethorn and Crystal Vile Shard to grow as intended
--Fixed the blowpipe critical strike modifier being way higher than intended (by like, several times)
--The Goblin Tinkerer will no longer make the hijack sound for items which cannot critically strike anyway
--Fixed Dungeon loot from this mod not spawning properly
--Fixed Prosthetic Arm damage bonus displaying incorrectly for the longest time
--Fixed weapons critically reforged with the Web Covered Whetstone sometimes sending you away faster than the speed of light, causing you to clip out of the world entirely
+Fixes:
+-Fixed NPC attacks and falling stars inheriting your current held item's crit

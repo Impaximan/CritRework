@@ -857,6 +857,17 @@ Items: {
 			The frequency of restoration scales with critical strike power and potency
 			'''
 	}
+
+	TargetPractice: {
+		CanBeApplied: Can only be applied to yoyos
+		DisplayName: Target Practice
+		Tooltip:
+			'''
+			When applied to a yoyo, this disables normal critical strikes
+			Instead, critical strikes will spawn targets
+			Hitting a target with your yoyo will create a saw that rapidly orbits the yoyo, critically damaging nearby enemies
+			'''
+	}
 }
 
 Whetstone: {
@@ -958,6 +969,12 @@ Prefixes: {
 	Effective.DisplayName: Effective
 	Impotent.DisplayName: Impotent
 	Particular.DisplayName: Particular
+
+	Rapid: {
+		tooltip: Saws damage twice as rapidly, but last half as long
+		tooltip2: Mods.CritRework.Prefixes.Rapid.tooltip2
+		DisplayName: Rapid
+	}
 }
 
 NecromanticTooltip: +2 lifesteal when inflicting critical damage upon enemies
@@ -2053,6 +2070,8 @@ Projectiles: {
 	Storm.DisplayName: Storm
 	IntercontinentalAutoMissileExplosion.DisplayName: Intercontinental Auto Missile Explosion
 	DoomTomb.DisplayName: Doom Tomb
+	TargetPracticeTarget.DisplayName: Target Practice Target
+	TargetSaw.DisplayName: Target Saw
 }
 
 BronzeHelm.SetBonus:

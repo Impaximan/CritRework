@@ -457,7 +457,10 @@ namespace CritRework.Common.Globals
             //Unfortunately neccessary failsafe
             if (!hasInheritedItem && projectile.friendly && projectile.owner == Main.myPlayer && Main.LocalPlayer != null && Main.LocalPlayer.HeldItem != null)
             {
-                InheritItemCrit(projectile, Main.LocalPlayer.HeldItem, Main.LocalPlayer);
+                if (!(source is EntitySource_WorldEvent || (source is EntitySource_Parent parentSource && parentSource.Entity is NPC)))
+                {
+                    InheritItemCrit(projectile, Main.LocalPlayer.HeldItem, Main.LocalPlayer);
+                }
             }
 
             //Hook on spawn
