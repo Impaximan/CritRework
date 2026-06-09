@@ -27,7 +27,8 @@ namespace CritRework.Content.Items.Augmentations
             Item.width = 18;
             Item.height = 20;
             Item.rare = ItemRarityID.Orange;
-            Item.value = Item.sellPrice(0, 0, 10, 0);
+            Item.value = Item.sellPrice(0, 3, 0, 0);
+            Item.UseSound = equipSound;
         }
 
         public override bool CanApplyTo(Item weapon)

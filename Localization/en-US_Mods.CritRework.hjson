@@ -1894,6 +1894,24 @@ CritTypes: {
 		CanBeAppliedToDescription: Can only be applied to opposing weapons
 		BasicWhetstonePrefix: Riposte
 	}
+
+	MagicMissile: {
+		Description: Critically strikes on enemies you don't have line of sight with
+		SpecialPrefixName: Ghastly
+		SpecialPrefixTooltip1: Travels through walls while within 20 tiles from yourself
+		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.MagicMissile.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.MagicMissile.BasicWhetstonePrefix
+	}
+
+	WaterBolt: {
+		Description: Critically strikes after bouncing off of at least one wall
+		SpecialPrefixName: Living
+		SpecialPrefixTooltip1: Bounces towards enemies and increases in speed after each wall bounce
+		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.WaterBolt.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.WaterBolt.BasicWhetstonePrefix
+	}
 }
 
 UnknownTooltip: Unknown critical strike condition

@@ -26,7 +26,7 @@ namespace CritRework.Common
 
         public static float CalculateActualCritMult(CritType critType, Item Item, Player Player)
         {
-            if (Item == null || Player == null)
+            if (Item == null || Player == null || critType == null)
             {
                 return 1f;
             }

@@ -176,6 +176,23 @@ namespace CritRework.Common.Globals
                 return false;
             }
 
+            if (ogItem != null && ogItem.type == ItemID.WaterBolt && ogItem.IsSpecial(Main.player[projectile.owner]))
+            {
+                int target = projectile.FindTargetWithLineOfSight(800);
+
+
+                if (target != -1)
+                {
+                    SoundEngine.PlaySound(SoundID.NPCHit3, projectile.Center);
+
+                    if (oldVelocity.X != projectile.velocity.X) projectile.velocity.X = -oldVelocity.X;
+                    if (oldVelocity.Y != projectile.velocity.Y) projectile.velocity.Y = -oldVelocity.Y;
+
+                    projectile.velocity = projectile.velocity.Length() * projectile.velocity.ToRotation().AngleTowards(projectile.DirectionTo(Main.npc[target].Center).ToRotation(), MathHelper.Pi / 3f).ToRotationVector2() * 1.5f;
+                    return false;
+                }
+            }
+
             return base.OnTileCollide(projectile, oldVelocity);
         }
 
@@ -218,6 +235,11 @@ namespace CritRework.Common.Globals
 
             if (ogItem != null && ogItem.IsSpecial(Main.player[projectile.owner]))
             {
+                if (ogItem.type == ItemID.MagicMissile)
+                {
+                    projectile.tileCollide = projectile.Distance(Main.player[projectile.owner].Center) > 320;
+                }
+
                 if (ogItem.type == ModContent.ItemType<GalacticGauntlet>() && projectile.velocity.Y > 0)
                 {
                     int target = projectile.FindTargetWithLineOfSight(800);
@@ -427,6 +449,8 @@ namespace CritRework.Common.Globals
             }
             else if (source is EntitySource_Parent parentSource)
             {
+                hasInheritedItem = true;
+
                 if (parentSource.Entity is Projectile parent)
                 {
                     if (parent.TryGetGlobalProjectile(out CritProjectile crit))
@@ -457,7 +481,7 @@ namespace CritRework.Common.Globals
             //Unfortunately neccessary failsafe
             if (!hasInheritedItem && projectile.friendly && projectile.owner == Main.myPlayer && Main.LocalPlayer != null && Main.LocalPlayer.HeldItem != null)
             {
-                if (!(source is EntitySource_WorldEvent || (source is EntitySource_Parent parentSource && parentSource.Entity is NPC)))
+                if (!(source is EntitySource_WorldEvent || source is EntitySource_TileInteraction || source is EntitySource_Wiring))
                 {
                     InheritItemCrit(projectile, Main.LocalPlayer.HeldItem, Main.LocalPlayer);
                 }
