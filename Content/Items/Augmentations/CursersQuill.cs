@@ -1,4 +1,5 @@
 ﻿using CritRework.Common.ModPlayers;
+using CritRework.Content.CritTypes.RandomPool;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,8 @@ namespace CritRework.Content.Items.Augmentations
                     Main.projectile[p].ai[1] = Main.rand.NextFloat(100f);
                     Main.projectile[p].netUpdate = true;
                     Main.projectile[p].DamageType = hit.DamageType;
+                    if (critType is TenSecondCooldown) Main.projectile[p].damage /= 5;
+                    if (critType is ThreeSecondCooldown) Main.projectile[p].damage /= 2;
                     Main.projectile[p].SetAsAugmentCrit();
 
                     player.GetModPlayer<CritPlayer>().criticalCurses.Add(Main.projectile[p]);

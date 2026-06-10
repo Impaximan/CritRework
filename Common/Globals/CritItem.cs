@@ -29,6 +29,8 @@ namespace CritRework.Common.Globals
     {
         public override bool InstancePerEntity => true;
         public CritType critType = null;
+        public bool disallowAugmentations = false;
+        public bool disallowWhetstones = false;
         public static LocalizedText necromanticTooltip;
         public static LocalizedText unknownTooltip;
         public static LocalizedText unableTooltip;

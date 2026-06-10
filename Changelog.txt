@@ -3,11 +3,13 @@ Additions:
 -Added Target Practice, a new augmentation for yoyos
 -Added unique crit conditions for Waterbolt, Magic Missile, and Magic Harp
 -Added a config option for non-critical damage multiplier
+-Added some new internal commands for other mods to interface with (which I will be using for an addon soon)
 
 Changes:
 -Backstab crit can now work with custom AI types, and can now be applied to shortswords (courtesy @Moonlight Glint)
 -Amazon and Yelets now both have backstab crits by default
 -Slimes are now included for backstab crits
+-Nerfed Curser's Quill + cooldown crit combo
 
 Fixes:
 -Fixed NPC attacks and falling stars inheriting your current held item's crit

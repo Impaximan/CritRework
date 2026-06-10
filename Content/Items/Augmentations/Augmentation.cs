@@ -77,7 +77,7 @@ namespace CritRework.Content.Items.Augmentations
 
         public override void RightClick(Player player)
         {
-            if (Main.mouseItem != null && Main.mouseItem.damage > 0 && Main.mouseItem.useStyle != ItemUseStyleID.None && !Main.mouseItem.accessory && CanApplyTo(Main.mouseItem) && CritItem.CanHaveCrits(Main.mouseItem))
+            if (Main.mouseItem != null && !Main.mouseItem.GetGlobalItem<CritItem>().disallowAugmentations && Main.mouseItem.damage > 0 && Main.mouseItem.useStyle != ItemUseStyleID.None && !Main.mouseItem.accessory && CanApplyTo(Main.mouseItem) && CritItem.CanHaveCrits(Main.mouseItem))
             {
                 int maxAugmentations = Main.mouseItem.MaxAugmentations(player);
 

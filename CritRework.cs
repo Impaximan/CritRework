@@ -185,6 +185,22 @@ namespace CritRework
             }
         }
 
+        public static void DisallowAugmentations(this Item item)
+        {
+            if (item.TryGetGlobalItem(out CritItem c))
+            {
+                c.disallowAugmentations = true;
+            }
+        }
+
+        public static void DisallowWhetstones(this Item item)
+        {
+            if (item.TryGetGlobalItem(out CritItem c))
+            {
+                c.disallowWhetstones = true;
+            }
+        }
+
         public static void SetAsAugmentCrit(this Projectile projectile)
         {
             if (projectile.TryGetGlobalProjectile(out CritProjectile c))
