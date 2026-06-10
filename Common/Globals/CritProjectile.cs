@@ -23,6 +23,9 @@ namespace CritRework.Common.Globals
         public bool fromNecromantic = false;
         public int targetsKilled = 0;
         public bool blowgunCrit = false;
+        public bool harpCrit = false;
+        public float harpCritAmount = 0f;
+        public static float harpSpeed = 100f;
         public bool thrownUpward = false;
         public float highestPoint = 0;
         public bool fromPoisonedHand = false;
@@ -139,6 +142,11 @@ namespace CritRework.Common.Globals
             {
                 modifiers.CritDamage *= 1f + (targetsHit - 10) * 0.05f;
             }
+
+            if (ogItem != null && ogItem.type == ItemID.MagicalHarp && ogItem.IsSpecial(Main.player[projectile.owner]))
+            {
+                modifiers.CritDamage *= 1f + (harpCritAmount / 400f);
+            }
         }
 
         public override bool OnTileCollide(Projectile projectile, Vector2 oldVelocity)
@@ -189,6 +197,14 @@ namespace CritRework.Common.Globals
                     if (oldVelocity.Y != projectile.velocity.Y) projectile.velocity.Y = -oldVelocity.Y;
 
                     projectile.velocity = projectile.velocity.Length() * projectile.velocity.ToRotation().AngleTowards(projectile.DirectionTo(Main.npc[target].Center).ToRotation(), MathHelper.Pi / 3f).ToRotationVector2() * 1.5f;
+
+                    if (projectile.velocity.Length() > 20f)
+                    {
+                        projectile.velocity /= projectile.velocity.Length() / 20f;
+                    }
+
+                    projectile.penetrate--;
+
                     return false;
                 }
             }
@@ -362,6 +378,25 @@ namespace CritRework.Common.Globals
             {
                 projectile.usesLocalNPCImmunity = true;
                 projectile.localNPCHitCooldown = 8;
+            }
+
+            if (item.type == ItemID.MagicalHarp)
+            {
+                float speed = projectile.Distance(Main.MouseWorld);
+                harpCrit = false;
+                if (speed > 550f)
+                {
+                    speed = 550f;
+                }
+
+                if (speed > harpSpeed + 10f)
+                {
+                    harpCrit = true;
+                    harpCritAmount = speed - harpSpeed;
+                }
+
+                harpSpeed = speed;
+
             }
             
             if (ogItem.IsSpecial(player))

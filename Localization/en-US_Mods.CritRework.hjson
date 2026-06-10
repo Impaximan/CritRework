@@ -1912,6 +1912,15 @@ CritTypes: {
 		CanBeAppliedToDescription: Mods.CritRework.CritTypes.WaterBolt.CanBeAppliedToDescription
 		BasicWhetstonePrefix: Mods.CritRework.CritTypes.WaterBolt.BasicWhetstonePrefix
 	}
+
+	MagicHarp: {
+		Description: Critically strikes when playing notes of ascending pitch
+		SpecialPrefixName: Harmonic
+		SpecialPrefixTooltip1: Deal bonus critical strike damage the bigger the pitch difference
+		SpecialPrefixTooltip2: ""
+		CanBeAppliedToDescription: Mods.CritRework.CritTypes.MagicHarp.CanBeAppliedToDescription
+		BasicWhetstonePrefix: Mods.CritRework.CritTypes.MagicHarp.BasicWhetstonePrefix
+	}
 }
 
 UnknownTooltip: Unknown critical strike condition

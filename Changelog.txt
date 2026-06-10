@@ -1,9 +1,11 @@
 ﻿Update 1.6.1.0 "Locked and Loaded"
 Additions:
 -Added Target Practice, a new augmentation for yoyos
+-Added unique crit conditions for Waterbolt, Magic Missile, and Magic Harp
 
 Changes:
 -Backstab crit can now work with custom AI types, and can now be applied to shortswords (courtesy @Moonlight Glint)
 
 Fixes:
 -Fixed NPC attacks and falling stars inheriting your current held item's crit
+-Fixed Divine Ingot not correctly wiping previous prefixes stats

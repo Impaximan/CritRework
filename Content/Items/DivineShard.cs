@@ -34,6 +34,7 @@ namespace CritRework.Content.Items
                     SoundEngine.PlaySound(SoundID.Item37);
                     Main.NewText("[i:" + ModContent.ItemType<SparkleIcon>() + "] " + ItemTagHandler.GenerateTag(Main.mouseItem) + " has been enchanted [i:" + ModContent.ItemType<SparkleIcon>() + "]", new Color(255, 230, 115));
                     Main.mouseItem.Prefix(ModContent.PrefixType<Special>());
+                    Main.mouseItem.Refresh(false);
                     return;
                 }
             }
