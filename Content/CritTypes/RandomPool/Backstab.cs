@@ -23,6 +23,11 @@
             }
         }
 
+        public override bool ForceOnItem(Item item)
+        {
+            return item.type == ItemID.JungleYoyo || item.type == ItemID.Yelets;
+        }
+
         public override void SpecialPrefixHoldItem(Item item, Player player)
         {
             player.AddBuff(BuffID.Invisibility, 2);
@@ -34,6 +39,7 @@
         {
 			switch (target.aiStyle) {
 				case NPCAIStyleID.Fighter:
+				case NPCAIStyleID.Slime:
 				case NPCAIStyleID.DD2Fighter:
 				case NPCAIStyleID.Caster:
 				case NPCAIStyleID.DemonEye:

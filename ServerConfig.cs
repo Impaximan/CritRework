@@ -17,10 +17,16 @@ namespace CritRework
         ])]
         public string critScaling = "Balanced";
 
+
         [DefaultValue(1f)]
         [Increment(0.05f)]
         [Range(0f, 2f)]
         public float critPower = 1f;
+
+        [DefaultValue(1f)]
+        [Increment(0.05f)]
+        [Range(0f, 1f)]
+        public float nonCritDamage = 1f;
 
         [DefaultValue(1.3f)]
         [Increment(0.1f)]
@@ -65,6 +71,7 @@ namespace CritRework
         public override void OnChanged()
         {
             CritRework.critPower = critPower;
+            CritRework.nonCritDamage = nonCritDamage;
             CritRework.critScaling = critScaling;
             CritRework.bossLife = bossLife;
             CritRework.enemyLife = enemyLife;

@@ -33,6 +33,7 @@ namespace CritRework
         public static bool abbreviateWhetstoneTooltip = false;
         public static bool abbreviateAugmentationTooltip = false;
         public static float critPower = 1f;
+        public static float nonCritDamage = 1f;
         public static float randomHijackChance = 0.25f;
         public static bool randomHijackSound = true;
         public static bool pirateHijack = true;

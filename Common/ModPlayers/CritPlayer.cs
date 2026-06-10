@@ -688,6 +688,8 @@ namespace CritRework.Common.ModPlayers
                 }
             }
 
+            modifiers.NonCritDamage *= CritRework.nonCritDamage;
+
             hitWouldCrit = false;
 
             if (critType != null && ShouldNormallyCrit(item, projectile, modifiers, critType, target) || (projectile != null && projectile.IsCritAugment()))

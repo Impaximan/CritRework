@@ -1099,6 +1099,16 @@ Configs: {
 			Label: Travelling merchant whetstones
 			Tooltip: Whether the Travelling Merchant will gain the function to give you basic whetstones or not
 		}
+
+		nonCritDamage: {
+			Label: Non-crit damage
+			Tooltip:
+				'''
+				A multiplier to all non-critical damage.
+				Will not display in weapon tooltips.
+				1 by default (recommended).
+				'''
+		}
 	}
 }
 
