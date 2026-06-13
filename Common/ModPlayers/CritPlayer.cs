@@ -313,6 +313,8 @@ namespace CritRework.Common.ModPlayers
             {
                 ModPlayer mp = Player.GetModPlayer(Calamity.Find<ModPlayer>("CalamityPlayer"));
 
+                timeSinceStealthStrike++;
+
                 if (mp.GetType().GetField("adrenalineModeActive").GetValue(mp) is bool adrenalineActive && mp.GetType().GetField("adrenaline").GetValue(mp) is float adrenaline)
                 {
                     if (adrenaline >= 100f)

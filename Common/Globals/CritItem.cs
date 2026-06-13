@@ -365,7 +365,7 @@ namespace CritRework.Common.Globals
                 AddCritType(item);
             }
 
-            if (Main.HoverItem.type == item.type && Main.HoverItem.GetGlobalItem<CritItem>().augmentations == augmentations)
+            if (Main.HoverItem.type == item.type && Main.HoverItem.TryGetGlobalItem(out CritItem crit) && crit.augmentations == augmentations)
             {
                 if (Main.keyState.IsKeyDown(Keys.LeftAlt) && Main.mouseRight)
                 {
