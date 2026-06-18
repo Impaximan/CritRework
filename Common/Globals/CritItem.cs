@@ -25,7 +25,7 @@ using CritRework.Content.Items.Equipable.Armor.Fraud;
 
 namespace CritRework.Common.Globals
 {
-    class CritItem : GlobalItem
+    public class CritItem : GlobalItem
     {
         public override bool InstancePerEntity => true;
         public CritType critType = null;
@@ -47,6 +47,7 @@ namespace CritRework.Common.Globals
         public static LocalizedText removeAugmentation;
 
         public bool forceCanCrit = false;
+        public bool forceNoCrit = false;
         public bool recoverableArrow = false;
         public bool harpoonFireAgain = false;
 
@@ -567,6 +568,11 @@ namespace CritRework.Common.Globals
                 return;
             }
 
+            if (forceNoCrit)
+            {
+                return;
+            }
+
             if (CritRework.loadedCritTypes.Count <= 0)
             {
                 return;
@@ -630,9 +636,17 @@ namespace CritRework.Common.Globals
 
         public static bool CanHaveCrits(Item item)
         {
-            if (item.TryGetGlobalItem(out CritItem cItem) && cItem.forceCanCrit)
+            if (item.TryGetGlobalItem(out CritItem cItem))
             {
-                return true;
+                if (cItem.forceCanCrit)
+                {
+                    return true;
+                }
+                
+                if (cItem.forceNoCrit)
+                {
+                    return false;
+                }
             }
 
             return item.DamageType.UseStandardCritCalcs && item.useStyle != ItemUseStyleID.None && !item.consumable && item.damage > 0;
