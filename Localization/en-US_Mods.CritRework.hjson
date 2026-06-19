@@ -2146,8 +2146,8 @@ RemoveAugmentation: Right click to remove augmentations
 StartingMessage:
 	'''
 	Welcome to [c/77ffb9:Critical Strikes Overhaul]!
-	FYI, this mod increases boss HP by 30% by default for balancing purposes; you can undo this change via the configm
-	If you have any questions or feedback on how the mod functions, feel free to ask on the Discord server, linked on the workshop
+	FYI, this mod increases boss HP by 30% by default for balancing purposes; you can undo this change via the config.
+	If you have any questions or feedback on how the mod functions, feel free to ask on the Discord server, which is linked on the workshop.
 	Have fun!
 	'''
 sawDamageReduced: -Chainsaw damage greatly reduced by this critical strike condition
