@@ -1,3 +1,4 @@
 ﻿Update 1.6.1.2
 Fixes
--Adjustments for cross-mod capability
+-Fixed Horrificracker not applying its summon crit effect properly
+-Fixed some augmentations, such as AMPL, not being applicable to all classes which count as the required class

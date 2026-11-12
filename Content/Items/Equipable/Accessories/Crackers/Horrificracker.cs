@@ -29,6 +29,11 @@ namespace CritRework.Content.Items.Equipable.Accessories.Crackers
         {
             player.AddEquip<WiseCracker>();
             player.maxMinions++;
+
+            if (Item.TryGetGlobalItem(out CritItem cItem) && cItem.critType != null)
+            {
+                player.GetModPlayer<CritPlayer>().summonCrit = cItem.critType;
+            }
         }
 
         public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player)
