@@ -28,7 +28,7 @@ namespace CritRework.Content.Items.Whetstones
                 return;
             }
 
-            if (Main.mouseItem != null && !Main.mouseItem.GetGlobalItem<CritItem>().disallowWhetstones && AssociatedCritType.CanApplyTo(Main.mouseItem) && CritItem.CanHaveCrits(Main.mouseItem))
+            if (Main.mouseItem != null && !Main.mouseItem.GetGlobalItem<CritItem>().disallowWhetstones && AssociatedCritType.CanApplyTo(Main.mouseItem) && CritItem.CanHaveCrits(Main.mouseItem) && CritItem.CanHaveCrit(Main.mouseItem, AssociatedCritType))
             {
                 if (AssociatedCritType == Main.mouseItem.GetGlobalItem<CritItem>().critType)
                 {

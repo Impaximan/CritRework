@@ -178,6 +178,16 @@ namespace CritRework.Common.Globals
             }
         }
 
+        public static bool CanHaveCrit(Item item, CritType critType)
+        {
+            if (item.type == ModContent.ItemType<ShadowDonut>() && !critType.ShowWhenActive)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public override float UseSpeedMultiplier(Item item, Player player)
         {
             float mult = 1f;
@@ -620,7 +630,7 @@ namespace CritRework.Common.Globals
                 {
                     rerolls++;
 
-                    if (rerolls <= 2 || item.type == ModContent.ItemType<ShadowDonut>()) //Reroll up to 2 times for a different crit
+                    if (rerolls <= 2 || item.type == ModContent.ItemType<ShadowDonut>() || !CanHaveCrit(item, critType)) //Reroll up to 2 times for a different crit
                     {
                         goto SelectCrit;
                     }
