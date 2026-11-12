@@ -3,3 +3,4 @@ Fixes
 -Fixed Horrificracker not applying its summon crit effect properly
 -Fixed some augmentations, such as AMPL, not being applicable to all classes which count as the required class
 -Fixed Shadow Donut being able to recieve crit conditions it shouldn't have via whetstones
+-Glove weapons can now use throwables that can also be used as ammo normally

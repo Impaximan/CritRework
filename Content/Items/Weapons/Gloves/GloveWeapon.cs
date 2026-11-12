@@ -147,7 +147,7 @@ namespace CritRework.Content.Items.Weapons.Gloves
             {
                 item = player.inventory[i];
 
-                if (item.consumable && item.damage > 0 && item.ammo == AmmoID.None && item.stack > 0)
+                if (item.consumable && item.damage > 0 && item.stack > 0 && item.useStyle != ItemUseStyleID.None && !item.IsACoin)
                 {
                     return true;
                 }
