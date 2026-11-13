@@ -1,4 +1,8 @@
 ﻿Update 1.6.1.2
+Additions
+-Added Poseidon's Grace, a new accessory found in water chests
+-Added Demeter's Wrath, a hardmode upgrade to Poseidon's Grace
+
 Fixes
 -Fixed Horrificracker not applying its summon crit effect properly
 -Fixed some augmentations, such as AMPL, not being applicable to all classes which count as the required class

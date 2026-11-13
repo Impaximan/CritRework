@@ -16,6 +16,7 @@ using Terraria;
 using Terraria.ModLoader.IO;
 using CritRework.Content.CritTypes.RandomPool;
 using System.Linq;
+using System.Diagnostics;
 
 namespace CritRework.Common.ModPlayers
 {
@@ -113,6 +114,42 @@ namespace CritRework.Common.ModPlayers
         public Item? bucklerWeapon = null;
 
 
+        //More complicated accessory stuff
+        #region whirlpool accessories
+        public List<WhirlpoolStack> whirlpoolStacks = new List<WhirlpoolStack>();
+        public int whirlpoolType = 0;
+        public int timeSinceWhirlpoolStrike = 0;
+        public int whirlpoolDuration = 600;
+
+        public class WhirlpoolStack
+        {
+            public int damage;
+            public int timeLeft;
+
+            public WhirlpoolStack(int damage, int timeLeft)
+            {
+                this.damage = damage;
+                this.timeLeft = timeLeft;
+            }
+        }
+
+        public int WhirlpoolTimeLeft()
+        {
+            int time = 0;
+
+            foreach (WhirlpoolStack whirlpoolStack in whirlpoolStacks)
+            {
+                if (whirlpoolStack.timeLeft > time)
+                {
+                    time = whirlpoolStack.timeLeft;
+                }
+            }
+
+            return time;
+        }
+
+        #endregion
+
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
             List<Item> list = new();
@@ -206,6 +243,8 @@ namespace CritRework.Common.ModPlayers
             potency = 1f;
             maxAugmentations = 0;
             augmentedWeaponCritBoost = 0f;
+            whirlpoolType = 0;
+            whirlpoolDuration = 600;
 
             if (!Player.HasBuff<BucklerDefense>() && !Player.HasBuff<BucklerRetaliation>())
             {
@@ -250,6 +289,15 @@ namespace CritRework.Common.ModPlayers
             timeSinceGravityWell++;
             timeSinceMovingSlow++;
             clockworkCounter++;
+            timeSinceWhirlpoolStrike++;
+
+            foreach (WhirlpoolStack stack in whirlpoolStacks)
+            {
+                stack.timeLeft--;
+            }
+
+            whirlpoolStacks.RemoveAll(x => x.timeLeft <= 0);
+
             if (noxiousEyeCooldown > 0) noxiousEyeCooldown--;
             UpdateSlotMachine();
 
@@ -857,6 +905,32 @@ namespace CritRework.Common.ModPlayers
                 {
                     augmentation.AugmentationOnHitNPC(Player, item, null, hit, critItem.critType, target, hitWouldCrit);
                 }
+
+                if (hit.Crit && Player.HasEquip<PoseidonsGrace>())
+                {
+                    if (Player.ownedProjectileCounts[whirlpoolType] <= 0)
+                    {
+
+                        bool found = false;
+                        foreach (Projectile p in Main.projectile)
+                        {
+                            if (p.type == whirlpoolType && p.active && p.owner == Player.whoAmI)
+                            {
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (!found)
+                        {
+                            Projectile projectile = Projectile.NewProjectileDirect(new EntitySource_OnHit(Player, target), Player.Center, Vector2.Zero, whirlpoolType, 0, 0f, Player.whoAmI);
+                            projectile.netUpdate = true;
+                        }
+                    }
+
+                    whirlpoolStacks.Add(new((int)(hit.Damage * critItem.Potency(item, Player)), whirlpoolDuration));
+                    timeSinceWhirlpoolStrike = 0;
+                }
             }
         }
 
@@ -884,6 +958,31 @@ namespace CritRework.Common.ModPlayers
                     {
                         augmentation.AugmentationOnHitNPC(Player, crit.ogItem, proj, hit, crit.critType, target, hitWouldCrit);
                     }
+                }
+
+                if (hit.Crit && Player.HasEquip<PoseidonsGrace>())
+                {
+                    if (Player.ownedProjectileCounts[whirlpoolType] <= 0)
+                    {
+                        bool found = false;
+                        foreach (Projectile p in Main.projectile)
+                        {
+                            if (p.type == whirlpoolType && p.active && p.owner == Player.whoAmI)
+                            {
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (!found)
+                        {
+                            Projectile projectile = Projectile.NewProjectileDirect(new EntitySource_OnHit(Player, target), Player.Center, Vector2.Zero, whirlpoolType, 0, 0f, Player.whoAmI);
+                            projectile.netUpdate = true;
+                        }
+                    }
+
+                    whirlpoolStacks.Add(new((int)(hit.Damage * crit.ogItem.GetGlobalItem<CritItem>().Potency(crit.ogItem, Player)), whirlpoolDuration));
+                    timeSinceWhirlpoolStrike = 0;
                 }
             }
 
@@ -915,6 +1014,7 @@ namespace CritRework.Common.ModPlayers
                 Player.accRunSpeed += 3f;
             }
         }
+
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

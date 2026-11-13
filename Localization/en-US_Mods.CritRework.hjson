@@ -868,6 +868,26 @@ Items: {
 			Hitting a target with your yoyo will create a saw that rapidly orbits the yoyo, critically damaging nearby enemies
 			'''
 	}
+
+	PoseidonsGrace: {
+		DisplayName: Poseidon's Grace
+		Tooltip:
+			'''
+			Critical strikes surround you with a protective water vortex
+			Vortex damage is proportional to the damage your critical strikes inflict as well as your critical potency
+			'''
+	}
+
+	DemetersWrath: {
+		DisplayName: Demeter's Wrath
+		Tooltip:
+			'''
+			Critical strikes surround you with a torrent of winter wind
+			Puts a shell around the owner when below 50% life that reduces damage by 25%
+			All damage reduction incrreases the size of the vortex
+			Vortex damage is proportional to the damage your critical strikes inflict as well as your critical potency
+			'''
+	}
 }
 
 Whetstone: {
@@ -2109,6 +2129,8 @@ Projectiles: {
 	DoomTomb.DisplayName: Doom Tomb
 	TargetPracticeTarget.DisplayName: Target Practice Target
 	TargetSaw.DisplayName: Target Saw
+	PoseidonsProtection.DisplayName: Poseidons Protection
+	DemetersFury.DisplayName: Demeters Fury
 }
 
 BronzeHelm.SetBonus:

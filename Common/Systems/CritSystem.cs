@@ -372,6 +372,34 @@ namespace CritRework.Common.Systems
 
                     }
 
+                    if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 17 * 36
+                        || chest.x < WorldGen.beachDistance || chest.x > Main.maxTilesX - WorldGen.beachDistance) //Water Chest
+                    {
+                        if (WorldGen.genRand.NextBool(3))
+                        {
+                            Item lastItem = null;
+
+                            for (int inventoryIndex = 1; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (lastItem != null)
+                                {
+                                    Item newLastItem = chest.item[inventoryIndex].Clone();
+                                    chest.item[inventoryIndex] = lastItem.Clone();
+                                    lastItem = newLastItem;
+                                }
+                                else
+                                {
+                                    lastItem = chest.item[inventoryIndex].Clone();
+                                    chest.item[inventoryIndex].SetDefaults(ItemID.None);
+                                }
+                            }
+
+                            chest.item[1].SetDefaults(ModContent.ItemType<Content.Items.Equipable.Accessories.PoseidonsGrace>());
+                            chest.item[1].Prefix(-1);
+                            chest.item[1].stack = 1;
+                        }
+                    }
+
                     if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 13 * 36) //Skyware Chest
                     {
                         skyNum++;
