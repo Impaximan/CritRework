@@ -161,6 +161,7 @@ namespace CritRework.Content.Items.Equipable.Accessories
             {
                 Projectile.damage = DemetersWrath.CalculateWhirlpoolDamage(critPlayer);
                 Projectile.timeLeft = critPlayer.WhirlpoolTimeLeft();
+                Projectile.knockBack = 0.01f;
             }
         }
 

@@ -131,6 +131,7 @@ namespace CritRework.Content.Items.Equipable.Accessories
             {
                 Projectile.damage = PoseidonsGrace.CalculateWhirlpoolDamage(critPlayer);
                 Projectile.timeLeft = critPlayer.WhirlpoolTimeLeft();
+                Projectile.knockBack = 0.01f;
             }
         }
 
@@ -139,8 +140,6 @@ namespace CritRework.Content.Items.Equipable.Accessories
             int modify = (int)(Projectile.width * (Projectile.scale - 1f));
 
             hitbox.OffsetSize(modify, modify);
-            hitbox.X -= modify / 2;
-            hitbox.Y -= modify / 2;
         }
     }
 }
